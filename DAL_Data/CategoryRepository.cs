@@ -12,7 +12,7 @@ namespace DAL_Data
     public class CategoryRepository
     {
         //Get all categories
-        public List<Category> GetAll()
+        public List<Category> GetAllCategories()
         {
             string sql = $"SELECT * FROM Categories";
             List<Category> categories = Utilities.ExecuteQuery(sql, reader =>

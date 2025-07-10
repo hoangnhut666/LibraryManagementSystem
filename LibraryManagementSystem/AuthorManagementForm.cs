@@ -218,16 +218,16 @@ namespace GUI_UI
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
-        { 
-            //try
-            //{
+        {
+            try
+            {
                 string searchTerm = txtSearch.Text.Trim();
                 dgvAuthors.DataSource = AuthorService.SearchAuthors(searchTerm);
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("An error occurred while searching for authors. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("An error occurred while searching for authors. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dtpDateOfBirth_ValueChanged(object sender, EventArgs e)

@@ -11,7 +11,7 @@ namespace DAL_Data
 {
     public class BookRepository
     {
-        // Get all books
+        //Get all books
         public List<Book> GetAllBooks()
         {
             string sql = $"SELECT * FROM Books";
@@ -133,3 +133,38 @@ namespace DAL_Data
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+// Get all books
+//public List<Book> GetAllBooks()
+//{
+//    //string sql = $"SELECT * FROM Books";
+//    string sql = $"SELECT BookID, Title FROM Books ORDER BY BookID DESC";
+//    List<Book> books = Utilities.ExecuteQuery(sql, reader =>
+//    {
+//        return new Book
+//        {
+//            BookID = reader["BookID"].ToString(),
+//            ISBN = reader["ISBN"].ToString(),
+//            Title = reader["Title"].ToString(),
+//            PublisherID = reader["PublisherID"].ToString(),
+//            PublicationYear = reader["PublicationYear"] as int?,
+//            CategoryID = reader["CategoryID"].ToString(),
+//            ShelfLocation = reader["ShelfLocation"].ToString(),
+//            NumberOfPages = reader["NumberOfPages"] as int?,
+//            Language = reader["Language"].ToString(),
+//            Description = reader["Description"].ToString(),
+//            CoverImage = reader["CoverImage"] as byte[]
+//        };
+//    });
+//    return books;
+//}
