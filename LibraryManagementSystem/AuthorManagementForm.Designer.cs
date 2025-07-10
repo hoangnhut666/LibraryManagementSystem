@@ -40,6 +40,12 @@
             dtpDateOfDeath = new DateTimePicker();
             groupBox1 = new GroupBox();
             txtBiography = new TextBox();
+            btnAdd = new Button();
+            btnUpdate = new Button();
+            btnDelete = new Button();
+            btnRefresh = new Button();
+            btnSearch = new Button();
+            txtSearch = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvAuthors).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -68,10 +74,10 @@
             // dgvAuthors
             // 
             dgvAuthors.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAuthors.Location = new Point(12, 691);
+            dgvAuthors.Location = new Point(12, 781);
             dgvAuthors.Name = "dgvAuthors";
             dgvAuthors.RowHeadersWidth = 92;
-            dgvAuthors.Size = new Size(2248, 618);
+            dgvAuthors.Size = new Size(2248, 528);
             dgvAuthors.TabIndex = 2;
             dgvAuthors.CellClick += dgvAuthors_CellClick;
             // 
@@ -106,6 +112,7 @@
             dtpDateOfBirth.Name = "dtpDateOfBirth";
             dtpDateOfBirth.Size = new Size(537, 43);
             dtpDateOfBirth.TabIndex = 4;
+            dtpDateOfBirth.ValueChanged += dtpDateOfBirth_ValueChanged;
             // 
             // label4
             // 
@@ -133,6 +140,7 @@
             dtpDateOfDeath.Name = "dtpDateOfDeath";
             dtpDateOfDeath.Size = new Size(537, 43);
             dtpDateOfDeath.TabIndex = 4;
+            dtpDateOfDeath.ValueChanged += dtpDateOfDeath_ValueChanged;
             // 
             // groupBox1
             // 
@@ -152,11 +160,90 @@
             txtBiography.Size = new Size(1102, 378);
             txtBiography.TabIndex = 3;
             // 
+            // btnAdd
+            // 
+            btnAdd.BackColor = Color.FromArgb(192, 192, 255);
+            btnAdd.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
+            btnAdd.ForeColor = Color.White;
+            btnAdd.Location = new Point(37, 662);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(196, 69);
+            btnAdd.TabIndex = 6;
+            btnAdd.Text = "Thêm";
+            btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.Click += btnAdd_Click;
+            // 
+            // btnUpdate
+            // 
+            btnUpdate.BackColor = Color.FromArgb(192, 192, 255);
+            btnUpdate.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
+            btnUpdate.ForeColor = Color.White;
+            btnUpdate.Location = new Point(279, 662);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(196, 69);
+            btnUpdate.TabIndex = 6;
+            btnUpdate.Text = "Sửa";
+            btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Click += btnUpdate_Click;
+            // 
+            // btnDelete
+            // 
+            btnDelete.BackColor = Color.FromArgb(192, 192, 255);
+            btnDelete.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
+            btnDelete.ForeColor = Color.White;
+            btnDelete.Location = new Point(532, 662);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(196, 69);
+            btnDelete.TabIndex = 6;
+            btnDelete.Text = "Xóa";
+            btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
+            // 
+            // btnRefresh
+            // 
+            btnRefresh.BackColor = Color.FromArgb(192, 192, 255);
+            btnRefresh.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
+            btnRefresh.ForeColor = Color.White;
+            btnRefresh.Location = new Point(774, 662);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new Size(196, 69);
+            btnRefresh.TabIndex = 6;
+            btnRefresh.Text = "Làm mới";
+            btnRefresh.UseVisualStyleBackColor = false;
+            btnRefresh.Click += btnRefresh_Click;
+            // 
+            // btnSearch
+            // 
+            btnSearch.BackColor = Color.FromArgb(192, 192, 255);
+            btnSearch.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
+            btnSearch.ForeColor = Color.White;
+            btnSearch.Location = new Point(2058, 662);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(196, 69);
+            btnSearch.TabIndex = 6;
+            btnSearch.Text = "Tìm kiếm";
+            btnSearch.UseVisualStyleBackColor = false;
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(1125, 665);
+            txtSearch.Multiline = true;
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(900, 66);
+            txtSearch.TabIndex = 7;
+            // 
             // AuthorManagementForm
             // 
             AutoScaleDimensions = new SizeF(15F, 37F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2272, 1321);
+            Controls.Add(txtSearch);
+            Controls.Add(btnSearch);
+            Controls.Add(btnRefresh);
+            Controls.Add(btnDelete);
+            Controls.Add(btnUpdate);
+            Controls.Add(btnAdd);
             Controls.Add(groupBox1);
             Controls.Add(dtpDateOfDeath);
             Controls.Add(dtpDateOfBirth);
@@ -191,5 +278,11 @@
         private DateTimePicker dtpDateOfDeath;
         private GroupBox groupBox1;
         private TextBox txtBiography;
+        private Button btnAdd;
+        private Button btnUpdate;
+        private Button btnDelete;
+        private Button btnRefresh;
+        private Button btnSearch;
+        private TextBox txtSearch;
     }
 }

@@ -13,7 +13,7 @@ namespace DAL_Data
     {
         public List<Author> GetAllAuthors()
         {
-            string sql = $"SELECT * FROM Authors";
+            string sql = $"SELECT * FROM Authors ORDER BY AuthorID DESC";
             List<Author> authors = Utilities.ExecuteQuery(sql, reader =>
             {
                 return new Author
@@ -31,7 +31,7 @@ namespace DAL_Data
 
 
         // Get authors by criteria
-        public List<Author> GetAuthors()
+        public List<Author> GetAuthorsByCriteria()
         {
             string sql = $"SELECT * FROM Authors";
             List<Author> authors = Utilities.ExecuteQuery(sql, reader =>
@@ -49,6 +49,24 @@ namespace DAL_Data
         }
 
 
+        //Get list of authors by execute stored procedure
+        public List<Author> GetAuthorsByStoredProcedure(string procedureName, params SqlParameter[] parameters)
+        {
+            List<Author> authors = Utilities.ExecuteStoredProcedure(procedureName, reader =>
+            {
+                return new Author
+                {
+                    AuthorID = reader["AuthorID"].ToString(),
+                    FullName = reader["FullName"].ToString(),
+                    Biography = reader["Biography"] as string,
+                    DateOfBirth = reader["DateOfBirth"] as DateTime?,
+                    DateOfDeath = reader["DateOfDeath"] as DateTime?
+                };
+            }, parameters);
+            return authors;
+        }
+
+
         // Insert a new author
         public int Insert(Author author)
         {
@@ -56,11 +74,11 @@ namespace DAL_Data
                          $"VALUES (@AuthorID, @FullName, @Biography, @DateOfBirth, @DateOfDeath)";
             var parameters = new SqlParameter[]
             {
-               new SqlParameter("@AuthorID", author.AuthorID ?? string.Empty), 
-               new SqlParameter("@FullName", author.FullName ?? string.Empty), 
-               new SqlParameter("@Biography", author.Biography ?? (object)DBNull.Value), 
-               new SqlParameter("@DateOfBirth", author.DateOfBirth ?? (object)DBNull.Value), 
-               new SqlParameter("@DateOfDeath", author.DateOfDeath ?? (object)DBNull.Value) 
+               new SqlParameter("@AuthorID", author.AuthorID ?? string.Empty),
+               new SqlParameter("@FullName", author.FullName ?? string.Empty),
+               new SqlParameter("@Biography", author.Biography ?? (object)DBNull.Value),
+               new SqlParameter("@DateOfBirth", author.DateOfBirth ?? (object)DBNull.Value),
+               new SqlParameter("@DateOfDeath", author.DateOfDeath ?? (object)DBNull.Value)
             };
             return Utilities.ExecuteNonQuery(sql, parameters);
         }
@@ -77,23 +95,23 @@ namespace DAL_Data
                          $"WHERE AuthorID = @AuthorID";
             var parameters = new SqlParameter[]
             {
-               new SqlParameter("@AuthorID", author.AuthorID ?? string.Empty), 
-               new SqlParameter("@FullName", author.FullName ?? string.Empty), 
-               new SqlParameter("@Biography", author.Biography ?? (object)DBNull.Value), 
-               new SqlParameter("@DateOfBirth", author.DateOfBirth ?? (object)DBNull.Value), 
-               new SqlParameter("@DateOfDeath", author.DateOfDeath ?? (object)DBNull.Value) 
+               new SqlParameter("@AuthorID", author.AuthorID ?? string.Empty),
+               new SqlParameter("@FullName", author.FullName ?? string.Empty),
+               new SqlParameter("@Biography", author.Biography ?? (object)DBNull.Value),
+               new SqlParameter("@DateOfBirth", author.DateOfBirth ?? (object)DBNull.Value),
+               new SqlParameter("@DateOfDeath", author.DateOfDeath ?? (object)DBNull.Value)
             };
             return Utilities.ExecuteNonQuery(sql, parameters);
         }
 
 
         // Delete an author
-        public int Delete(Author author)
+        public int Delete(string authorID)
         {
             string sql = $"DELETE FROM Authors WHERE AuthorID = @AuthorID";
             var parameters = new SqlParameter[]
             {
-                new SqlParameter("@AuthorID", author.AuthorID)
+                new SqlParameter("@AuthorID", authorID)
             };
             return Utilities.ExecuteNonQuery(sql, parameters);
         }
