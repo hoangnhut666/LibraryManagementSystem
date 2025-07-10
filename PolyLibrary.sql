@@ -477,6 +477,29 @@ END;
 GO
 
 EXEC GetTop10FavoriteBooks;
+GO
 
 
+CREATE PROCEDURE SearchAuthors
+    @SearchTerm NVARCHAR(100)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        AuthorID,
+        FullName,
+        Biography,
+        DateOfBirth,
+        DateOfDeath
+    FROM Authors
+    WHERE 
+        AuthorID LIKE '%' + @SearchTerm + '%' OR
+        FullName LIKE '%' + @SearchTerm + '%'
+    ORDER BY FullName;
+END;
 
+
+EXEC SearchAuthors 'AUTH001';
+EXEC SearchAuthors N'Nguyễn';
+EXEC SearchAuthors N'Tô Hoài';
+EXEC SearchAuthors N'tô hoài';
