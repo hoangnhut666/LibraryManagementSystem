@@ -14,7 +14,7 @@ namespace DAL_Data
         //Get all books
         public List<Book> GetAllBooks()
         {
-            string sql = $"SELECT * FROM Books";
+            string sql = $"SELECT * FROM Books ORDER BY BookID DESC";
             List<Book> books = Utilities.ExecuteQuery(sql, reader =>
             {
                 return new Book
@@ -64,6 +64,20 @@ namespace DAL_Data
             return books;
         }
 
+
+        // Get books by stored procedure
+        public List<Book> GetBooksByStoredProcedure(string procedureName, params SqlParameter[] parameters)
+        {
+            List<Book> books = Utilities.ExecuteStoredProcedure(procedureName, reader =>
+            {
+                return new Book
+                {
+                    BookID = reader["BookID"].ToString(),
+                    Title = reader["Title"].ToString(),
+                };
+            }, parameters);
+            return books;
+        }
 
         // Insert a new book
         public int Insert(Book book)
@@ -121,12 +135,12 @@ namespace DAL_Data
         }
 
         //Delete a book
-        public int Delete(Book book)
+        public int Delete(string bookID)
         {
             string sql = $"DELETE FROM Books WHERE BookID = @BookID";
             var parameters = new SqlParameter[]
             {
-                new SqlParameter("@BookID", book.BookID ?? (object)DBNull.Value)
+                new SqlParameter("@BookID", bookID ?? (object)DBNull.Value)
             };
             return Utilities.ExecuteNonQuery(sql, parameters);
         }

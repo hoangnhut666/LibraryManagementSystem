@@ -503,3 +503,44 @@ EXEC SearchAuthors 'AUTH001';
 EXEC SearchAuthors N'Nguyễn';
 EXEC SearchAuthors N'Tô Hoài';
 EXEC SearchAuthors N'tô hoài';
+GO
+
+
+CREATE PROCEDURE SearchBooks
+    @SearchTerm NVARCHAR(100) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    SELECT DISTINCT
+        b.BookID,
+        b.Title
+    FROM 
+        Books b
+        LEFT JOIN Publishers p ON b.PublisherID = p.PublisherID
+        LEFT JOIN Categories c ON b.CategoryID = c.CategoryID
+        LEFT JOIN BookAuthors ba ON b.BookID = ba.BookID
+        LEFT JOIN Authors a ON ba.AuthorID = a.AuthorID
+
+    WHERE 
+        @SearchTerm IS NULL OR
+        b.BookID LIKE '%' + @SearchTerm + '%' OR
+        b.Title LIKE '%' + @SearchTerm + '%' OR
+        b.ISBN LIKE '%' + @SearchTerm + '%' OR
+        a.FullName LIKE '%' + @SearchTerm + '%' OR
+        c.Name LIKE '%' + @SearchTerm + '%' OR
+        p.Name LIKE '%' + @SearchTerm + '%'
+        
+    GROUP BY
+        b.BookID,
+        b.Title
+    ORDER BY 
+        b.Title;
+END;
+
+
+EXEC SearchBooks N'Dế Mèn';
+EXEC SearchBooks N'kim đồng';
+EXEC SearchBooks N'Tô Hoài';
+
+

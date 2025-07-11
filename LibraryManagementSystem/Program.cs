@@ -14,6 +14,7 @@ namespace LibraryManagementSystem
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new BookManagementForm());
+            //Application.Run(new MainForm());
         }
     }
 }

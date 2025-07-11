@@ -30,7 +30,7 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            tabPage2 = new TabPage();
+            label1 = new Label();
             cboPublisherName = new ComboBox();
             cboCategory = new ComboBox();
             btnRefresh = new Button();
@@ -44,6 +44,7 @@
             label5 = new Label();
             label10 = new Label();
             label8 = new Label();
+            label12 = new Label();
             label9 = new Label();
             label3 = new Label();
             label7 = new Label();
@@ -52,17 +53,18 @@
             label6 = new Label();
             label2 = new Label();
             txtDescription = new TextBox();
+            txtShelfLocation = new TextBox();
             txtNumberOfPages = new TextBox();
-            txtPulisherYear = new TextBox();
+            txtPublicationYear = new TextBox();
             groupBox1 = new GroupBox();
             dgvBooks = new DataGridView();
             txtLanguage = new TextBox();
-            textBox1 = new TextBox();
+            txtTitle = new TextBox();
             txtISBN = new TextBox();
-            txtAuthors = new TextBox();
-            label1 = new Label();
+            txtAuthor = new TextBox();
             txtSearch = new TextBox();
             txtBookId = new TextBox();
+            tabPage2 = new TabPage();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxCoverImage).BeginInit();
@@ -97,6 +99,7 @@
             tabPage1.Controls.Add(label5);
             tabPage1.Controls.Add(label10);
             tabPage1.Controls.Add(label8);
+            tabPage1.Controls.Add(label12);
             tabPage1.Controls.Add(label9);
             tabPage1.Controls.Add(label3);
             tabPage1.Controls.Add(label7);
@@ -105,13 +108,14 @@
             tabPage1.Controls.Add(label6);
             tabPage1.Controls.Add(label2);
             tabPage1.Controls.Add(txtDescription);
+            tabPage1.Controls.Add(txtShelfLocation);
             tabPage1.Controls.Add(txtNumberOfPages);
-            tabPage1.Controls.Add(txtPulisherYear);
+            tabPage1.Controls.Add(txtPublicationYear);
             tabPage1.Controls.Add(groupBox1);
             tabPage1.Controls.Add(txtLanguage);
-            tabPage1.Controls.Add(textBox1);
+            tabPage1.Controls.Add(txtTitle);
             tabPage1.Controls.Add(txtISBN);
-            tabPage1.Controls.Add(txtAuthors);
+            tabPage1.Controls.Add(txtAuthor);
             tabPage1.Controls.Add(txtSearch);
             tabPage1.Controls.Add(txtBookId);
             tabPage1.Location = new Point(10, 55);
@@ -121,28 +125,29 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             // 
-            // tabPage2
+            // label1
             // 
-            tabPage2.Location = new Point(10, 55);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(430, 160);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
-            tabPage2.UseVisualStyleBackColor = true;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.MediumSlateBlue;
+            label1.Location = new Point(852, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(457, 96);
+            label1.TabIndex = 18;
+            label1.Text = "Quản lý sách";
             // 
             // cboPublisherName
             // 
             cboPublisherName.FormattingEnabled = true;
-            cboPublisherName.Location = new Point(1112, 715);
+            cboPublisherName.Location = new Point(1108, 811);
             cboPublisherName.Name = "cboPublisherName";
-            cboPublisherName.Size = new Size(437, 45);
+            cboPublisherName.Size = new Size(444, 45);
             cboPublisherName.TabIndex = 39;
             // 
             // cboCategory
             // 
             cboCategory.FormattingEnabled = true;
-            cboCategory.Location = new Point(1112, 512);
+            cboCategory.Location = new Point(1765, 811);
             cboCategory.Name = "cboCategory";
             cboCategory.Size = new Size(441, 45);
             cboCategory.TabIndex = 38;
@@ -194,6 +199,7 @@
             btnAdd.TabIndex = 34;
             btnAdd.Text = "Thêm";
             btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.Click += btnAdd_Click;
             // 
             // btnAiGenerate
             // 
@@ -212,30 +218,32 @@
             btnUploadPicture.BackColor = Color.FromArgb(174, 160, 249);
             btnUploadPicture.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnUploadPicture.ForeColor = SystemColors.Control;
-            btnUploadPicture.Location = new Point(1806, 699);
+            btnUploadPicture.Location = new Point(1801, 619);
             btnUploadPicture.Name = "btnUploadPicture";
             btnUploadPicture.Size = new Size(202, 60);
             btnUploadPicture.TabIndex = 32;
             btnUploadPicture.Text = "Chọn ảnh";
             btnUploadPicture.UseVisualStyleBackColor = false;
+            btnUploadPicture.Click += btnUploadPicture_Click;
             // 
             // btnSearch
             // 
             btnSearch.BackColor = Color.FromArgb(174, 160, 249);
             btnSearch.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnSearch.ForeColor = SystemColors.Control;
-            btnSearch.Location = new Point(2004, 115);
+            btnSearch.Location = new Point(2022, 115);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(202, 60);
+            btnSearch.Size = new Size(172, 60);
             btnSearch.TabIndex = 31;
             btnSearch.Text = "Tìm kiếm";
             btnSearch.UseVisualStyleBackColor = false;
+            btnSearch.Click += btnSearch_Click;
             // 
             // pictureBoxCoverImage
             // 
-            pictureBoxCoverImage.Location = new Point(1604, 208);
+            pictureBoxCoverImage.Location = new Point(1653, 208);
             pictureBoxCoverImage.Name = "pictureBoxCoverImage";
-            pictureBoxCoverImage.Size = new Size(610, 467);
+            pictureBoxCoverImage.Size = new Size(497, 379);
             pictureBoxCoverImage.TabIndex = 30;
             pictureBoxCoverImage.TabStop = false;
             // 
@@ -253,7 +261,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 11F);
-            label10.Location = new Point(868, 712);
+            label10.Location = new Point(862, 808);
             label10.Name = "label10";
             label10.Size = new Size(216, 45);
             label10.TabIndex = 27;
@@ -269,11 +277,21 @@
             label8.TabIndex = 26;
             label8.Text = "Số trang";
             // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 11F);
+            label12.Location = new Point(1606, 710);
+            label12.Name = "label12";
+            label12.Size = new Size(130, 45);
+            label12.TabIndex = 25;
+            label12.Text = "Kệ sách";
+            // 
             // label9
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 11F);
-            label9.Location = new Point(867, 805);
+            label9.Location = new Point(866, 707);
             label9.Name = "label9";
             label9.Size = new Size(225, 45);
             label9.TabIndex = 25;
@@ -293,7 +311,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 11F);
-            label7.Location = new Point(1597, 804);
+            label7.Location = new Point(869, 503);
             label7.Name = "label7";
             label7.Size = new Size(168, 45);
             label7.TabIndex = 24;
@@ -323,7 +341,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 11F);
-            label6.Location = new Point(869, 510);
+            label6.Location = new Point(1604, 811);
             label6.Name = "label6";
             label6.Size = new Size(134, 45);
             label6.TabIndex = 21;
@@ -347,6 +365,13 @@
             txtDescription.Size = new Size(1349, 108);
             txtDescription.TabIndex = 16;
             // 
+            // txtShelfLocation
+            // 
+            txtShelfLocation.Location = new Point(1762, 710);
+            txtShelfLocation.Name = "txtShelfLocation";
+            txtShelfLocation.Size = new Size(442, 43);
+            txtShelfLocation.TabIndex = 14;
+            // 
             // txtNumberOfPages
             // 
             txtNumberOfPages.Location = new Point(1113, 610);
@@ -354,19 +379,19 @@
             txtNumberOfPages.Size = new Size(442, 43);
             txtNumberOfPages.TabIndex = 15;
             // 
-            // txtPulisherYear
+            // txtPublicationYear
             // 
-            txtPulisherYear.Location = new Point(1111, 808);
-            txtPulisherYear.Name = "txtPulisherYear";
-            txtPulisherYear.Size = new Size(442, 43);
-            txtPulisherYear.TabIndex = 14;
+            txtPublicationYear.Location = new Point(1113, 710);
+            txtPublicationYear.Name = "txtPublicationYear";
+            txtPublicationYear.Size = new Size(442, 43);
+            txtPublicationYear.TabIndex = 14;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(dgvBooks);
             groupBox1.Location = new Point(14, 64);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(725, 1178);
+            groupBox1.Size = new Size(782, 1178);
             groupBox1.TabIndex = 19;
             groupBox1.TabStop = false;
             groupBox1.Text = "Danh mục sách";
@@ -377,56 +402,46 @@
             dgvBooks.Location = new Point(6, 42);
             dgvBooks.Name = "dgvBooks";
             dgvBooks.RowHeadersWidth = 92;
-            dgvBooks.Size = new Size(723, 1118);
+            dgvBooks.Size = new Size(758, 1118);
             dgvBooks.TabIndex = 0;
+            dgvBooks.CellClick += dgvBooks_CellClick;
             // 
             // txtLanguage
             // 
-            txtLanguage.Location = new Point(1776, 807);
+            txtLanguage.Location = new Point(1113, 503);
             txtLanguage.Name = "txtLanguage";
-            txtLanguage.Size = new Size(430, 43);
+            txtLanguage.Size = new Size(436, 43);
             txtLanguage.TabIndex = 13;
             // 
-            // textBox1
+            // txtTitle
             // 
-            textBox1.Location = new Point(1109, 408);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(443, 43);
-            textBox1.TabIndex = 12;
+            txtTitle.Location = new Point(1113, 408);
+            txtTitle.Name = "txtTitle";
+            txtTitle.Size = new Size(439, 43);
+            txtTitle.TabIndex = 12;
             // 
             // txtISBN
             // 
-            txtISBN.Location = new Point(1112, 305);
+            txtISBN.Location = new Point(1111, 305);
             txtISBN.Name = "txtISBN";
-            txtISBN.Size = new Size(442, 43);
+            txtISBN.Size = new Size(443, 43);
             txtISBN.TabIndex = 11;
             // 
-            // txtAuthors
+            // txtAuthor
             // 
-            txtAuthors.Location = new Point(1770, 896);
-            txtAuthors.Multiline = true;
-            txtAuthors.Name = "txtAuthors";
-            txtAuthors.ReadOnly = true;
-            txtAuthors.Size = new Size(436, 100);
-            txtAuthors.TabIndex = 10;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.MediumSlateBlue;
-            label1.Location = new Point(852, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(457, 96);
-            label1.TabIndex = 18;
-            label1.Text = "Quản lý sách";
+            txtAuthor.Location = new Point(1770, 896);
+            txtAuthor.Multiline = true;
+            txtAuthor.Name = "txtAuthor";
+            txtAuthor.ReadOnly = true;
+            txtAuthor.Size = new Size(436, 100);
+            txtAuthor.TabIndex = 10;
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(1596, 115);
+            txtSearch.Location = new Point(1653, 23);
             txtSearch.Multiline = true;
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(389, 57);
+            txtSearch.Size = new Size(541, 57);
             txtSearch.TabIndex = 17;
             // 
             // txtBookId
@@ -436,6 +451,16 @@
             txtBookId.ReadOnly = true;
             txtBookId.Size = new Size(442, 43);
             txtBookId.TabIndex = 9;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Location = new Point(10, 55);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(2228, 1240);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "tabPage2";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
             // BookManagementForm
             // 
@@ -483,14 +508,16 @@
         private Label label2;
         private TextBox txtDescription;
         private TextBox txtNumberOfPages;
-        private TextBox txtPulisherYear;
+        private TextBox txtPublicationYear;
         private GroupBox groupBox1;
         private DataGridView dgvBooks;
         private TextBox txtLanguage;
-        private TextBox textBox1;
+        private TextBox txtTitle;
         private TextBox txtISBN;
-        private TextBox txtAuthors;
+        private TextBox txtAuthor;
         private TextBox txtSearch;
         private TextBox txtBookId;
+        private Label label12;
+        private TextBox txtShelfLocation;
     }
 }
