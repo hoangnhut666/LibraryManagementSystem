@@ -485,7 +485,7 @@ CREATE PROCEDURE SearchAuthors
 AS
 BEGIN
     SET NOCOUNT ON;
-    SELECT 
+    SELECT
         AuthorID,
         FullName,
         Biography,
@@ -511,11 +511,11 @@ CREATE PROCEDURE SearchBooks
 AS
 BEGIN
     SET NOCOUNT ON;
-    
+
     SELECT DISTINCT
         b.BookID,
         b.Title
-    FROM 
+    FROM
         Books b
         LEFT JOIN Publishers p ON b.PublisherID = p.PublisherID
         LEFT JOIN Categories c ON b.CategoryID = c.CategoryID
@@ -530,7 +530,7 @@ BEGIN
         a.FullName LIKE '%' + @SearchTerm + '%' OR
         c.Name LIKE '%' + @SearchTerm + '%' OR
         p.Name LIKE '%' + @SearchTerm + '%'
-        
+
     GROUP BY
         b.BookID,
         b.Title
@@ -542,5 +542,33 @@ END;
 EXEC SearchBooks N'Dế Mèn';
 EXEC SearchBooks N'kim đồng';
 EXEC SearchBooks N'Tô Hoài';
+GO
 
 
+CREATE PROCEDURE GetAuthorsByBookID
+    @BookID VARCHAR(10)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        a.FullName
+    FROM
+        Authors a
+        INNER JOIN BookAuthors ba ON a.AuthorID = ba.AuthorID
+    WHERE 
+        ba.BookID = @BookID
+    ORDER BY 
+        a.FullName;
+END;
+
+
+EXEC GetAuthorsByBookID 'BOOK001';
+EXEC GetAuthorsByBookID 'BOOK014';
+
+
+
+SELECT a.*
+FROM Authors a
+    JOIN BookAuthors ba ON a.AuthorID = ba.AuthorID
+WHERE ba.BookID = 'BOOK014'

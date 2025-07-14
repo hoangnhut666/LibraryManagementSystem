@@ -67,6 +67,31 @@ namespace DAL_Data
         }
 
 
+        //Get all authors of a specific book with a given BookID
+        public List<Author> GetAuthorsByBookID(string bookID)
+        {
+            string sql = $"SELECT a.* FROM Authors a " +
+                         $"JOIN BookAuthors ba ON a.AuthorID = ba.AuthorID " +
+                         $"WHERE ba.BookID = @BookID";
+            var parameters = new SqlParameter[]
+            {
+                new SqlParameter("@BookID", bookID)
+            };
+            List<Author> authors = Utilities.ExecuteQuery(sql, reader =>
+            {
+                return new Author
+                {
+                    AuthorID = reader["AuthorID"].ToString(),
+                    FullName = reader["FullName"].ToString(),
+                    Biography = reader["Biography"] as string,
+                    DateOfBirth = reader["DateOfBirth"] as DateTime?,
+                    DateOfDeath = reader["DateOfDeath"] as DateTime?
+                };
+            }, parameters);
+            return authors;
+        }
+
+
         // Insert a new author
         public int Insert(Author author)
         {

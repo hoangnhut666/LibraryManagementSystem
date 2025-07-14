@@ -14,15 +14,11 @@ namespace BLL_Services.Services
     public class BookService
     {
         private BookRepository BookRepository { get; set; }
-        private PublisherService PublisherService { get; set; }
-        private CategoryService CategoryService { get; set; }
         private BookValidator BookValidator { get; set; }
 
         public BookService()
         {
             BookRepository = new BookRepository();
-            PublisherService = new PublisherService();
-            CategoryService = new CategoryService();
             BookValidator = new BookValidator();
         }
 

@@ -44,6 +44,17 @@ namespace BLL_Services.Services
         }
 
 
+        //Get all authors by book ID
+        public List<Author> GetAuthorsByBookId(string bookID)
+        {
+            if (string.IsNullOrWhiteSpace(bookID))
+            {
+                throw new ArgumentException("Book ID cannot be null or empty.", nameof(bookID));
+            }
+            return AuthorRepository.GetAuthorsByBookID(bookID);
+        }
+
+
         //Add a new author
         public int AddAuthor(Author author)
         {

@@ -19,11 +19,13 @@ namespace GUI_UI
         private BookService BookService { get; set; }
         private PublisherService PublisherService { get; set; }
         private CategoryService CategoryService { get; set; }
+        private AuthorService AuthorService { get; set; }
         public BookManagementForm()
         {
             BookService = new BookService();
             PublisherService = new PublisherService();
             CategoryService = new CategoryService();
+            AuthorService = new AuthorService();
 
             InitializeComponent();
             SetupComponent(dgvBooks);
@@ -128,17 +130,81 @@ namespace GUI_UI
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            int publicationYear;
+            int numberOfPages;
 
+            Book newBook = new Book
+            {
+                BookID = txtBookId.Text.Trim(),
+                ISBN = txtISBN.Text,
+                Title = txtTitle.Text,
+                PublisherID = cboPublisherName.SelectedValue != null ? cboPublisherName.SelectedValue.ToString() : null,
+                PublicationYear = int.TryParse(txtPublicationYear.Text, out publicationYear) ? publicationYear : (int?)null,
+                CategoryID = cboCategory.SelectedValue != null ? cboCategory.SelectedValue.ToString() : null,
+                ShelfLocation = txtShelfLocation.Text,
+                NumberOfPages = int.TryParse(txtNumberOfPages.Text, out numberOfPages) ? numberOfPages : (int?)null,
+                Language = txtLanguage.Text,
+                Description = txtDescription.Text,
+                CoverImage = pictureBoxCoverImage.Image != null ? ImageToByteArray(pictureBoxCoverImage.Image) : null
+            };
+
+            //Update the book in the database
+            try
+            {
+                if (BookService.UpdateBook(newBook) > 0)
+                {
+                    MessageBox.Show("Book updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadBooks();
+                    ClearInputFields();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to update book. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while updating the book: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            //Using try catch to handle any exceptions that may occur during deletion
+            try
+            {
+                string bookId = txtBookId.Text.Trim();
+                if (string.IsNullOrEmpty(bookId))
+                {
+                    MessageBox.Show("Please select a book to delete.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this book?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    // Delete the book from the database
+                    if (BookService.DeleteBook(bookId) > 0)
+                    {
+                        MessageBox.Show("Book deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadBooks();
+                        ClearInputFields();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to delete book. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while deleting the book: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-
+            ClearInputFields();
+            LoadBooks();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -150,51 +216,49 @@ namespace GUI_UI
                 return;
             }
 
-            //try
-            //{
-            var searchResults = BookService.SearchBooks(searchTerm);
-            if (searchResults != null && searchResults.Count > 0)
+            try
             {
-                dgvBooks.DataSource = searchResults;
+                var searchResults = BookService.SearchBooks(searchTerm);
+                if (searchResults != null && searchResults.Count > 0)
+                {
+                    dgvBooks.DataSource = searchResults;
+                }
+                else
+                {
+                    MessageBox.Show("No books found matching the search term.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadBooks();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("No books found matching the search term.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadBooks();
+                MessageBox.Show($"An error occurred while searching for books: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show($"An error occurred while searching for books: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
         }
 
 
         private void dgvBooks_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //// Check if a row is selected
-            //if (e.RowIndex >= 0 && e.RowIndex < dgvBooks.Rows.Count)
-            //{
-            //    DataGridViewRow selectedRow = dgvBooks.Rows[e.RowIndex];
-            //    Book selectedBook = (Book)selectedRow.DataBoundItem;
-            //    // Fill the input fields with the selected book's data
-            //    txtISBN.Text = selectedBook.ISBN;
-            //    txtTitle.Text = selectedBook.Title;
-            //    txtAuthor.Text = selectedBook.Author;
-            //    dtpPublicationDate.Value = selectedBook.PublicationDate;
-            //    cboPublisherName.SelectedValue = selectedBook.PublisherID;
-            //    cboCategory.SelectedValue = selectedBook.CategoryID;
-            //    txtShelfLocation.Text = selectedBook.ShelfLocation;
-            //    numNumberOfPages.Value = selectedBook.NumberOfPages;
-            //    txtLanguage.Text = selectedBook.Language;
-            //    txtDescription.Text = selectedBook.Description;
-            //    // Load the cover image if it exists
-            //    if (!string.IsNullOrEmpty(selectedBook.CoverImage))
-            //    {
-            //        pictureBoxCoverImage.ImageLocation = selectedBook.CoverImage;
-            //    }
-            //}
+            //Check if a row is selected
+            if (e.RowIndex >= 0 && e.RowIndex < dgvBooks.Rows.Count)
+            {
+                DataGridViewRow selectedRow = dgvBooks.Rows[e.RowIndex];
+                Book selectedBook = (Book)selectedRow.DataBoundItem;
+
+                txtBookId.Text = selectedBook.BookID;
+                txtISBN.Text = selectedBook.ISBN;
+                txtTitle.Text = selectedBook.Title;
+                cboPublisherName.SelectedValue = selectedBook.PublisherID;
+                txtPublicationYear.Text = selectedBook.PublicationYear.HasValue ? selectedBook.PublicationYear.Value.ToString() : string.Empty;
+                cboCategory.SelectedValue = selectedBook.CategoryID;
+                txtShelfLocation.Text = selectedBook.ShelfLocation;
+                txtNumberOfPages.Text = selectedBook.NumberOfPages.HasValue ? selectedBook.NumberOfPages.Value.ToString() : string.Empty;
+                txtLanguage.Text = selectedBook.Language;
+                txtDescription.Text = selectedBook.Description;
+                pictureBoxCoverImage.Image = selectedBook.CoverImage != null ? Image.FromStream(new System.IO.MemoryStream(selectedBook.CoverImage)) : null;
+                txtAuthor.Text = selectedBook.BookID != null ? string.Join(", ", AuthorService.GetAuthorsByBookId(selectedBook.BookID).Select(a => a.FullName)) : string.Empty;
+            }
         }
+
 
         private void btnUploadPicture_Click(object sender, EventArgs e)
         {
@@ -221,7 +285,9 @@ namespace GUI_UI
 
 
         private void ClearInputFields()
-        {
+        {   
+            txtBookId.Clear();
+            txtTitle.Clear();
             txtISBN.Clear();
             txtTitle.Clear();
             cboPublisherName.SelectedIndex = -1;
@@ -234,6 +300,10 @@ namespace GUI_UI
             pictureBoxCoverImage.Image = null;
         }
 
+        private void label14_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

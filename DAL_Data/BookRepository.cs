@@ -1,11 +1,12 @@
-﻿using System;
+﻿using DBUTIL_Utilities;
+using DTO_Models;
+using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DBUTIL_Utilities;
-using DTO_Models;
-using Microsoft.Data.SqlClient;
 
 namespace DAL_Data
 {
@@ -96,7 +97,8 @@ namespace DAL_Data
                 new SqlParameter("@NumberOfPages", book.NumberOfPages ?? (object)DBNull.Value),
                 new SqlParameter("@Language", book.Language ?? (object)DBNull.Value),
                 new SqlParameter("@Description", book.Description ?? (object)DBNull.Value),
-                new SqlParameter("@CoverImage", book.CoverImage ?? (object)DBNull.Value)
+                //new SqlParameter("@CoverImage", book.CoverImage ?? (object)DBNull.Value),
+                new SqlParameter("@CoverImage", SqlDbType.VarBinary) { Value = book.CoverImage ?? (object)DBNull.Value }
             };
             return Utilities.ExecuteNonQuery(sql, parameters);
         }
@@ -128,7 +130,8 @@ namespace DAL_Data
                 new SqlParameter("@NumberOfPages", book.NumberOfPages ?? (object)DBNull.Value),
                 new SqlParameter("@Language", book.Language ?? (object)DBNull.Value),
                 new SqlParameter("@Description", book.Description ?? (object)DBNull.Value),
-                new SqlParameter("@CoverImage", book.CoverImage ?? (object)DBNull.Value),
+                //new SqlParameter("@CoverImage", book.CoverImage ?? (object)DBNull.Value),
+                new SqlParameter("@CoverImage", SqlDbType.VarBinary) { Value = book.CoverImage ?? (object)DBNull.Value },
                 new SqlParameter("@BookID", book.BookID ?? (object)DBNull.Value)
             };
             return Utilities.ExecuteNonQuery(sql, parameters);
