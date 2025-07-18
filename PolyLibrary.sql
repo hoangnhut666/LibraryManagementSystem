@@ -119,8 +119,10 @@ CREATE TABLE Fines
     [PaymentDate] DATETIME,
     [Status] NVARCHAR(20) DEFAULT N'Chưa thanh toán' CHECK (Status IN (N'Chưa thanh toán', N'Đã thanh toán', N'Được miễn')),
     [Reason] NVARCHAR(255),
+    [UserID] VARCHAR(10)
     FOREIGN KEY (LoanID) REFERENCES Loans(LoanID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
+    FOREIGN KEY (MemberID) REFERENCES Members(MemberID),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 
@@ -158,17 +160,6 @@ CREATE TABLE Users
     FOREIGN KEY (RoleID) REFERENCES Roles(RoleID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE Reviews
-(
-    [ReviewID] INT PRIMARY KEY IDENTITY(1,1),
-    [BookID] VARCHAR(10) NOT NULL,
-    [MemberID] VARCHAR(10) NOT NULL,
-    [Expression] NVARCHAR(50) CHECK (Expression IN (N'Thích', N'Không thích', N'Bình thường', N'Thương thương', N'Phẫn nộ')),
-    [ReviewText] NVARCHAR(MAX),
-    FOREIGN KEY (BookID) REFERENCES Books(BookID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (MemberID) REFERENCES Members(MemberID) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT UQ_BookMember UNIQUE (BookID, MemberID)
-);
 
 
 

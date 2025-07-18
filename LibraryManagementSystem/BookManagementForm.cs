@@ -20,16 +20,19 @@ namespace GUI_UI
         private PublisherService PublisherService { get; set; }
         private CategoryService CategoryService { get; set; }
         private AuthorService AuthorService { get; set; }
+        private BookAuthorsService BookAuthorsService { get; set; }
         public BookManagementForm()
         {
             BookService = new BookService();
             PublisherService = new PublisherService();
             CategoryService = new CategoryService();
             AuthorService = new AuthorService();
+            BookAuthorsService = new BookAuthorsService();
 
             InitializeComponent();
             SetupComponent(dgvBooks);
             LoadBooks();
+            LoadBookAuthors();
         }
 
 
@@ -49,13 +52,24 @@ namespace GUI_UI
             //Set up Combobox
             cboCategory.DisplayMember = "Name";
             cboCategory.ValueMember = "CategoryID";
-            cboCategory.SelectedIndex = -1;
             cboCategory.DataSource = CategoryService.GetCategories();
+            cboCategory.SelectedIndex = -1;
 
             cboPublisherName.DisplayMember = "Name";
             cboPublisherName.ValueMember = "PublisherID";
-            cboPublisherName.SelectedIndex = -1;
             cboPublisherName.DataSource = PublisherService.GetPublishers();
+            cboPublisherName.SelectedIndex = -1;
+
+
+            cboAuthorNameBookAuthor.DisplayMember = "FullName";
+            cboAuthorNameBookAuthor.ValueMember = "AuthorID";
+            cboAuthorNameBookAuthor.DataSource = AuthorService.GetAuthors();
+            cboAuthorNameBookAuthor.SelectedIndex = -1;
+
+            cboTitleBookAuthor.DisplayMember = "Title";
+            cboTitleBookAuthor.ValueMember = "BookID";
+            cboTitleBookAuthor.DataSource = BookService.GetBooks();
+            cboTitleBookAuthor.SelectedIndex = -1;
 
             // Set the TextBox properties
             txtDescription.Multiline = true;
@@ -85,6 +99,21 @@ namespace GUI_UI
                 MessageBox.Show($"An error occurred while loading books: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        //Load all book authors from the database
+        private void LoadBookAuthors()
+        {
+            try
+            {
+                var bookAuthors = BookAuthorsService.GetAllBookAuthors();
+                dgvBookAuthor.DataSource = bookAuthors;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while loading book authors: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -285,7 +314,7 @@ namespace GUI_UI
 
 
         private void ClearInputFields()
-        {   
+        {
             txtBookId.Clear();
             txtTitle.Clear();
             txtISBN.Clear();
@@ -300,9 +329,43 @@ namespace GUI_UI
             pictureBoxCoverImage.Image = null;
         }
 
-        private void label14_Click(object sender, EventArgs e)
+        private void btnAddBookAuthor_Click(object sender, EventArgs e)
+        {
+            //Get the selected author and book from the comboboxes
+
+        }
+
+        private void btnUpdateBookAuthor_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnDeleteBookAuthor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRefreshBookAuthor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvBookAuthor_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void cboTitleBookAuthor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboTitleBookAuthor.SelectedItem is Book selectedBook)
+            {
+                txtBookIdBookAuthor.Text = selectedBook.BookID ?? "BOOK001";
+                //dgvBookAuthor.DataSource = BookAuthorsService.GetBookAuthorsByCriteria("BookID", txtBookIdBookAuthor.Text);
+            }
+            else
+            {
+                txtBookIdBookAuthor.Clear();
+            }
         }
     }
 }

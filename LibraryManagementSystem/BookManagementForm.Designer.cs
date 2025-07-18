@@ -1,4 +1,6 @@
-﻿namespace GUI_UI
+﻿using System.Windows.Forms;
+
+namespace GUI_UI
 {
     partial class BookManagementForm
     {
@@ -502,6 +504,7 @@
             btnRefreshBookAuthor.TabIndex = 35;
             btnRefreshBookAuthor.Text = "Làm mới";
             btnRefreshBookAuthor.UseVisualStyleBackColor = false;
+            btnRefreshBookAuthor.Click += btnRefreshBookAuthor_Click;
             // 
             // btnUpdateBookAuthor
             // 
@@ -514,6 +517,7 @@
             btnUpdateBookAuthor.TabIndex = 35;
             btnUpdateBookAuthor.Text = "Sửa";
             btnUpdateBookAuthor.UseVisualStyleBackColor = false;
+            btnUpdateBookAuthor.Click += btnUpdateBookAuthor_Click;
             // 
             // btnDeleteBookAuthor
             // 
@@ -526,6 +530,7 @@
             btnDeleteBookAuthor.TabIndex = 35;
             btnDeleteBookAuthor.Text = "Xóa";
             btnDeleteBookAuthor.UseVisualStyleBackColor = false;
+            btnDeleteBookAuthor.Click += btnDeleteBookAuthor_Click;
             // 
             // btnAddBookAuthor
             // 
@@ -538,6 +543,7 @@
             btnAddBookAuthor.TabIndex = 35;
             btnAddBookAuthor.Text = "Thêm";
             btnAddBookAuthor.UseVisualStyleBackColor = false;
+            btnAddBookAuthor.Click += btnAddBookAuthor_Click;
             // 
             // cboAuthorNameBookAuthor
             // 
@@ -554,6 +560,7 @@
             cboTitleBookAuthor.Name = "cboTitleBookAuthor";
             cboTitleBookAuthor.Size = new Size(450, 45);
             cboTitleBookAuthor.TabIndex = 5;
+            cboTitleBookAuthor.SelectedIndexChanged += cboTitleBookAuthor_SelectedIndexChanged;
             // 
             // txtBookIdBookAuthor
             // 
@@ -572,7 +579,6 @@
             label16.Size = new Size(118, 45);
             label16.TabIndex = 3;
             label16.Text = "Tác giả";
-            label16.Click += label14_Click;
             // 
             // label15
             // 
@@ -583,7 +589,6 @@
             label15.Size = new Size(144, 45);
             label15.TabIndex = 3;
             label15.Text = "Tên sách";
-            label15.Click += label14_Click;
             // 
             // label14
             // 
@@ -594,7 +599,6 @@
             label14.Size = new Size(141, 45);
             label14.TabIndex = 3;
             label14.Text = "Mã sách";
-            label14.Click += label14_Click;
             // 
             // label13
             // 
@@ -615,6 +619,10 @@
             dgvBookAuthor.RowHeadersWidth = 92;
             dgvBookAuthor.Size = new Size(2205, 710);
             dgvBookAuthor.TabIndex = 0;
+            dgvBookAuthor.CellClick += dgvBookAuthor_CellClick;
+            dgvBookAuthor.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvBookAuthor.AutoGenerateColumns = true;
+            dgvBookAuthor.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             // 
             // BookManagementForm
             // 
