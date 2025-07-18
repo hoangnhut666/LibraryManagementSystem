@@ -7,6 +7,26 @@ GO
 USE PolyLibrary;
 GO
 
+CREATE TABLE Roles
+(
+    [RoleID] VARCHAR(10) PRIMARY KEY,
+    [RoleName] NVARCHAR(50) UNIQUE NOT NULL,
+    [Description] NVARCHAR(200)
+);
+
+
+CREATE TABLE Users
+(
+    [UserID] VARCHAR(10) PRIMARY KEY,
+    [Username] VARCHAR(50) UNIQUE NOT NULL,
+    [Password] VARCHAR(50) NOT NULL,
+    [Email] VARCHAR(100) UNIQUE NOT NULL,
+    [FullName] NVARCHAR(100),
+    [RoleID] VARCHAR(10) NOT NULL,
+    [IsActive] BIT DEFAULT 1,
+    FOREIGN KEY (RoleID) REFERENCES Roles(RoleID)
+);
+
 CREATE TABLE Publishers
 (
     [PublisherID] VARCHAR(10) PRIMARY KEY,
@@ -53,8 +73,6 @@ CREATE TABLE Books
 );
 
 
-
-
 CREATE TABLE BookAuthors
 (
     [BookAuthorID] INT PRIMARY KEY IDENTITY(1,1),
@@ -93,73 +111,62 @@ CREATE TABLE Members
 );
 
 
-
 CREATE TABLE Loans
 (
     [LoanID] VARCHAR(10) PRIMARY KEY,
     [CopyID] VARCHAR(10) NOT NULL,
     [MemberID] VARCHAR(10) NOT NULL,
+    [UserID] VARCHAR(10),
     [LoanDate] DATETIME DEFAULT GETDATE(),
     [DueDate] DATETIME NOT NULL,
     [ReturnDate] DATETIME,
     [Status] NVARCHAR(20) DEFAULT N'Đang mượn' CHECK (Status IN (N'Đang mượn', N'Đã trả', N'Quá hạn', N'Thất lạc')),
-    [Notes] NVARCHAR(500),
+    [Notes] NVARCHAR(255),
     FOREIGN KEY (CopyID) REFERENCES BookCopies(CopyID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (MemberID) REFERENCES Members(MemberID) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (MemberID) REFERENCES Members(MemberID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 
 CREATE TABLE Fines
 (
-    [FineID] INT PRIMARY KEY IDENTITY(1,1),
+    [FineID] VARCHAR(10) PRIMARY KEY,
     [LoanID] VARCHAR(10) NOT NULL,
-    [MemberID] VARCHAR(10) NOT NULL,
     [Amount] DECIMAL(10,2) NOT NULL,
     [IssueDate] DATETIME DEFAULT GETDATE(),
-    [PaymentDate] DATETIME,
-    [Status] NVARCHAR(20) DEFAULT N'Chưa thanh toán' CHECK (Status IN (N'Chưa thanh toán', N'Đã thanh toán', N'Được miễn')),
+    [Paid] BIT DEFAULT 0,
     [Reason] NVARCHAR(255),
-    [UserID] VARCHAR(10)
     FOREIGN KEY (LoanID) REFERENCES Loans(LoanID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (MemberID) REFERENCES Members(MemberID),
-    FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 
-CREATE TABLE Payments
-(
-    [PaymentID] INT PRIMARY KEY IDENTITY(1,1),
-    [MemberID] VARCHAR(10) NOT NULL,
-    [Amount] DECIMAL(10,2) NOT NULL,
-    [PaymentDate] DATETIME DEFAULT GETDATE(),
-    [PaymentMethod] NVARCHAR(50) CHECK ( PaymentMethod IN (N'Tiền mặt', N'Thẻ tín dụng', N'Thẻ ghi nợ', N'Chuyển khoản ngân hàng')),
-    [PaymentType] NVARCHAR(50) CHECK (PaymentType IN (N'Tiền phạt', N'Quyên góp', N'Khác')),
-    [ReferenceNumber] VARCHAR(100),
-    [Notes] NVARCHAR(500),
-    FOREIGN KEY (MemberID) REFERENCES Members(MemberID) ON DELETE CASCADE ON UPDATE CASCADE
-);
+INSERT INTO Roles
+    ([RoleID], [RoleName], [Description])
+VALUES
+    ('ROLE001', N'Quản trị viên', N'Toàn quyền quản lý hệ thống thư viện.'),
+    ('ROLE002', N'Thủ thư', N'Quản lý sách, mượn trả, thành viên.'),
+    ('ROLE003', N'Thành viên', N'Người dùng thông thường, có thể mượn sách, đặt chỗ.');
 
 
-CREATE TABLE Roles
-(
-    [RoleID] VARCHAR(10) PRIMARY KEY,
-    [RoleName] NVARCHAR(50) UNIQUE NOT NULL,
-    [Description] NVARCHAR(200)
-);
-
-
-CREATE TABLE Users
-(
-    [UserID] VARCHAR(10) PRIMARY KEY,
-    [Username] VARCHAR(50) UNIQUE NOT NULL,
-    [Password] VARCHAR(50) NOT NULL,
-    [Email] VARCHAR(100) UNIQUE NOT NULL,
-    [FullName] NVARCHAR(100),
-    [RoleID] VARCHAR(10) NOT NULL,
-    [IsActive] BIT DEFAULT 1,
-    FOREIGN KEY (RoleID) REFERENCES Roles(RoleID) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
+INSERT INTO Users
+    ([UserID], [Username], [Password], [Email], [FullName], [RoleID], [IsActive])
+VALUES
+    ('USER001', 'admin', 'admin123', 'admin@polylibrary.com', N'Quản Trị Viên', 'ROLE001', 1),
+    ('USER002', 'thuthu01', 'thuthu123', 'thuthu01@polylibrary.com', N'Nguyễn Thị Hoa', 'ROLE002', 1),
+    ('USER003', 'nhanvien01', 'nhanvien123', 'nhanvien01@polylibrary.com', N'Trần Văn Long', 'ROLE002', 1),
+    ('USER004', 'annguyen', 'annguyen123', 'an.nguyen@example.com', N'Nguyễn Văn An', 'ROLE003', 1),
+    ('USER005', 'binhtran', 'binhtran123', 'binh.tran@example.com', N'Trần Thị Bình', 'ROLE003', 1),
+    ('USER006', 'cuongle', 'cuongle123', 'cuong.le@example.com', N'Lê Minh Cường', 'ROLE003', 1),
+    ('USER007', 'dungpham', 'dungpham123', 'dung.pham@example.com', N'Phạm Thu Dung', 'ROLE003', 1),
+    ('USER008', 'anhhoang', 'anhhoang123', 'anh.hoang@example.com', N'Hoàng Việt Anh', 'ROLE003', 1),
+    ('USER009', 'thaodo', 'thaodo123', 'thao.do@example.com', N'Đỗ Thị Thảo', 'ROLE003', 1),
+    ('USER010', 'vinhbui', 'vinhbui123', 'vinh.bui@example.com', N'Bùi Quang Vinh', 'ROLE003', 1),
+    ('USER011', 'tuvu', 'tuvu123', 'tu.vo@example.com', N'Võ Thanh Tú', 'ROLE003', 1),
+    ('USER012', 'kimdang', 'kimdang123', 'kim.dang@example.com', N'Đặng Thị Kim', 'ROLE003', 1),
+    ('USER013', 'phatnguyen', 'phatnguyen123', 'phat.nguyen@example.com', N'Nguyễn Đức Phát', 'ROLE003', 1),
+    ('USER014', 'maicao', 'maicao123', 'mai.cao@example.com', N'Cao Thị Mai', 'ROLE003', 1),
+    ('USER015', 'khaidinh', 'khaidinh123', 'khai.dinh@example.com', N'Đinh Bá Khải', 'ROLE003', 1);
+GO
 
 
 
@@ -356,119 +363,26 @@ VALUES
     ('LOAN015', 'COPY015', 'MEM015', '2024-07-03 16:00:00', '2024-07-17 16:00:00', NULL, N'Đang mượn', NULL);
 
 
-
 INSERT INTO Fines
-    ([LoanID], [MemberID], [Amount], [IssueDate], [PaymentDate], [Status], [Reason])
+    ([FineID], [LoanID], [Amount], [IssueDate], [Paid], [Reason])
 VALUES
-    ('LOAN001', 'MEM001', 10000.00, '2025-07-05 10:00:00', NULL, N'Chưa thanh toán', N'Trả sách quá hạn 1 ngày'),
-    ('LOAN002', 'MEM003', 5000.00, '2025-07-10 11:30:00', NULL, N'Chưa thanh toán', N'Trả sách quá hạn 1 ngày'),
-    ('LOAN003', 'MEM005', 5000.00, '2025-07-13 14:00:00', NULL, N'Chưa thanh toán', N'Trả sách quá hạn 1 ngày'),
-    ('LOAN004', 'MEM007', 5000.00, '2025-07-16 09:00:00', NULL, N'Chưa thanh toán', N'Trả sách quá hạn 1 ngày'),
-    ('LOAN010', 'MEM010', 5000.00, '2025-06-30 13:00:00', NULL, N'Chưa thanh toán', N'Trả sách quá hạn 1 ngày'),
-    ('LOAN011', 'MEM011', 5000.00, '2025-07-03 15:00:00', NULL, N'Chưa thanh toán', N'Trả sách quá hạn 1 ngày'),
-    ('LOAN012', 'MEM012', 5000.00, '2025-07-07 10:30:00', NULL, N'Chưa thanh toán', N'Trả sách quá hạn 1 ngày'),
-    ('LOAN013', 'MEM013', 5000.00, '2025-07-12 08:00:00', NULL, N'Chưa thanh toán', N'Trả sách quá hạn 1 ngày'),
-    ('LOAN014', 'MEM014', 5000.00, '2025-07-15 14:30:00', NULL, N'Chưa thanh toán', N'Trả sách quá hạn 1 ngày'),
-    ('LOAN015', 'MEM015', 5000.00, '2025-07-18 16:00:00', NULL, N'Chưa thanh toán', N'Trả sách quá hạn 1 ngày'),
-    ('LOAN005', 'MEM002', 7500.00, '2025-05-16 11:00:00', '2025-05-17 09:00:00', N'Đã thanh toán', N'Trả sách quá hạn 1 ngày (LOAN005)'),
-    ('LOAN006', 'MEM004', 18000.00, '2025-06-25 15:00:00', '2025-06-26 09:00:00', N'Đã thanh toán', N'Làm rách 5 trang cuối sách'),
-    ('LOAN007', 'MEM006', 10000.00, '2025-07-01 10:30:00', NULL, N'Chưa thanh toán', N'Đánh dấu bút xóa vào sách'),
-    ('LOAN008', 'MEM008', 30000.00, '2025-07-02 14:00:00', '2025-07-03 10:00:00', N'Đã thanh toán', N'Làm thất lạc sách "Lược Sử Thời Gian"'),
-    ('LOAN009', 'MEM009', 2000.00, '2025-06-25 11:05:00', '2025-06-25 11:30:00', N'Đã thanh toán', N'Trả sách hơi bẩn'),
-    ('LOAN001', 'MEM001', 20000.00, '2025-06-01 10:00:00', NULL, N'Chưa thanh toán', N'Làm mất thẻ thư viện'),
-    ('LOAN003', 'MEM005', 10000.00, '2025-07-01 09:00:00', NULL, N'Chưa thanh toán', N'Trả sách bị dính bẩn'),
-    ('LOAN004', 'MEM007', 8000.00, '2025-07-02 10:00:00', NULL, N'Chưa thanh toán', N'Làm rách bìa sách'),
-    ('LOAN011', 'MEM001', 15000.00, '2025-07-04 09:00:00', NULL, N'Chưa thanh toán', N'Làm cong gáy sách'),
-    ('LOAN012', 'MEM002', 25000.00, '2025-07-04 14:00:00', NULL, N'Chưa thanh toán', N'Làm ướt sách')
-
-
-INSERT INTO Payments
-    ([MemberID], [Amount], [PaymentDate], [PaymentMethod], [PaymentType], [ReferenceNumber], [Notes])
-VALUES
-    ('MEM004', 5000.00, '2024-05-25 09:10:00', N'Tiền mặt', N'Tiền phạt', 'PAY001', N'Thanh toán phạt quá hạn LOAN006'),
-    ('MEM003', 15000.00, '2024-06-15 14:30:00', N'Chuyển khoản ngân hàng', N'Tiền phạt', 'PAY002', N'Thanh toán phạt làm hư sách'),
-    ('MEM009', 12000.00, '2024-06-26 09:00:00', N'Thẻ tín dụng', N'Tiền phạt', 'PAY003', N'Thanh toán phạt làm ướt sách'),
-    ('MEM001', 50000.00, '2024-03-10 10:00:00', N'Tiền mặt', N'Quyên góp', 'PAY004', N'Quyên góp hỗ trợ thư viện'),
-    ('MEM002', 20000.00, '2024-04-05 11:00:00', N'Thẻ ghi nợ', N'Khác', 'PAY005', N'Mua vật phẩm lưu niệm'),
-    ('MEM005', 10000.00, '2024-07-04 12:00:00', N'Tiền mặt', N'Tiền phạt', 'PAY006', N'Thanh toán phạt làm bẩn sách'),
-    ('MEM007', 8000.00, '2024-07-04 15:00:00', N'Tiền mặt', N'Tiền phạt', 'PAY007', N'Thanh toán phạt làm rách bìa sách'),
-    ('MEM010', 5000.00, '2024-07-05 09:00:00', N'Tiền mặt', N'Tiền phạt', 'PAY008', N'Thanh toán phạt quá hạn LOAN010'),
-    ('MEM011', 5000.00, '2024-07-05 10:00:00', N'Tiền mặt', N'Tiền phạt', 'PAY009', N'Thanh toán phạt quá hạn LOAN011'),
-    ('MEM012', 5000.00, '2024-07-05 11:00:00', N'Tiền mặt', N'Tiền phạt', 'PAY010', N'Thanh toán phạt quá hạn LOAN012'),
-    ('MEM013', 5000.00, '2024-07-05 12:00:00', N'Tiền mặt', N'Tiền phạt', 'PAY011', N'Thanh toán phạt quá hạn LOAN013'),
-    ('MEM014', 5000.00, '2024-07-05 13:00:00', N'Tiền mặt', N'Tiền phạt', 'PAY012', N'Thanh toán phạt quá hạn LOAN014'),
-    ('MEM015', 5000.00, '2024-07-05 14:00:00', N'Tiền mặt', N'Tiền phạt', 'PAY013', N'Thanh toán phạt quá hạn LOAN015'),
-    ('MEM008', 30000.00, '2024-06-01 10:00:00', N'Chuyển khoản ngân hàng', N'Quyên góp', 'PAY014', N'Quyên góp định kỳ'),
-    ('MEM006', 15000.00, '2024-06-20 11:00:00', N'Thẻ tín dụng', N'Khác', 'PAY015', N'Mua tài liệu nghiên cứu');
-
-INSERT INTO Roles
-    ([RoleID], [RoleName], [Description])
-VALUES
-    ('ROLE001', N'Quản trị viên', N'Toàn quyền quản lý hệ thống thư viện.'),
-    ('ROLE002', N'Thủ thư', N'Quản lý sách, mượn trả, thành viên.'),
-    ('ROLE003', N'Thành viên', N'Người dùng thông thường, có thể mượn sách, đặt chỗ.');
-
-
-INSERT INTO Users
-    ([UserID], [Username], [Password], [Email], [FullName], [RoleID], [IsActive])
-VALUES
-    ('USER001', 'admin', 'admin123', 'admin@polylibrary.com', N'Quản Trị Viên', 'ROLE001', 1),
-    ('USER002', 'thuthu01', 'thuthu123', 'thuthu01@polylibrary.com', N'Nguyễn Thị Hoa', 'ROLE002', 1),
-    ('USER003', 'nhanvien01', 'nhanvien123', 'nhanvien01@polylibrary.com', N'Trần Văn Long', 'ROLE002', 1),
-    ('USER004', 'annguyen', 'annguyen123', 'an.nguyen@example.com', N'Nguyễn Văn An', 'ROLE003', 1),
-    ('USER005', 'binhtran', 'binhtran123', 'binh.tran@example.com', N'Trần Thị Bình', 'ROLE003', 1),
-    ('USER006', 'cuongle', 'cuongle123', 'cuong.le@example.com', N'Lê Minh Cường', 'ROLE003', 1),
-    ('USER007', 'dungpham', 'dungpham123', 'dung.pham@example.com', N'Phạm Thu Dung', 'ROLE003', 1),
-    ('USER008', 'anhhoang', 'anhhoang123', 'anh.hoang@example.com', N'Hoàng Việt Anh', 'ROLE003', 1),
-    ('USER009', 'thaodo', 'thaodo123', 'thao.do@example.com', N'Đỗ Thị Thảo', 'ROLE003', 1),
-    ('USER010', 'vinhbui', 'vinhbui123', 'vinh.bui@example.com', N'Bùi Quang Vinh', 'ROLE003', 1),
-    ('USER011', 'tuvu', 'tuvu123', 'tu.vo@example.com', N'Võ Thanh Tú', 'ROLE003', 1),
-    ('USER012', 'kimdang', 'kimdang123', 'kim.dang@example.com', N'Đặng Thị Kim', 'ROLE003', 1),
-    ('USER013', 'phatnguyen', 'phatnguyen123', 'phat.nguyen@example.com', N'Nguyễn Đức Phát', 'ROLE003', 1),
-    ('USER014', 'maicao', 'maicao123', 'mai.cao@example.com', N'Cao Thị Mai', 'ROLE003', 1),
-    ('USER015', 'khaidinh', 'khaidinh123', 'khai.dinh@example.com', N'Đinh Bá Khải', 'ROLE003', 1);
-
-
-INSERT INTO Reviews
-    ([BookID], [MemberID], [Expression], [ReviewText])
-VALUES
-    ('BOOK001', 'MEM001', N'Thích', N'Cuốn sách rất hay và ý nghĩa, phù hợp cho mọi lứa tuổi.'),
-    ('BOOK003', 'MEM002', N'Thích', N'Đắc Nhân Tâm đã thay đổi cách tôi giao tiếp.'),
-    ('BOOK006', 'MEM003', N'Thích', N'Kiệt tác văn học Việt Nam, nên đọc.'),
-    ('BOOK007', 'MEM004', N'Thích', N'Truyện Nguyễn Nhật Ánh luôn đáng yêu và trong sáng.'),
-    ('BOOK009', 'MEM005', N'Thích', N'Sapiens mang đến cái nhìn sâu sắc về lịch sử loài người.'),
-    ('BOOK010', 'MEM006', N'Thích', N'Một cuốn sách truyền cảm hứng tuyệt vời.'),
-    ('BOOK011', 'MEM007', N'Thích', N'Cha Giàu Cha Nghèo giúp tôi thay đổi tư duy tài chính.'),
-    ('BOOK002', 'MEM008', N'Bình thường', N'Số Đỏ mang tính thời sự nhưng hơi khó đọc với người mới.'),
-    ('BOOK004', 'MEM009', N'Thích', N'Một cuốn sách khoa học hấp dẫn nhưng cần sự tập trung.'),
-    ('BOOK005', 'MEM010', N'Thích', N'Rất bổ ích cho những ai quan tâm đến khởi nghiệp.'),
-    ('BOOK008', 'MEM011', N'Thích', N'Thám tử Conan luôn là lựa chọn số 1 của tôi.'),
-    ('BOOK012', 'MEM012', N'Thích', N'Tắt Đèn là một bức tranh chân thực về xã hội cũ.'),
-    ('BOOK013', 'MEM013', N'Thích', N'Chí Phèo là một tác phẩm bất hủ của Nam Cao.'),
-    ('BOOK014', 'MEM014', N'Thích', N'Bí Mật Của Sự May Mắn là cuốn sách gối đầu giường.'),
-    ('BOOK015', 'MEM015', N'Bình thường', N'Truyện cổ tích Lĩnh Nam Chích Quái rất độc đáo.'),
-    ('BOOK003', 'MEM003', N'Thích', N'Đắc Nhân Tâm đã thay đổi con người của tôi.'),
-    ('BOOK003', 'MEM004', N'Thích', N'Đắc Nhân Tâm cách tôi cư xử với mọi người xung quanh.'),
-    ('BOOK003', 'MEM005', N'Thích', N'Quyển sách kỹ năng mềm mà tất cả chúng ta cần có.');
+    ('FINE001', 'LOAN006', 15000.00, '2024-05-25 10:00:00', 0, N'Trả sách quá hạn 1 ngày'),
+    ('FINE002', 'LOAN001', 20000.00, GETDATE(), 0, N'Làm rách bìa sách'),
+    ('FINE003', 'LOAN002', 10000.00, GETDATE(), 0, N'Làm ố một vài trang sách'),
+    ('FINE004', 'LOAN003', 25000.00, GETDATE(), 0, N'Làm mất mã vạch sách'),
+    ('FINE005', 'LOAN004', 30000.00, GETDATE(), 0, N'Làm mất sách'),
+    ('FINE006', 'LOAN005', 5000.00, '2024-05-15 11:00:00', 1, N'Trả sách quá hạn 1 ngày (đã thanh toán)'),
+    ('FINE007', 'LOAN007', 12000.00, GETDATE(), 0, N'Làm cong gáy sách'),
+    ('FINE008', 'LOAN008', 8000.00, GETDATE(), 0, N'Viết bút chì vào sách'),
+    ('FINE009', 'LOAN009', 18000.00, GETDATE(), 0, N'Làm rách trang sách'),
+    ('FINE010', 'LOAN010', 22000.00, GETDATE(), 0, N'Làm hỏng sách (không thể sửa chữa)'),
+    ('FINE011', 'LOAN011', 15000.00, GETDATE(), 0, N'Trả sách quá hạn 2 ngày'),
+    ('FINE012', 'LOAN012', 10000.00, GETDATE(), 0, N'Làm bẩn bìa sách'),
+    ('FINE013', 'LOAN013', 50000.00, GETDATE(), 0, N'Làm mất sách quý hiếm'),
+    ('FINE014', 'LOAN014', 7000.00, GETDATE(), 0, N'Làm nhàu bìa sách'),
+    ('FINE015', 'LOAN015', 13000.00, GETDATE(), 0, N'Trả sách quá hạn 3 ngày');
 GO
 
-CREATE PROCEDURE GetTop10FavoriteBooks
-AS
-BEGIN
-    SELECT TOP 10 WITH TIES
-        b.BookID,
-        b.Title,
-        COUNT(*) AS FavoriteCount
-    FROM Reviews r
-        INNER JOIN Books b ON r.BookID = b.BookID
-    WHERE r.Expression = N'Thích'
-    GROUP BY b.BookID, b.Title
-    ORDER BY FavoriteCount DESC;
-END;
-GO
-
-EXEC GetTop10FavoriteBooks;
-GO
 
 
 CREATE PROCEDURE SearchAuthors
@@ -495,6 +409,7 @@ EXEC SearchAuthors N'Nguyễn';
 EXEC SearchAuthors N'Tô Hoài';
 EXEC SearchAuthors N'tô hoài';
 GO
+
 
 
 CREATE PROCEDURE SearchBooks
@@ -563,3 +478,5 @@ SELECT a.*
 FROM Authors a
     JOIN BookAuthors ba ON a.AuthorID = ba.AuthorID
 WHERE ba.BookID = 'BOOK014'
+
+
