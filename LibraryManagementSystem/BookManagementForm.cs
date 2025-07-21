@@ -367,6 +367,11 @@ namespace GUI_UI
                 txtBookIdBookAuthor.Clear();
             }
         }
+
+        private void BookManagementForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

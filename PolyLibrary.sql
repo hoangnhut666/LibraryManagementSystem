@@ -478,5 +478,53 @@ SELECT a.*
 FROM Authors a
     JOIN BookAuthors ba ON a.AuthorID = ba.AuthorID
 WHERE ba.BookID = 'BOOK014'
+drop PROCEDURE find_members
+Create PROCEDURE find_members
+    @MemberID VARCHAR(10) = NULL,
+    @FullName NVARCHAR(100) = NULL,
+    @Email VARCHAR(100) = NULL,
+    @Phone VARCHAR(20) = NULL,
+    @Address NVARCHAR(200) = NULL,
+    @DateOfBirth DATE = NULL,
+    @JoinDate DATE = NULL,
+    @Status NVARCHAR(20) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        MemberID,
+        FullName,
+        Email,
+        Phone,
+        Address,
+        DateOfBirth,
+        JoinDate,
+        Status
+    FROM Members
+    WHERE 
+        (@MemberID IS NULL OR MemberID = @MemberID)
+        AND (@FullName IS NULL OR FullName LIKE '%' + @FullName + '%')
+        AND (@Email IS NULL OR Email = @Email)
+        AND (@Phone IS NULL OR Phone = @Phone)
+        AND (@Address IS NULL OR Address LIKE '%' + @Address + '%')
+        AND (@DateOfBirth IS NULL OR DateOfBirth = @DateOfBirth)
+        AND (@JoinDate IS NULL OR JoinDate = @JoinDate)
+        AND (@Status IS NULL OR Status = @Status)
+    ORDER BY MemberID;
+END;
+GO
+
+
+EXEC find_members;
+EXEC find_members @FullName = N'An';
+EXEC find_members @Email = 'an.nguyen@example.com';
+EXEC find_members @Status = N'Hoạt động', @JoinDate = '2022-01-10';
+EXEC find_members @MemberID = "MEM001"
+EXEC find_members 
+    @FullName = N'Nguyễn', 
+    @Phone = '0912345678', 
+    @Status = N'Hoạt động';
+
 
 

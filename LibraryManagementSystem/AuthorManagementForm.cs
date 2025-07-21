@@ -239,5 +239,10 @@ namespace GUI_UI
         {
             dtpDateOfDeath.CustomFormat = "dd/MM/yyyy";
         }
+
+        private void AuthorManagementForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
