@@ -142,7 +142,7 @@ namespace GUI_UI
                 {
                     MessageBox.Show("Book added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadBooks();
-                    ClearInputFields();
+                    ClearBookInputFields();
                 }
                 else
                 {
@@ -184,7 +184,7 @@ namespace GUI_UI
                 {
                     MessageBox.Show("Book updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadBooks();
-                    ClearInputFields();
+                    ClearBookInputFields();
                 }
                 else
                 {
@@ -216,7 +216,7 @@ namespace GUI_UI
                     {
                         MessageBox.Show("Book deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadBooks();
-                        ClearInputFields();
+                        ClearBookInputFields();
                     }
                     else
                     {
@@ -232,7 +232,7 @@ namespace GUI_UI
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            ClearInputFields();
+            ClearBookInputFields();
             LoadBooks();
         }
 
@@ -313,7 +313,7 @@ namespace GUI_UI
         }
 
 
-        private void ClearInputFields()
+        private void ClearBookInputFields()
         {
             txtBookId.Clear();
             txtTitle.Clear();
@@ -331,7 +331,30 @@ namespace GUI_UI
 
         private void btnAddBookAuthor_Click(object sender, EventArgs e)
         {
-            //Get the selected author and book from the comboboxes
+            BookAuthor newBookAuthor = new BookAuthor
+            {
+                BookID = cboTitleBookAuthor.SelectedValue != null ? cboTitleBookAuthor.SelectedValue.ToString() : null,
+                AuthorID = cboAuthorNameBookAuthor.SelectedValue != null ? cboAuthorNameBookAuthor.SelectedValue.ToString() : null
+            };
+
+            //Insert the book author relationship into the database
+            try
+            {
+                if (BookAuthorsService.InsertBookAuthor(newBookAuthor) > 0)
+                {
+                    MessageBox.Show("Book-Author relationship added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadBookAuthors();
+                    ClearBookAuthorInputFields();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to add Book-Author relationship. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while adding the Book-Author relationship: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
@@ -366,6 +389,13 @@ namespace GUI_UI
             {
                 txtBookIdBookAuthor.Clear();
             }
+        }
+
+        private void ClearBookAuthorInputFields()
+        {
+            cboTitleBookAuthor.SelectedIndex = -1;
+            cboAuthorNameBookAuthor.SelectedIndex = -1;
+            txtBookIdBookAuthor.Clear();
         }
     }
 }

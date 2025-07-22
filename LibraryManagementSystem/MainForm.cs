@@ -22,8 +22,11 @@ namespace GUI_UI
 
         private void SetupComponent()
         {
-            //Set up Form
+            // Set the main form properties
             StartPosition = FormStartPosition.CenterScreen;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.Size = new Size(2400, 1600);
+
         }
 
 

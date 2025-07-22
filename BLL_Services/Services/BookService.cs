@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BLL_Services.Services
 {
-    
+
     public class BookService
     {
         private BookRepository BookRepository { get; set; }
@@ -90,8 +90,17 @@ namespace BLL_Services.Services
             }
             return BookRepository.Delete(bookID);
         }
+
+        //Get the book cover image with the given book ID
+        public byte[]? GetBookCoverImage(string bookID)
+        {
+            if (string.IsNullOrWhiteSpace(bookID))
+            {
+                throw new ArgumentException("Book ID cannot be null or empty.", nameof(bookID));
+            }
+            return BookRepository.GetBookCoverImage(bookID);
+        }
     }
 }
-
 
 

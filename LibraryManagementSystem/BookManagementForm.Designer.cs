@@ -148,14 +148,14 @@ namespace GUI_UI
             label1.ForeColor = Color.MediumSlateBlue;
             label1.Location = new Point(852, 0);
             label1.Name = "label1";
-            label1.Size = new Size(457, 96);
+            label1.Size = new Size(700, 96);
             label1.TabIndex = 18;
-            label1.Text = "Quản lý sách";
+            label1.Text = "Quản lý ấn bản sách";
             // 
             // cboPublisherName
             // 
             cboPublisherName.FormattingEnabled = true;
-            cboPublisherName.Location = new Point(1108, 811);
+            cboPublisherName.Location = new Point(1108, 808);
             cboPublisherName.Name = "cboPublisherName";
             cboPublisherName.Size = new Size(444, 45);
             cboPublisherName.TabIndex = 39;
@@ -225,7 +225,7 @@ namespace GUI_UI
             btnAiGenerate.BackColor = Color.FromArgb(174, 160, 249);
             btnAiGenerate.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnAiGenerate.ForeColor = SystemColors.Control;
-            btnAiGenerate.Location = new Point(865, 115);
+            btnAiGenerate.Location = new Point(852, 115);
             btnAiGenerate.Name = "btnAiGenerate";
             btnAiGenerate.Size = new Size(337, 60);
             btnAiGenerate.TabIndex = 33;
@@ -270,7 +270,7 @@ namespace GUI_UI
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 11F);
-            label5.Location = new Point(866, 918);
+            label5.Location = new Point(852, 918);
             label5.Name = "label5";
             label5.Size = new Size(106, 45);
             label5.TabIndex = 28;
@@ -280,7 +280,7 @@ namespace GUI_UI
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 11F);
-            label10.Location = new Point(862, 808);
+            label10.Location = new Point(852, 805);
             label10.Name = "label10";
             label10.Size = new Size(216, 45);
             label10.TabIndex = 27;
@@ -290,7 +290,7 @@ namespace GUI_UI
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 11F);
-            label8.Location = new Point(869, 607);
+            label8.Location = new Point(852, 605);
             label8.Name = "label8";
             label8.Size = new Size(143, 45);
             label8.TabIndex = 26;
@@ -310,7 +310,7 @@ namespace GUI_UI
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 11F);
-            label9.Location = new Point(866, 707);
+            label9.Location = new Point(852, 705);
             label9.Name = "label9";
             label9.Size = new Size(225, 45);
             label9.TabIndex = 25;
@@ -320,7 +320,7 @@ namespace GUI_UI
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11F);
-            label3.Location = new Point(868, 302);
+            label3.Location = new Point(852, 305);
             label3.Name = "label3";
             label3.Size = new Size(91, 45);
             label3.TabIndex = 29;
@@ -330,7 +330,7 @@ namespace GUI_UI
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 11F);
-            label7.Location = new Point(869, 503);
+            label7.Location = new Point(852, 505);
             label7.Name = "label7";
             label7.Size = new Size(168, 45);
             label7.TabIndex = 24;
@@ -340,7 +340,7 @@ namespace GUI_UI
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 11F);
-            label11.Location = new Point(866, 405);
+            label11.Location = new Point(852, 405);
             label11.Name = "label11";
             label11.Size = new Size(144, 45);
             label11.TabIndex = 23;
@@ -370,7 +370,7 @@ namespace GUI_UI
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11F);
-            label2.Location = new Point(868, 205);
+            label2.Location = new Point(852, 205);
             label2.Name = "label2";
             label2.Size = new Size(141, 45);
             label2.TabIndex = 20;
@@ -378,7 +378,7 @@ namespace GUI_UI
             // 
             // txtDescription
             // 
-            txtDescription.Location = new Point(865, 1023);
+            txtDescription.Location = new Point(852, 1023);
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new Size(1349, 108);
@@ -393,16 +393,16 @@ namespace GUI_UI
             // 
             // txtNumberOfPages
             // 
-            txtNumberOfPages.Location = new Point(1113, 610);
+            txtNumberOfPages.Location = new Point(1108, 608);
             txtNumberOfPages.Name = "txtNumberOfPages";
-            txtNumberOfPages.Size = new Size(442, 43);
+            txtNumberOfPages.Size = new Size(444, 43);
             txtNumberOfPages.TabIndex = 15;
             // 
             // txtPublicationYear
             // 
-            txtPublicationYear.Location = new Point(1113, 710);
+            txtPublicationYear.Location = new Point(1108, 708);
             txtPublicationYear.Name = "txtPublicationYear";
-            txtPublicationYear.Size = new Size(442, 43);
+            txtPublicationYear.Size = new Size(444, 43);
             txtPublicationYear.TabIndex = 14;
             // 
             // groupBox1
@@ -427,23 +427,23 @@ namespace GUI_UI
             // 
             // txtLanguage
             // 
-            txtLanguage.Location = new Point(1113, 503);
+            txtLanguage.Location = new Point(1108, 508);
             txtLanguage.Name = "txtLanguage";
-            txtLanguage.Size = new Size(436, 43);
+            txtLanguage.Size = new Size(444, 43);
             txtLanguage.TabIndex = 13;
             // 
             // txtTitle
             // 
-            txtTitle.Location = new Point(1113, 408);
+            txtTitle.Location = new Point(1108, 408);
             txtTitle.Name = "txtTitle";
-            txtTitle.Size = new Size(439, 43);
+            txtTitle.Size = new Size(444, 43);
             txtTitle.TabIndex = 12;
             // 
             // txtISBN
             // 
-            txtISBN.Location = new Point(1111, 305);
+            txtISBN.Location = new Point(1108, 308);
             txtISBN.Name = "txtISBN";
-            txtISBN.Size = new Size(443, 43);
+            txtISBN.Size = new Size(444, 43);
             txtISBN.TabIndex = 11;
             // 
             // txtAuthor
@@ -465,10 +465,10 @@ namespace GUI_UI
             // 
             // txtBookId
             // 
-            txtBookId.Location = new Point(1112, 208);
+            txtBookId.Location = new Point(1108, 208);
             txtBookId.Name = "txtBookId";
             txtBookId.ReadOnly = true;
-            txtBookId.Size = new Size(442, 43);
+            txtBookId.Size = new Size(444, 43);
             txtBookId.TabIndex = 9;
             // 
             // tabPageBookAuthor
@@ -498,7 +498,7 @@ namespace GUI_UI
             btnRefreshBookAuthor.BackColor = Color.FromArgb(174, 160, 249);
             btnRefreshBookAuthor.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnRefreshBookAuthor.ForeColor = SystemColors.Control;
-            btnRefreshBookAuthor.Location = new Point(1510, 361);
+            btnRefreshBookAuthor.Location = new Point(1519, 283);
             btnRefreshBookAuthor.Name = "btnRefreshBookAuthor";
             btnRefreshBookAuthor.Size = new Size(201, 70);
             btnRefreshBookAuthor.TabIndex = 35;
@@ -511,7 +511,7 @@ namespace GUI_UI
             btnUpdateBookAuthor.BackColor = Color.FromArgb(174, 160, 249);
             btnUpdateBookAuthor.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnUpdateBookAuthor.ForeColor = SystemColors.Control;
-            btnUpdateBookAuthor.Location = new Point(818, 361);
+            btnUpdateBookAuthor.Location = new Point(827, 283);
             btnUpdateBookAuthor.Name = "btnUpdateBookAuthor";
             btnUpdateBookAuthor.Size = new Size(201, 70);
             btnUpdateBookAuthor.TabIndex = 35;
@@ -524,7 +524,7 @@ namespace GUI_UI
             btnDeleteBookAuthor.BackColor = Color.FromArgb(174, 160, 249);
             btnDeleteBookAuthor.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnDeleteBookAuthor.ForeColor = SystemColors.Control;
-            btnDeleteBookAuthor.Location = new Point(1163, 361);
+            btnDeleteBookAuthor.Location = new Point(1172, 283);
             btnDeleteBookAuthor.Name = "btnDeleteBookAuthor";
             btnDeleteBookAuthor.Size = new Size(201, 70);
             btnDeleteBookAuthor.TabIndex = 35;
@@ -537,7 +537,7 @@ namespace GUI_UI
             btnAddBookAuthor.BackColor = Color.FromArgb(174, 160, 249);
             btnAddBookAuthor.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnAddBookAuthor.ForeColor = SystemColors.Control;
-            btnAddBookAuthor.Location = new Point(471, 361);
+            btnAddBookAuthor.Location = new Point(480, 283);
             btnAddBookAuthor.Name = "btnAddBookAuthor";
             btnAddBookAuthor.Size = new Size(201, 70);
             btnAddBookAuthor.TabIndex = 35;
@@ -613,16 +613,15 @@ namespace GUI_UI
             // 
             // dgvBookAuthor
             // 
+            dgvBookAuthor.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvBookAuthor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBookAuthor.Location = new Point(17, 524);
+            dgvBookAuthor.Location = new Point(17, 423);
             dgvBookAuthor.Name = "dgvBookAuthor";
             dgvBookAuthor.RowHeadersWidth = 92;
-            dgvBookAuthor.Size = new Size(2205, 710);
+            dgvBookAuthor.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvBookAuthor.Size = new Size(2205, 811);
             dgvBookAuthor.TabIndex = 0;
             dgvBookAuthor.CellClick += dgvBookAuthor_CellClick;
-            dgvBookAuthor.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvBookAuthor.AutoGenerateColumns = true;
-            dgvBookAuthor.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             // 
             // BookManagementForm
             // 

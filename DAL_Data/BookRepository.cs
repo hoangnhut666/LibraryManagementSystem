@@ -147,6 +147,17 @@ namespace DAL_Data
             };
             return Utilities.ExecuteNonQuery(sql, parameters);
         }
+
+        //Get book cover image by BookID
+        public byte[]? GetBookCoverImage(string bookID)
+        {
+            string sql = $"SELECT CoverImage FROM Books WHERE BookID = @BookID";
+            var parameters = new SqlParameter[]
+            {
+                new SqlParameter("@BookID", bookID ?? (object)DBNull.Value)
+            };
+            return Utilities.ExecuteScalar(sql, parameters) as byte[]; 
+        }
     }
 
 }
