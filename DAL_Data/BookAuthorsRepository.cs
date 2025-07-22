@@ -1,11 +1,12 @@
-﻿using System;
+﻿using DBUTIL_Utilities;
+using DTO_Models;
+using DTO_Models.ViewModel;
+using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DBUTIL_Utilities;
-using DTO_Models;
-using Microsoft.Data.SqlClient;
 
 namespace DAL_Data
 {
@@ -43,6 +44,35 @@ namespace DAL_Data
                     BookAuthorID = Convert.ToInt32(reader["BookAuthorID"]),
                     BookID = reader["BookID"].ToString(),
                     AuthorID = reader["AuthorID"].ToString()
+                };
+            });
+            return bookAuthors;
+        }
+
+        //Get book author view models
+        public List<BookAuthorViewModel> GetBookAuthorViewModels()
+        {
+            string sql = @"
+                SELECT 
+                    ba.BookAuthorID,
+                    ba.BookID,
+                    b.Title,
+                    ba.AuthorID,
+                    a.FullName
+                FROM BookAuthors ba
+                JOIN Authors a ON a.AuthorID = ba.AuthorID
+                JOIN Books b ON b.BookID = ba.BookID
+                ORDER BY ba.BookAuthorID DESC";
+
+            List<BookAuthorViewModel> bookAuthors = Utilities.ExecuteQuery(sql, reader =>
+            {
+                return new BookAuthorViewModel
+                {
+                    MaSachVaTacGia = reader["BookAuthorID"].ToString(),
+                    MaSach = reader["BookID"].ToString(),
+                    TieuDe = reader["Title"].ToString(),
+                    MaTacGia = reader["AuthorID"].ToString(),
+                    TenTacGia = reader["FullName"].ToString()
                 };
             });
             return bookAuthors;

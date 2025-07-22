@@ -55,7 +55,6 @@ namespace GUI_UI
             label6 = new Label();
             label2 = new Label();
             txtDescription = new TextBox();
-            txtShelfLocation = new TextBox();
             txtNumberOfPages = new TextBox();
             txtPublicationYear = new TextBox();
             groupBox1 = new GroupBox();
@@ -71,14 +70,17 @@ namespace GUI_UI
             btnUpdateBookAuthor = new Button();
             btnDeleteBookAuthor = new Button();
             btnAddBookAuthor = new Button();
-            cboAuthorNameBookAuthor = new ComboBox();
+            cboAuthorNameBookAuthorTab = new ComboBox();
             cboTitleBookAuthor = new ComboBox();
+            txtAuthorId = new TextBox();
             txtBookIdBookAuthor = new TextBox();
             label16 = new Label();
             label15 = new Label();
+            lblAuthorId = new Label();
             label14 = new Label();
             label13 = new Label();
             dgvBookAuthor = new DataGridView();
+            cboShelfLocation = new ComboBox();
             tabControl1.SuspendLayout();
             tabPageBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxCoverImage).BeginInit();
@@ -101,6 +103,7 @@ namespace GUI_UI
             // tabPageBook
             // 
             tabPageBook.BackColor = Color.FromArgb(237, 235, 248);
+            tabPageBook.Controls.Add(cboShelfLocation);
             tabPageBook.Controls.Add(label1);
             tabPageBook.Controls.Add(cboPublisherName);
             tabPageBook.Controls.Add(cboCategory);
@@ -124,7 +127,6 @@ namespace GUI_UI
             tabPageBook.Controls.Add(label6);
             tabPageBook.Controls.Add(label2);
             tabPageBook.Controls.Add(txtDescription);
-            tabPageBook.Controls.Add(txtShelfLocation);
             tabPageBook.Controls.Add(txtNumberOfPages);
             tabPageBook.Controls.Add(txtPublicationYear);
             tabPageBook.Controls.Add(groupBox1);
@@ -384,13 +386,6 @@ namespace GUI_UI
             txtDescription.Size = new Size(1349, 108);
             txtDescription.TabIndex = 16;
             // 
-            // txtShelfLocation
-            // 
-            txtShelfLocation.Location = new Point(1762, 710);
-            txtShelfLocation.Name = "txtShelfLocation";
-            txtShelfLocation.Size = new Size(442, 43);
-            txtShelfLocation.TabIndex = 14;
-            // 
             // txtNumberOfPages
             // 
             txtNumberOfPages.Location = new Point(1108, 608);
@@ -478,11 +473,13 @@ namespace GUI_UI
             tabPageBookAuthor.Controls.Add(btnUpdateBookAuthor);
             tabPageBookAuthor.Controls.Add(btnDeleteBookAuthor);
             tabPageBookAuthor.Controls.Add(btnAddBookAuthor);
-            tabPageBookAuthor.Controls.Add(cboAuthorNameBookAuthor);
+            tabPageBookAuthor.Controls.Add(cboAuthorNameBookAuthorTab);
             tabPageBookAuthor.Controls.Add(cboTitleBookAuthor);
+            tabPageBookAuthor.Controls.Add(txtAuthorId);
             tabPageBookAuthor.Controls.Add(txtBookIdBookAuthor);
             tabPageBookAuthor.Controls.Add(label16);
             tabPageBookAuthor.Controls.Add(label15);
+            tabPageBookAuthor.Controls.Add(lblAuthorId);
             tabPageBookAuthor.Controls.Add(label14);
             tabPageBookAuthor.Controls.Add(label13);
             tabPageBookAuthor.Controls.Add(dgvBookAuthor);
@@ -498,7 +495,7 @@ namespace GUI_UI
             btnRefreshBookAuthor.BackColor = Color.FromArgb(174, 160, 249);
             btnRefreshBookAuthor.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnRefreshBookAuthor.ForeColor = SystemColors.Control;
-            btnRefreshBookAuthor.Location = new Point(1519, 283);
+            btnRefreshBookAuthor.Location = new Point(1565, 374);
             btnRefreshBookAuthor.Name = "btnRefreshBookAuthor";
             btnRefreshBookAuthor.Size = new Size(201, 70);
             btnRefreshBookAuthor.TabIndex = 35;
@@ -511,7 +508,7 @@ namespace GUI_UI
             btnUpdateBookAuthor.BackColor = Color.FromArgb(174, 160, 249);
             btnUpdateBookAuthor.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnUpdateBookAuthor.ForeColor = SystemColors.Control;
-            btnUpdateBookAuthor.Location = new Point(827, 283);
+            btnUpdateBookAuthor.Location = new Point(873, 374);
             btnUpdateBookAuthor.Name = "btnUpdateBookAuthor";
             btnUpdateBookAuthor.Size = new Size(201, 70);
             btnUpdateBookAuthor.TabIndex = 35;
@@ -524,7 +521,7 @@ namespace GUI_UI
             btnDeleteBookAuthor.BackColor = Color.FromArgb(174, 160, 249);
             btnDeleteBookAuthor.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnDeleteBookAuthor.ForeColor = SystemColors.Control;
-            btnDeleteBookAuthor.Location = new Point(1172, 283);
+            btnDeleteBookAuthor.Location = new Point(1218, 374);
             btnDeleteBookAuthor.Name = "btnDeleteBookAuthor";
             btnDeleteBookAuthor.Size = new Size(201, 70);
             btnDeleteBookAuthor.TabIndex = 35;
@@ -537,7 +534,7 @@ namespace GUI_UI
             btnAddBookAuthor.BackColor = Color.FromArgb(174, 160, 249);
             btnAddBookAuthor.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnAddBookAuthor.ForeColor = SystemColors.Control;
-            btnAddBookAuthor.Location = new Point(480, 283);
+            btnAddBookAuthor.Location = new Point(526, 374);
             btnAddBookAuthor.Name = "btnAddBookAuthor";
             btnAddBookAuthor.Size = new Size(201, 70);
             btnAddBookAuthor.TabIndex = 35;
@@ -545,36 +542,44 @@ namespace GUI_UI
             btnAddBookAuthor.UseVisualStyleBackColor = false;
             btnAddBookAuthor.Click += btnAddBookAuthor_Click;
             // 
-            // cboAuthorNameBookAuthor
+            // cboAuthorNameBookAuthorTab
             // 
-            cboAuthorNameBookAuthor.FormattingEnabled = true;
-            cboAuthorNameBookAuthor.Location = new Point(1753, 176);
-            cboAuthorNameBookAuthor.Name = "cboAuthorNameBookAuthor";
-            cboAuthorNameBookAuthor.Size = new Size(450, 45);
-            cboAuthorNameBookAuthor.TabIndex = 5;
+            cboAuthorNameBookAuthorTab.FormattingEnabled = true;
+            cboAuthorNameBookAuthorTab.Location = new Point(1400, 263);
+            cboAuthorNameBookAuthorTab.Name = "cboAuthorNameBookAuthorTab";
+            cboAuthorNameBookAuthorTab.Size = new Size(450, 45);
+            cboAuthorNameBookAuthorTab.TabIndex = 5;
             // 
             // cboTitleBookAuthor
             // 
             cboTitleBookAuthor.FormattingEnabled = true;
-            cboTitleBookAuthor.Location = new Point(1006, 176);
+            cboTitleBookAuthor.Location = new Point(622, 257);
             cboTitleBookAuthor.Name = "cboTitleBookAuthor";
             cboTitleBookAuthor.Size = new Size(450, 45);
             cboTitleBookAuthor.TabIndex = 5;
             cboTitleBookAuthor.SelectedIndexChanged += cboTitleBookAuthor_SelectedIndexChanged;
             // 
+            // txtAuthorId
+            // 
+            txtAuthorId.Location = new Point(1400, 155);
+            txtAuthorId.Name = "txtAuthorId";
+            txtAuthorId.ReadOnly = true;
+            txtAuthorId.Size = new Size(450, 43);
+            txtAuthorId.TabIndex = 4;
+            // 
             // txtBookIdBookAuthor
             // 
-            txtBookIdBookAuthor.Location = new Point(237, 173);
+            txtBookIdBookAuthor.Location = new Point(622, 152);
             txtBookIdBookAuthor.Name = "txtBookIdBookAuthor";
             txtBookIdBookAuthor.ReadOnly = true;
-            txtBookIdBookAuthor.Size = new Size(422, 43);
+            txtBookIdBookAuthor.Size = new Size(450, 43);
             txtBookIdBookAuthor.TabIndex = 4;
             // 
             // label16
             // 
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI", 11F);
-            label16.Location = new Point(1579, 176);
+            label16.Location = new Point(1198, 260);
             label16.Name = "label16";
             label16.Size = new Size(118, 45);
             label16.TabIndex = 3;
@@ -584,17 +589,27 @@ namespace GUI_UI
             // 
             label15.AutoSize = true;
             label15.Font = new Font("Segoe UI", 11F);
-            label15.Location = new Point(808, 176);
+            label15.Location = new Point(424, 254);
             label15.Name = "label15";
             label15.Size = new Size(144, 45);
             label15.TabIndex = 3;
             label15.Text = "Tên sách";
             // 
+            // lblAuthorId
+            // 
+            lblAuthorId.AutoSize = true;
+            lblAuthorId.Font = new Font("Segoe UI", 11F);
+            lblAuthorId.Location = new Point(1198, 152);
+            lblAuthorId.Name = "lblAuthorId";
+            lblAuthorId.Size = new Size(181, 45);
+            lblAuthorId.TabIndex = 3;
+            lblAuthorId.Text = "Mã tác giả ";
+            // 
             // label14
             // 
             label14.AutoSize = true;
             label14.Font = new Font("Segoe UI", 11F);
-            label14.Location = new Point(49, 173);
+            label14.Location = new Point(424, 152);
             label14.Name = "label14";
             label14.Size = new Size(141, 45);
             label14.TabIndex = 3;
@@ -615,13 +630,21 @@ namespace GUI_UI
             // 
             dgvBookAuthor.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvBookAuthor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBookAuthor.Location = new Point(17, 423);
+            dgvBookAuthor.Location = new Point(17, 503);
             dgvBookAuthor.Name = "dgvBookAuthor";
             dgvBookAuthor.RowHeadersWidth = 92;
             dgvBookAuthor.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvBookAuthor.Size = new Size(2205, 811);
+            dgvBookAuthor.Size = new Size(2205, 731);
             dgvBookAuthor.TabIndex = 0;
             dgvBookAuthor.CellClick += dgvBookAuthor_CellClick;
+            // 
+            // cboShelfLocation
+            // 
+            cboShelfLocation.FormattingEnabled = true;
+            cboShelfLocation.Location = new Point(1765, 713);
+            cboShelfLocation.Name = "cboShelfLocation";
+            cboShelfLocation.Size = new Size(436, 45);
+            cboShelfLocation.TabIndex = 40;
             // 
             // BookManagementForm
             // 
@@ -682,18 +705,20 @@ namespace GUI_UI
         private TextBox txtSearch;
         private TextBox txtBookId;
         private Label label12;
-        private TextBox txtShelfLocation;
         private Label label13;
         private DataGridView dgvBookAuthor;
         private ComboBox cboTitleBookAuthor;
         private TextBox txtBookIdBookAuthor;
         private Label label14;
-        private ComboBox cboAuthorNameBookAuthor;
+        private ComboBox cboAuthorNameBookAuthorTab;
         private Label label16;
         private Label label15;
         private Button btnRefreshBookAuthor;
         private Button btnUpdateBookAuthor;
         private Button btnDeleteBookAuthor;
         private Button btnAddBookAuthor;
+        private TextBox txtAuthorId;
+        private Label lblAuthorId;
+        private ComboBox cboShelfLocation;
     }
 }

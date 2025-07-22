@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DTO_Models.ViewModel;
 
 namespace GUI_UI
 {
@@ -61,15 +62,26 @@ namespace GUI_UI
             cboPublisherName.SelectedIndex = -1;
 
 
-            cboAuthorNameBookAuthor.DisplayMember = "FullName";
-            cboAuthorNameBookAuthor.ValueMember = "AuthorID";
-            cboAuthorNameBookAuthor.DataSource = AuthorService.GetAuthors();
-            cboAuthorNameBookAuthor.SelectedIndex = -1;
+            cboAuthorNameBookAuthorTab.DisplayMember = "FullName";
+            cboAuthorNameBookAuthorTab.ValueMember = "AuthorID";
+            cboAuthorNameBookAuthorTab.DataSource = AuthorService.GetAuthors();
+            cboAuthorNameBookAuthorTab.SelectedIndex = -1;
 
             cboTitleBookAuthor.DisplayMember = "Title";
             cboTitleBookAuthor.ValueMember = "BookID";
             cboTitleBookAuthor.DataSource = BookService.GetBooks();
             cboTitleBookAuthor.SelectedIndex = -1;
+
+            cboShelfLocation.DataSource = new List<string>
+            {
+                "A1", "A2", "A3", "A4", "A5", 
+                "B1", "B2", "B3", "B4", "B5", 
+                "C1", "C2", "C3", "C4", "C5",
+                "D1", "D2", "D3", "D4", "D5",
+                "E1", "E2", "E3", "E4", "E5"
+            };
+            cboShelfLocation.SelectedIndex = -1;
+
 
             // Set the TextBox properties
             txtDescription.Multiline = true;
@@ -105,7 +117,7 @@ namespace GUI_UI
         {
             try
             {
-                var bookAuthors = BookAuthorsService.GetAllBookAuthors();
+                var bookAuthors = BookAuthorsService.GetBookAuthorViewModels();
                 dgvBookAuthor.DataSource = bookAuthors;
             }
             catch (Exception ex)
@@ -128,7 +140,7 @@ namespace GUI_UI
                 PublisherID = cboPublisherName.SelectedValue != null ? cboPublisherName.SelectedValue.ToString() : null,
                 PublicationYear = int.TryParse(txtPublicationYear.Text, out publicationYear) ? publicationYear : (int?)null,
                 CategoryID = cboCategory.SelectedValue != null ? cboCategory.SelectedValue.ToString() : null,
-                ShelfLocation = txtShelfLocation.Text,
+                ShelfLocation = cboShelfLocation.SelectedItem != null ? cboShelfLocation.SelectedItem.ToString() : null,
                 NumberOfPages = int.TryParse(txtNumberOfPages.Text, out numberOfPages) ? numberOfPages : (int?)null,
                 Language = txtLanguage.Text,
                 Description = txtDescription.Text,
@@ -170,7 +182,7 @@ namespace GUI_UI
                 PublisherID = cboPublisherName.SelectedValue != null ? cboPublisherName.SelectedValue.ToString() : null,
                 PublicationYear = int.TryParse(txtPublicationYear.Text, out publicationYear) ? publicationYear : (int?)null,
                 CategoryID = cboCategory.SelectedValue != null ? cboCategory.SelectedValue.ToString() : null,
-                ShelfLocation = txtShelfLocation.Text,
+                ShelfLocation = cboShelfLocation.SelectedItem != null ? cboShelfLocation.SelectedItem.ToString() : null,
                 NumberOfPages = int.TryParse(txtNumberOfPages.Text, out numberOfPages) ? numberOfPages : (int?)null,
                 Language = txtLanguage.Text,
                 Description = txtDescription.Text,
@@ -279,7 +291,7 @@ namespace GUI_UI
                 cboPublisherName.SelectedValue = selectedBook.PublisherID;
                 txtPublicationYear.Text = selectedBook.PublicationYear.HasValue ? selectedBook.PublicationYear.Value.ToString() : string.Empty;
                 cboCategory.SelectedValue = selectedBook.CategoryID;
-                txtShelfLocation.Text = selectedBook.ShelfLocation;
+                cboShelfLocation.Text = selectedBook.ShelfLocation;
                 txtNumberOfPages.Text = selectedBook.NumberOfPages.HasValue ? selectedBook.NumberOfPages.Value.ToString() : string.Empty;
                 txtLanguage.Text = selectedBook.Language;
                 txtDescription.Text = selectedBook.Description;
@@ -322,7 +334,7 @@ namespace GUI_UI
             cboPublisherName.SelectedIndex = -1;
             txtPublicationYear.Clear();
             cboCategory.SelectedIndex = -1;
-            txtShelfLocation.Clear();
+            cboShelfLocation.SelectedIndex = -1;
             txtNumberOfPages.Clear();
             txtLanguage.Clear();
             txtDescription.Clear();
@@ -334,7 +346,7 @@ namespace GUI_UI
             BookAuthor newBookAuthor = new BookAuthor
             {
                 BookID = cboTitleBookAuthor.SelectedValue != null ? cboTitleBookAuthor.SelectedValue.ToString() : null,
-                AuthorID = cboAuthorNameBookAuthor.SelectedValue != null ? cboAuthorNameBookAuthor.SelectedValue.ToString() : null
+                AuthorID = cboAuthorNameBookAuthorTab.SelectedValue != null ? cboAuthorNameBookAuthorTab.SelectedValue.ToString() : null
             };
 
             //Insert the book author relationship into the database
@@ -375,26 +387,29 @@ namespace GUI_UI
 
         private void dgvBookAuthor_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            var selectedRow = dgvBookAuthor.Rows[e.RowIndex];
+            if (selectedRow != null)
+            {
+                var selectedBookAuthor = (BookAuthorViewModel)selectedRow.DataBoundItem;
+                cboTitleBookAuthor.SelectedValue = selectedBookAuthor.MaSach;
+                cboAuthorNameBookAuthorTab.SelectedValue = selectedBookAuthor.MaTacGia;
+                txtBookIdBookAuthor.Text = selectedBookAuthor.MaSachVaTacGia;
+                txtAuthorId.Text = selectedBookAuthor.MaTacGia;
+            }
+            else
+            {
+                ClearBookAuthorInputFields();
+            }
         }
 
         private void cboTitleBookAuthor_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cboTitleBookAuthor.SelectedItem is Book selectedBook)
-            {
-                txtBookIdBookAuthor.Text = selectedBook.BookID ?? "BOOK001";
-                //dgvBookAuthor.DataSource = BookAuthorsService.GetBookAuthorsByCriteria("BookID", txtBookIdBookAuthor.Text);
-            }
-            else
-            {
-                txtBookIdBookAuthor.Clear();
-            }
         }
 
         private void ClearBookAuthorInputFields()
         {
             cboTitleBookAuthor.SelectedIndex = -1;
-            cboAuthorNameBookAuthor.SelectedIndex = -1;
+            cboAuthorNameBookAuthorTab.SelectedIndex = -1;
             txtBookIdBookAuthor.Clear();
         }
     }

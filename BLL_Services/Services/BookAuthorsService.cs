@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL_Data;
 using DTO_Models;
+using DTO_Models.ViewModel;
 
 namespace BLL_Services.Services
 {
@@ -43,6 +44,20 @@ namespace BLL_Services.Services
             catch (Exception ex)
             {
                 throw new Exception($"An error occurred while retrieving book authors by {columnName}.", ex);
+            }
+        }
+
+
+        // Get book author view models
+        public List<BookAuthorViewModel> GetBookAuthorViewModels()
+        {
+            try
+            {
+                return BookAuthorsRepository.GetBookAuthorViewModels();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while retrieving book author view models.", ex);
             }
         }
 

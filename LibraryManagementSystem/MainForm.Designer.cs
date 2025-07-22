@@ -38,7 +38,8 @@
             menuItemAuthorManagement = new ToolStripMenuItem();
             menuItemBookManagement = new ToolStripMenuItem();
             quảnLýThànhViênToolStripMenuItem = new ToolStripMenuItem();
-            quảnLýMượnTrảToolStripMenuItem = new ToolStripMenuItem();
+            ToolStripMenuItemLoanDashboard = new ToolStripMenuItem();
+            menuItemBookCopiesManagement = new ToolStripMenuItem();
             báoCáoToolStripMenuItem = new ToolStripMenuItem();
             hỗTrợToolStripMenuItem = new ToolStripMenuItem();
             trợGiúpToolStripMenuItem = new ToolStripMenuItem();
@@ -58,7 +59,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(36, 36);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, quảnLýToolStripMenuItem, báoCáoToolStripMenuItem, hỗTrợToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, quảnLýToolStripMenuItem, menuItemBookCopiesManagement, báoCáoToolStripMenuItem, hỗTrợToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(2372, 47);
@@ -89,7 +90,7 @@
             // 
             // quảnLýToolStripMenuItem
             // 
-            quảnLýToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { quảnLýThểLoạiSáchToolStripMenuItem, menuItemAuthorManagement, menuItemBookManagement, quảnLýThànhViênToolStripMenuItem, quảnLýMượnTrảToolStripMenuItem });
+            quảnLýToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { quảnLýThểLoạiSáchToolStripMenuItem, menuItemAuthorManagement, menuItemBookManagement, quảnLýThànhViênToolStripMenuItem, ToolStripMenuItemLoanDashboard });
             quảnLýToolStripMenuItem.Image = Properties.Resources.project_manager;
             quảnLýToolStripMenuItem.Name = "quảnLýToolStripMenuItem";
             quảnLýToolStripMenuItem.Size = new Size(180, 43);
@@ -125,12 +126,21 @@
             quảnLýThànhViênToolStripMenuItem.Size = new Size(413, 48);
             quảnLýThànhViênToolStripMenuItem.Text = "Quản lý thành viên";
             // 
-            // quảnLýMượnTrảToolStripMenuItem
+            // ToolStripMenuItemLoanDashboard
             // 
-            quảnLýMượnTrảToolStripMenuItem.Image = Properties.Resources.cash_flow;
-            quảnLýMượnTrảToolStripMenuItem.Name = "quảnLýMượnTrảToolStripMenuItem";
-            quảnLýMượnTrảToolStripMenuItem.Size = new Size(413, 48);
-            quảnLýMượnTrảToolStripMenuItem.Text = "Quản lý mượn trả";
+            ToolStripMenuItemLoanDashboard.Image = Properties.Resources.cash_flow;
+            ToolStripMenuItemLoanDashboard.Name = "ToolStripMenuItemLoanDashboard";
+            ToolStripMenuItemLoanDashboard.Size = new Size(413, 48);
+            ToolStripMenuItemLoanDashboard.Text = "Quản lý mượn trả";
+            ToolStripMenuItemLoanDashboard.Click += ToolStripMenuItemLoanDashboard_Click;
+            // 
+            // menuItemBookCopiesManagement
+            // 
+            menuItemBookCopiesManagement.Image = Properties.Resources.inventory;
+            menuItemBookCopiesManagement.Name = "menuItemBookCopiesManagement";
+            menuItemBookCopiesManagement.Size = new Size(228, 43);
+            menuItemBookCopiesManagement.Text = "Kiểm kê sách";
+            menuItemBookCopiesManagement.Click += menuItemBookCopiesManagement_Click;
             // 
             // báoCáoToolStripMenuItem
             // 
@@ -253,7 +263,7 @@
         private ToolStripMenuItem menuItemAuthorManagement;
         private ToolStripMenuItem menuItemBookManagement;
         private ToolStripMenuItem quảnLýThànhViênToolStripMenuItem;
-        private ToolStripMenuItem quảnLýMượnTrảToolStripMenuItem;
+        private ToolStripMenuItem ToolStripMenuItemLoanDashboard;
         private ToolStripMenuItem báoCáoToolStripMenuItem;
         private Panel panelMainContainer;
         private Label label1;
@@ -268,5 +278,6 @@
         private ToolStripMenuItem trợGiúpToolStripMenuItem;
         private ToolStripMenuItem giớiThiệuToolStripMenuItem;
         private System.Windows.Forms.Timer timer1;
+        private ToolStripMenuItem menuItemBookCopiesManagement;
     }
 }

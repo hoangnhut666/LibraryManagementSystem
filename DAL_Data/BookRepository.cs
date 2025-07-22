@@ -1,5 +1,6 @@
 ﻿using DBUTIL_Utilities;
 using DTO_Models;
+using DTO_Models.ViewModel;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -156,7 +157,7 @@ namespace DAL_Data
             {
                 new SqlParameter("@BookID", bookID ?? (object)DBNull.Value)
             };
-            return Utilities.ExecuteScalar(sql, parameters) as byte[]; 
+            return Utilities.ExecuteScalar(sql, parameters) as byte[];
         }
     }
 

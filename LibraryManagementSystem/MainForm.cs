@@ -30,16 +30,6 @@ namespace GUI_UI
         }
 
 
-        private void toolStripDropDownButton1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripComboBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void menuItemAuthorManagement_Click(object sender, EventArgs e)
         {
             var authorManagementForm = new AuthorManagementForm();
@@ -52,7 +42,13 @@ namespace GUI_UI
             EmbedFormIntoPanel(bookManagementForm);
         }
 
-        //Embed another form into the panel of main screen
+        private void menuItemBookCopiesManagement_Click(object sender, EventArgs e)
+        {
+            var bookCopiesManagementForm = new BookCopiesManagementForm();
+            EmbedFormIntoPanel(bookCopiesManagementForm);
+        }
+
+
         private void EmbedFormIntoPanel(Form form)
         {
             // Dispose the old form if present
@@ -73,6 +69,12 @@ namespace GUI_UI
         private void timer1_Tick(object sender, EventArgs e)
         {
             lblClock.Text = DateTime.Now.ToString("HH:mm:ss");
+        }
+
+        private void ToolStripMenuItemLoanDashboard_Click(object sender, EventArgs e)
+        {
+            var loanDashboardForm = new LoanDashboardForm();
+            EmbedFormIntoPanel(loanDashboardForm);
         }
     }
 }

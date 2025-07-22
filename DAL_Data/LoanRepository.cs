@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DBUTIL_Utilities;
 using DTO_Models;
 using Microsoft.Data.SqlClient;
+using DTO_Models.ViewModel;
 
 namespace DAL_Data
 {
@@ -55,6 +56,45 @@ namespace DAL_Data
                 };
             }, parameters);
             return loans;
+        }
+
+
+        //Get view model for loans
+        public List<LoanViewModel> GetLoanViewModels()
+        {
+            string sql = @"
+                SELECT
+                    l.LoanID AS MaMuon,
+                    l.CopyID AS MaBanSao,
+                    b.Title AS TenSach,
+                    m.FullName AS TenDocGia,
+                    u.FullName AS TenNhanVien,
+                    l.LoanDate AS NgayMuon,
+                    l.DueDate AS HanTra,
+                    l.ReturnDate AS NgayTra,
+                    l.Status AS TrangThai
+                FROM Loans l
+                JOIN BookCopies bc ON bc.CopyID = l.CopyID
+                JOIN Books b ON b.BookID = bc.BookID
+                JOIN Members m ON m.MemberID = l.MemberID
+                LEFT JOIN Users u ON u.UserID = l.UserID
+                ORDER BY LoanID DESC";
+            List<LoanViewModel> viewModels = Utilities.ExecuteQuery(sql, reader =>
+            {
+                return new LoanViewModel
+                {
+                    MaMuon = reader["MaMuon"].ToString(),
+                    MaBanSao = reader["MaBanSao"].ToString(),
+                    TenSach = reader["TenSach"].ToString(),
+                    TenDocGia = reader["TenDocGia"].ToString(),
+                    TenNhanVien = reader["TenNhanVien"].ToString(),
+                    NgayMuon = (DateTime)reader["NgayMuon"],
+                    HanTra = (DateTime)reader["HanTra"],
+                    NgayTra = reader["NgayTra"] as DateTime?,
+                    TrangThai = reader["TrangThai"].ToString()
+                };
+            });
+            return viewModels;
         }
 
         // Insert a new loan
