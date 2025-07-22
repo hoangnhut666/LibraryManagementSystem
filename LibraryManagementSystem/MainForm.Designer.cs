@@ -61,7 +61,8 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, quảnLýToolStripMenuItem, báoCáoToolStripMenuItem, hỗTrợToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(2372, 47);
+            menuStrip1.Padding = new Padding(3, 1, 0, 1);
+            menuStrip1.Size = new Size(941, 42);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -70,21 +71,21 @@
             toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { đổiToolStripMenuItem, đăngXuấtToolStripMenuItem });
             toolStripMenuItem1.Image = Properties.Resources.user;
             toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(208, 43);
+            toolStripMenuItem1.Size = new Size(133, 40);
             toolStripMenuItem1.Text = " Tài khoản  ";
             // 
             // đổiToolStripMenuItem
             // 
             đổiToolStripMenuItem.Image = Properties.Resources.reset_password;
             đổiToolStripMenuItem.Name = "đổiToolStripMenuItem";
-            đổiToolStripMenuItem.Size = new Size(326, 48);
+            đổiToolStripMenuItem.Size = new Size(181, 26);
             đổiToolStripMenuItem.Text = "Đổi mật khẩu";
             // 
             // đăngXuấtToolStripMenuItem
             // 
             đăngXuấtToolStripMenuItem.Image = Properties.Resources.exit;
             đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            đăngXuấtToolStripMenuItem.Size = new Size(326, 48);
+            đăngXuấtToolStripMenuItem.Size = new Size(181, 26);
             đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             // 
             // quảnLýToolStripMenuItem
@@ -92,21 +93,21 @@
             quảnLýToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { quảnLýThểLoạiSáchToolStripMenuItem, menuItemAuthorManagement, menuItemBookManagement, quảnLýThànhViênToolStripMenuItem, quảnLýMượnTrảToolStripMenuItem });
             quảnLýToolStripMenuItem.Image = Properties.Resources.project_manager;
             quảnLýToolStripMenuItem.Name = "quảnLýToolStripMenuItem";
-            quảnLýToolStripMenuItem.Size = new Size(180, 43);
+            quảnLýToolStripMenuItem.Size = new Size(117, 40);
             quảnLýToolStripMenuItem.Text = "Quản lý  ";
             // 
             // quảnLýThểLoạiSáchToolStripMenuItem
             // 
             quảnLýThểLoạiSáchToolStripMenuItem.Image = Properties.Resources.options;
             quảnLýThểLoạiSáchToolStripMenuItem.Name = "quảnLýThểLoạiSáchToolStripMenuItem";
-            quảnLýThểLoạiSáchToolStripMenuItem.Size = new Size(413, 48);
+            quảnLýThểLoạiSáchToolStripMenuItem.Size = new Size(229, 26);
             quảnLýThểLoạiSáchToolStripMenuItem.Text = "Quản lý thể loại sách";
             // 
             // menuItemAuthorManagement
             // 
             menuItemAuthorManagement.Image = Properties.Resources.authorize;
             menuItemAuthorManagement.Name = "menuItemAuthorManagement";
-            menuItemAuthorManagement.Size = new Size(413, 48);
+            menuItemAuthorManagement.Size = new Size(229, 26);
             menuItemAuthorManagement.Text = "Quản lý tác giả";
             menuItemAuthorManagement.Click += menuItemAuthorManagement_Click;
             // 
@@ -114,7 +115,7 @@
             // 
             menuItemBookManagement.Image = Properties.Resources.book;
             menuItemBookManagement.Name = "menuItemBookManagement";
-            menuItemBookManagement.Size = new Size(413, 48);
+            menuItemBookManagement.Size = new Size(229, 26);
             menuItemBookManagement.Text = "Quản lý sách";
             menuItemBookManagement.Click += menuItemBookManagement_Click;
             // 
@@ -122,21 +123,21 @@
             // 
             quảnLýThànhViênToolStripMenuItem.Image = Properties.Resources.member;
             quảnLýThànhViênToolStripMenuItem.Name = "quảnLýThànhViênToolStripMenuItem";
-            quảnLýThànhViênToolStripMenuItem.Size = new Size(413, 48);
+            quảnLýThànhViênToolStripMenuItem.Size = new Size(229, 26);
             quảnLýThànhViênToolStripMenuItem.Text = "Quản lý thành viên";
             // 
             // quảnLýMượnTrảToolStripMenuItem
             // 
             quảnLýMượnTrảToolStripMenuItem.Image = Properties.Resources.cash_flow;
             quảnLýMượnTrảToolStripMenuItem.Name = "quảnLýMượnTrảToolStripMenuItem";
-            quảnLýMượnTrảToolStripMenuItem.Size = new Size(413, 48);
+            quảnLýMượnTrảToolStripMenuItem.Size = new Size(229, 26);
             quảnLýMượnTrảToolStripMenuItem.Text = "Quản lý mượn trả";
             // 
             // báoCáoToolStripMenuItem
             // 
             báoCáoToolStripMenuItem.Image = Properties.Resources.increase;
             báoCáoToolStripMenuItem.Name = "báoCáoToolStripMenuItem";
-            báoCáoToolStripMenuItem.Size = new Size(169, 43);
+            báoCáoToolStripMenuItem.Size = new Size(113, 40);
             báoCáoToolStripMenuItem.Text = "Báo cáo";
             // 
             // hỗTrợToolStripMenuItem
@@ -144,37 +145,41 @@
             hỗTrợToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { trợGiúpToolStripMenuItem, giớiThiệuToolStripMenuItem });
             hỗTrợToolStripMenuItem.Image = Properties.Resources.help;
             hỗTrợToolStripMenuItem.Name = "hỗTrợToolStripMenuItem";
-            hỗTrợToolStripMenuItem.Size = new Size(151, 43);
+            hỗTrợToolStripMenuItem.Size = new Size(102, 40);
             hỗTrợToolStripMenuItem.Text = "Hỗ trợ";
             // 
             // trợGiúpToolStripMenuItem
             // 
             trợGiúpToolStripMenuItem.Image = Properties.Resources.helping_hand;
             trợGiúpToolStripMenuItem.Name = "trợGiúpToolStripMenuItem";
-            trợGiúpToolStripMenuItem.Size = new Size(283, 48);
+            trợGiúpToolStripMenuItem.Size = new Size(240, 42);
             trợGiúpToolStripMenuItem.Text = "Trợ giúp";
+            trợGiúpToolStripMenuItem.Click += trợGiúpToolStripMenuItem_Click;
             // 
             // giớiThiệuToolStripMenuItem
             // 
             giớiThiệuToolStripMenuItem.Image = Properties.Resources.presentation;
             giớiThiệuToolStripMenuItem.Name = "giớiThiệuToolStripMenuItem";
-            giớiThiệuToolStripMenuItem.Size = new Size(283, 48);
+            giớiThiệuToolStripMenuItem.Size = new Size(156, 26);
             giớiThiệuToolStripMenuItem.Text = "Giới thiệu";
+            giớiThiệuToolStripMenuItem.Click += giớiThiệuToolStripMenuItem_Click;
             // 
             // panelMainContainer
             // 
-            panelMainContainer.Location = new Point(34, 60);
+            panelMainContainer.Location = new Point(18, 32);
+            panelMainContainer.Margin = new Padding(2);
             panelMainContainer.Name = "panelMainContainer";
-            panelMainContainer.Size = new Size(2300, 1390);
+            panelMainContainer.Size = new Size(1227, 751);
             panelMainContainer.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 11F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            label1.Location = new Point(1771, 12);
+            label1.Location = new Point(945, 6);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(170, 45);
+            label1.Size = new Size(97, 25);
             label1.TabIndex = 0;
             label1.Text = "Chào bạn!";
             // 
@@ -182,9 +187,10 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(1954, 12);
+            label2.Location = new Point(1042, 6);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(119, 45);
+            label2.Size = new Size(69, 25);
             label2.TabIndex = 0;
             label2.Text = "Admin";
             // 
@@ -192,9 +198,10 @@
             // 
             statusStrip1.ImageScalingSize = new Size(36, 36);
             statusStrip1.Items.AddRange(new ToolStripItem[] { lblSystemInfo, toolStripStatusLabel2, lblClock });
-            statusStrip1.Location = new Point(0, 1476);
+            statusStrip1.Location = new Point(0, 480);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(2372, 48);
+            statusStrip1.Padding = new Padding(1, 0, 7, 0);
+            statusStrip1.Size = new Size(941, 42);
             statusStrip1.TabIndex = 3;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -202,21 +209,21 @@
             // 
             lblSystemInfo.Image = Properties.Resources.logo2;
             lblSystemInfo.Name = "lblSystemInfo";
-            lblSystemInfo.Size = new Size(184, 37);
+            lblSystemInfo.Size = new Size(117, 36);
             lblSystemInfo.Text = "PolyLibrary";
             lblSystemInfo.TextAlign = ContentAlignment.BottomLeft;
             // 
             // toolStripStatusLabel2
             // 
             toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new Size(1974, 37);
+            toolStripStatusLabel2.Size = new Size(690, 36);
             toolStripStatusLabel2.Spring = true;
             // 
             // lblClock
             // 
             lblClock.Image = Properties.Resources.alarm;
             lblClock.Name = "lblClock";
-            lblClock.Size = new Size(199, 37);
+            lblClock.Size = new Size(126, 36);
             lblClock.Text = "CurrentTime";
             lblClock.TextAlign = ContentAlignment.MiddleRight;
             // 
@@ -226,14 +233,15 @@
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(15F, 37F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(2372, 1524);
+            ClientSize = new Size(941, 522);
             Controls.Add(statusStrip1);
             Controls.Add(label2);
             Controls.Add(panelMainContainer);
             Controls.Add(label1);
             Controls.Add(menuStrip1);
+            Margin = new Padding(2);
             Name = "MainForm";
             Text = "Trang chủ";
             menuStrip1.ResumeLayout(false);

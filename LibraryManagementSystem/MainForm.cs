@@ -71,5 +71,15 @@ namespace GUI_UI
         {
             lblClock.Text = DateTime.Now.ToString("HH:mm:ss");
         }
+
+        private void giớiThiệuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EmbedFormIntoPanel(new Introduce());
+        }
+
+        private void trợGiúpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EmbedFormIntoPanel(new Support());
+        }
     }
 }

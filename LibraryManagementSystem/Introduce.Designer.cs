@@ -44,7 +44,7 @@
             // pictureBox4
             // 
             pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(812, 479);
+            pictureBox4.Location = new Point(768, 479);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(329, 173);
             pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -54,9 +54,9 @@
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(476, 479);
+            pictureBox3.Location = new Point(407, 479);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(286, 173);
+            pictureBox3.Size = new Size(355, 173);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 10;
             pictureBox3.TabStop = false;
@@ -64,9 +64,9 @@
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(128, 479);
+            pictureBox2.Location = new Point(37, 479);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(298, 173);
+            pictureBox2.Size = new Size(358, 173);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 9;
             pictureBox2.TabStop = false;
