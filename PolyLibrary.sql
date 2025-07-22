@@ -478,5 +478,43 @@ SELECT a.*
 FROM Authors a
     JOIN BookAuthors ba ON a.AuthorID = ba.AuthorID
 WHERE ba.BookID = 'BOOK014'
+GO
 
 
+CREATE PROCEDURE SearchBookCopies
+    @SearchTerm NVARCHAR(100) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT DISTINCT
+        bc.CopyID,
+        b.Title
+    FROM
+        Books b
+        LEFT JOIN Publishers p ON b.PublisherID = p.PublisherID
+        LEFT JOIN Categories c ON b.CategoryID = c.CategoryID
+        LEFT JOIN BookAuthors ba ON b.BookID = ba.BookID
+        LEFT JOIN Authors a ON ba.AuthorID = a.AuthorID
+        LEFT JOIN BookCopies bc ON bc.BookID = b.BookID
+        
+
+    WHERE 
+        @SearchTerm IS NULL OR
+        b.BookID LIKE '%' + @SearchTerm + '%' OR
+        b.Title LIKE '%' + @SearchTerm + '%' OR
+        b.ISBN LIKE '%' + @SearchTerm + '%' OR
+        a.FullName LIKE '%' + @SearchTerm + '%' OR
+        c.Name LIKE '%' + @SearchTerm + '%' OR
+        p.Name LIKE '%' + @SearchTerm + '%'
+
+    GROUP BY
+        bc.CopyID,
+        b.Title
+    ORDER BY 
+        b.Title;
+END;
+
+EXEC SearchBookCopies N'Dế Mèn';
+EXEC SearchBookCopies N'kim đồng';
+EXEC SearchBookCopies N'Tô Hoài';
