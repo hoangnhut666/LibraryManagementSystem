@@ -18,6 +18,7 @@ namespace BLL_Services.Validators
                 ErrorMessage = "ISBN cannot be empty.";
                 return false;
             }
+
             if (string.IsNullOrWhiteSpace(book.Title))
             {
                 ErrorMessage = "Title cannot be empty.";

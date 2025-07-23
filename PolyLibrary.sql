@@ -549,3 +549,53 @@ JOIN BookCopies bc ON bc.CopyID = l.CopyID
 JOIN Books b ON b.BookID = bc.BookID
 JOIN Members m ON m.MemberID = l.MemberID
 LEFT JOIN Users u ON u.UserID = l.UserID;
+
+
+SELECT 
+    u.UserID,
+    u.FullName,
+    r.RoleName
+FROM Users u
+JOIN Roles r ON r.RoleID = u.RoleID
+GO
+
+CREATE PROCEDURE SearchUsers
+@SearchTerm NVARCHAR(100) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        u.UserID,
+        u.FullName,
+        r.RoleName
+    FROM Users u
+    JOIN Roles r ON r.RoleID = u.RoleID
+    WHERE 
+        @SearchTerm IS NULL OR
+        u.UserID LIKE '%' + @SearchTerm + '%' OR
+        u.FullName LIKE '%' + @SearchTerm + '%' OR
+        r.RoleName LIKE '%' + @SearchTerm + '%' OR
+        u.Email LIKE '%' + @SearchTerm + '%' OR
+        u.Username LIKE '%' + @SearchTerm + '%'
+    ORDER BY u.UserID DESC;
+END;
+
+EXEC SearchUsers N'USER001';
+EXEC SearchUsers N'Thủ thư';
+EXEC SearchUsers N'Nguyễn';
+
+    SELECT 
+        u.UserID,
+        u.FullName,
+        r.RoleName
+    FROM Users u
+    JOIN Roles r ON r.RoleID = u.RoleID
+    WHERE 
+        @SearchTerm IS NULL OR
+        u.UserID LIKE '%' + @SearchTerm + '%' OR
+        u.FullName LIKE '%' + @SearchTerm + '%' OR
+        r.RoleName LIKE '%' + @SearchTerm + '%' OR
+        u.Email LIKE '%' + @SearchTerm + '%' OR
+        u.Username LIKE '%' + @SearchTerm + '%'
+    ORDER BY u.UserID DESC;
