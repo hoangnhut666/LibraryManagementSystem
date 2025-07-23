@@ -144,12 +144,12 @@ namespace DAL_Data
         }
 
         // Delete a loan
-        public int Delete(Loan loan)
+        public int Delete(string loanId )
         {
             string sql = $"DELETE FROM Loans WHERE LoanID = @LoanID";
             var parameters = new SqlParameter[]
             {
-                new SqlParameter("@LoanID", loan.LoanID)
+                new SqlParameter("@LoanID", loanId)
             };
             return Utilities.ExecuteNonQuery(sql, parameters);
 

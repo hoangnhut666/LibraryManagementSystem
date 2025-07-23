@@ -31,22 +31,22 @@
             dgvLoans = new DataGridView();
             label1 = new Label();
             label2 = new Label();
-            txtCopyID = new TextBox();
+            txtLoanId = new TextBox();
             label5 = new Label();
-            textBox1 = new TextBox();
-            cboStatus = new ComboBox();
+            txtTitle = new TextBox();
+            cboUserFullName = new ComboBox();
             label6 = new Label();
             label4 = new Label();
-            comboBox1 = new ComboBox();
-            dtpPurchaseDate = new DateTimePicker();
+            cboMemberFullName = new ComboBox();
+            dtpLoanDate = new DateTimePicker();
             label9 = new Label();
             label7 = new Label();
-            dateTimePicker1 = new DateTimePicker();
+            dtpDueDate = new DateTimePicker();
             label8 = new Label();
-            dateTimePicker2 = new DateTimePicker();
+            dtpReturnDate = new DateTimePicker();
             label11 = new Label();
-            comboBox2 = new ComboBox();
-            textBox2 = new TextBox();
+            cboStatus = new ComboBox();
+            txtCopyId = new TextBox();
             label12 = new Label();
             txtSearch = new TextBox();
             btnRefresh = new Button();
@@ -54,9 +54,9 @@
             btnUpdate = new Button();
             btnAdd = new Button();
             groupBox1 = new GroupBox();
-            textBox3 = new TextBox();
+            txtNote = new TextBox();
             groupBox2 = new GroupBox();
-            button1 = new Button();
+            btnSearch = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvLoans).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -92,13 +92,13 @@
             label2.TabIndex = 55;
             label2.Text = "Mã mượn";
             // 
-            // txtCopyID
+            // txtLoanId
             // 
-            txtCopyID.Location = new Point(247, 154);
-            txtCopyID.Name = "txtCopyID";
-            txtCopyID.ReadOnly = true;
-            txtCopyID.Size = new Size(450, 43);
-            txtCopyID.TabIndex = 53;
+            txtLoanId.Location = new Point(247, 154);
+            txtLoanId.Name = "txtLoanId";
+            txtLoanId.ReadOnly = true;
+            txtLoanId.Size = new Size(450, 43);
+            txtLoanId.TabIndex = 53;
             // 
             // label5
             // 
@@ -109,21 +109,21 @@
             label5.Size = new Size(0, 45);
             label5.TabIndex = 65;
             // 
-            // textBox1
+            // txtTitle
             // 
-            textBox1.Location = new Point(6, 42);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(576, 43);
-            textBox1.TabIndex = 62;
+            txtTitle.Location = new Point(6, 42);
+            txtTitle.Name = "txtTitle";
+            txtTitle.ReadOnly = true;
+            txtTitle.Size = new Size(576, 43);
+            txtTitle.TabIndex = 62;
             // 
-            // cboStatus
+            // cboUserFullName
             // 
-            cboStatus.FormattingEnabled = true;
-            cboStatus.Location = new Point(1112, 160);
-            cboStatus.Name = "cboStatus";
-            cboStatus.Size = new Size(450, 45);
-            cboStatus.TabIndex = 73;
+            cboUserFullName.FormattingEnabled = true;
+            cboUserFullName.Location = new Point(1112, 160);
+            cboUserFullName.Name = "cboUserFullName";
+            cboUserFullName.Size = new Size(450, 45);
+            cboUserFullName.TabIndex = 73;
             // 
             // label6
             // 
@@ -145,20 +145,20 @@
             label4.TabIndex = 72;
             label4.Text = "Tên thành viên";
             // 
-            // comboBox1
+            // cboMemberFullName
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(1112, 262);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(450, 45);
-            comboBox1.TabIndex = 73;
+            cboMemberFullName.FormattingEnabled = true;
+            cboMemberFullName.Location = new Point(1112, 262);
+            cboMemberFullName.Name = "cboMemberFullName";
+            cboMemberFullName.Size = new Size(450, 45);
+            cboMemberFullName.TabIndex = 73;
             // 
-            // dtpPurchaseDate
+            // dtpLoanDate
             // 
-            dtpPurchaseDate.Location = new Point(248, 470);
-            dtpPurchaseDate.Name = "dtpPurchaseDate";
-            dtpPurchaseDate.Size = new Size(450, 43);
-            dtpPurchaseDate.TabIndex = 75;
+            dtpLoanDate.Location = new Point(248, 470);
+            dtpLoanDate.Name = "dtpLoanDate";
+            dtpLoanDate.Size = new Size(450, 43);
+            dtpLoanDate.TabIndex = 75;
             // 
             // label9
             // 
@@ -180,12 +180,12 @@
             label7.TabIndex = 74;
             label7.Text = "Hạn trả";
             // 
-            // dateTimePicker1
+            // dtpDueDate
             // 
-            dateTimePicker1.Location = new Point(1112, 365);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(450, 43);
-            dateTimePicker1.TabIndex = 75;
+            dtpDueDate.Location = new Point(1112, 365);
+            dtpDueDate.Name = "dtpDueDate";
+            dtpDueDate.Size = new Size(450, 43);
+            dtpDueDate.TabIndex = 75;
             // 
             // label8
             // 
@@ -197,12 +197,12 @@
             label8.TabIndex = 74;
             label8.Text = "Ngày trả";
             // 
-            // dateTimePicker2
+            // dtpReturnDate
             // 
-            dateTimePicker2.Location = new Point(1112, 475);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(450, 43);
-            dateTimePicker2.TabIndex = 75;
+            dtpReturnDate.Location = new Point(1112, 475);
+            dtpReturnDate.Name = "dtpReturnDate";
+            dtpReturnDate.Size = new Size(450, 43);
+            dtpReturnDate.TabIndex = 75;
             // 
             // label11
             // 
@@ -214,21 +214,21 @@
             label11.TabIndex = 72;
             label11.Text = "Trạng thái";
             // 
-            // comboBox2
+            // cboStatus
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(248, 363);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(450, 45);
-            comboBox2.TabIndex = 73;
+            cboStatus.FormattingEnabled = true;
+            cboStatus.Location = new Point(248, 363);
+            cboStatus.Name = "cboStatus";
+            cboStatus.Size = new Size(450, 45);
+            cboStatus.TabIndex = 73;
             // 
-            // textBox2
+            // txtCopyId
             // 
-            textBox2.Location = new Point(250, 267);
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new Size(450, 43);
-            textBox2.TabIndex = 53;
+            txtCopyId.Location = new Point(250, 267);
+            txtCopyId.Name = "txtCopyId";
+            txtCopyId.ReadOnly = true;
+            txtCopyId.Size = new Size(450, 43);
+            txtCopyId.TabIndex = 53;
             // 
             // label12
             // 
@@ -259,6 +259,7 @@
             btnRefresh.TabIndex = 81;
             btnRefresh.Text = "Làm mới";
             btnRefresh.UseVisualStyleBackColor = false;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // btnDelete
             // 
@@ -271,6 +272,7 @@
             btnDelete.TabIndex = 80;
             btnDelete.Text = "Xóa";
             btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnUpdate
             // 
@@ -283,6 +285,7 @@
             btnUpdate.TabIndex = 79;
             btnUpdate.Text = "Sửa";
             btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnAdd
             // 
@@ -295,10 +298,11 @@
             btnAdd.TabIndex = 78;
             btnAdd.Text = "Thêm";
             btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.Click += btnAdd_Click;
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(textBox3);
+            groupBox1.Controls.Add(txtNote);
             groupBox1.Location = new Point(1684, 209);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(576, 208);
@@ -306,17 +310,17 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Ghi chú";
             // 
-            // textBox3
+            // txtNote
             // 
-            textBox3.Location = new Point(6, 53);
-            textBox3.Multiline = true;
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(570, 146);
-            textBox3.TabIndex = 0;
+            txtNote.Location = new Point(6, 53);
+            txtNote.Multiline = true;
+            txtNote.Name = "txtNote";
+            txtNote.Size = new Size(570, 146);
+            txtNote.TabIndex = 0;
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(textBox1);
+            groupBox2.Controls.Add(txtTitle);
             groupBox2.Location = new Point(1678, 118);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(582, 99);
@@ -324,17 +328,18 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Tên sách";
             // 
-            // button1
+            // btnSearch
             // 
-            button1.BackColor = Color.FromArgb(174, 160, 249);
-            button1.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
-            button1.ForeColor = SystemColors.Control;
-            button1.Location = new Point(1902, 577);
-            button1.Name = "button1";
-            button1.Size = new Size(201, 70);
-            button1.TabIndex = 81;
-            button1.Text = "Tìm kiếm";
-            button1.UseVisualStyleBackColor = false;
+            btnSearch.BackColor = Color.FromArgb(174, 160, 249);
+            btnSearch.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
+            btnSearch.ForeColor = SystemColors.Control;
+            btnSearch.Location = new Point(1902, 577);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(201, 70);
+            btnSearch.TabIndex = 81;
+            btnSearch.Text = "Tìm kiếm";
+            btnSearch.UseVisualStyleBackColor = false;
+            btnSearch.Click += btnSearch_Click;
             // 
             // LoanDashboardForm
             // 
@@ -344,30 +349,30 @@
             ClientSize = new Size(2272, 1321);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
-            Controls.Add(button1);
+            Controls.Add(btnSearch);
             Controls.Add(btnRefresh);
             Controls.Add(btnDelete);
             Controls.Add(btnUpdate);
             Controls.Add(btnAdd);
             Controls.Add(txtSearch);
-            Controls.Add(dateTimePicker2);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(dtpReturnDate);
+            Controls.Add(dtpDueDate);
             Controls.Add(label8);
             Controls.Add(label7);
-            Controls.Add(dtpPurchaseDate);
+            Controls.Add(dtpLoanDate);
             Controls.Add(label9);
-            Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
             Controls.Add(cboStatus);
+            Controls.Add(cboMemberFullName);
+            Controls.Add(cboUserFullName);
             Controls.Add(label11);
             Controls.Add(label4);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label1);
             Controls.Add(label12);
-            Controls.Add(textBox2);
+            Controls.Add(txtCopyId);
             Controls.Add(label2);
-            Controls.Add(txtCopyID);
+            Controls.Add(txtLoanId);
             Controls.Add(dgvLoans);
             Name = "LoanDashboardForm";
             Text = "BorrowingsForm";
@@ -385,22 +390,22 @@
         private DataGridView dgvLoans;
         private Label label1;
         private Label label2;
-        private TextBox txtCopyID;
+        private TextBox txtLoanId;
         private Label label5;
-        private TextBox textBox1;
-        private ComboBox cboStatus;
+        private TextBox txtTitle;
+        private ComboBox cboUserFullName;
         private Label label6;
         private Label label4;
-        private ComboBox comboBox1;
-        private DateTimePicker dtpPurchaseDate;
+        private ComboBox cboMemberFullName;
+        private DateTimePicker dtpLoanDate;
         private Label label9;
         private Label label7;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dtpDueDate;
         private Label label8;
-        private DateTimePicker dateTimePicker2;
+        private DateTimePicker dtpReturnDate;
         private Label label11;
-        private ComboBox comboBox2;
-        private TextBox textBox2;
+        private ComboBox cboStatus;
+        private TextBox txtCopyId;
         private Label label12;
         private TextBox txtSearch;
         private Button btnRefresh;
@@ -408,8 +413,8 @@
         private Button btnUpdate;
         private Button btnAdd;
         private GroupBox groupBox1;
-        private TextBox textBox3;
+        private TextBox txtNote;
         private GroupBox groupBox2;
-        private Button button1;
+        private Button btnSearch;
     }
 }

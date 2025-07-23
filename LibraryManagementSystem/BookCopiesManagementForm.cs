@@ -98,34 +98,6 @@ namespace GUI_UI
             }
         }
 
-        //private void btnSearch_Click(object sender, EventArgs e)
-        //{
-        //    string searchTerm = txtSearch.Text.Trim();
-        //    if (string.IsNullOrEmpty(searchTerm))
-        //    {
-        //        MessageBox.Show("Please enter a search term.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        return;
-        //    }
-
-        //    try
-        //    {
-        //        var searchResults = BookService.SearchBooks(searchTerm);
-        //        if (searchResults != null && searchResults.Count > 0)
-        //        {
-        //            dgvBooks.DataSource = searchResults;
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("No books found matching the search term.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //            LoadBooks();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"An error occurred while searching for books: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-
 
         private void btnAdd_Click(object sender, EventArgs e)
         {

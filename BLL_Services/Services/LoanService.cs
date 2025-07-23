@@ -35,5 +35,43 @@ namespace BLL_Services.Services
         }
 
 
+        //Add a new loan
+        public int AddLoan(Loan loan)
+        {
+            if (loan == null)
+            {
+                throw new ArgumentNullException(nameof(loan), "Loan cannot be null.");
+            }
+            if (!LoanValidator.IsValidLoan(loan))
+            {
+                throw new ArgumentException(LoanValidator.ErrorMessage, nameof(loan));
+            }
+            return LoanRepository.Insert(loan);
+        }
+
+        // Update an existing loan
+        public int UpdateLoan(Loan loan)
+        {
+            if (loan == null)
+            {
+                throw new ArgumentNullException(nameof(loan), "Loan cannot be null.");
+            }
+            if (!LoanValidator.IsValidLoan(loan))
+            {
+                throw new ArgumentException(LoanValidator.ErrorMessage, nameof(loan));
+            }
+            return LoanRepository.Update(loan);
+        }
+
+        // Delete a loan
+        public int DeleteLoan(string loanID)
+        {
+            if (string.IsNullOrWhiteSpace(loanID))
+            {
+                throw new ArgumentException("Loan ID cannot be null or empty.", nameof(loanID));
+            }
+            return LoanRepository.Delete(loanID);
+        }
     }
 }
+
