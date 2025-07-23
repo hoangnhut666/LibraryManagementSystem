@@ -479,4 +479,3 @@ FROM Authors a
     JOIN BookAuthors ba ON a.AuthorID = ba.AuthorID
 WHERE ba.BookID = 'BOOK014'
 
-
