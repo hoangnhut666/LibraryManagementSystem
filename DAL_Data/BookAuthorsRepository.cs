@@ -106,7 +106,7 @@ namespace DAL_Data
 
 
         // Delete a book author
-        public int Delete(int bookAuthorID)
+        public int Delete(string bookAuthorID)
         {
             string sql = "DELETE FROM BookAuthors WHERE BookAuthorID = @BookAuthorID";
             var parameters = new SqlParameter[]

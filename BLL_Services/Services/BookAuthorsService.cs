@@ -1,20 +1,24 @@
-﻿using System;
+﻿using BLL_Services.Validators;
+using DAL_Data;
+using DTO_Models;
+using DTO_Models.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL_Data;
-using DTO_Models;
-using DTO_Models.ViewModel;
+
 
 namespace BLL_Services.Services
 {
     public class BookAuthorsService
     {
         private BookAuthorsRepository BookAuthorsRepository { get; set; }
+        private BookAuthorValidator BookAuthorsValidator { get; set; }
         public BookAuthorsService()
         {
             BookAuthorsRepository = new BookAuthorsRepository();
+            BookAuthorsValidator = new BookAuthorValidator();
         }
 
         // Get all book-author relationships
@@ -68,14 +72,11 @@ namespace BLL_Services.Services
             {
                 throw new ArgumentNullException(nameof(bookAuthor), "Book author cannot be null.");
             }
-            try
+            if (!BookAuthorsValidator.IsValidBookAuthor(bookAuthor))
             {
-                return BookAuthorsRepository.Insert(bookAuthor);
+                throw new ArgumentException(BookAuthorsValidator.ErrorMessage, nameof(bookAuthor));
             }
-            catch (Exception ex)
-            {
-                throw new Exception("An error occurred while inserting the book author.", ex);
-            }
+            return BookAuthorsRepository.Insert(bookAuthor);
         }
 
 
@@ -86,31 +87,22 @@ namespace BLL_Services.Services
             {
                 throw new ArgumentNullException(nameof(bookAuthor), "Book author cannot be null.");
             }
-            try
+            if (!BookAuthorsValidator.IsValidBookAuthor(bookAuthor))
             {
-                return BookAuthorsRepository.Update(bookAuthor);
+                throw new ArgumentException(BookAuthorsValidator.ErrorMessage, nameof(bookAuthor));
             }
-            catch (Exception ex)
-            {
-                throw new Exception("An error occurred while updating the book author.", ex);
-            }
+            return BookAuthorsRepository.Update(bookAuthor);
         }
 
         // Delete a book-author relationship
-        public int DeleteBookAuthor(int bookAuthorId)
+        public int DeleteBookAuthor(string bookAuthorID)
         {
-            if (bookAuthorId <= 0)
+            if (string.IsNullOrWhiteSpace(bookAuthorID))
             {
-                throw new ArgumentException("Book author ID must be greater than zero.", nameof(bookAuthorId));
+                throw new ArgumentException("Book author ID cannot be null or empty.", nameof(bookAuthorID));
             }
-            try
-            {
-                return BookAuthorsRepository.Delete(bookAuthorId);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("An error occurred while deleting the book author.", ex);
-            }
+            return BookAuthorsRepository.Delete(bookAuthorID);
         }
     }
 }
+

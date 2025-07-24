@@ -32,6 +32,7 @@ namespace GUI_UI
         {
             tabControl1 = new TabControl();
             tabPageBook = new TabPage();
+            cboShelfLocation = new ComboBox();
             label1 = new Label();
             cboPublisherName = new ComboBox();
             cboCategory = new ComboBox();
@@ -72,7 +73,7 @@ namespace GUI_UI
             btnAddBookAuthor = new Button();
             cboAuthorNameBookAuthorTab = new ComboBox();
             cboTitleBookAuthor = new ComboBox();
-            txtAuthorId = new TextBox();
+            txtAuthorIdBookAuthor = new TextBox();
             txtBookIdBookAuthor = new TextBox();
             label16 = new Label();
             label15 = new Label();
@@ -80,7 +81,6 @@ namespace GUI_UI
             label14 = new Label();
             label13 = new Label();
             dgvBookAuthor = new DataGridView();
-            cboShelfLocation = new ComboBox();
             tabControl1.SuspendLayout();
             tabPageBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxCoverImage).BeginInit();
@@ -142,6 +142,14 @@ namespace GUI_UI
             tabPageBook.Size = new Size(2228, 1240);
             tabPageBook.TabIndex = 0;
             tabPageBook.Text = "Quản lý sách  ";
+            // 
+            // cboShelfLocation
+            // 
+            cboShelfLocation.FormattingEnabled = true;
+            cboShelfLocation.Location = new Point(1765, 713);
+            cboShelfLocation.Name = "cboShelfLocation";
+            cboShelfLocation.Size = new Size(436, 45);
+            cboShelfLocation.TabIndex = 40;
             // 
             // label1
             // 
@@ -475,7 +483,7 @@ namespace GUI_UI
             tabPageBookAuthor.Controls.Add(btnAddBookAuthor);
             tabPageBookAuthor.Controls.Add(cboAuthorNameBookAuthorTab);
             tabPageBookAuthor.Controls.Add(cboTitleBookAuthor);
-            tabPageBookAuthor.Controls.Add(txtAuthorId);
+            tabPageBookAuthor.Controls.Add(txtAuthorIdBookAuthor);
             tabPageBookAuthor.Controls.Add(txtBookIdBookAuthor);
             tabPageBookAuthor.Controls.Add(label16);
             tabPageBookAuthor.Controls.Add(label15);
@@ -549,6 +557,7 @@ namespace GUI_UI
             cboAuthorNameBookAuthorTab.Name = "cboAuthorNameBookAuthorTab";
             cboAuthorNameBookAuthorTab.Size = new Size(450, 45);
             cboAuthorNameBookAuthorTab.TabIndex = 5;
+            cboAuthorNameBookAuthorTab.SelectedIndexChanged += cboAuthorNameBookAuthorTab_SelectedIndexChanged;
             // 
             // cboTitleBookAuthor
             // 
@@ -559,13 +568,13 @@ namespace GUI_UI
             cboTitleBookAuthor.TabIndex = 5;
             cboTitleBookAuthor.SelectedIndexChanged += cboTitleBookAuthor_SelectedIndexChanged;
             // 
-            // txtAuthorId
+            // txtAuthorIdBookAuthor
             // 
-            txtAuthorId.Location = new Point(1400, 155);
-            txtAuthorId.Name = "txtAuthorId";
-            txtAuthorId.ReadOnly = true;
-            txtAuthorId.Size = new Size(450, 43);
-            txtAuthorId.TabIndex = 4;
+            txtAuthorIdBookAuthor.Location = new Point(1400, 155);
+            txtAuthorIdBookAuthor.Name = "txtAuthorIdBookAuthor";
+            txtAuthorIdBookAuthor.ReadOnly = true;
+            txtAuthorIdBookAuthor.Size = new Size(450, 43);
+            txtAuthorIdBookAuthor.TabIndex = 4;
             // 
             // txtBookIdBookAuthor
             // 
@@ -638,14 +647,6 @@ namespace GUI_UI
             dgvBookAuthor.TabIndex = 0;
             dgvBookAuthor.CellClick += dgvBookAuthor_CellClick;
             // 
-            // cboShelfLocation
-            // 
-            cboShelfLocation.FormattingEnabled = true;
-            cboShelfLocation.Location = new Point(1765, 713);
-            cboShelfLocation.Name = "cboShelfLocation";
-            cboShelfLocation.Size = new Size(436, 45);
-            cboShelfLocation.TabIndex = 40;
-            // 
             // BookManagementForm
             // 
             AutoScaleDimensions = new SizeF(15F, 37F);
@@ -717,7 +718,7 @@ namespace GUI_UI
         private Button btnUpdateBookAuthor;
         private Button btnDeleteBookAuthor;
         private Button btnAddBookAuthor;
-        private TextBox txtAuthorId;
+        private TextBox txtAuthorIdBookAuthor;
         private Label lblAuthorId;
         private ComboBox cboShelfLocation;
     }

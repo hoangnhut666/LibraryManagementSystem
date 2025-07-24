@@ -75,5 +75,28 @@ namespace GUI_UI
             var loanDashboardForm = new LoanDashboardForm();
             EmbedFormIntoPanel(loanDashboardForm);
         }
+
+        private void ToolStripMenuItemUserManagement_Click(object sender, EventArgs e)
+        {
+            var userManagementForm = new UserManagementForm();
+            EmbedFormIntoPanel(userManagementForm);
+        }
+
+        private void ToolStripMenuItemFineManagement_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ToolStripMenuItemSupport_Click(object sender, EventArgs e)
+        {
+            var supportForm = new SupportForm();
+            EmbedFormIntoPanel(supportForm);
+        }
+
+        private void ToolStripMenuItemIntroduce_Click(object sender, EventArgs e)
+        {
+            var introduceForm = new IntroduceForm();
+            EmbedFormIntoPanel(introduceForm);
+        }
     }
 }
