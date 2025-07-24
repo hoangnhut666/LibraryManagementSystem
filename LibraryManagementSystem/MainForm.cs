@@ -98,5 +98,11 @@ namespace GUI_UI
             var introduceForm = new IntroduceForm();
             EmbedFormIntoPanel(introduceForm);
         }
+
+        private void ToolStripMenuItemMemberManagement_Click(object sender, EventArgs e)
+        {
+            var memberManagementForm = new MemberManagementForm();
+            EmbedFormIntoPanel(memberManagementForm);
+        }
     }
 }

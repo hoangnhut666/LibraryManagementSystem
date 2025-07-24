@@ -19,14 +19,9 @@ namespace GUI_UI
     public partial class AuthorManagementForm : Form
     {
         private AuthorService AuthorService { get; set; }
-        private AuthorValidator AuthorValidator { get; set; }
-
-
-
         public AuthorManagementForm()
         {
             AuthorService = new AuthorService();
-            AuthorValidator = new AuthorValidator();
             InitializeComponent();
             SetupComponent(dgvAuthors);
             LoadAuthors();

@@ -584,18 +584,32 @@ END;
 EXEC SearchUsers N'USER001';
 EXEC SearchUsers N'Thủ thư';
 EXEC SearchUsers N'Nguyễn';
+GO
 
-    SELECT 
-        u.UserID,
-        u.FullName,
-        r.RoleName
-    FROM Users u
-    JOIN Roles r ON r.RoleID = u.RoleID
+
+CREATE PROCEDURE SearchMembers
+    @SearchTerm NVARCHAR(100) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT *
+    FROM
+        Members m
     WHERE 
         @SearchTerm IS NULL OR
-        u.UserID LIKE '%' + @SearchTerm + '%' OR
-        u.FullName LIKE '%' + @SearchTerm + '%' OR
-        r.RoleName LIKE '%' + @SearchTerm + '%' OR
-        u.Email LIKE '%' + @SearchTerm + '%' OR
-        u.Username LIKE '%' + @SearchTerm + '%'
-    ORDER BY u.UserID DESC;
+        m.MemberID LIKE '%' + @SearchTerm + '%' OR
+        m.DateOfBirth LIKE '%' + @SearchTerm + '%' OR
+        m.FullName LIKE '%' + @SearchTerm + '%' OR
+        m.Email LIKE '%' + @SearchTerm + '%' OR
+        m.Phone LIKE '%' + @SearchTerm + '%' OR
+        m.Address LIKE '%' + @SearchTerm + '%'
+    ORDER BY 
+        m.MemberID DESC;
+END;
+
+EXEC SearchMembers N'MEM001';
+EXEC SearchMembers N'Nguyễn';
+
+SELECT *
+FROM Members
+ORDER BY MemberID DESC;
