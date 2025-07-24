@@ -16,10 +16,12 @@ namespace GUI_UI
     {
         private UserService UserService { get; set; }
         private RoleService RoleService { get; set; }
+        private SecurityService SecurityHelper { get; set; }
         public UserManagementForm()
         {
             UserService = new UserService();
             RoleService = new RoleService();
+            SecurityHelper = new SecurityService();
             InitializeComponent();
             SetupComponent(dgvUserList);
             LoadUserViewModels();
@@ -142,7 +144,8 @@ namespace GUI_UI
             User user = new User() { 
                 UserID = UserService.GenerateUserID(),
                 Username = txtUserName.Text.Trim(),
-                Password = txtPassword.Text.Trim(),
+                //Password = txtPassword.Text.Trim(),
+                Password = SecurityService.HashPassword(txtPassword.Text.Trim()),
                 Email = txtEmail.Text.Trim(),
                 FullName = txtFullName.Text.Trim(),
                 RoleID = cboRole.SelectedValue?.ToString(),
@@ -166,6 +169,7 @@ namespace GUI_UI
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred while adding the user: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
             }
         }
 
@@ -184,7 +188,8 @@ namespace GUI_UI
             {
                 UserID = txtUserId.Text.Trim(),
                 Username = txtUserName.Text.Trim(),
-                Password = txtPassword.Text.Trim(),
+                //Password = txtPassword.Text.Trim(),
+                Password = SecurityService.HashPassword(txtPassword.Text.Trim()),
                 Email = txtEmail.Text.Trim(),
                 FullName = txtFullName.Text.Trim(),
                 RoleID = cboRole.SelectedValue?.ToString(),

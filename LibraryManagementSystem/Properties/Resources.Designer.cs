@@ -123,6 +123,16 @@ namespace GUI_UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap exit1 {
+            get {
+                object obj = ResourceManager.GetObject("exit1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fine {
             get {
                 object obj = ResourceManager.GetObject("fine", resourceCulture);
@@ -276,6 +286,16 @@ namespace GUI_UI.Properties {
         internal static System.Drawing.Bitmap project_manager {
             get {
                 object obj = ResourceManager.GetObject("project-manager", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap reloading {
+            get {
+                object obj = ResourceManager.GetObject("reloading", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

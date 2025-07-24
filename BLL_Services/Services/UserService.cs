@@ -87,6 +87,16 @@ namespace BLL_Services.Services
         }
 
 
+        // Get user by username
+        public User GetUserByUsername(string username)
+        {
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                throw new ArgumentException("Username cannot be null or empty.", nameof(username));
+            }
+            return SearchUsers("Username", username).FirstOrDefault() ?? throw new KeyNotFoundException($"User with username {username} not found.");
+        }
+
         // Insert a new user
         public int AddUser(User user)
         {

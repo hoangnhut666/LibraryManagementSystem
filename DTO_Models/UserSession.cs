@@ -8,6 +8,6 @@ namespace DTO_Models
 {
     public static class UserSession
     {
-        public static UserInfo? CurrentUser { get; set; }
+        public static User? CurrentUser { get; set; }
     }
 }

@@ -165,6 +165,32 @@ namespace DAL_Data
             };
             return Utilities.ExecuteNonQuery(sql, parameters);
         }
+
+
+        // Get hash password with username
+        public string? GetHashPassword(string username)
+        {
+            string sql = "SELECT Password FROM Users WHERE Username = @Username";
+            var parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Username", username)
+            };
+            List<string?> passwords = Utilities.ExecuteQuery(sql, reader => reader["Password"]?.ToString(), parameters);
+            return passwords.FirstOrDefault() ?? string.Empty;
+        }
+
+        //Update password
+        public int UpdateUserPassword(string userName, string newPassword)
+        {
+            string sql = "UPDATE Users SET Password = @Password WHERE Username = @Username";
+            var parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Username", userName),
+                new SqlParameter("@Password", newPassword)
+            };
+            return Utilities.ExecuteNonQuery(sql, parameters);
+
+        }
     }
 }
 

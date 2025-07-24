@@ -30,14 +30,14 @@
         {
             pictureBox1 = new PictureBox();
             groupBox1 = new GroupBox();
-            label1 = new Label();
-            label2 = new Label();
-            textBox1 = new TextBox();
+            btnExit = new Button();
+            btnLogin = new Button();
+            chkShowPassword = new CheckBox();
+            txtPassword = new TextBox();
+            txtUsername = new TextBox();
             label3 = new Label();
-            checkBox1 = new CheckBox();
-            textBox2 = new TextBox();
-            button1 = new Button();
-            button2 = new Button();
+            label2 = new Label();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -54,11 +54,11 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(button2);
-            groupBox1.Controls.Add(button1);
-            groupBox1.Controls.Add(checkBox1);
-            groupBox1.Controls.Add(textBox2);
-            groupBox1.Controls.Add(textBox1);
+            groupBox1.Controls.Add(btnExit);
+            groupBox1.Controls.Add(btnLogin);
+            groupBox1.Controls.Add(chkShowPassword);
+            groupBox1.Controls.Add(txtPassword);
+            groupBox1.Controls.Add(txtUsername);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
@@ -68,32 +68,56 @@
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             // 
-            // label1
+            // btnExit
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(357, 76);
-            label1.Name = "label1";
-            label1.Size = new Size(309, 65);
-            label1.TabIndex = 0;
-            label1.Text = "ĐĂNG NHẬP";
+            btnExit.BackColor = Color.FromArgb(213, 203, 239);
+            btnExit.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            btnExit.ForeColor = Color.White;
+            btnExit.Location = new Point(242, 848);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(567, 75);
+            btnExit.TabIndex = 4;
+            btnExit.Text = "Thoát";
+            btnExit.UseVisualStyleBackColor = false;
+            btnExit.Click += btnExit_Click;
             // 
-            // label2
+            // btnLogin
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(242, 279);
-            label2.Name = "label2";
-            label2.Size = new Size(253, 48);
-            label2.TabIndex = 1;
-            label2.Text = "Tên đăng nhập";
+            btnLogin.BackColor = Color.FromArgb(213, 203, 239);
+            btnLogin.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            btnLogin.ForeColor = Color.White;
+            btnLogin.Location = new Point(242, 720);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(567, 75);
+            btnLogin.TabIndex = 4;
+            btnLogin.Text = "Đăng nhập";
+            btnLogin.UseVisualStyleBackColor = false;
+            btnLogin.Click += btnLogin_Click;
             // 
-            // textBox1
+            // chkShowPassword
             // 
-            textBox1.Location = new Point(242, 351);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(567, 43);
-            textBox1.TabIndex = 2;
+            chkShowPassword.AutoSize = true;
+            chkShowPassword.Location = new Point(242, 591);
+            chkShowPassword.Name = "chkShowPassword";
+            chkShowPassword.Size = new Size(221, 41);
+            chkShowPassword.TabIndex = 3;
+            chkShowPassword.Text = "Hiện mật khẩu";
+            chkShowPassword.UseVisualStyleBackColor = true;
+            chkShowPassword.CheckedChanged += chkShowPassword_CheckedChanged;
+            // 
+            // txtPassword
+            // 
+            txtPassword.Location = new Point(242, 523);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(567, 43);
+            txtPassword.TabIndex = 1;
+            // 
+            // txtUsername
+            // 
+            txtUsername.Location = new Point(242, 351);
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new Size(567, 43);
+            txtUsername.TabIndex = 0;
             // 
             // label3
             // 
@@ -105,46 +129,25 @@
             label3.TabIndex = 1;
             label3.Text = "Mật khẩu";
             // 
-            // checkBox1
+            // label2
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(242, 591);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(221, 41);
-            checkBox1.TabIndex = 3;
-            checkBox1.Text = "Hiện mật khẩu";
-            checkBox1.UseVisualStyleBackColor = true;
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(242, 279);
+            label2.Name = "label2";
+            label2.Size = new Size(253, 48);
+            label2.TabIndex = 1;
+            label2.Text = "Tên đăng nhập";
             // 
-            // textBox2
+            // label1
             // 
-            textBox2.Location = new Point(242, 523);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(567, 43);
-            textBox2.TabIndex = 2;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.FromArgb(213, 203, 239);
-            button1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(242, 720);
-            button1.Name = "button1";
-            button1.Size = new Size(567, 75);
-            button1.TabIndex = 4;
-            button1.Text = "Đăng nhập";
-            button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            button2.BackColor = Color.FromArgb(213, 203, 239);
-            button2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(242, 848);
-            button2.Name = "button2";
-            button2.Size = new Size(567, 75);
-            button2.TabIndex = 4;
-            button2.Text = "Thoát";
-            button2.UseVisualStyleBackColor = false;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(357, 76);
+            label1.Name = "label1";
+            label1.Size = new Size(309, 65);
+            label1.TabIndex = 0;
+            label1.Text = "ĐĂNG NHẬP";
             // 
             // LoginForm
             // 
@@ -168,12 +171,12 @@
         private PictureBox pictureBox1;
         private GroupBox groupBox1;
         private Label label1;
-        private CheckBox checkBox1;
-        private TextBox textBox1;
+        private CheckBox chkShowPassword;
+        private TextBox txtUsername;
         private Label label3;
         private Label label2;
-        private Button button2;
-        private Button button1;
-        private TextBox textBox2;
+        private Button btnExit;
+        private Button btnLogin;
+        private TextBox txtPassword;
     }
 }
