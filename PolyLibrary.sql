@@ -19,13 +19,14 @@ CREATE TABLE Users
 (
     [UserID] VARCHAR(10) PRIMARY KEY,
     [Username] VARCHAR(50) UNIQUE NOT NULL,
-    [Password] VARCHAR(50) NOT NULL,
+    [Password] VARCHAR(255) NOT NULL,
     [Email] VARCHAR(100) UNIQUE NOT NULL,
     [FullName] NVARCHAR(100),
     [RoleID] VARCHAR(10) NOT NULL,
     [IsActive] BIT DEFAULT 1,
     FOREIGN KEY (RoleID) REFERENCES Roles(RoleID)
 );
+
 
 CREATE TABLE Publishers
 (
