@@ -614,3 +614,21 @@ EXEC SearchMembers N'Nguyễn';
 SELECT *
 FROM Members
 ORDER BY MemberID DESC;
+
+
+SELECT *
+FROM BookAuthors
+
+SELECT *
+FROM Books
+
+DELETE FROM Books
+WHERE BookID='BOOK001';
+
+UPDATE BookAuthors
+SET AuthorID = 'AUTH005'
+WHERE BookAuthorID = 1;
+
+SELECT * FROM BookAuthors WHERE BookID = 'BOOK014'
+
+UPDATE BookAuthors SET BookID = 'BOOK008', AuthorID = 'AUTH009' WHERE BookAuthorID = 2

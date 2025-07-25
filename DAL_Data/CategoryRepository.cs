@@ -1,11 +1,12 @@
-﻿using System;
+﻿using DBUTIL_Utilities;
+using DTO_Models;
+using DTO_Models.ViewModel;
+using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DBUTIL_Utilities;
-using Microsoft.Data.SqlClient;
-using DTO_Models;
 
 namespace DAL_Data
 {
@@ -47,6 +48,36 @@ namespace DAL_Data
             return categories;
         }
 
+
+        //Search categories by search term
+        public List<Category> SearchCategories(string searchTerm)
+        {
+            string sql = @"
+                SELECT * FROM Categories
+                WHERE 
+                    @SearchTerm IS NULL OR
+                    CategoryID LIKE '%' + @SearchTerm + '%' OR
+                    Name LIKE '%' + @SearchTerm + '%' OR
+                    Description LIKE '%' + @SearchTerm + '%'
+                ORDER BY CategoryID DESC;
+            ";
+            var parameters = new SqlParameter[]
+            {
+                new SqlParameter("@SearchTerm", string.IsNullOrEmpty(searchTerm) ? (object)DBNull.Value : searchTerm)
+            };
+            List<Category> categories = Utilities.ExecuteQuery(sql, reader =>
+            {
+                return new Category
+                {
+                    CategoryID = reader["CategoryID"].ToString(),
+                    Name = reader["Name"].ToString(),
+                    Description = reader["Description"].ToString(),
+                };
+            }, parameters);
+            return categories;
+        }
+
+
         //Insert a new category
         public int Insert(Category category)
         {
@@ -80,12 +111,12 @@ namespace DAL_Data
 
 
         //Delete a category
-        public int Delete(Category category)
+        public int Delete(string categoryId)
         {
             string sql = $"DELETE FROM Categories WHERE CategoryID = @CategoryID";
             var parameters = new SqlParameter[]
             {
-                new SqlParameter("@CategoryID", category.CategoryID)
+                new SqlParameter("@CategoryID", categoryId)
             };
             return Utilities.ExecuteNonQuery(sql, parameters);
         }

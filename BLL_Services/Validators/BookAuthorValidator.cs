@@ -30,27 +30,17 @@ namespace BLL_Services.Validators
                 return false;
             }
 
-            // Check if BookAuthor already exists
-            //if (IsBookAuthorExists(bookAuthor.BookID, bookAuthor.AuthorID))
-            //{
-            //    ErrorMessage = "This book-author relationship already exists.";
-            //    return false;
-            //}
-
+            var existingBookAuthor = BookAuthorsRepository.GetBookAuthorsByCriteria("BookID", bookAuthor.BookID);
+            foreach (var item in existingBookAuthor)
+            {
+                if (item.AuthorID == bookAuthor.AuthorID)
+                {
+                    ErrorMessage = "This Book-Author pairing already exists.";
+                    return false;
+                }
+            }
 
             return true;
-        }
-
-
-        public bool IsBookAuthorExists(string bookID, string authorID)
-        {
-            var existingBookAuthor = BookAuthorsRepository.GetBookAuthorsByCriteria("BookID", bookID)
-                .FirstOrDefault(ba => ba.AuthorID == authorID);
-            if (existingBookAuthor != null)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

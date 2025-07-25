@@ -8,7 +8,7 @@ namespace LibraryManagementSystem
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            //Application.Run(new UserManagementForm());
+            //Application.Run(new CategoryManagementForm());
 
             var loginForm = new LoginForm();
             if (loginForm.ShowDialog() == DialogResult.OK)

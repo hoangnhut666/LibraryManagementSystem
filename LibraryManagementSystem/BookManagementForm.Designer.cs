@@ -67,13 +67,14 @@ namespace GUI_UI
             txtSearch = new TextBox();
             txtBookId = new TextBox();
             tabPageBookAuthor = new TabPage();
+            txtBookAuthorID = new TextBox();
             btnRefreshBookAuthor = new Button();
             btnUpdateBookAuthor = new Button();
             btnDeleteBookAuthor = new Button();
             btnAddBookAuthor = new Button();
             cboAuthorNameBookAuthorTab = new ComboBox();
             cboTitleBookAuthor = new ComboBox();
-            txtAuthorIdBookAuthor = new TextBox();
+            txtAuthorIdBookAuthorTab = new TextBox();
             txtBookIdBookAuthor = new TextBox();
             label16 = new Label();
             label15 = new Label();
@@ -477,13 +478,14 @@ namespace GUI_UI
             // tabPageBookAuthor
             // 
             tabPageBookAuthor.BackColor = Color.FromArgb(237, 235, 248);
+            tabPageBookAuthor.Controls.Add(txtBookAuthorID);
             tabPageBookAuthor.Controls.Add(btnRefreshBookAuthor);
             tabPageBookAuthor.Controls.Add(btnUpdateBookAuthor);
             tabPageBookAuthor.Controls.Add(btnDeleteBookAuthor);
             tabPageBookAuthor.Controls.Add(btnAddBookAuthor);
             tabPageBookAuthor.Controls.Add(cboAuthorNameBookAuthorTab);
             tabPageBookAuthor.Controls.Add(cboTitleBookAuthor);
-            tabPageBookAuthor.Controls.Add(txtAuthorIdBookAuthor);
+            tabPageBookAuthor.Controls.Add(txtAuthorIdBookAuthorTab);
             tabPageBookAuthor.Controls.Add(txtBookIdBookAuthor);
             tabPageBookAuthor.Controls.Add(label16);
             tabPageBookAuthor.Controls.Add(label15);
@@ -497,6 +499,14 @@ namespace GUI_UI
             tabPageBookAuthor.Size = new Size(2228, 1240);
             tabPageBookAuthor.TabIndex = 1;
             tabPageBookAuthor.Text = "Quản lý tác giả và sách";
+            // 
+            // txtBookAuthorID
+            // 
+            txtBookAuthorID.Location = new Point(1528, 77);
+            txtBookAuthorID.Name = "txtBookAuthorID";
+            txtBookAuthorID.ReadOnly = true;
+            txtBookAuthorID.Size = new Size(225, 43);
+            txtBookAuthorID.TabIndex = 36;
             // 
             // btnRefreshBookAuthor
             // 
@@ -568,13 +578,13 @@ namespace GUI_UI
             cboTitleBookAuthor.TabIndex = 5;
             cboTitleBookAuthor.SelectedIndexChanged += cboTitleBookAuthor_SelectedIndexChanged;
             // 
-            // txtAuthorIdBookAuthor
+            // txtAuthorIdBookAuthorTab
             // 
-            txtAuthorIdBookAuthor.Location = new Point(1400, 155);
-            txtAuthorIdBookAuthor.Name = "txtAuthorIdBookAuthor";
-            txtAuthorIdBookAuthor.ReadOnly = true;
-            txtAuthorIdBookAuthor.Size = new Size(450, 43);
-            txtAuthorIdBookAuthor.TabIndex = 4;
+            txtAuthorIdBookAuthorTab.Location = new Point(1400, 155);
+            txtAuthorIdBookAuthorTab.Name = "txtAuthorIdBookAuthorTab";
+            txtAuthorIdBookAuthorTab.ReadOnly = true;
+            txtAuthorIdBookAuthorTab.Size = new Size(450, 43);
+            txtAuthorIdBookAuthorTab.TabIndex = 4;
             // 
             // txtBookIdBookAuthor
             // 
@@ -718,8 +728,9 @@ namespace GUI_UI
         private Button btnUpdateBookAuthor;
         private Button btnDeleteBookAuthor;
         private Button btnAddBookAuthor;
-        private TextBox txtAuthorIdBookAuthor;
+        private TextBox txtAuthorIdBookAuthorTab;
         private Label lblAuthorId;
         private ComboBox cboShelfLocation;
+        private TextBox txtBookAuthorID;
     }
 }

@@ -60,7 +60,7 @@ namespace DAL_Data
 
 
         //Get view model for loans
-        public List<LoanViewModel> GetLoanViewModels()
+        public List<LoanViewModel> GetAllLoanViewModels()
         {
             string sql = @"
                 SELECT
@@ -94,6 +94,52 @@ namespace DAL_Data
                     TrangThai = reader["TrangThai"].ToString()
                 };
             });
+            return viewModels;
+        }
+
+        //Get view model for loans by criteria
+        public List<LoanViewModel> GetLoanViewModelsByCriteria(string columnName, string? value)
+        {
+            string sql = $@"
+                SELECT
+                    l.LoanID AS MaMuon,
+                    l.CopyID AS MaBanSao,
+                    b.Title AS TenSach,
+                    m.FullName AS TenDocGia,
+                    u.FullName AS TenNhanVien,
+                    l.LoanDate AS NgayMuon,
+                    l.DueDate AS HanTra,
+                    l.ReturnDate AS NgayTra,
+                    l.Status AS TrangThai
+                FROM Loans l
+                JOIN BookCopies bc ON bc.CopyID = l.CopyID
+                JOIN Books b ON b.BookID = bc.BookID
+                JOIN Members m ON m.MemberID = l.MemberID
+                LEFT JOIN Users u ON u.UserID = l.UserID
+                WHERE {columnName} = @Value
+                ORDER BY LoanID DESC";
+
+            var parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Value", value)
+            };
+
+            List<LoanViewModel> viewModels = Utilities.ExecuteQuery(sql, reader =>
+            {
+                return new LoanViewModel
+                {
+                    MaMuon = reader["MaMuon"].ToString(),
+                    MaBanSao = reader["MaBanSao"].ToString(),
+                    TenSach = reader["TenSach"].ToString(),
+                    TenDocGia = reader["TenDocGia"].ToString(),
+                    TenNhanVien = reader["TenNhanVien"].ToString(),
+                    NgayMuon = (DateTime)reader["NgayMuon"],
+                    HanTra = (DateTime)reader["HanTra"],
+                    NgayTra = reader["NgayTra"] as DateTime?,
+                    TrangThai = reader["TrangThai"].ToString()
+                };
+            }, parameters);
+
             return viewModels;
         }
 

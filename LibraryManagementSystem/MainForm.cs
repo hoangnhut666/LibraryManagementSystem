@@ -168,9 +168,19 @@ namespace GUI_UI
             Application.Exit();
         }
 
+        private void ToolStripMenuItemCategoryManagement_Click(object sender, EventArgs e)
+        {
+            var categoryManagementForm = new CategoryManagementForm();
+            EmbedFormIntoPanel(categoryManagementForm);
+        }
+
         private void ToolStripMenuItemLogout_Click(object sender, EventArgs e)
         {
             Application.Restart();
         }
+
+
+
+
     }
 }

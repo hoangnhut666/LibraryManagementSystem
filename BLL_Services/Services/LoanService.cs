@@ -26,12 +26,33 @@ namespace BLL_Services.Services
         {
             try
             {
-                return LoanRepository.GetLoanViewModels();
+                return LoanRepository.GetAllLoanViewModels();
             }
             catch (Exception ex)
             {
                 throw new Exception("An error occurred while retrieving loans.", ex);
             }
+        }
+
+        //Get loans by criteria
+        public List<Loan> GetLoansByCriteria(string columnName, string? value)
+        {
+            if (string.IsNullOrWhiteSpace(columnName) || string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException("Column name and value cannot be null or empty.");
+            }
+            return LoanRepository.GetLoansByCriteria(columnName, value);
+        }
+
+
+        //Get loan view models by criteria
+        public List<LoanViewModel> GetLoanViewModelsByCriteria(string columnName, string? value)
+        {
+            if (string.IsNullOrWhiteSpace(columnName) || string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException("Column name and value cannot be null or empty.");
+            }
+            return LoanRepository.GetLoanViewModelsByCriteria(columnName, value);
         }
 
 

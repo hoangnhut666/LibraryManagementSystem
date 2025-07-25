@@ -45,9 +45,10 @@ namespace DAL_Data
                     BookID = reader["BookID"].ToString(),
                     AuthorID = reader["AuthorID"].ToString()
                 };
-            });
+            }, parameters);
             return bookAuthors;
         }
+
 
         //Get book author view models
         public List<BookAuthorViewModel> GetBookAuthorViewModels()

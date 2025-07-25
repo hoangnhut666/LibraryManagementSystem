@@ -34,7 +34,6 @@
             txtLoanId = new TextBox();
             label5 = new Label();
             txtTitle = new TextBox();
-            cboUserFullName = new ComboBox();
             label6 = new Label();
             label4 = new Label();
             cboMemberFullName = new ComboBox();
@@ -46,7 +45,6 @@
             dtpReturnDate = new DateTimePicker();
             label11 = new Label();
             cboStatus = new ComboBox();
-            txtCopyId = new TextBox();
             label12 = new Label();
             txtSearch = new TextBox();
             btnRefresh = new Button();
@@ -54,9 +52,11 @@
             btnUpdate = new Button();
             btnAdd = new Button();
             groupBox1 = new GroupBox();
-            txtNote = new TextBox();
+            txtNotes = new TextBox();
             groupBox2 = new GroupBox();
             btnSearch = new Button();
+            txtUserFullName = new TextBox();
+            cboCopyId = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvLoans).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -70,6 +70,7 @@
             dgvLoans.RowHeadersWidth = 92;
             dgvLoans.Size = new Size(2248, 611);
             dgvLoans.TabIndex = 0;
+            dgvLoans.CellClick += dgvLoans_CellClick;
             // 
             // label1
             // 
@@ -117,14 +118,6 @@
             txtTitle.Size = new Size(576, 43);
             txtTitle.TabIndex = 62;
             // 
-            // cboUserFullName
-            // 
-            cboUserFullName.FormattingEnabled = true;
-            cboUserFullName.Location = new Point(1112, 160);
-            cboUserFullName.Name = "cboUserFullName";
-            cboUserFullName.Size = new Size(450, 45);
-            cboUserFullName.TabIndex = 73;
-            // 
             // label6
             // 
             label6.AutoSize = true;
@@ -159,6 +152,7 @@
             dtpLoanDate.Name = "dtpLoanDate";
             dtpLoanDate.Size = new Size(450, 43);
             dtpLoanDate.TabIndex = 75;
+            dtpLoanDate.ValueChanged += dtpLoanDate_ValueChanged;
             // 
             // label9
             // 
@@ -186,6 +180,7 @@
             dtpDueDate.Name = "dtpDueDate";
             dtpDueDate.Size = new Size(450, 43);
             dtpDueDate.TabIndex = 75;
+            dtpDueDate.ValueChanged += dtpDueDate_ValueChanged;
             // 
             // label8
             // 
@@ -203,6 +198,7 @@
             dtpReturnDate.Name = "dtpReturnDate";
             dtpReturnDate.Size = new Size(450, 43);
             dtpReturnDate.TabIndex = 75;
+            dtpReturnDate.ValueChanged += dtpReturnDate_ValueChanged;
             // 
             // label11
             // 
@@ -221,14 +217,6 @@
             cboStatus.Name = "cboStatus";
             cboStatus.Size = new Size(450, 45);
             cboStatus.TabIndex = 73;
-            // 
-            // txtCopyId
-            // 
-            txtCopyId.Location = new Point(250, 267);
-            txtCopyId.Name = "txtCopyId";
-            txtCopyId.ReadOnly = true;
-            txtCopyId.Size = new Size(450, 43);
-            txtCopyId.TabIndex = 53;
             // 
             // label12
             // 
@@ -302,7 +290,7 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(txtNote);
+            groupBox1.Controls.Add(txtNotes);
             groupBox1.Location = new Point(1684, 209);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(576, 208);
@@ -310,13 +298,13 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Ghi chú";
             // 
-            // txtNote
+            // txtNotes
             // 
-            txtNote.Location = new Point(6, 53);
-            txtNote.Multiline = true;
-            txtNote.Name = "txtNote";
-            txtNote.Size = new Size(570, 146);
-            txtNote.TabIndex = 0;
+            txtNotes.Location = new Point(6, 53);
+            txtNotes.Multiline = true;
+            txtNotes.Name = "txtNotes";
+            txtNotes.Size = new Size(570, 146);
+            txtNotes.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -341,12 +329,30 @@
             btnSearch.UseVisualStyleBackColor = false;
             btnSearch.Click += btnSearch_Click;
             // 
+            // txtUserFullName
+            // 
+            txtUserFullName.Location = new Point(1112, 154);
+            txtUserFullName.Name = "txtUserFullName";
+            txtUserFullName.ReadOnly = true;
+            txtUserFullName.Size = new Size(450, 43);
+            txtUserFullName.TabIndex = 53;
+            // 
+            // cboCopyId
+            // 
+            cboCopyId.FormattingEnabled = true;
+            cboCopyId.Location = new Point(247, 261);
+            cboCopyId.Name = "cboCopyId";
+            cboCopyId.Size = new Size(451, 45);
+            cboCopyId.TabIndex = 84;
+            cboCopyId.SelectedIndexChanged += cboCopyId_SelectedIndexChanged;
+            // 
             // LoanDashboardForm
             // 
             AutoScaleDimensions = new SizeF(15F, 37F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(237, 235, 248);
             ClientSize = new Size(2272, 1321);
+            Controls.Add(cboCopyId);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(btnSearch);
@@ -363,15 +369,14 @@
             Controls.Add(label9);
             Controls.Add(cboStatus);
             Controls.Add(cboMemberFullName);
-            Controls.Add(cboUserFullName);
             Controls.Add(label11);
             Controls.Add(label4);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label1);
             Controls.Add(label12);
-            Controls.Add(txtCopyId);
             Controls.Add(label2);
+            Controls.Add(txtUserFullName);
             Controls.Add(txtLoanId);
             Controls.Add(dgvLoans);
             Name = "LoanDashboardForm";
@@ -393,7 +398,6 @@
         private TextBox txtLoanId;
         private Label label5;
         private TextBox txtTitle;
-        private ComboBox cboUserFullName;
         private Label label6;
         private Label label4;
         private ComboBox cboMemberFullName;
@@ -405,7 +409,6 @@
         private DateTimePicker dtpReturnDate;
         private Label label11;
         private ComboBox cboStatus;
-        private TextBox txtCopyId;
         private Label label12;
         private TextBox txtSearch;
         private Button btnRefresh;
@@ -413,8 +416,10 @@
         private Button btnUpdate;
         private Button btnAdd;
         private GroupBox groupBox1;
-        private TextBox txtNote;
+        private TextBox txtNotes;
         private GroupBox groupBox2;
         private Button btnSearch;
+        private TextBox txtUserFullName;
+        private ComboBox cboCopyId;
     }
 }

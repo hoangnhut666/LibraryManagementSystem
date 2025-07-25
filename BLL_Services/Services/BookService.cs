@@ -41,6 +41,16 @@ namespace BLL_Services.Services
             }
         }
 
+        // Get books by criteria
+        public List<Book> GetBooksByCriteria(string columnName, string? value)
+        {
+            if (string.IsNullOrWhiteSpace(columnName) || string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException("Column name and value cannot be null or empty.");
+            }
+            return BookRepository.GetBooksByCriteria(columnName, value);
+        }
+
         // Search books by stored procedure
         public List<Book> SearchBooks(string searchTerm)
         {

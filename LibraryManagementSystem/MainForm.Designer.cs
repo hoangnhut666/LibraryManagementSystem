@@ -36,7 +36,7 @@
             ToolStripMenuItemRestart = new ToolStripMenuItem();
             ToolStripMenuItemExit = new ToolStripMenuItem();
             quảnLýToolStripMenuItem = new ToolStripMenuItem();
-            quảnLýThểLoạiSáchToolStripMenuItem = new ToolStripMenuItem();
+            ToolStripMenuItemCategoryManagement = new ToolStripMenuItem();
             menuItemAuthorManagement = new ToolStripMenuItem();
             menuItemBookManagement = new ToolStripMenuItem();
             ToolStripMenuItemMemberManagement = new ToolStripMenuItem();
@@ -81,7 +81,7 @@
             // 
             ToolStripMenuItemChangePassword.Image = Properties.Resources.reset_password;
             ToolStripMenuItemChangePassword.Name = "ToolStripMenuItemChangePassword";
-            ToolStripMenuItemChangePassword.Size = new Size(403, 48);
+            ToolStripMenuItemChangePassword.Size = new Size(326, 48);
             ToolStripMenuItemChangePassword.Text = "Đổi mật khẩu";
             ToolStripMenuItemChangePassword.Click += ToolStripMenuItemChangePassword_Click;
             // 
@@ -89,7 +89,7 @@
             // 
             ToolStripMenuItemLogout.Image = Properties.Resources.exit;
             ToolStripMenuItemLogout.Name = "ToolStripMenuItemLogout";
-            ToolStripMenuItemLogout.Size = new Size(403, 48);
+            ToolStripMenuItemLogout.Size = new Size(326, 48);
             ToolStripMenuItemLogout.Text = "Đăng xuất";
             ToolStripMenuItemLogout.Click += ToolStripMenuItemLogout_Click;
             // 
@@ -97,7 +97,7 @@
             // 
             ToolStripMenuItemRestart.Image = Properties.Resources.reloading;
             ToolStripMenuItemRestart.Name = "ToolStripMenuItemRestart";
-            ToolStripMenuItemRestart.Size = new Size(403, 48);
+            ToolStripMenuItemRestart.Size = new Size(326, 48);
             ToolStripMenuItemRestart.Text = "Khởi động lại";
             ToolStripMenuItemRestart.Click += ToolStripMenuItemRestart_Click;
             // 
@@ -105,24 +105,25 @@
             // 
             ToolStripMenuItemExit.Image = Properties.Resources.exit1;
             ToolStripMenuItemExit.Name = "ToolStripMenuItemExit";
-            ToolStripMenuItemExit.Size = new Size(403, 48);
+            ToolStripMenuItemExit.Size = new Size(326, 48);
             ToolStripMenuItemExit.Text = "Thoát";
             ToolStripMenuItemExit.Click += ToolStripMenuItemExit_Click_1;
             // 
             // quảnLýToolStripMenuItem
             // 
-            quảnLýToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { quảnLýThểLoạiSáchToolStripMenuItem, menuItemAuthorManagement, menuItemBookManagement, ToolStripMenuItemMemberManagement, ToolStripMenuItemLoanDashboard, ToolStripMenuItemUserManagement, ToolStripMenuItemFineManagement });
+            quảnLýToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ToolStripMenuItemCategoryManagement, menuItemAuthorManagement, menuItemBookManagement, ToolStripMenuItemMemberManagement, ToolStripMenuItemLoanDashboard, ToolStripMenuItemUserManagement, ToolStripMenuItemFineManagement });
             quảnLýToolStripMenuItem.Image = Properties.Resources.project_manager;
             quảnLýToolStripMenuItem.Name = "quảnLýToolStripMenuItem";
             quảnLýToolStripMenuItem.Size = new Size(180, 43);
             quảnLýToolStripMenuItem.Text = "Quản lý  ";
             // 
-            // quảnLýThểLoạiSáchToolStripMenuItem
+            // ToolStripMenuItemCategoryManagement
             // 
-            quảnLýThểLoạiSáchToolStripMenuItem.Image = Properties.Resources.options;
-            quảnLýThểLoạiSáchToolStripMenuItem.Name = "quảnLýThểLoạiSáchToolStripMenuItem";
-            quảnLýThểLoạiSáchToolStripMenuItem.Size = new Size(413, 48);
-            quảnLýThểLoạiSáchToolStripMenuItem.Text = "Quản lý thể loại sách";
+            ToolStripMenuItemCategoryManagement.Image = Properties.Resources.options;
+            ToolStripMenuItemCategoryManagement.Name = "ToolStripMenuItemCategoryManagement";
+            ToolStripMenuItemCategoryManagement.Size = new Size(413, 48);
+            ToolStripMenuItemCategoryManagement.Text = "Quản lý thể loại sách";
+            ToolStripMenuItemCategoryManagement.Click += ToolStripMenuItemCategoryManagement_Click;
             // 
             // menuItemAuthorManagement
             // 
@@ -288,7 +289,7 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem toolStripMenuItem1;
         private ToolStripMenuItem quảnLýToolStripMenuItem;
-        private ToolStripMenuItem quảnLýThểLoạiSáchToolStripMenuItem;
+        private ToolStripMenuItem ToolStripMenuItemCategoryManagement;
         private ToolStripMenuItem menuItemAuthorManagement;
         private ToolStripMenuItem menuItemBookManagement;
         private ToolStripMenuItem ToolStripMenuItemMemberManagement;
