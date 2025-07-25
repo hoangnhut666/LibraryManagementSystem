@@ -20,13 +20,13 @@ namespace BLL_Services.Validators
             // Check if BookID is not empty
             if (string.IsNullOrWhiteSpace(bookAuthor.BookID))
             {
-                ErrorMessage = "Book ID cannot be empty.";
+                ErrorMessage = "Book ID không được để trống.";
                 return false;
             }
             // Check if AuthorID is not empty
             if (string.IsNullOrWhiteSpace(bookAuthor.AuthorID))
             {
-                ErrorMessage = "Author ID cannot be empty.";
+                ErrorMessage = "Author ID không được để trống.";
                 return false;
             }
 
@@ -35,7 +35,7 @@ namespace BLL_Services.Validators
             {
                 if (item.AuthorID == bookAuthor.AuthorID)
                 {
-                    ErrorMessage = "This Book-Author pairing already exists.";
+                    ErrorMessage = "Mối quan hệ giữa sách và tác giả này đã tồn tại.";
                     return false;
                 }
             }

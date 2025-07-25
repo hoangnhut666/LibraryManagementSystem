@@ -14,17 +14,17 @@ namespace BLL_Services.Validators
         {
             if (category == null)
             {
-                ErrorMessage = "Category cannot be null.";
+                ErrorMessage = "Thể loại không được để trống.";
                 return false;
             }
             if (string.IsNullOrWhiteSpace(category.CategoryID))
             {
-                ErrorMessage = "Category ID cannot be null or empty.";
+                ErrorMessage = "Mã thể loại không được để trống.";
                 return false;
             }
             if (string.IsNullOrWhiteSpace(category.Name))
             {
-                ErrorMessage = "Category name cannot be null or empty.";
+                ErrorMessage = "Tên thể loại không được để trống.";
                 return false;
             }
             ErrorMessage = null; 

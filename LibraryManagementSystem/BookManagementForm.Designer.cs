@@ -82,6 +82,7 @@ namespace GUI_UI
             label14 = new Label();
             label13 = new Label();
             dgvBookAuthor = new DataGridView();
+            label17 = new Label();
             tabControl1.SuspendLayout();
             tabPageBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxCoverImage).BeginInit();
@@ -490,6 +491,7 @@ namespace GUI_UI
             tabPageBookAuthor.Controls.Add(label16);
             tabPageBookAuthor.Controls.Add(label15);
             tabPageBookAuthor.Controls.Add(lblAuthorId);
+            tabPageBookAuthor.Controls.Add(label17);
             tabPageBookAuthor.Controls.Add(label14);
             tabPageBookAuthor.Controls.Add(label13);
             tabPageBookAuthor.Controls.Add(dgvBookAuthor);
@@ -502,10 +504,10 @@ namespace GUI_UI
             // 
             // txtBookAuthorID
             // 
-            txtBookAuthorID.Location = new Point(1528, 77);
+            txtBookAuthorID.Location = new Point(723, 367);
             txtBookAuthorID.Name = "txtBookAuthorID";
             txtBookAuthorID.ReadOnly = true;
-            txtBookAuthorID.Size = new Size(225, 43);
+            txtBookAuthorID.Size = new Size(450, 43);
             txtBookAuthorID.TabIndex = 36;
             // 
             // btnRefreshBookAuthor
@@ -513,7 +515,7 @@ namespace GUI_UI
             btnRefreshBookAuthor.BackColor = Color.FromArgb(174, 160, 249);
             btnRefreshBookAuthor.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnRefreshBookAuthor.ForeColor = SystemColors.Control;
-            btnRefreshBookAuthor.Location = new Point(1565, 374);
+            btnRefreshBookAuthor.Location = new Point(1543, 475);
             btnRefreshBookAuthor.Name = "btnRefreshBookAuthor";
             btnRefreshBookAuthor.Size = new Size(201, 70);
             btnRefreshBookAuthor.TabIndex = 35;
@@ -526,7 +528,7 @@ namespace GUI_UI
             btnUpdateBookAuthor.BackColor = Color.FromArgb(174, 160, 249);
             btnUpdateBookAuthor.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnUpdateBookAuthor.ForeColor = SystemColors.Control;
-            btnUpdateBookAuthor.Location = new Point(873, 374);
+            btnUpdateBookAuthor.Location = new Point(851, 475);
             btnUpdateBookAuthor.Name = "btnUpdateBookAuthor";
             btnUpdateBookAuthor.Size = new Size(201, 70);
             btnUpdateBookAuthor.TabIndex = 35;
@@ -539,7 +541,7 @@ namespace GUI_UI
             btnDeleteBookAuthor.BackColor = Color.FromArgb(174, 160, 249);
             btnDeleteBookAuthor.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnDeleteBookAuthor.ForeColor = SystemColors.Control;
-            btnDeleteBookAuthor.Location = new Point(1218, 374);
+            btnDeleteBookAuthor.Location = new Point(1196, 475);
             btnDeleteBookAuthor.Name = "btnDeleteBookAuthor";
             btnDeleteBookAuthor.Size = new Size(201, 70);
             btnDeleteBookAuthor.TabIndex = 35;
@@ -552,7 +554,7 @@ namespace GUI_UI
             btnAddBookAuthor.BackColor = Color.FromArgb(174, 160, 249);
             btnAddBookAuthor.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnAddBookAuthor.ForeColor = SystemColors.Control;
-            btnAddBookAuthor.Location = new Point(526, 374);
+            btnAddBookAuthor.Location = new Point(504, 475);
             btnAddBookAuthor.Name = "btnAddBookAuthor";
             btnAddBookAuthor.Size = new Size(201, 70);
             btnAddBookAuthor.TabIndex = 35;
@@ -563,7 +565,7 @@ namespace GUI_UI
             // cboAuthorNameBookAuthorTab
             // 
             cboAuthorNameBookAuthorTab.FormattingEnabled = true;
-            cboAuthorNameBookAuthorTab.Location = new Point(1400, 263);
+            cboAuthorNameBookAuthorTab.Location = new Point(1501, 270);
             cboAuthorNameBookAuthorTab.Name = "cboAuthorNameBookAuthorTab";
             cboAuthorNameBookAuthorTab.Size = new Size(450, 45);
             cboAuthorNameBookAuthorTab.TabIndex = 5;
@@ -572,7 +574,7 @@ namespace GUI_UI
             // cboTitleBookAuthor
             // 
             cboTitleBookAuthor.FormattingEnabled = true;
-            cboTitleBookAuthor.Location = new Point(622, 257);
+            cboTitleBookAuthor.Location = new Point(723, 264);
             cboTitleBookAuthor.Name = "cboTitleBookAuthor";
             cboTitleBookAuthor.Size = new Size(450, 45);
             cboTitleBookAuthor.TabIndex = 5;
@@ -580,7 +582,7 @@ namespace GUI_UI
             // 
             // txtAuthorIdBookAuthorTab
             // 
-            txtAuthorIdBookAuthorTab.Location = new Point(1400, 155);
+            txtAuthorIdBookAuthorTab.Location = new Point(1501, 162);
             txtAuthorIdBookAuthorTab.Name = "txtAuthorIdBookAuthorTab";
             txtAuthorIdBookAuthorTab.ReadOnly = true;
             txtAuthorIdBookAuthorTab.Size = new Size(450, 43);
@@ -588,7 +590,7 @@ namespace GUI_UI
             // 
             // txtBookIdBookAuthor
             // 
-            txtBookIdBookAuthor.Location = new Point(622, 152);
+            txtBookIdBookAuthor.Location = new Point(723, 159);
             txtBookIdBookAuthor.Name = "txtBookIdBookAuthor";
             txtBookIdBookAuthor.ReadOnly = true;
             txtBookIdBookAuthor.Size = new Size(450, 43);
@@ -598,7 +600,7 @@ namespace GUI_UI
             // 
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI", 11F);
-            label16.Location = new Point(1198, 260);
+            label16.Location = new Point(1299, 267);
             label16.Name = "label16";
             label16.Size = new Size(118, 45);
             label16.TabIndex = 3;
@@ -608,7 +610,7 @@ namespace GUI_UI
             // 
             label15.AutoSize = true;
             label15.Font = new Font("Segoe UI", 11F);
-            label15.Location = new Point(424, 254);
+            label15.Location = new Point(417, 261);
             label15.Name = "label15";
             label15.Size = new Size(144, 45);
             label15.TabIndex = 3;
@@ -618,7 +620,7 @@ namespace GUI_UI
             // 
             lblAuthorId.AutoSize = true;
             lblAuthorId.Font = new Font("Segoe UI", 11F);
-            lblAuthorId.Location = new Point(1198, 152);
+            lblAuthorId.Location = new Point(1299, 159);
             lblAuthorId.Name = "lblAuthorId";
             lblAuthorId.Size = new Size(181, 45);
             lblAuthorId.TabIndex = 3;
@@ -628,7 +630,7 @@ namespace GUI_UI
             // 
             label14.AutoSize = true;
             label14.Font = new Font("Segoe UI", 11F);
-            label14.Location = new Point(424, 152);
+            label14.Location = new Point(420, 159);
             label14.Name = "label14";
             label14.Size = new Size(141, 45);
             label14.TabIndex = 3;
@@ -649,13 +651,23 @@ namespace GUI_UI
             // 
             dgvBookAuthor.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvBookAuthor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBookAuthor.Location = new Point(17, 503);
+            dgvBookAuthor.Location = new Point(17, 610);
             dgvBookAuthor.Name = "dgvBookAuthor";
             dgvBookAuthor.RowHeadersWidth = 92;
             dgvBookAuthor.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvBookAuthor.Size = new Size(2205, 731);
+            dgvBookAuthor.Size = new Size(2205, 624);
             dgvBookAuthor.TabIndex = 0;
             dgvBookAuthor.CellClick += dgvBookAuthor_CellClick;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new Font("Segoe UI", 11F);
+            label17.Location = new Point(417, 364);
+            label17.Name = "label17";
+            label17.Size = new Size(288, 45);
+            label17.TabIndex = 3;
+            label17.Text = "Mã sách và tác giả";
             // 
             // BookManagementForm
             // 
@@ -732,5 +744,6 @@ namespace GUI_UI
         private Label lblAuthorId;
         private ComboBox cboShelfLocation;
         private TextBox txtBookAuthorID;
+        private Label label17;
     }
 }

@@ -8,17 +8,17 @@ namespace LibraryManagementSystem
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            //Application.Run(new CategoryManagementForm());
+            Application.Run(new BookManagementForm());
 
-            var loginForm = new LoginForm();
-            if (loginForm.ShowDialog() == DialogResult.OK)
-            {
-                Application.Run(new MainForm());
-            }
-            else
-            {
-                Application.Exit();
-            }
+            //var loginForm = new LoginForm();
+            //if (loginForm.ShowDialog() == DialogResult.OK)
+            //{
+            //    Application.Run(new MainForm());
+            //}
+            //else
+            //{
+            //    Application.Exit();
+            //}
         }
     }
 }

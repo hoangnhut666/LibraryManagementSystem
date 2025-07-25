@@ -22,28 +22,28 @@ namespace BLL_Services.Validators
         {
             if (string.IsNullOrWhiteSpace(currentPassword))
             {
-                ErrorMessage = "Current password is required.";
+                ErrorMessage = "Mật khẩu hiện tại không được để trống.";
                 return false;
             }
             if (string.IsNullOrWhiteSpace(newPassword))
             {
-                ErrorMessage = "New password is required.";
+                ErrorMessage = "Mật khẩu mới không được để trống.";
                 return false;
             }
             if (newPassword.Length < 6)
             {
-                ErrorMessage = "New password must be at least 6 characters long.";
+                ErrorMessage = "Mật khẩu mới phải có ít nhất 6 ký tự.";
                 return false;
             }
             if (newPassword != confirmNewPassword)
             {
-                ErrorMessage = "New password and confirmation do not match.";
+                ErrorMessage = "Mật khẩu mới và xác nhận không khớp.";
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(userName))
             {
-                ErrorMessage = "Username is required.";
+                ErrorMessage = "Tên đăng nhập không được để trống.";
                 return false;
             }
 
@@ -51,12 +51,12 @@ namespace BLL_Services.Validators
             var user = UserService.GetUserByUsername(userName);
             if (user == null)
             {
-                ErrorMessage = "User not found.";
+                ErrorMessage = "Người dùng không tồn tại.";
                 return false;
             }
             if (!SecurityService.VerifyPassword(currentPassword, user.Password))
             {
-                ErrorMessage = "Current password is incorrect.";
+                ErrorMessage = "Mật khẩu hiện tại không chính xác.";
                 return false;
             }
             ErrorMessage = string.Empty; 

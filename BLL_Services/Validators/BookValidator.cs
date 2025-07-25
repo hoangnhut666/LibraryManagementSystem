@@ -15,28 +15,28 @@ namespace BLL_Services.Validators
         {
             if (string.IsNullOrWhiteSpace(book.ISBN))
             {
-                ErrorMessage = "ISBN cannot be empty.";
+                ErrorMessage = "Mã ISBN không được để trống.";
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(book.Title))
             {
-                ErrorMessage = "Title cannot be empty.";
+                ErrorMessage = "Tiêu đề không được để trống.";
                 return false;
             }
             if (string.IsNullOrWhiteSpace(book.PublisherID))
             {
-                ErrorMessage = "Publisher ID cannot be empty.";
+                ErrorMessage = "Publisher ID không được để trống.";
                 return false;
             }
             if (book.PublicationYear <= 0)
             {
-                ErrorMessage = "Publication Year must be a positive integer.";
+                ErrorMessage = "Năm xuất bản phải là một số nguyên dương.";
                 return false;
             }
             if (book.NumberOfPages <= 0)
             {
-                ErrorMessage = "Number of Pages must be a positive integer.";
+                ErrorMessage = "Số trang phải là một số nguyên dương.";
                 return false;
             }
             ErrorMessage = string.Empty;

@@ -345,14 +345,14 @@ namespace GUI_UI
         {
             BookAuthor newBookAuthor = new BookAuthor
             {
-                BookID = cboTitleBookAuthor.SelectedValue != null ? cboTitleBookAuthor.SelectedValue.ToString() : null,
-                AuthorID = cboAuthorNameBookAuthorTab.SelectedValue != null ? cboAuthorNameBookAuthorTab.SelectedValue.ToString() : null
+                BookID = txtBookIdBookAuthor.Text.Trim(),
+                AuthorID = txtAuthorIdBookAuthorTab.Text.Trim(),
             };
 
             //Insert the book author relationship into the database
-            //try
-            //{
-            if (BookAuthorsService.InsertBookAuthor(newBookAuthor) > 0)
+            try
+            {
+                if (BookAuthorsService.InsertBookAuthor(newBookAuthor) > 0)
             {
                 MessageBox.Show("Book-Author relationship added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LoadBookAuthors();
@@ -362,11 +362,11 @@ namespace GUI_UI
             {
                 MessageBox.Show("Failed to add Book-Author relationship. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show($"An error occurred while adding the Book-Author relationship: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while adding the Book-Author relationship: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
@@ -387,15 +387,14 @@ namespace GUI_UI
                     LoadBookAuthors();
                     ClearBookAuthorInputFields();
                 }
-                //else
-                //{
-                //    MessageBox.Show("Failed to update Book-Author relationship. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //}
+                else
+                {
+                    MessageBox.Show("Failed to update Book-Author relationship. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred while updating the Book-Author relationship: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
             }
         }
 
@@ -403,12 +402,7 @@ namespace GUI_UI
         {
             try
             {
-                string bookAuthorId = txtBookIdBookAuthor.Text.Trim();
-                if (string.IsNullOrEmpty(bookAuthorId))
-                {
-                    MessageBox.Show("Please select a Book-Author relationship to delete.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+                string bookAuthorId = txtBookAuthorID.Text.Trim();
                 DialogResult result = MessageBox.Show("Are you sure you want to delete this Book-Author relationship?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
@@ -432,11 +426,8 @@ namespace GUI_UI
 
         private void btnRefreshBookAuthor_Click(object sender, EventArgs e)
         {
-            txtBookIdBookAuthor.Clear();
-            txtBookIdBookAuthor.Clear();
-            cboTitleBookAuthor.SelectedIndex = -1;
-            cboAuthorNameBookAuthorTab.SelectedIndex = -1;
-
+            ClearBookAuthorInputFields();
+            LoadBookAuthors();
         }
 
         private void dgvBookAuthor_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -448,7 +439,7 @@ namespace GUI_UI
                 txtBookAuthorID.Text = selectedRow.Cells[0].Value.ToString();
                 cboTitleBookAuthor.SelectedValue = selectedBookAuthor.MaSach;
                 cboAuthorNameBookAuthorTab.SelectedValue = selectedBookAuthor.MaTacGia;
-                txtBookIdBookAuthor.Text = selectedBookAuthor.MaSachVaTacGia;
+                txtBookIdBookAuthor.Text = selectedBookAuthor.MaSach;
                 txtAuthorIdBookAuthorTab.Text = selectedBookAuthor.MaTacGia;
             }
             else
@@ -463,6 +454,7 @@ namespace GUI_UI
             cboAuthorNameBookAuthorTab.SelectedIndex = -1;
             txtBookIdBookAuthor.Clear();
             txtAuthorIdBookAuthorTab.Clear();
+            txtBookAuthorID.Clear();
         }
 
         private void cboTitleBookAuthor_SelectedIndexChanged(object sender, EventArgs e)

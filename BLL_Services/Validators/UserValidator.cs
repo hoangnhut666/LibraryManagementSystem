@@ -16,31 +16,31 @@ namespace BLL_Services.Validators
         {
             if (string.IsNullOrWhiteSpace(user.UserID))
             {
-                ErrorMessage = "User ID cannot be empty.";
+                ErrorMessage = "Mã người dùng không được để trống.";
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(user.FullName))
             {
-                ErrorMessage = "Full Name cannot be empty.";
+                ErrorMessage = "Họ và tên không được để trống.";
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(user.RoleID))
             {
-                ErrorMessage = "Role cannot be empty.";
+                ErrorMessage = "Vai trò không được để trống.";
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(user.Email))
             {
-                ErrorMessage = "Email cannot be empty.";
+                ErrorMessage = "Email không được để trống.";
                 return false;
             }
 
             if (!Regex.IsMatch(user.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
-                ErrorMessage = "Email format is invalid.";
+                ErrorMessage = "Định dạng email không hợp lệ.";
                 return false;
             }
 

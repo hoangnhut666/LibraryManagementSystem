@@ -27,42 +27,42 @@ namespace BLL_Services.Validators
             string.IsNullOrWhiteSpace(member.Phone) &&
             member.Photo == null)
             {
-                ErrorMessage = "Please enter member information.";
+                ErrorMessage = "Vui lòng chọn ảnh đại diện.";
                 return false;
             }
 
             // Address is required
             if (string.IsNullOrWhiteSpace(member.Address))
             {
-                ErrorMessage = "Address cannot be empty.";
+                ErrorMessage = "Địa chỉ không được để trống.";
                 return false;
             }
 
             // Check if the member ID is not empty
             if (string.IsNullOrWhiteSpace(member.MemberID))
             {
-                ErrorMessage = "Member ID cannot be empty.";
+                ErrorMessage = "Mã thành viên không được để trống.";
                 return false;
             }
 
             // Check if the member ID length is between 5 and 10 characters
             if (member.MemberID.Length < 5 || member.MemberID.Length > 10)
             {
-                ErrorMessage = "Member ID must be between 5 and 10 characters.";
+                ErrorMessage = "Mã thành viên phải có độ dài từ 5 đến 10 ký tự.";
                 return false;
             }
 
             // Check if the full name is not empty
             if (string.IsNullOrWhiteSpace(member.FullName))
             {
-                ErrorMessage = "Full name cannot be empty.";
+                ErrorMessage = "Họ và tên không được để trống.";
                 return false;
             }
 
             // Email is required
             if (string.IsNullOrWhiteSpace(member.Email))
             {
-                ErrorMessage = "Email cannot be empty.";
+                ErrorMessage = "Email không được để trống.";
                 return false;
             }
 
@@ -71,7 +71,7 @@ namespace BLL_Services.Validators
             {
                 if (item.MemberID != member.MemberID)
                 {
-                    ErrorMessage = "Email already exists.";
+                    ErrorMessage = "Email đã tồn tại.";
                     return false;
                 }
             }
@@ -80,42 +80,42 @@ namespace BLL_Services.Validators
             // Check if the email is valid
             if (!string.IsNullOrWhiteSpace(member.Email) && !IsValidEmail(member.Email))
             {
-                ErrorMessage = "Invalid email format.";
+                ErrorMessage = "Định dạng email không hợp lệ.";
                 return false;
             }
 
             // Phone number is required
             if (string.IsNullOrWhiteSpace(member.Phone))
             {
-                ErrorMessage = "Phone number cannot be empty.";
+                ErrorMessage = "Số điện thoại không được để trống.";
                 return false;
             }
 
             // Check if the phone number is valid
             if (!string.IsNullOrWhiteSpace(member.Phone) && !IsValidPhone(member.Phone))
             {
-                ErrorMessage = "Invalid phone number format.";
+                ErrorMessage = "Định dạng số điện thoại không hợp lệ.";
                 return false;
             }
 
             // Check if the date of birth is not in the future
             if (member.DateOfBirth.HasValue && member.DateOfBirth > DateTime.Now)
             {
-                ErrorMessage = "Date of birth cannot be in the future.";
+                ErrorMessage = "Ngày sinh không được lớn hơn ngày hiện tại.";
                 return false;
             }
 
             // Check if the join date is not in the future
             if (member.JoinDate > DateTime.Now)
             {
-                ErrorMessage = "Join date cannot be in the future.";
+                ErrorMessage = "Ngày tham gia không được lớn hơn ngày hiện tại.";
                 return false;
             }
 
             //Check if the join date is not before the date of birth
             if (member.DateOfBirth.HasValue && member.JoinDate < member.DateOfBirth)
             {
-                ErrorMessage = "Join date cannot be before the date of birth.";
+                ErrorMessage = "Ngày tham gia không được trước ngày sinh.";
                 return false;
             }
 
