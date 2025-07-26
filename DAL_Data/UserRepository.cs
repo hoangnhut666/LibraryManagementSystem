@@ -176,7 +176,7 @@ namespace DAL_Data
                 new SqlParameter("@Username", username)
             };
             List<string?> passwords = Utilities.ExecuteQuery(sql, reader => reader["Password"]?.ToString(), parameters);
-            return passwords.FirstOrDefault() ?? string.Empty;
+            return passwords.FirstOrDefault();
         }
 
         //Update password
@@ -191,6 +191,18 @@ namespace DAL_Data
             return Utilities.ExecuteNonQuery(sql, parameters);
 
         }
+
+        //Lock the user by username
+        public int LockAcountByUsername(string username)
+        {
+            string sql = "UPDATE Users SET IsActive = 0 WHERE Username = @Username";
+            var parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Username", username)
+            };
+            return Utilities.ExecuteNonQuery(sql, parameters);
+        }
+
     }
 }
 

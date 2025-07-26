@@ -1,3 +1,4 @@
+using DTO_Models;
 using GUI_UI;
 
 namespace LibraryManagementSystem
@@ -8,7 +9,8 @@ namespace LibraryManagementSystem
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new BookManagementForm());
+            Application.Run(new FineManagementForm());
+            //Application.Run(new MainForm());
 
             //var loginForm = new LoginForm();
             //if (loginForm.ShowDialog() == DialogResult.OK)

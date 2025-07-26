@@ -20,31 +20,31 @@ namespace BLL_Services.Validators
             // Check if CopyID is not empty
             if (string.IsNullOrWhiteSpace(loan.CopyID))
             {
-                ErrorMessage = "Copy ID cannot be empty.";
+                ErrorMessage = "Mã bản sao không được để trống.";
                 return false;
             }
             // Check if MemberID is not empty
             if (string.IsNullOrWhiteSpace(loan.MemberID))
             {
-                ErrorMessage = "Member ID cannot be empty.";
+                ErrorMessage = "Mã thành viên không được để trống.";
                 return false;
             }
             // Check if LoanDate is not in the future
             if (loan.LoanDate > DateTime.Now)
             {
-                ErrorMessage = "Loan date cannot be in the future.";
+                ErrorMessage = "Ngày mượn không được lớn hơn ngày hiện tại.";
                 return false;
             }
             // Check if DueDate is not before LoanDate
             if (loan.DueDate < loan.LoanDate)
             {
-                ErrorMessage = "Due date cannot be before loan date.";
+                ErrorMessage = "Ngày đến hạn không được trước ngày mượn.";
                 return false;
             }
             // If ReturnDate is set, check if it is not before LoanDate or DueDate
             if (loan.ReturnDate.HasValue && (loan.ReturnDate < loan.LoanDate || loan.ReturnDate < loan.DueDate))
             {
-                ErrorMessage = "Return date cannot be before loan date or due date.";
+                ErrorMessage = "Ngày trả không được trước ngày mượn hoặc ngày đến hạn.";
                 return false;
             }
             return true;

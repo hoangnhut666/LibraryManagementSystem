@@ -21,6 +21,19 @@ namespace BLL_Services.Services
             LoanValidator = new LoanValidator();
         }
 
+        // Get all loans
+        public List<Loan> GetAllLoans()
+        {
+            try
+            {
+                return LoanRepository.GetAllLoans();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while retrieving loans.", ex);
+            }
+        }
+
         // Get all loan view models
         public List<LoanViewModel> GetLoanViewModels()
         {

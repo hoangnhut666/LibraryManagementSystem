@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using DTO_Models;
 
 namespace BLL_Services.Services
 {
@@ -31,21 +32,35 @@ namespace BLL_Services.Services
             }
         }
 
-        public bool VerifyPassword(string enteredPassword, string storedHash)
+        public bool VerifyPassword(string enteredPassword, string? storedHash)
         {
-            byte[] hashBytes = Convert.FromBase64String(storedHash);
-            byte[] salt = new byte[16];
-            Array.Copy(hashBytes, 0, salt, 0, 16);
-            using (var pbkdf2 = new Rfc2898DeriveBytes(enteredPassword, salt, 100000, HashAlgorithmName.SHA256))
+            if (string.IsNullOrEmpty(storedHash))
             {
-                byte[] hash = pbkdf2.GetBytes(20);
-                for (int i = 0; i < 20; i++)
-                {
-                    if (hashBytes[i + 16] != hash[i])
-                        return false;
-                }
+                return false;
             }
-            return true;
+
+            try
+            {
+                byte[] hashBytes = Convert.FromBase64String(storedHash);
+                byte[] salt = new byte[16];
+                Array.Copy(hashBytes, 0, salt, 0, 16);
+
+                using (var pbkdf2 = new Rfc2898DeriveBytes(enteredPassword, salt, 100000, HashAlgorithmName.SHA256))
+                {
+                    byte[] hash = pbkdf2.GetBytes(20);
+                    for (int i = 0; i < 20; i++)
+                    {
+                        if (hashBytes[i + 16] != hash[i])
+                            return false;
+                    }
+                }
+
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
 
         public string? GetStoredHashedPasswordWithUsername(string username)
@@ -66,6 +81,34 @@ namespace BLL_Services.Services
             {
                 throw new Exception("An error occurred while updating the password.", ex);
             }
+        }
+
+
+        //Get user by username
+        public User? GetUserByUsername(string username)
+        {
+            try
+            {
+                return UserRepository.GetUsersByCriteria("Username", username).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while retrieving the user.", ex);
+            }
+        }
+
+        //Lock user account by username
+        public int LockAccountByUsername(string username)
+        {
+            try
+            {
+                return UserRepository.LockAcountByUsername(username);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while locking the account.", ex);
+            }
+
         }
     }
 }

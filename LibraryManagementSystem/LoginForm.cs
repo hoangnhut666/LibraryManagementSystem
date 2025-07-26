@@ -1,4 +1,5 @@
 ﻿using BLL_Services.Services;
+using BLL_Services.Validators;
 using DTO_Models;
 using System;
 using System.Collections.Generic;
@@ -14,13 +15,15 @@ namespace GUI_UI
 {
     public partial class LoginForm : Form
     {
-        private SecurityService SecurityHelper { get; set; }
+        private SecurityService SecurityService { get; set; }
         private UserService UserService { get; set; }
-
+        private LoginValidator LoginValidator { get; set; }
+        private Dictionary<string, int> failedAttempts = new Dictionary<string, int>();
         public LoginForm()
         {
-            SecurityHelper = new SecurityService();
+            SecurityService = new SecurityService();
             UserService = new UserService();
+            LoginValidator = new LoginValidator();
             InitializeComponent();
             SetupComponent();
         }
@@ -38,30 +41,40 @@ namespace GUI_UI
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
 
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (!LoginValidator.Validate(username, password))
             {
-                MessageBox.Show("Vui lòng nhập tên đăng nhập và mật khẩu.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(LoginValidator.ErrorMessage, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string? storedHash = SecurityHelper.GetStoredHashedPasswordWithUsername(username);
+            string? storedHash = SecurityService.GetStoredHashedPasswordWithUsername(username);
 
-            if (storedHash == null)
+            if (!SecurityService.VerifyPassword(storedHash, password))
             {
-                MessageBox.Show("Tên đăng nhập không tồn tại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (failedAttempts.ContainsKey(username))
+                {
+                    failedAttempts[username]++;
+                }
+                else
+                {
+                    failedAttempts[username] = 1;
+                }
+
+                if (failedAttempts[username] >= 3)
+                {
+
+                    SecurityService.LockAccountByUsername(username);
+                    MessageBox.Show("Tài khoản của bạn đã bị khóa do quá nhiều lần đăng nhập không thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                MessageBox.Show($"Tên đăng nhập hoặc mật khẩu không đúng. Số lần thử còn lại: {3 - failedAttempts[username]}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (SecurityHelper.VerifyPassword(password, storedHash))
-            {
-                UserSession.CurrentUser = UserService.GetUserByUsername(username);
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            UserSession.CurrentUser = UserService.GetUserByUsername(username);
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void chkShowPassword_CheckedChanged(object sender, EventArgs e)

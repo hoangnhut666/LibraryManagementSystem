@@ -385,6 +385,20 @@ VALUES
 GO
 
 
+INSERT INTO Fines
+    ([FineID], [LoanID], [Amount], [IssueDate], [Paid], [Reason])
+VALUES
+    ('FINE007', 'LOAN007', 12000.00, '2024-06-15 10:00:00', 0, N'Làm cong gáy sách'),
+    ('FINE008', 'LOAN008', 8000.00, '2024-06-19 09:30:00', 0, N'Viết bút chì vào sách'),
+    ('FINE009', 'LOAN009', 18000.00, '2024-06-23 10:00:00', 0, N'Làm rách trang sách'),
+    ('FINE010', 'LOAN010', 22000.00, '2024-06-29 13:00:00', 0, N'Làm hỏng sách (không thể sửa chữa)'),
+    ('FINE011', 'LOAN011', 15000.00, '2024-07-02 15:00:00', 0, N'Trả sách quá hạn 2 ngày'),
+    ('FINE012', 'LOAN012', 10000.00, '2024-07-06 10:30:00', 0, N'Làm bẩn bìa sách'),
+    ('FINE013', 'LOAN013', 50000.00, '2024-07-10 09:00:00', 0, N'Làm mất sách quý hiếm'),
+    ('FINE014', 'LOAN014', 7000.00, '2024-07-12 14:00:00', 0, N'Làm nhàu bìa sách'),
+    ('FINE015', 'LOAN015', 13000.00, '2024-07-15 11:30:00', 0, N'Trả sách quá hạn 3 ngày');
+GO
+
 
 CREATE PROCEDURE SearchAuthors
     @SearchTerm NVARCHAR(100)
@@ -632,3 +646,60 @@ WHERE BookAuthorID = 1;
 SELECT * FROM BookAuthors WHERE BookID = 'BOOK014'
 
 UPDATE BookAuthors SET BookID = 'BOOK008', AuthorID = 'AUTH009' WHERE BookAuthorID = 2
+GO
+
+CREATE PROCEDURE SearchFines
+    @SearchTerm NVARCHAR(100) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        f.FineID,
+        f.LoanID,
+        m.FullName,
+        f.Amount
+    FROM
+        Fines f
+    JOIN Loans l ON f.LoanID = l.LoanID
+    JOIN Members m ON l.MemberID = m.MemberID
+    WHERE 
+        @SearchTerm IS NULL OR
+        f.FineID LIKE '%' + @SearchTerm + '%' OR
+        m.FullName LIKE '%' + @SearchTerm + '%' OR
+        l.LoanDate LIKE '%' + @SearchTerm + '%' OR
+        l.DueDate LIKE '%' + @SearchTerm + '%' OR
+        l.ReturnDate LIKE '%' + @SearchTerm + '%'
+    ORDER BY 
+        f.FineID DESC;
+END;
+
+EXEC SearchFines N'FINE007';
+EXEC SearchFines N'Nguyễn';
+GO
+
+SELECT *
+FROM Fines
+
+
+SELECT
+    f.FineID AS MaPhieuPhat,
+    f.LoanID AS MaPhieuMuon,
+    u.FullName AS TenhanhVien,
+    f.Amount AS SoTien
+FROM Fines f
+JOIN Users u ON u.UserID = f.LoanID
+ORDER BY f.FineID DESC
+
+
+ SELECT
+     f.FineID,
+     f.LoanID,
+     m.FullName,
+     f.Amount
+ FROM Fines f
+ JOIN Loans l ON l.LoanID=f.LoanID
+ JOIN Members m ON m.MemberID=l.MemberID
+ ORDER BY f.FineID DESC
+
+SELECT *
+FROM Fines
