@@ -37,7 +37,7 @@ namespace BLL_Services.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while retrieving user view models.", ex);
+                throw new Exception("Đã xảy ra lỗi khi lấy danh sách người dùng.", ex);
             }
         }
 
@@ -50,7 +50,7 @@ namespace BLL_Services.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while retrieving users.", ex);
+                throw new Exception("Đã xảy ra lỗi khi lấy danh sách người dùng.", ex);
             }
         }
 
@@ -59,7 +59,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
-                throw new ArgumentException("Search term cannot be null or empty.", nameof(searchTerm));
+                throw new ArgumentException("Từ khóa không được để trống.", nameof(searchTerm));
             }
             return UserRepository.SearchUsers(searchTerm);
         }
@@ -70,7 +70,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(columnName) || string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException("Column name and value cannot be null or empty.");
+                throw new ArgumentException("Tên cột và giá trị không được để trống.");
             }
             return UserRepository.GetUsersByCriteria(columnName, value);
         }
@@ -81,9 +81,9 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(userID))
             {
-                throw new ArgumentException("User ID cannot be null or empty.", nameof(userID));
+                throw new ArgumentException("Mã người dùng không được để trống.", nameof(userID));
             }
-            return SearchUsers("UserID", userID).FirstOrDefault() ?? throw new KeyNotFoundException($"User with ID {userID} not found.");
+            return SearchUsers("UserID", userID).FirstOrDefault() ?? throw new KeyNotFoundException($"Không tìm thấy người dùng với mã {userID}.");
         }
 
 
@@ -92,9 +92,9 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(username))
             {
-                throw new ArgumentException("Username cannot be null or empty.", nameof(username));
+                throw new ArgumentException("Tên đăng nhập không được để trống.", nameof(username));
             }
-            return SearchUsers("Username", username).FirstOrDefault() ?? throw new KeyNotFoundException($"User with username {username} not found.");
+            return SearchUsers("Username", username).FirstOrDefault() ?? throw new KeyNotFoundException($"Không tìm thấy người dùng với tên đăng nhập {username}.");
         }
 
         // Insert a new user
@@ -102,7 +102,7 @@ namespace BLL_Services.Services
         {
             if (user == null)
             {
-                throw new ArgumentNullException(nameof(user), "User cannot be null.");
+                throw new ArgumentNullException(nameof(user), "Người dùng không được để trống.");
             }
             if (!UserValidator.IsValidUser(user))
             {
@@ -116,7 +116,7 @@ namespace BLL_Services.Services
         {
             if (user == null)
             {
-                throw new ArgumentNullException(nameof(user), "User cannot be null.");
+                throw new ArgumentNullException(nameof(user), "Người dùng không được để trống.");
             }
             if (!UserValidator.IsValidUser(user))
             {
@@ -131,10 +131,13 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(userID))
             {
-                throw new ArgumentException("User ID cannot be null or empty.", nameof(userID));
+                throw new ArgumentException("Mã người dùng không được để trống.", nameof(userID));
             }
             return UserRepository.Delete(userID);
         }
+
+
+        
     }
 }
 

@@ -512,7 +512,7 @@ BEGIN
         LEFT JOIN BookAuthors ba ON b.BookID = ba.BookID
         LEFT JOIN Authors a ON ba.AuthorID = a.AuthorID
         LEFT JOIN BookCopies bc ON bc.BookID = b.BookID
-        
+
 
     WHERE 
         @SearchTerm IS NULL OR
@@ -537,19 +537,19 @@ EXEC SearchBookCopies N'kim đồng';
 EXEC SearchBookCopies N'Tô Hoài';
 
 
-SELECT 
+SELECT
     ba.BookAuthorID,
     ba.BookID,
     b.Title,
     ba.AuthorID,
     a.FullName
 FROM BookAuthors ba
-JOIN Authors a ON a.AuthorID = ba.AuthorID
-JOIN Books b ON b.BookID = ba.BookID
+    JOIN Authors a ON a.AuthorID = ba.AuthorID
+    JOIN Books b ON b.BookID = ba.BookID
 ORDER BY ba.BookAuthorID DESC
 GO
 
-SELECT  
+SELECT
     l.LoanID,
     l.CopyID,
     b.Title,
@@ -560,32 +560,32 @@ SELECT
     l.ReturnDate,
     l.Status
 FROM Loans l
-JOIN BookCopies bc ON bc.CopyID = l.CopyID
-JOIN Books b ON b.BookID = bc.BookID
-JOIN Members m ON m.MemberID = l.MemberID
-LEFT JOIN Users u ON u.UserID = l.UserID;
+    JOIN BookCopies bc ON bc.CopyID = l.CopyID
+    JOIN Books b ON b.BookID = bc.BookID
+    JOIN Members m ON m.MemberID = l.MemberID
+    LEFT JOIN Users u ON u.UserID = l.UserID;
 
 
-SELECT 
+SELECT
     u.UserID,
     u.FullName,
     r.RoleName
 FROM Users u
-JOIN Roles r ON r.RoleID = u.RoleID
+    JOIN Roles r ON r.RoleID = u.RoleID
 GO
 
 CREATE PROCEDURE SearchUsers
-@SearchTerm NVARCHAR(100) = NULL
+    @SearchTerm NVARCHAR(100) = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    SELECT 
+    SELECT
         u.UserID,
         u.FullName,
         r.RoleName
     FROM Users u
-    JOIN Roles r ON r.RoleID = u.RoleID
+        JOIN Roles r ON r.RoleID = u.RoleID
     WHERE 
         @SearchTerm IS NULL OR
         u.UserID LIKE '%' + @SearchTerm + '%' OR
@@ -643,7 +643,9 @@ UPDATE BookAuthors
 SET AuthorID = 'AUTH005'
 WHERE BookAuthorID = 1;
 
-SELECT * FROM BookAuthors WHERE BookID = 'BOOK014'
+SELECT *
+FROM BookAuthors
+WHERE BookID = 'BOOK014'
 
 UPDATE BookAuthors SET BookID = 'BOOK008', AuthorID = 'AUTH009' WHERE BookAuthorID = 2
 GO
@@ -653,15 +655,15 @@ CREATE PROCEDURE SearchFines
 AS
 BEGIN
     SET NOCOUNT ON;
-    SELECT 
+    SELECT
         f.FineID,
         f.LoanID,
         m.FullName,
         f.Amount
     FROM
         Fines f
-    JOIN Loans l ON f.LoanID = l.LoanID
-    JOIN Members m ON l.MemberID = m.MemberID
+        JOIN Loans l ON f.LoanID = l.LoanID
+        JOIN Members m ON l.MemberID = m.MemberID
     WHERE 
         @SearchTerm IS NULL OR
         f.FineID LIKE '%' + @SearchTerm + '%' OR
@@ -687,19 +689,73 @@ SELECT
     u.FullName AS TenhanhVien,
     f.Amount AS SoTien
 FROM Fines f
-JOIN Users u ON u.UserID = f.LoanID
+    JOIN Users u ON u.UserID = f.LoanID
 ORDER BY f.FineID DESC
 
 
- SELECT
-     f.FineID,
-     f.LoanID,
-     m.FullName,
-     f.Amount
- FROM Fines f
- JOIN Loans l ON l.LoanID=f.LoanID
- JOIN Members m ON m.MemberID=l.MemberID
- ORDER BY f.FineID DESC
+SELECT
+    f.FineID,
+    f.LoanID,
+    m.FullName,
+    f.Amount
+FROM Fines f
+    JOIN Loans l ON l.LoanID=f.LoanID
+    JOIN Members m ON m.MemberID=l.MemberID
+ORDER BY f.FineID DESC
 
 SELECT *
 FROM Fines
+GO
+
+CREATE PROCEDURE SearchLoans
+    @SearchTerm NVARCHAR(100) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT
+        l.LoanID,
+        l.CopyID,
+        b.Title,
+        m.MemberID,
+        m.FullName,
+        u.FullName,
+        l.LoanDate,
+        l.DueDate,
+        l.ReturnDate,
+        l.[Status]
+    FROM
+        Loans l
+        JOIN Users u ON u.UserID = l.UserID
+        JOIN BookCopies bc ON bc.CopyID = l.CopyID
+        JOIN Books b ON b.BookID = bc.BookID
+        JOIN Members m ON m.MemberID = l.MemberID
+    WHERE 
+        @SearchTerm IS NULL OR
+        l.LoanID LIKE '%' + @SearchTerm + '%' OR
+        b.Title LIKE '%' + @SearchTerm + '%' OR
+        m.MemberID LIKE '%' + @SearchTerm + '%' OR
+        m.FullName LIKE '%' + @SearchTerm + '%' OR
+        u.FullName LIKE '%' + @SearchTerm + '%' OR
+        l.LoanDate LIKE '%' + @SearchTerm + '%' OR
+        l.DueDate LIKE '%' + @SearchTerm + '%' OR
+        l.ReturnDate LIKE '%' + @SearchTerm + '%' OR
+        l.[Status] LIKE '%' + @SearchTerm + '%'
+    ORDER BY 
+        l.LoanID DESC;
+END;
+
+EXEC SearchLoans N'LOAN001';
+EXEC SearchLoans N'Nguyễn';
+
+
+
+        -- public string? MaMuon { get; set; }
+        -- public string? MaBanSao { get; set; }
+        -- public string? TenSach { get; set; }
+        -- public string? MaThanhVien { get; set; }
+        -- public string? TenThanhVien { get; set; }
+        -- public string? TenNhanVien { get; set; }
+        -- public DateTime NgayMuon { get; set; }
+        -- public DateTime HanTra { get; set; }
+        -- public DateTime? NgayTra { get; set; }
+        -- public string? TrangThai { get; set; }

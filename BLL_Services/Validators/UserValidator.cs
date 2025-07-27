@@ -5,12 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using DAL_Data;
+using BLL_Services.Services;
 
 namespace BLL_Services.Validators
 {
     public class UserValidator
     {
         public string ErrorMessage { get; private set; } = string.Empty;
+        public UserRepository UserRepository { get; set; } 
+
+        public UserValidator()
+        {
+            UserRepository = new UserRepository();
+        }
 
         public bool IsValidUser(User user)
         {
@@ -35,6 +43,13 @@ namespace BLL_Services.Validators
             if (string.IsNullOrWhiteSpace(user.Email))
             {
                 ErrorMessage = "Email không được để trống.";
+                return false;
+            }
+
+            var existingUserWithTheSameEmail = UserRepository.GetUsersByCriteria("Email", user.Email);
+            if (existingUserWithTheSameEmail.Count > 0)
+            {
+                ErrorMessage = "Email đã được sử dụng bởi người dùng khác.";
                 return false;
             }
 

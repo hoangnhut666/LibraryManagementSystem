@@ -125,7 +125,8 @@ namespace GUI_UI
 
         private void ToolStripMenuItemFineManagement_Click(object sender, EventArgs e)
         {
-
+            var fineManagementForm = new FineManagementForm();
+            EmbedFormIntoPanel(fineManagementForm);
         }
 
         private void ToolStripMenuItemSupport_Click(object sender, EventArgs e)

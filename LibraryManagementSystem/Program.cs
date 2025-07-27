@@ -9,18 +9,17 @@ namespace LibraryManagementSystem
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new FineManagementForm());
-            //Application.Run(new MainForm());
+            //Application.Run(new UserManagementForm());
 
-            //var loginForm = new LoginForm();
-            //if (loginForm.ShowDialog() == DialogResult.OK)
-            //{
-            //    Application.Run(new MainForm());
-            //}
-            //else
-            //{
-            //    Application.Exit();
-            //}
+            var loginForm = new LoginForm();
+            if (loginForm.ShowDialog() == DialogResult.OK)
+            {
+                Application.Run(new MainForm());
+            }
+            else
+            {
+                Application.Exit();
+            }
         }
     }
 }

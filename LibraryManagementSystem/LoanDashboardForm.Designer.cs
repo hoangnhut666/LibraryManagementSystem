@@ -36,7 +36,7 @@
             txtTitle = new TextBox();
             label6 = new Label();
             label4 = new Label();
-            cboMemberFullName = new ComboBox();
+            cboMemberID = new ComboBox();
             dtpLoanDate = new DateTimePicker();
             label9 = new Label();
             label7 = new Label();
@@ -57,9 +57,12 @@
             btnSearch = new Button();
             txtUserFullName = new TextBox();
             cboCopyId = new ComboBox();
+            groupBox3 = new GroupBox();
+            txtMemberName = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvLoans).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // dgvLoans
@@ -105,7 +108,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 11F);
-            label5.Location = new Point(1768, 286);
+            label5.Location = new Point(1678, 286);
             label5.Name = "label5";
             label5.Size = new Size(0, 45);
             label5.TabIndex = 65;
@@ -134,17 +137,18 @@
             label4.Font = new Font("Segoe UI", 11F);
             label4.Location = new Point(820, 267);
             label4.Name = "label4";
-            label4.Size = new Size(233, 45);
+            label4.Size = new Size(230, 45);
             label4.TabIndex = 72;
-            label4.Text = "Tên thành viên";
+            label4.Text = "Mã thành viên";
             // 
-            // cboMemberFullName
+            // cboMemberID
             // 
-            cboMemberFullName.FormattingEnabled = true;
-            cboMemberFullName.Location = new Point(1112, 262);
-            cboMemberFullName.Name = "cboMemberFullName";
-            cboMemberFullName.Size = new Size(450, 45);
-            cboMemberFullName.TabIndex = 73;
+            cboMemberID.FormattingEnabled = true;
+            cboMemberID.Location = new Point(1112, 262);
+            cboMemberID.Name = "cboMemberID";
+            cboMemberID.Size = new Size(450, 45);
+            cboMemberID.TabIndex = 73;
+            cboMemberID.SelectedIndexChanged += cboMemberID_SelectedIndexChanged;
             // 
             // dtpLoanDate
             // 
@@ -230,7 +234,7 @@
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(1690, 471);
+            txtSearch.Location = new Point(1684, 586);
             txtSearch.Multiline = true;
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(570, 47);
@@ -241,7 +245,7 @@
             btnRefresh.BackColor = Color.FromArgb(174, 160, 249);
             btnRefresh.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnRefresh.ForeColor = SystemColors.Control;
-            btnRefresh.Location = new Point(1231, 577);
+            btnRefresh.Location = new Point(1020, 570);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(201, 70);
             btnRefresh.TabIndex = 81;
@@ -254,7 +258,7 @@
             btnDelete.BackColor = Color.FromArgb(174, 160, 249);
             btnDelete.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnDelete.ForeColor = SystemColors.Control;
-            btnDelete.Location = new Point(914, 577);
+            btnDelete.Location = new Point(703, 570);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(201, 70);
             btnDelete.TabIndex = 80;
@@ -267,7 +271,7 @@
             btnUpdate.BackColor = Color.FromArgb(174, 160, 249);
             btnUpdate.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnUpdate.ForeColor = SystemColors.Control;
-            btnUpdate.Location = new Point(597, 577);
+            btnUpdate.Location = new Point(386, 570);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(201, 70);
             btnUpdate.TabIndex = 79;
@@ -280,7 +284,7 @@
             btnAdd.BackColor = Color.FromArgb(174, 160, 249);
             btnAdd.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnAdd.ForeColor = SystemColors.Control;
-            btnAdd.Location = new Point(280, 577);
+            btnAdd.Location = new Point(69, 570);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(201, 70);
             btnAdd.TabIndex = 78;
@@ -291,9 +295,9 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(txtNotes);
-            groupBox1.Location = new Point(1684, 209);
+            groupBox1.Location = new Point(1678, 318);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(576, 208);
+            groupBox1.Size = new Size(576, 200);
             groupBox1.TabIndex = 82;
             groupBox1.TabStop = false;
             groupBox1.Text = "Ghi chú";
@@ -309,7 +313,7 @@
             // groupBox2
             // 
             groupBox2.Controls.Add(txtTitle);
-            groupBox2.Location = new Point(1678, 118);
+            groupBox2.Location = new Point(1678, 107);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(582, 99);
             groupBox2.TabIndex = 83;
@@ -321,7 +325,7 @@
             btnSearch.BackColor = Color.FromArgb(174, 160, 249);
             btnSearch.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnSearch.ForeColor = SystemColors.Control;
-            btnSearch.Location = new Point(1902, 577);
+            btnSearch.Location = new Point(1330, 570);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(201, 70);
             btnSearch.TabIndex = 81;
@@ -346,6 +350,24 @@
             cboCopyId.TabIndex = 84;
             cboCopyId.SelectedIndexChanged += cboCopyId_SelectedIndexChanged;
             // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(txtMemberName);
+            groupBox3.Location = new Point(1678, 206);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(582, 106);
+            groupBox3.TabIndex = 82;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Tên thành viên";
+            // 
+            // txtMemberName
+            // 
+            txtMemberName.Location = new Point(6, 53);
+            txtMemberName.Multiline = true;
+            txtMemberName.Name = "txtMemberName";
+            txtMemberName.Size = new Size(570, 146);
+            txtMemberName.TabIndex = 0;
+            // 
             // LoanDashboardForm
             // 
             AutoScaleDimensions = new SizeF(15F, 37F);
@@ -354,6 +376,7 @@
             ClientSize = new Size(2272, 1321);
             Controls.Add(cboCopyId);
             Controls.Add(groupBox2);
+            Controls.Add(groupBox3);
             Controls.Add(groupBox1);
             Controls.Add(btnSearch);
             Controls.Add(btnRefresh);
@@ -368,7 +391,7 @@
             Controls.Add(dtpLoanDate);
             Controls.Add(label9);
             Controls.Add(cboStatus);
-            Controls.Add(cboMemberFullName);
+            Controls.Add(cboMemberID);
             Controls.Add(label11);
             Controls.Add(label4);
             Controls.Add(label6);
@@ -386,6 +409,8 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -400,7 +425,7 @@
         private TextBox txtTitle;
         private Label label6;
         private Label label4;
-        private ComboBox cboMemberFullName;
+        private ComboBox cboMemberID;
         private DateTimePicker dtpLoanDate;
         private Label label9;
         private Label label7;
@@ -421,5 +446,7 @@
         private Button btnSearch;
         private TextBox txtUserFullName;
         private ComboBox cboCopyId;
+        private GroupBox groupBox3;
+        private TextBox txtMemberName;
     }
 }

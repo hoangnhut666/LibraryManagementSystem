@@ -21,6 +21,19 @@ namespace BLL_Services.Services
             LoanValidator = new LoanValidator();
         }
 
+        //Auto generate a new Loan ID
+        public string GenerateNewLoanID()
+        {
+            try
+            {
+                return EntityRepository.GenerateId("Loans", "LoanID","LOAN");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while generating a new Loan ID.", ex);
+            }
+        }
+
         // Get all loans
         public List<Loan> GetAllLoans()
         {
@@ -66,6 +79,16 @@ namespace BLL_Services.Services
                 throw new ArgumentException("Column name and value cannot be null or empty.");
             }
             return LoanRepository.GetLoanViewModelsByCriteria(columnName, value);
+        }
+
+        //Search loans by search term
+        public List<LoanViewModel> SearchLoansBySearchTerm(string searchTerm)
+        {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                throw new ArgumentException("Search term cannot be null or empty.", nameof(searchTerm));
+            }
+            return LoanRepository.SearchLoans(searchTerm);
         }
 
 

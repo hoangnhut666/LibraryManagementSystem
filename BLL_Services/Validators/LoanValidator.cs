@@ -41,12 +41,6 @@ namespace BLL_Services.Validators
                 ErrorMessage = "Ngày đến hạn không được trước ngày mượn.";
                 return false;
             }
-            // If ReturnDate is set, check if it is not before LoanDate or DueDate
-            if (loan.ReturnDate.HasValue && (loan.ReturnDate < loan.LoanDate || loan.ReturnDate < loan.DueDate))
-            {
-                ErrorMessage = "Ngày trả không được trước ngày mượn hoặc ngày đến hạn.";
-                return false;
-            }
             return true;
         }
     }

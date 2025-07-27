@@ -49,7 +49,13 @@ namespace GUI_UI
 
             string? storedHash = SecurityService.GetStoredHashedPasswordWithUsername(username);
 
-            if (!SecurityService.VerifyPassword(storedHash, password))
+            if (storedHash == null)
+            {
+                MessageBox.Show("Tên đăng nhập không tồn tại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!SecurityService.VerifyPassword(password, storedHash))
             {
                 if (failedAttempts.ContainsKey(username))
                 {

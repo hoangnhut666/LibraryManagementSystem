@@ -44,10 +44,10 @@ namespace BLL_Services.Validators
                 return false;
             }
             var user = users.FirstOrDefault();
-            if (user != null && !user.IsActive)
+            if (user != null && user.IsActive == false)
             {
                 ErrorMessage = "Tài khoản của bạn đã bị khóa.";
-                return true;
+                return false;
             }
 
             ErrorMessage = string.Empty;

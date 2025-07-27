@@ -32,8 +32,7 @@ namespace GUI_UI
             InitializeComponent();
             SetupComponent(dgvLoans);
             LoadLoans();
-
-            txtUserFullName.Text = CurrentUser?.FullName ?? string.Empty;
+            txtTitle.Text = string.Empty;
         }
 
 
@@ -52,13 +51,13 @@ namespace GUI_UI
             cboStatus.SelectedIndex = -1;
 
             //Set up member combo box
-            cboMemberFullName.DataSource = MemberService.GetMembers();
-            cboMemberFullName.DisplayMember = "FullName";
-            cboMemberFullName.ValueMember = "MemberID";
-            cboMemberFullName.SelectedIndex = -1;
+            cboMemberID.DataSource = MemberService.GetMembers();
+            cboMemberID.DisplayMember = "MemberID";
+            cboMemberID.ValueMember = "MemberID";
+            cboMemberID.SelectedIndex = -1;
 
             cboCopyId.DataSource = BookCopyService.GetAllBookCopies();
-            cboCopyId.DisplayMember = "Barcode";
+            cboCopyId.DisplayMember = "CopyID";
             cboCopyId.ValueMember = "CopyID";
             cboCopyId.SelectedIndex = -1;
 
@@ -99,9 +98,9 @@ namespace GUI_UI
         {
             Loan loan = new Loan()
             {
-                LoanID = txtLoanId.Text,
-                CopyID = cboCopyId.SelectedValue?.ToString(),
-                MemberID = cboMemberFullName.SelectedValue?.ToString(),
+                LoanID = LoanService.GenerateNewLoanID(),
+                CopyID = cboCopyId.Text,
+                MemberID = cboMemberID.SelectedValue?.ToString(),
                 UserID = CurrentUser?.UserID,
                 LoanDate = dtpLoanDate.Value,
                 DueDate = dtpDueDate.Value,
@@ -109,6 +108,7 @@ namespace GUI_UI
                 Status = cboStatus.Text,
                 Notes = txtNotes.Text
             };
+
 
             try
             {
@@ -124,21 +124,68 @@ namespace GUI_UI
                     MessageBox.Show("Failed to add loan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("An error occurred while adding the loan. Please check your input and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                MessageBox.Show($"An error occurred while adding the loan: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            Loan loan = new Loan()
+            {
+                LoanID = txtLoanId.Text,
+                CopyID = cboCopyId.SelectedValue?.ToString(),
+                MemberID = cboMemberID.SelectedValue?.ToString(),
+                UserID = CurrentUser?.UserID,
+                LoanDate = dtpLoanDate.Value,
+                DueDate = dtpDueDate.Value,
+                ReturnDate = dtpReturnDate.Value,
+                Status = cboStatus.Text,
+                Notes = txtNotes.Text
+            };
 
+            try
+            {
+                int result = LoanService.UpdateLoan(loan);
+                if (result > 0)
+                {
+                    MessageBox.Show("Loan updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadLoans();
+                    ClearInputFields();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to update loan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while updating the loan: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            var loanId = txtLoanId.Text;
+            try
+            {
+                int result = LoanService.DeleteLoan(loanId);
+                if (result > 0)
+                {
+                    MessageBox.Show("Loan deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadLoans();
+                    ClearInputFields();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to delete loan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while deleting the loan: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -149,7 +196,29 @@ namespace GUI_UI
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-
+            string searchTerm = txtSearch.Text.Trim();
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                MessageBox.Show("Please enter a search term.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            try
+            {
+                List<LoanViewModel> searchResults = LoanService.SearchLoansBySearchTerm(searchTerm);
+                if (searchResults.Count > 0)
+                {
+                    dgvLoans.DataSource = searchResults;
+                }
+                else
+                {
+                    MessageBox.Show("No loans found matching the search criteria.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadLoans();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while searching for loans: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dtpLoanDate_ValueChanged(object sender, EventArgs e)
@@ -171,12 +240,15 @@ namespace GUI_UI
         {
             txtLoanId.Clear();
             cboCopyId.SelectedIndex = -1;
-            cboMemberFullName.SelectedIndex = -1;
+            cboMemberID.SelectedIndex = -1;
             dtpLoanDate.CustomFormat = " ";
             dtpDueDate.CustomFormat = " ";
             dtpReturnDate.CustomFormat = " ";
             cboStatus.SelectedIndex = -1;
             txtNotes.Clear();
+            txtTitle.Clear();
+            txtUserFullName.Clear();
+            txtSearch.Clear();
         }
 
         private void dgvLoans_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -188,7 +260,7 @@ namespace GUI_UI
                 var selectedLoan = LoanService.GetLoansByCriteria("LoanID", loanId).FirstOrDefault();
                 txtLoanId.Text = selectedRow.Cells["MaMuon"].Value?.ToString() ?? string.Empty;
                 cboCopyId.SelectedValue = selectedRow.Cells["MaBanSao"].Value?.ToString() ?? string.Empty;
-                cboMemberFullName.Text = selectedRow.Cells["TenDocGia"].Value?.ToString() ?? string.Empty;
+                cboMemberID.Text = selectedRow.Cells["MaThanhVien"].Value?.ToString() ?? string.Empty;
                 if (selectedLoan?.LoanDate != null)
                 {
                     dtpDueDate.CustomFormat = "dd/MM/yyyy";
@@ -225,48 +297,27 @@ namespace GUI_UI
 
         private void cboCopyId_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedBook = BookService.GetBooksByCriteria("CopyID", cboCopyId.SelectedValue?.ToString()).FirstOrDefault();
-            txtTitle.Text = selectedBook?.Title ?? string.Empty;
+            if (cboCopyId.SelectedItem is BookCopy selectedBookCopy)
+            {
+                var book = BookService.GetBooksByCriteria("BookID", selectedBookCopy.BookID).FirstOrDefault();
+                txtTitle.Text = book?.Title ?? string.Empty;
+            }
+            else
+            {
+                txtTitle.Clear();
+            }
+        }
+
+        private void cboMemberID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboMemberID.SelectedItem is Member selectedMember)
+            {
+                txtMemberName.Text = selectedMember.FullName ?? string.Empty;
+            }
+            else
+            {
+                txtMemberName.Clear();
+            }
         }
     }
 }
-
-//public class LoanViewModel
-//{
-//    public string? MaMuon { get; set; }
-//    public string? MaBanSao { get; set; }
-//    public string? TenSach { get; set; }
-//    public string? TenDocGia { get; set; }
-//    public string? TenNhanVien { get; set; }
-//    public DateTime NgayMuon { get; set; }
-//    public DateTime HanTra { get; set; }
-//    public DateTime? NgayTra { get; set; }
-//    public string? TrangThai { get; set; }
-//}
-
-
-//    private void dgvUserList_CellClick(object sender, DataGridViewCellEventArgs e)
-//{
-//    if (e.RowIndex >= 0)
-//    {
-//        var selectedRow = dgvUserList.Rows[e.RowIndex];
-//        var selectedUserId = selectedRow.Cells[0].Value?.ToString();
-
-//        if (!string.IsNullOrEmpty(selectedUserId))
-//        {
-//            var selectedUser = UserService.GetUserById(selectedUserId);
-//            txtUserId.Text = selectedUser.UserID;
-//            txtUserName.Text = selectedUser.Username;
-//            txtFullName.Text = selectedUser.FullName;
-//            txtPassword.Text = selectedUser.Password;
-//            txtConfirmPassword.Text = selectedUser.Password;
-//            txtEmail.Text = selectedUser.Email;
-//            cboRole.Text = selectedRow.Cells[2].Value?.ToString();
-//            chkIsActive.Checked = selectedUser.IsActive;
-//        }
-//        else
-//        {
-//            MessageBox.Show("The selected user ID is invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-//        }
-//    }
-//}

@@ -67,7 +67,8 @@ namespace DAL_Data
                     l.LoanID AS MaMuon,
                     l.CopyID AS MaBanSao,
                     b.Title AS TenSach,
-                    m.FullName AS TenDocGia,
+                    m.MemberID AS MaThanhVien,
+                    m.FullName AS TenThanhVien,
                     u.FullName AS TenNhanVien,
                     l.LoanDate AS NgayMuon,
                     l.DueDate AS HanTra,
@@ -86,7 +87,8 @@ namespace DAL_Data
                     MaMuon = reader["MaMuon"].ToString(),
                     MaBanSao = reader["MaBanSao"].ToString(),
                     TenSach = reader["TenSach"].ToString(),
-                    TenDocGia = reader["TenDocGia"].ToString(),
+                    MaThanhVien = reader["MaThanhVien"].ToString(),
+                    TenThanhVien = reader["TenThanhVien"].ToString(),
                     TenNhanVien = reader["TenNhanVien"].ToString(),
                     NgayMuon = (DateTime)reader["NgayMuon"],
                     HanTra = (DateTime)reader["HanTra"],
@@ -131,7 +133,7 @@ namespace DAL_Data
                     MaMuon = reader["MaMuon"].ToString(),
                     MaBanSao = reader["MaBanSao"].ToString(),
                     TenSach = reader["TenSach"].ToString(),
-                    TenDocGia = reader["TenDocGia"].ToString(),
+                    TenThanhVien = reader["TenDocGia"].ToString(),
                     TenNhanVien = reader["TenNhanVien"].ToString(),
                     NgayMuon = (DateTime)reader["NgayMuon"],
                     HanTra = (DateTime)reader["HanTra"],
@@ -140,6 +142,62 @@ namespace DAL_Data
                 };
             }, parameters);
 
+            return viewModels;
+        }
+
+        //Search loans by search term
+        public List<LoanViewModel> SearchLoans(string searchTerm)
+        {
+            string sql = @"
+                SELECT
+                    l.LoanID AS MaMuon,
+                    l.CopyID AS MaBanSao,
+                    b.Title AS TenSach,
+                    m.MemberID AS MaThanhVien,
+                    m.FullName AS TenThanhVien,
+                    u.FullName AS TenNhanVien,
+                    l.LoanDate AS NgayMuon,
+                    l.DueDate AS HanTra,
+                    l.ReturnDate AS NgayTra,
+                    l.Status AS TrangThai
+                FROM Loans l
+                JOIN Users u ON u.UserID = l.UserID
+                JOIN BookCopies bc ON bc.CopyID = l.CopyID
+                JOIN Books b ON b.BookID = bc.BookID
+                JOIN Members m ON m.MemberID = l.MemberID
+                WHERE 
+                    @SearchTerm IS NULL OR
+                    l.LoanID LIKE '%' + @SearchTerm + '%' OR
+                    b.Title LIKE '%' + @SearchTerm + '%' OR
+                    m.MemberID LIKE '%' + @SearchTerm + '%' OR
+                    m.FullName LIKE '%' + @SearchTerm + '%' OR
+                    u.FullName LIKE '%' + @SearchTerm + '%' OR
+                    CONVERT(NVARCHAR, l.LoanDate, 120) LIKE '%' + @SearchTerm + '%' OR
+                    CONVERT(NVARCHAR, l.DueDate, 120) LIKE '%' + @SearchTerm + '%' OR
+                    CONVERT(NVARCHAR, l.ReturnDate, 120) LIKE '%' + @SearchTerm + '%' OR
+                    l.Status LIKE '%' + @SearchTerm + '%'
+                ORDER BY 
+                    l.LoanID DESC";
+            var parameters = new SqlParameter[]
+            {
+                new SqlParameter("@SearchTerm", (object)searchTerm ?? DBNull.Value)
+            };
+            List<LoanViewModel> viewModels = Utilities.ExecuteQuery(sql, reader =>
+            {
+                return new LoanViewModel
+                {
+                    MaMuon = reader["MaMuon"].ToString(),
+                    MaBanSao = reader["MaBanSao"].ToString(),
+                    TenSach = reader["TenSach"].ToString(),
+                    MaThanhVien = reader["MaThanhVien"].ToString(),
+                    TenThanhVien = reader["TenThanhVien"].ToString(),
+                    TenNhanVien = reader["TenNhanVien"].ToString(),
+                    NgayMuon = (DateTime)reader["NgayMuon"],
+                    HanTra = (DateTime)reader["HanTra"],
+                    NgayTra = reader["NgayTra"] as DateTime?,
+                    TrangThai = reader["TrangThai"].ToString()
+                    };
+                }, parameters);
             return viewModels;
         }
 
@@ -202,3 +260,41 @@ namespace DAL_Data
         }
     }
 }
+
+
+//CREATE PROCEDURE SearchLoans
+//    @SearchTerm NVARCHAR(100) = NULL
+//AS
+//BEGIN
+//    SET NOCOUNT ON;
+//SELECT
+//        l.LoanID,
+//        l.CopyID,
+//        b.Title,
+//        m.MemberID,
+//        m.FullName,
+//        u.FullName,
+//        l.LoanDate,
+//        l.DueDate,
+//        l.ReturnDate,
+//        l.[Status]
+//    FROM
+//        Loans l
+//        JOIN Users u ON u.UserID = l.UserID
+//        JOIN BookCopies bc ON bc.CopyID = l.CopyID
+//        JOIN Books b ON b.BookID = bc.BookID
+//        JOIN Members m ON m.MemberID = l.MemberID
+//    WHERE 
+//        @SearchTerm IS NULL OR
+//        l.LoanID LIKE '%' + @SearchTerm + '%' OR
+//        b.Title LIKE '%' + @SearchTerm + '%' OR
+//        m.MemberID LIKE '%' + @SearchTerm + '%' OR
+//        m.FullName LIKE '%' + @SearchTerm + '%' OR
+//        u.FullName LIKE '%' + @SearchTerm + '%' OR
+//        l.LoanDate LIKE '%' + @SearchTerm + '%' OR
+//        l.DueDate LIKE '%' + @SearchTerm + '%' OR
+//        l.ReturnDate LIKE '%' + @SearchTerm + '%' OR
+//        l.[Status] LIKE '%' + @SearchTerm + '%'
+//    ORDER BY 
+//        l.LoanID DESC;
+//END;

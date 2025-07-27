@@ -59,7 +59,7 @@ namespace GUI_UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while loading users: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Đã xảy ra lỗi khi tải danh sách người dùng: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -72,12 +72,12 @@ namespace GUI_UI
                 dgvUserList.DataSource = searchResults;
                 if (searchResults.Count == 0)
                 {
-                    MessageBox.Show("No users found matching the search criteria.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Không tìm thấy người dùng phù hợp với tiêu chí tìm kiếm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while searching for users: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Đã xảy ra lỗi khi tìm kiếm người dùng: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -103,7 +103,7 @@ namespace GUI_UI
                 }
                 else
                 {
-                    MessageBox.Show("The selected user ID is invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("ID người dùng được chọn không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
@@ -137,14 +137,14 @@ namespace GUI_UI
         {
             if (txtConfirmPassword.Text != txtPassword.Text)
             {
-                MessageBox.Show("Passwords do not match. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Mật khẩu xác nhận không khớp. Vui lòng thử lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            User user = new User() { 
+            User user = new User()
+            {
                 UserID = UserService.GenerateUserID(),
                 Username = txtUserName.Text.Trim(),
-                //Password = txtPassword.Text.Trim(),
                 Password = SecurityService.HashPassword(txtPassword.Text.Trim()),
                 Email = txtEmail.Text.Trim(),
                 FullName = txtFullName.Text.Trim(),
@@ -152,24 +152,22 @@ namespace GUI_UI
                 IsActive = chkIsActive.Checked
             };
 
-            //Add user to the database
             try
             {
                 if (UserService.AddUser(user) > 0)
                 {
-                    MessageBox.Show("User added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Thêm người dùng thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadUserViewModels();
                     ClearInputFields();
                 }
                 else
                 {
-                    MessageBox.Show("Failed to add user. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Thêm người dùng thất bại. Vui lòng thử lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while adding the user: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                MessageBox.Show($"Đã xảy ra lỗi khi thêm người dùng: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -179,16 +177,14 @@ namespace GUI_UI
         {
             if (txtConfirmPassword.Text != txtPassword.Text)
             {
-                MessageBox.Show("Passwords do not match. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Mật khẩu xác nhận không khớp. Vui lòng thử lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            //Get user details from input fields
             User user = new User()
             {
                 UserID = txtUserId.Text.Trim(),
                 Username = txtUserName.Text.Trim(),
-                //Password = txtPassword.Text.Trim(),
                 Password = SecurityService.HashPassword(txtPassword.Text.Trim()),
                 Email = txtEmail.Text.Trim(),
                 FullName = txtFullName.Text.Trim(),
@@ -196,29 +192,28 @@ namespace GUI_UI
                 IsActive = chkIsActive.Checked
             };
 
-            //Update user in the database
             try
             {
                 if (UserService.UpdateUser(user) > 0)
                 {
-                    MessageBox.Show("User updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Cập nhật người dùng thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadUserViewModels();
                     ClearInputFields();
                 }
                 else
                 {
-                    MessageBox.Show("Failed to update user. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Cập nhật người dùng thất bại. Vui lòng thử lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while updating the user: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Đã xảy ra lỗi khi cập nhật người dùng: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to delete this user?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa người dùng này không?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 string userId = txtUserId.Text.Trim();
@@ -226,18 +221,18 @@ namespace GUI_UI
                 {
                     if (UserService.DeleteUser(userId) > 0)
                     {
-                        MessageBox.Show("User deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Xóa người dùng thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadUserViewModels();
                         ClearInputFields();
                     }
                     else
                     {
-                        MessageBox.Show("Failed to delete user. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Xóa người dùng thất bại. Vui lòng thử lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"An error occurred while deleting the user: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Đã xảy ra lỗi khi xóa người dùng: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

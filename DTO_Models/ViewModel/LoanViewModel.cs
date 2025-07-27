@@ -14,7 +14,8 @@ namespace DTO_Models.ViewModel
         public string? MaMuon { get; set; }
         public string? MaBanSao { get; set; }
         public string? TenSach { get; set; }
-        public string? TenDocGia { get; set; }
+        public string? MaThanhVien { get; set; }
+        public string? TenThanhVien { get; set; }
         public string? TenNhanVien { get; set; }
         public DateTime NgayMuon { get; set; }
         public DateTime HanTra { get; set; }
