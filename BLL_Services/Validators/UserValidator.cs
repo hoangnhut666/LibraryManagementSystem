@@ -46,12 +46,6 @@ namespace BLL_Services.Validators
                 return false;
             }
 
-            var existingUserWithTheSameEmail = UserRepository.GetUsersByCriteria("Email", user.Email);
-            if (existingUserWithTheSameEmail.Count > 0)
-            {
-                ErrorMessage = "Email đã được sử dụng bởi người dùng khác.";
-                return false;
-            }
 
             if (!Regex.IsMatch(user.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {

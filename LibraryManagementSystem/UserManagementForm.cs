@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BLL_Services.Services;
+using DAL_Data;
+using DTO_Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,8 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BLL_Services.Services;
-using DTO_Models;
 
 namespace GUI_UI
 {
@@ -151,6 +152,13 @@ namespace GUI_UI
                 RoleID = cboRole.SelectedValue?.ToString(),
                 IsActive = chkIsActive.Checked
             };
+
+            var existingUserWithTheSameEmail = UserService.SearchUsers("Email", user.Email);
+            if (existingUserWithTheSameEmail.Count > 0)
+            {
+                MessageBox.Show("Email đã được sử dụng bởi người dùng khác. Vui lòng nhập email khác.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             try
             {
