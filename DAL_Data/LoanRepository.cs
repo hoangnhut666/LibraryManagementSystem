@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using DBUTIL_Utilities;
 using DTO_Models;
 using Microsoft.Data.SqlClient;
+using System.Windows.Forms;
+using System.Data;
 
 namespace DAL_Data
 {
     public class LoanRepository
     {
+
         // Get all loans
         public List<Loan> GetAllLoans()
         {

@@ -8,10 +8,128 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace DAL_Data
 {
     public class BookRepository
     {
+        // GetBookInventoryStatus
+        public List<BookStatusReport> GetBookInventoryStatus()
+        {
+            string query = @"
+            SELECT b.BookID, b.Title,
+                CASE
+                    WHEN EXISTS (
+                        SELECT 1 FROM BookCopies bc
+                        LEFT JOIN Loans l ON bc.CopyID = l.CopyID
+                        WHERE bc.BookID = b.BookID AND l.ReturnDate IS NULL
+                    ) THEN N'Đang mượn'
+                    ELSE N'Có sẵn'
+                END AS Status
+            FROM Books b";
+
+            return Utilities.ExecuteQuery(query, reader => new BookStatusReport
+            {
+                BookID = reader["BookID"].ToString(),
+                Title = reader["Title"].ToString(),
+                Status = reader["Status"].ToString()
+            });
+        }
+
+        // GetTopReaders
+        public List<TopReaderReport> GetTopReaders()
+        {
+            string query = @"
+            SELECT TOP 10 m.MemberID, m.FullName, COUNT(*) AS BorrowCount
+            FROM Loans l
+            INNER JOIN Members m ON l.MemberID = m.MemberID
+            GROUP BY m.MemberID, m.FullName
+            ORDER BY BorrowCount DESC
+        ";
+
+            return Utilities.ExecuteQuery(query, reader => new TopReaderReport
+            {
+                MemberID = reader["MemberID"].ToString(),
+                FullName = reader["FullName"].ToString(),
+                BorrowCount = Convert.ToInt32(reader["BorrowCount"])
+            });
+        }
+
+        // GetTopBorrowedBooks
+        public List<TopBookReport> GetTopBorrowedBooks()
+        {
+            string query = @"
+            SELECT TOP 10 b.BookID, b.Title, COUNT(*) AS BorrowCount
+            FROM Loans l
+            INNER JOIN BookCopies bc ON l.CopyID = bc.CopyID
+            INNER JOIN Books b ON bc.BookID = b.BookID
+            GROUP BY b.BookID, b.Title
+            ORDER BY BorrowCount DESC";
+
+            return Utilities.ExecuteQuery(query, reader => new TopBookReport
+            {
+                BookID = reader["BookID"].ToString(),
+                Title = reader["Title"].ToString(),
+                BorrowCount = Convert.ToInt32(reader["BorrowCount"])
+            });
+        }
+
+        // GetBooksByDateRange theo stored procedure này:
+        public List<BookReport> GetBooksByDateRange(DateTime startDate, DateTime endDate)
+        {
+            string procedureName = "sp_GetBookStatusByDateRange";
+            var parameters = new SqlParameter[]
+            {
+                new SqlParameter("@FromDate", startDate),
+                new SqlParameter("@ToDate", endDate)
+            };
+
+            List<BookReport> bookReports = Utilities.ExecuteStoredProcedure(procedureName, reader =>
+            {
+                return new BookReport
+                {
+                    BookID = reader["BookID"].ToString(),
+                    BookTitle = reader["BookTitle"].ToString(),
+                    CategoryName = reader["CategoryName"].ToString(),
+                    AuthorName = reader["AuthorNames"].ToString(),  
+                    PublisherName = reader["PublisherName"].ToString(),
+                    Status = reader["Status"].ToString(),
+                    LoanDate = reader["LoanDate"] as DateTime? ?? DateTime.MinValue
+                };
+            }, parameters);
+
+            return bookReports;
+        }
+
+
+        //GetBooksByCategory
+        public List<Book> GetBooksByCategory(string categoryId)
+        {
+            string sql = $"SELECT * FROM Books WHERE CategoryID = @CategoryID";
+            var parameters = new SqlParameter[]
+            {
+                new SqlParameter("@CategoryID", categoryId ?? (object)DBNull.Value)
+            };
+            List<Book> books = Utilities.ExecuteQuery(sql, reader =>
+            {
+                return new Book
+                {
+                    BookID = reader["BookID"].ToString(),
+                    ISBN = reader["ISBN"].ToString(),
+                    Title = reader["Title"].ToString(),
+                    PublisherID = reader["PublisherID"].ToString(),
+                    PublicationYear = reader["PublicationYear"] as int?,
+                    CategoryID = reader["CategoryID"].ToString(),
+                    ShelfLocation = reader["ShelfLocation"].ToString(),
+                    NumberOfPages = reader["NumberOfPages"] as int?,
+                    Language = reader["Language"].ToString(),
+                    Description = reader["Description"].ToString(),
+                    CoverImage = reader["CoverImage"] as byte[]
+                };
+            }, parameters);
+            return books;
+        }
+
         //Get all books
         public List<Book> GetAllBooks()
         {
