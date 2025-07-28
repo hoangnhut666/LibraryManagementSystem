@@ -528,3 +528,60 @@ EXEC find_members
 
 
 
+CREATE PROCEDURE sp_GetBookStatusReport
+AS
+BEGIN
+    SELECT 
+        b.Title AS BookTitle,
+        c.Name AS CategoryName,
+        CASE 
+            WHEN l.ReturnDate IS NULL THEN N'Đang mượn'
+            ELSE N'Đã trả'
+        END AS Status
+    FROM Loans l
+    INNER JOIN BookCopies bc ON l.CopyID = bc.CopyID
+    INNER JOIN Books b ON bc.BookID = b.BookID
+    INNER JOIN Categories c ON b.CategoryID = c.CategoryID
+END
+
+
+ALTER PROCEDURE sp_GetBookStatusByDateRange
+    @FromDate DATE,
+    @ToDate DATE
+AS
+BEGIN
+    SELECT 
+        b.BookID,  
+        b.Title AS BookTitle,
+        STRING_AGG(a.FullName, ', ') AS AuthorNames,
+        p.Name AS PublisherName,
+        c.Name AS CategoryName,
+        CASE 
+            WHEN l.ReturnDate IS NULL THEN N'Đang mượn'
+            ELSE N'Đã trả'
+        END AS Status,
+        l.LoanDate
+    FROM Loans l
+    INNER JOIN BookCopies bc ON l.CopyID = bc.CopyID
+    INNER JOIN Books b ON bc.BookID = b.BookID
+    INNER JOIN Categories c ON b.CategoryID = c.CategoryID
+    INNER JOIN Publishers p ON b.PublisherID = p.PublisherID
+    INNER JOIN BookAuthors ba ON b.BookID = ba.BookID
+    INNER JOIN Authors a ON ba.AuthorID = a.AuthorID
+    WHERE l.LoanDate BETWEEN @FromDate AND @ToDate
+    GROUP BY 
+        b.BookID,                
+        b.Title, 
+        p.Name, 
+        c.Name, 
+        CASE WHEN l.ReturnDate IS NULL THEN N'Đang mượn' ELSE N'Đã trả' END,
+        l.LoanDate
+END
+
+
+SELECT TOP (@TopN) m.MemberID, m.FullName, COUNT(*) AS BorrowCount
+FROM Members m
+INNER JOIN Loans l ON m.MemberID = l.MemberID
+GROUP BY m.MemberID, m.FullName
+ORDER BY BorrowCount DESC
+
