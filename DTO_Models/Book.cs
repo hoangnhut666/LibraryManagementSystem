@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DBUTIL_Utilities;
 
 namespace DTO_Models
 {
@@ -19,5 +20,14 @@ namespace DTO_Models
         public string? Language { get; set; }
         public string? Description { get; set; }
         public byte[]? CoverImage { get; set; }
+
+        public string LoanDateString
+        {
+            get
+            {
+                return DBUTIL_Utilities.DateUtil.ToString(DateTime.Now, DBUTIL_Utilities.DateUtil.DatePattern.Date);
+            }
+        }
     }
+
 }
