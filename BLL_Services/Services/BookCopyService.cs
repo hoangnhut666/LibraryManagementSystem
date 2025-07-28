@@ -31,7 +31,7 @@ namespace BLL_Services.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while retrieving book copies.", ex);
+                throw new Exception("Đã xảy ra lỗi khi lấy danh sách bản sao sách.", ex);
             }
         }
 
@@ -47,7 +47,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
-                throw new ArgumentException("Search term cannot be null or empty.", nameof(searchTerm));
+                throw new ArgumentException("Từ khóa không được để trống.", nameof(searchTerm));
             }
             return BookCopyRepository.GetBookCopiesByStoredProcedure("SearchBookCopies", new SqlParameter("@SearchTerm", searchTerm));
         }
@@ -57,7 +57,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(columnName) || string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException("Column name and value cannot be null or empty.");
+                throw new ArgumentException("Tên cột và giá trị không được để trống.");
             }
             return BookCopyRepository.GetBookCopiesByCriteria(columnName, value);
         }
@@ -72,7 +72,7 @@ namespace BLL_Services.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while retrieving book copies view models.", ex);
+                throw new Exception("Đã xảy ra lỗi khi lấy danh sách mô hình bản sao sách.", ex);
             }
         }
 
@@ -82,7 +82,7 @@ namespace BLL_Services.Services
         {
             if (bookCopy == null)
             {
-                throw new ArgumentNullException(nameof(bookCopy), "Book copy cannot be null.");
+                throw new ArgumentNullException(nameof(bookCopy), "Bản sao sách không được để trống.");
             }
             if (!BookCopyValidator.IsValidBookCopy(bookCopy))
             {
@@ -98,7 +98,7 @@ namespace BLL_Services.Services
         {
             if (bookCopy == null)
             {
-                throw new ArgumentNullException(nameof(bookCopy), "Book copy cannot be null.");
+                throw new ArgumentNullException(nameof(bookCopy), "Bản sao sách không được để trống.");
             }
             if (!BookCopyValidator.IsValidBookCopy(bookCopy))
             {
@@ -113,7 +113,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(copyID))
             {
-                throw new ArgumentException("Copy ID cannot be null or empty.", nameof(copyID));
+                throw new ArgumentException("Mã bản sao không được để trống.", nameof(copyID));
             }
             return BookCopyRepository.Delete(copyID);
         }

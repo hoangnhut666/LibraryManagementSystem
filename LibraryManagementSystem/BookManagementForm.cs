@@ -1,6 +1,8 @@
 ﻿using BLL_Services;
 using BLL_Services.Services;
+using DAL_Data;
 using DTO_Models;
+using DTO_Models.ViewModel;
 using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DTO_Models.ViewModel;
 
 namespace GUI_UI
 {
@@ -108,7 +109,7 @@ namespace GUI_UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while loading books: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi đã xảy ra trong quá trình tải sách: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -122,7 +123,7 @@ namespace GUI_UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while loading book authors: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi đã xảy ra trong quá trình tải tác giả sách: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -147,23 +148,30 @@ namespace GUI_UI
                 CoverImage = pictureBoxCoverImage.Image != null ? ImageToByteArray(pictureBoxCoverImage.Image) : null
             };
 
-            //Add the book to the database
+            var existingBook = BookService.GetBooksByCriteria("ISBN", newBook.ISBN);
+            if (existingBook.Count > 0)
+            {
+                MessageBox.Show("Ấn bản với mã ISBN này đã tồn tại. Vui lòng nhập mã ISBN khác.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            
             try
             {
                 if (BookService.AddBook(newBook) > 0)
                 {
-                    MessageBox.Show("Book added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Thêm sách thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadBooks();
                     ClearBookInputFields();
                 }
                 else
                 {
-                    MessageBox.Show("Failed to add book. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Thêm sách thất bại. Vui lòng thử lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while adding the book: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi đã xảy ra trong quá trình thêm sách: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -194,18 +202,18 @@ namespace GUI_UI
             {
                 if (BookService.UpdateBook(newBook) > 0)
                 {
-                    MessageBox.Show("Book updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Cập nhật sách thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadBooks();
                     ClearBookInputFields();
                 }
                 else
                 {
-                    MessageBox.Show("Failed to update book. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Cập nhật sách thất bại. Vui lòng thử lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while updating the book: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi đã xảy ra trong quá trình cập nhật sách: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -217,28 +225,28 @@ namespace GUI_UI
                 string bookId = txtBookId.Text.Trim();
                 if (string.IsNullOrEmpty(bookId))
                 {
-                    MessageBox.Show("Please select a book to delete.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Vui lòng chọn một cuốn sách để xóa.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                DialogResult result = MessageBox.Show("Are you sure you want to delete this book?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa cuốn sách này không?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
                     // Delete the book from the database
                     if (BookService.DeleteBook(bookId) > 0)
                     {
-                        MessageBox.Show("Book deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Xóa sách thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadBooks();
                         ClearBookInputFields();
                     }
                     else
                     {
-                        MessageBox.Show("Failed to delete book. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Xóa sách thất bại. Vui lòng thử lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while deleting the book: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi đã xảy ra trong quá trình xóa sách: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -253,7 +261,7 @@ namespace GUI_UI
             string searchTerm = txtSearch.Text.Trim();
             if (string.IsNullOrEmpty(searchTerm))
             {
-                MessageBox.Show("Please enter a search term.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập từ khóa tìm kiếm.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -266,13 +274,13 @@ namespace GUI_UI
                 }
                 else
                 {
-                    MessageBox.Show("No books found matching the search term.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Không tìm thấy sách nào phù hợp với từ khóa tìm kiếm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadBooks();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while searching for books: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi đã xảy ra trong quá trình tìm kiếm sách: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -354,18 +362,18 @@ namespace GUI_UI
             {
                 if (BookAuthorsService.InsertBookAuthor(newBookAuthor) > 0)
             {
-                MessageBox.Show("Book-Author relationship added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Thêm mối quan hệ sách - tác giả thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LoadBookAuthors();
                 ClearBookAuthorInputFields();
             }
             else
             {
-                MessageBox.Show("Failed to add Book-Author relationship. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Thêm mối quan hệ sách - tác giả thất bại. Vui lòng thử lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while adding the Book-Author relationship: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi đã xảy ra trong quá trình thêm mối quan hệ sách - tác giả: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -383,18 +391,18 @@ namespace GUI_UI
             {
                 if (BookAuthorsService.UpdateBookAuthor(newBookAuthor) > 0)
                 {
-                    MessageBox.Show("Book-Author relationship updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Cập nhật mối quan hệ sách - tác giả thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadBookAuthors();
                     ClearBookAuthorInputFields();
                 }
                 else
                 {
-                    MessageBox.Show("Failed to update Book-Author relationship. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Cập nhật mối quan hệ sách - tác giả thất bại. Vui lòng thử lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while updating the Book-Author relationship: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi đã xảy ra trong quá trình cập nhật mối quan hệ sách - tác giả: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -403,24 +411,24 @@ namespace GUI_UI
             try
             {
                 string bookAuthorId = txtBookAuthorID.Text.Trim();
-                DialogResult result = MessageBox.Show("Are you sure you want to delete this Book-Author relationship?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa mối quan hệ sách - tác giả này không?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
                     if (BookAuthorsService.DeleteBookAuthor(bookAuthorId) > 0)
                     {
-                        MessageBox.Show("Book-Author relationship deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Xóa mối quan hệ sách - tác giả thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadBookAuthors();
                         ClearBookAuthorInputFields();
                     }
                     else
                     {
-                        MessageBox.Show("Failed to delete Book-Author relationship. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Xóa mối quan hệ sách - tác giả thất bại. Vui lòng thử lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while deleting the Book-Author relationship: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi đã xảy ra trong quá trình xóa mối quan hệ sách - tác giả: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

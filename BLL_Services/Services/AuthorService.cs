@@ -38,7 +38,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
-                throw new ArgumentException("Search term cannot be null or empty.", nameof(searchTerm));
+                throw new ArgumentException("Từ khóa không được để trống.", nameof(searchTerm));
             }
             return AuthorRepository.GetAuthorsByStoredProcedure("SearchAuthors", new SqlParameter("@SearchTerm", searchTerm));
         }
@@ -49,7 +49,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(bookID))
             {
-                throw new ArgumentException("Book ID cannot be null or empty.", nameof(bookID));
+                throw new ArgumentException("Mã sách không được để trống.", nameof(bookID));
             }
             return AuthorRepository.GetAuthorsByBookID(bookID);
         }
@@ -60,7 +60,7 @@ namespace BLL_Services.Services
         {
             if (author == null)
             {
-                throw new ArgumentNullException(nameof(author), "Author cannot be null.");
+                throw new ArgumentNullException(nameof(author), "Tác giả không được để trống.");
             }
 
 
@@ -77,7 +77,7 @@ namespace BLL_Services.Services
         {
             if (author == null)
             {
-                throw new ArgumentNullException(nameof(author), "Author cannot be null.");
+                throw new ArgumentNullException(nameof(author), "Tác giả không được để trống.");
             }
 
 
@@ -94,7 +94,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(authorID))
             {
-                throw new ArgumentException("Author ID cannot be null or empty.", nameof(authorID));
+                throw new ArgumentException("Mã tác giả không được để trống.", nameof(authorID));
             }
             return AuthorRepository.Delete(authorID);
         }

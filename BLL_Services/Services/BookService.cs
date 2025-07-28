@@ -37,7 +37,7 @@ namespace BLL_Services.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while retrieving books.", ex);
+                throw new Exception("Một lỗi đã xảy ra trong quá trình lấy danh sách sách.", ex);
             }
         }
 
@@ -46,7 +46,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(columnName) || string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException("Column name and value cannot be null or empty.");
+                throw new ArgumentException("Tên cột và giá trị không được để trống.");
             }
             return BookRepository.GetBooksByCriteria(columnName, value);
         }
@@ -56,7 +56,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
-                throw new ArgumentException("Search term cannot be null or empty.", nameof(searchTerm));
+                throw new ArgumentException("Thuật ngữ tìm kiếm không được để trống.", nameof(searchTerm));
             }
             return BookRepository.GetBooksByStoredProcedure("SearchBooks", new SqlParameter("@SearchTerm", searchTerm));
         }
@@ -67,7 +67,7 @@ namespace BLL_Services.Services
         {
             if (book == null)
             {
-                throw new ArgumentNullException(nameof(book), "Book cannot be null.");
+                throw new ArgumentNullException(nameof(book), "Sách không được để trống.");
             }
             if (!BookValidator.IsValidBook(book))
             {
@@ -81,7 +81,7 @@ namespace BLL_Services.Services
         {
             if (book == null)
             {
-                throw new ArgumentNullException(nameof(book), "Book cannot be null.");
+                throw new ArgumentNullException(nameof(book), "Sách không được để trống.");
             }
             if (!BookValidator.IsValidBook(book))
             {
@@ -96,7 +96,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(bookID))
             {
-                throw new ArgumentException("Book ID cannot be null or empty.", nameof(bookID));
+                throw new ArgumentException("ID sách không được để trống.", nameof(bookID));
             }
             return BookRepository.Delete(bookID);
         }
@@ -106,7 +106,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(bookID))
             {
-                throw new ArgumentException("Book ID cannot be null or empty.", nameof(bookID));
+                throw new ArgumentException("ID sách không được để trống.", nameof(bookID));
             }
             return BookRepository.GetBookCoverImage(bookID);
         }

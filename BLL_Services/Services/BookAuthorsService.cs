@@ -30,7 +30,7 @@ namespace BLL_Services.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while retrieving book authors.", ex);
+                throw new Exception("Đã xảy ra lỗi khi lấy danh sách tác giả sách.", ex);
             }
         }
 
@@ -39,7 +39,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(columnName) || string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException("Column name and value cannot be null or empty.");
+                throw new ArgumentException("Tên cột và giá trị không được để trống.");
             }
             try
             {
@@ -47,7 +47,7 @@ namespace BLL_Services.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"An error occurred while retrieving book authors by {columnName}.", ex);
+                throw new Exception($"Đã xảy ra lỗi khi lấy danh sách tác giả sách theo {columnName}.", ex);
             }
         }
 
@@ -61,7 +61,7 @@ namespace BLL_Services.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while retrieving book author view models.", ex);
+                throw new Exception("Đã xảy ra lỗi khi lấy danh sách mô hình tác giả sách.", ex);
             }
         }
 
@@ -70,7 +70,7 @@ namespace BLL_Services.Services
         {
             if (bookAuthor == null)
             {
-                throw new ArgumentNullException(nameof(bookAuthor), "Book author cannot be null.");
+                throw new ArgumentNullException(nameof(bookAuthor), "Mối quan hệ sách - tác giả không được để trống.");
             }
             if (!BookAuthorsValidator.IsValidBookAuthor(bookAuthor))
             {
@@ -85,7 +85,7 @@ namespace BLL_Services.Services
         {
             if (bookAuthor == null)
             {
-                throw new ArgumentNullException(nameof(bookAuthor), "Book author cannot be null.");
+                throw new ArgumentNullException(nameof(bookAuthor), "Mối quan hệ sách - tác giả không được để trống.");
             }
             if (!BookAuthorsValidator.IsValidBookAuthor(bookAuthor))
             {
@@ -99,7 +99,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(bookAuthorID))
             {
-                throw new ArgumentException("Book author ID cannot be null or empty.", nameof(bookAuthorID));
+                throw new ArgumentException("Mã tác giả sách không được để trống.", nameof(bookAuthorID));
             }
             return BookAuthorsRepository.Delete(bookAuthorID);
         }

@@ -19,21 +19,21 @@ namespace BLL_Services.Validators
             // Check if the book ID is not empty
             if (string.IsNullOrWhiteSpace(bookCopy.BookID))
             {
-                ErrorMessage = "Book ID cannot be empty.";
+                ErrorMessage = "Mã sách không được để trống.";
                 return false;
             }
 
             //Check if the date is not in the future
             if (bookCopy.PurchaseDate.HasValue && bookCopy.PurchaseDate.Value > DateTime.Now)
             {
-                ErrorMessage = "Purchase date cannot be in the future.";
+                ErrorMessage = "Ngày mua không được ở tương lai.";
                 return false;
             }
 
             // Check if the purchase price is not negative
             if (bookCopy.PurchasePrice.HasValue && bookCopy.PurchasePrice.Value < 0)
             {
-                ErrorMessage = "Purchase price cannot be negative.";
+                ErrorMessage = "Giá mua không được âm.";
                 return false;
             }
 
