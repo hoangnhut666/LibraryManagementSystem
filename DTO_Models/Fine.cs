@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace DTO_Models
 {
-    public class Fine
+    public class FineDTO
     {
-        public string? FineID { get; set; }          
-        public string? LoanID { get; set; }          
-        public decimal? Amount { get; set; }        
-        public DateTime? IssueDate { get; set; }     
-        public bool Paid { get; set; }               
-        public string? Reason { get; set; }           
+        public string FineID { get; set; }
+        public string LoanID { get; set; }
+        public decimal Amount { get; set; }
+        public DateTime IssueDate { get; set; }
+        public bool Paid { get; set; }
+        public string Reason { get; set; }
     }
 }

@@ -11,7 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DTO_Models.ViewModel;
 
 namespace GUI_UI
 {
@@ -62,26 +61,15 @@ namespace GUI_UI
             cboPublisherName.SelectedIndex = -1;
 
 
-            cboAuthorNameBookAuthorTab.DisplayMember = "FullName";
-            cboAuthorNameBookAuthorTab.ValueMember = "AuthorID";
-            cboAuthorNameBookAuthorTab.DataSource = AuthorService.GetAuthors();
-            cboAuthorNameBookAuthorTab.SelectedIndex = -1;
+            cboAuthorNameBookAuthor.DisplayMember = "FullName";
+            cboAuthorNameBookAuthor.ValueMember = "AuthorID";
+            cboAuthorNameBookAuthor.DataSource = AuthorService.GetAuthors();
+            cboAuthorNameBookAuthor.SelectedIndex = -1;
 
             cboTitleBookAuthor.DisplayMember = "Title";
             cboTitleBookAuthor.ValueMember = "BookID";
             cboTitleBookAuthor.DataSource = BookService.GetBooks();
             cboTitleBookAuthor.SelectedIndex = -1;
-
-            cboShelfLocation.DataSource = new List<string>
-            {
-                "A1", "A2", "A3", "A4", "A5",
-                "B1", "B2", "B3", "B4", "B5",
-                "C1", "C2", "C3", "C4", "C5",
-                "D1", "D2", "D3", "D4", "D5",
-                "E1", "E2", "E3", "E4", "E5"
-            };
-            cboShelfLocation.SelectedIndex = -1;
-
 
             // Set the TextBox properties
             txtDescription.Multiline = true;
@@ -117,7 +105,7 @@ namespace GUI_UI
         {
             try
             {
-                var bookAuthors = BookAuthorsService.GetBookAuthorViewModels();
+                var bookAuthors = BookAuthorsService.GetAllBookAuthors();
                 dgvBookAuthor.DataSource = bookAuthors;
             }
             catch (Exception ex)
@@ -140,7 +128,7 @@ namespace GUI_UI
                 PublisherID = cboPublisherName.SelectedValue != null ? cboPublisherName.SelectedValue.ToString() : null,
                 PublicationYear = int.TryParse(txtPublicationYear.Text, out publicationYear) ? publicationYear : (int?)null,
                 CategoryID = cboCategory.SelectedValue != null ? cboCategory.SelectedValue.ToString() : null,
-                ShelfLocation = cboShelfLocation.SelectedItem != null ? cboShelfLocation.SelectedItem.ToString() : null,
+                ShelfLocation = txtShelfLocation.Text,
                 NumberOfPages = int.TryParse(txtNumberOfPages.Text, out numberOfPages) ? numberOfPages : (int?)null,
                 Language = txtLanguage.Text,
                 Description = txtDescription.Text,
@@ -154,7 +142,7 @@ namespace GUI_UI
                 {
                     MessageBox.Show("Book added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadBooks();
-                    ClearBookInputFields();
+                    ClearInputFields();
                 }
                 else
                 {
@@ -182,7 +170,7 @@ namespace GUI_UI
                 PublisherID = cboPublisherName.SelectedValue != null ? cboPublisherName.SelectedValue.ToString() : null,
                 PublicationYear = int.TryParse(txtPublicationYear.Text, out publicationYear) ? publicationYear : (int?)null,
                 CategoryID = cboCategory.SelectedValue != null ? cboCategory.SelectedValue.ToString() : null,
-                ShelfLocation = cboShelfLocation.SelectedItem != null ? cboShelfLocation.SelectedItem.ToString() : null,
+                ShelfLocation = txtShelfLocation.Text,
                 NumberOfPages = int.TryParse(txtNumberOfPages.Text, out numberOfPages) ? numberOfPages : (int?)null,
                 Language = txtLanguage.Text,
                 Description = txtDescription.Text,
@@ -196,7 +184,7 @@ namespace GUI_UI
                 {
                     MessageBox.Show("Book updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadBooks();
-                    ClearBookInputFields();
+                    ClearInputFields();
                 }
                 else
                 {
@@ -228,7 +216,7 @@ namespace GUI_UI
                     {
                         MessageBox.Show("Book deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadBooks();
-                        ClearBookInputFields();
+                        ClearInputFields();
                     }
                     else
                     {
@@ -244,7 +232,7 @@ namespace GUI_UI
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            ClearBookInputFields();
+            ClearInputFields();
             LoadBooks();
         }
 
@@ -291,7 +279,7 @@ namespace GUI_UI
                 cboPublisherName.SelectedValue = selectedBook.PublisherID;
                 txtPublicationYear.Text = selectedBook.PublicationYear.HasValue ? selectedBook.PublicationYear.Value.ToString() : string.Empty;
                 cboCategory.SelectedValue = selectedBook.CategoryID;
-                cboShelfLocation.Text = selectedBook.ShelfLocation;
+                txtShelfLocation.Text = selectedBook.ShelfLocation;
                 txtNumberOfPages.Text = selectedBook.NumberOfPages.HasValue ? selectedBook.NumberOfPages.Value.ToString() : string.Empty;
                 txtLanguage.Text = selectedBook.Language;
                 txtDescription.Text = selectedBook.Description;
@@ -325,7 +313,7 @@ namespace GUI_UI
         }
 
 
-        private void ClearBookInputFields()
+        private void ClearInputFields()
         {
             txtBookId.Clear();
             txtTitle.Clear();
@@ -334,7 +322,7 @@ namespace GUI_UI
             cboPublisherName.SelectedIndex = -1;
             txtPublicationYear.Clear();
             cboCategory.SelectedIndex = -1;
-            cboShelfLocation.SelectedIndex = -1;
+            txtShelfLocation.Clear();
             txtNumberOfPages.Clear();
             txtLanguage.Clear();
             txtDescription.Clear();
@@ -343,133 +331,41 @@ namespace GUI_UI
 
         private void btnAddBookAuthor_Click(object sender, EventArgs e)
         {
-            BookAuthor newBookAuthor = new BookAuthor
-            {
-                BookID = txtBookIdBookAuthor.Text.Trim(),
-                AuthorID = txtAuthorIdBookAuthorTab.Text.Trim(),
-            };
-
-            //Insert the book author relationship into the database
-            try
-            {
-                if (BookAuthorsService.InsertBookAuthor(newBookAuthor) > 0)
-            {
-                MessageBox.Show("Book-Author relationship added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadBookAuthors();
-                ClearBookAuthorInputFields();
-            }
-            else
-            {
-                MessageBox.Show("Failed to add Book-Author relationship. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred while adding the Book-Author relationship: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //Get the selected author and book from the comboboxes
 
         }
 
         private void btnUpdateBookAuthor_Click(object sender, EventArgs e)
         {
-            BookAuthor newBookAuthor = new BookAuthor
-            {
-                BookAuthorID = int.Parse(txtBookAuthorID.Text),
-                BookID = txtBookIdBookAuthor.Text.Trim(),
-                AuthorID = txtAuthorIdBookAuthorTab.Text.Trim()
-            };
 
-            try
-            {
-                if (BookAuthorsService.UpdateBookAuthor(newBookAuthor) > 0)
-                {
-                    MessageBox.Show("Book-Author relationship updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadBookAuthors();
-                    ClearBookAuthorInputFields();
-                }
-                else
-                {
-                    MessageBox.Show("Failed to update Book-Author relationship. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred while updating the Book-Author relationship: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void btnDeleteBookAuthor_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string bookAuthorId = txtBookAuthorID.Text.Trim();
-                DialogResult result = MessageBox.Show("Are you sure you want to delete this Book-Author relationship?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.Yes)
-                {
-                    if (BookAuthorsService.DeleteBookAuthor(bookAuthorId) > 0)
-                    {
-                        MessageBox.Show("Book-Author relationship deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadBookAuthors();
-                        ClearBookAuthorInputFields();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Failed to delete Book-Author relationship. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred while deleting the Book-Author relationship: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
         }
 
         private void btnRefreshBookAuthor_Click(object sender, EventArgs e)
         {
-            ClearBookAuthorInputFields();
-            LoadBookAuthors();
+
         }
 
         private void dgvBookAuthor_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            var selectedRow = dgvBookAuthor.Rows[e.RowIndex];
-            if (selectedRow != null)
-            {
-                var selectedBookAuthor = (BookAuthorViewModel)selectedRow.DataBoundItem;
-                txtBookAuthorID.Text = selectedRow.Cells[0].Value.ToString();
-                cboTitleBookAuthor.SelectedValue = selectedBookAuthor.MaSach;
-                cboAuthorNameBookAuthorTab.SelectedValue = selectedBookAuthor.MaTacGia;
-                txtBookIdBookAuthor.Text = selectedBookAuthor.MaSach;
-                txtAuthorIdBookAuthorTab.Text = selectedBookAuthor.MaTacGia;
-            }
-            else
-            {
-                ClearBookAuthorInputFields();
-            }
-        }
 
-        private void ClearBookAuthorInputFields()
-        {
-            cboTitleBookAuthor.SelectedIndex = -1;
-            cboAuthorNameBookAuthorTab.SelectedIndex = -1;
-            txtBookIdBookAuthor.Clear();
-            txtAuthorIdBookAuthorTab.Clear();
-            txtBookAuthorID.Clear();
         }
 
         private void cboTitleBookAuthor_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtBookIdBookAuthor.Text = cboTitleBookAuthor.SelectedValue != null ? cboTitleBookAuthor.SelectedValue.ToString() : string.Empty;
-        }
-
-        private void cboAuthorNameBookAuthorTab_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            txtAuthorIdBookAuthorTab.Text = cboAuthorNameBookAuthorTab.SelectedValue != null ? cboAuthorNameBookAuthorTab.SelectedValue.ToString() : string.Empty;
-        }
-
-        private void tabPageBook_Click(object sender, EventArgs e)
-        {
-
+            if (cboTitleBookAuthor.SelectedItem is Book selectedBook)
+            {
+                txtBookIdBookAuthor.Text = selectedBook.BookID ?? "BOOK001";
+                //dgvBookAuthor.DataSource = BookAuthorsService.GetBookAuthorsByCriteria("BookID", txtBookIdBookAuthor.Text);
+            }
+            else
+            {
+                txtBookIdBookAuthor.Clear();
+            }
         }
     }
 }

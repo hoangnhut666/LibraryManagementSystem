@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BLL_Services.Services
 {
-
+    
     public class BookService
     {
         private BookRepository BookRepository { get; set; }
@@ -39,16 +39,6 @@ namespace BLL_Services.Services
             {
                 throw new Exception("An error occurred while retrieving books.", ex);
             }
-        }
-
-        // Get books by criteria
-        public List<Book> GetBooksByCriteria(string columnName, string? value)
-        {
-            if (string.IsNullOrWhiteSpace(columnName) || string.IsNullOrWhiteSpace(value))
-            {
-                throw new ArgumentException("Column name and value cannot be null or empty.");
-            }
-            return BookRepository.GetBooksByCriteria(columnName, value);
         }
 
         // Search books by stored procedure
@@ -100,17 +90,8 @@ namespace BLL_Services.Services
             }
             return BookRepository.Delete(bookID);
         }
-
-        //Get the book cover image with the given book ID
-        public byte[]? GetBookCoverImage(string bookID)
-        {
-            if (string.IsNullOrWhiteSpace(bookID))
-            {
-                throw new ArgumentException("Book ID cannot be null or empty.", nameof(bookID));
-            }
-            return BookRepository.GetBookCoverImage(bookID);
-        }
     }
 }
+
 
 

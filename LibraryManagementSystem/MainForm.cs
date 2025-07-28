@@ -1,5 +1,4 @@
-﻿using DTO_Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,56 +17,24 @@ namespace GUI_UI
             InitializeComponent();
             SetupComponent();
             timer1.Start();
-            InitializeUIBasedOnRole();
-            EmbedFormIntoPanel(new BookManagementForm());
         }
 
 
         private void SetupComponent()
         {
-            // Set the main form properties
+            //Set up Form
             StartPosition = FormStartPosition.CenterScreen;
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.Size = new Size(2400, 1600);
         }
 
-        private void InitializeUIBasedOnRole()
+
+        private void toolStripDropDownButton1_Click(object sender, EventArgs e)
         {
-            if (UserSession.CurrentUser == null)
-            {
-                Application.Exit();
-                return;
-            }
 
-
-            switch (UserSession.CurrentUser.RoleID)
-            {
-                case "ROLE001":
-                    SetupAdminUI();
-                    break;
-                case "ROLE002":
-                    SetupLibrarianUI();
-                    break;
-                default:
-                    MessageBox.Show("Unauthorized access", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Application.Exit();
-                    break;
-            }
         }
 
-        private void SetupAdminUI()
+        private void toolStripComboBox1_Click(object sender, EventArgs e)
         {
-            lblWelcome.Text = UserSession.CurrentUser.FullName != null
-                ? $"Xin chào,Quản trị viên {UserSession.CurrentUser.FullName} "
-                : "Xin chào!";
-        }
 
-        private void SetupLibrarianUI()
-        {
-            lblWelcome.Text = UserSession.CurrentUser.FullName != null
-                ? $"Xin chào,Thủ thư {UserSession.CurrentUser.FullName} "
-                : "Xin chào!";
-            ToolStripMenuItemUserManagement.Visible = false;
         }
 
         private void menuItemAuthorManagement_Click(object sender, EventArgs e)
@@ -82,13 +49,7 @@ namespace GUI_UI
             EmbedFormIntoPanel(bookManagementForm);
         }
 
-        private void menuItemBookCopiesManagement_Click(object sender, EventArgs e)
-        {
-            var bookCopiesManagementForm = new BookCopiesManagementForm();
-            EmbedFormIntoPanel(bookCopiesManagementForm);
-        }
-
-
+        //Embed another form into the panel of main screen
         private void EmbedFormIntoPanel(Form form)
         {
             // Dispose the old form if present
@@ -110,77 +71,5 @@ namespace GUI_UI
         {
             lblClock.Text = DateTime.Now.ToString("HH:mm:ss");
         }
-
-        private void ToolStripMenuItemLoanDashboard_Click(object sender, EventArgs e)
-        {
-            var loanDashboardForm = new LoanDashboardForm();
-            EmbedFormIntoPanel(loanDashboardForm);
-        }
-
-        private void ToolStripMenuItemUserManagement_Click(object sender, EventArgs e)
-        {
-            var userManagementForm = new UserManagementForm();
-            EmbedFormIntoPanel(userManagementForm);
-        }
-
-        private void ToolStripMenuItemFineManagement_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ToolStripMenuItemSupport_Click(object sender, EventArgs e)
-        {
-            var supportForm = new SupportForm();
-            EmbedFormIntoPanel(supportForm);
-        }
-
-        private void ToolStripMenuItemIntroduce_Click(object sender, EventArgs e)
-        {
-            var introduceForm = new IntroduceForm();
-            EmbedFormIntoPanel(introduceForm);
-        }
-
-        private void ToolStripMenuItemMemberManagement_Click(object sender, EventArgs e)
-        {
-            var memberManagementForm = new MemberManagementForm();
-            EmbedFormIntoPanel(memberManagementForm);
-        }
-
-        private void ToolStripMenuItemChangePassword_Click(object sender, EventArgs e)
-        {
-            using (var form = new ChangePasswordForm())
-            {
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    MessageBox.Show("Password changed successfully!", "Success",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-        }
-
-        private void ToolStripMenuItemRestart_Click(object sender, EventArgs e)
-        {
-            Application.Restart();
-        }
-
-        private void ToolStripMenuItemExit_Click_1(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void ToolStripMenuItemCategoryManagement_Click(object sender, EventArgs e)
-        {
-            var categoryManagementForm = new CategoryManagementForm();
-            EmbedFormIntoPanel(categoryManagementForm);
-        }
-
-        private void ToolStripMenuItemLogout_Click(object sender, EventArgs e)
-        {
-            Application.Restart();
-        }
-
-
-
-
     }
 }

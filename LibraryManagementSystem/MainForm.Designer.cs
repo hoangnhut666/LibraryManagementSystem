@@ -31,25 +31,21 @@
             components = new System.ComponentModel.Container();
             menuStrip1 = new MenuStrip();
             toolStripMenuItem1 = new ToolStripMenuItem();
-            ToolStripMenuItemChangePassword = new ToolStripMenuItem();
-            ToolStripMenuItemLogout = new ToolStripMenuItem();
-            ToolStripMenuItemRestart = new ToolStripMenuItem();
-            ToolStripMenuItemExit = new ToolStripMenuItem();
+            đổiToolStripMenuItem = new ToolStripMenuItem();
+            đăngXuấtToolStripMenuItem = new ToolStripMenuItem();
             quảnLýToolStripMenuItem = new ToolStripMenuItem();
-            ToolStripMenuItemCategoryManagement = new ToolStripMenuItem();
+            quảnLýThểLoạiSáchToolStripMenuItem = new ToolStripMenuItem();
             menuItemAuthorManagement = new ToolStripMenuItem();
             menuItemBookManagement = new ToolStripMenuItem();
-            ToolStripMenuItemMemberManagement = new ToolStripMenuItem();
-            ToolStripMenuItemLoanDashboard = new ToolStripMenuItem();
-            ToolStripMenuItemUserManagement = new ToolStripMenuItem();
-            ToolStripMenuItemFineManagement = new ToolStripMenuItem();
-            menuItemBookCopiesManagement = new ToolStripMenuItem();
+            quảnLýThànhViênToolStripMenuItem = new ToolStripMenuItem();
+            quảnLýMượnTrảToolStripMenuItem = new ToolStripMenuItem();
             báoCáoToolStripMenuItem = new ToolStripMenuItem();
             hỗTrợToolStripMenuItem = new ToolStripMenuItem();
-            ToolStripMenuItemSupport = new ToolStripMenuItem();
-            ToolStripMenuItemIntroduce = new ToolStripMenuItem();
+            trợGiúpToolStripMenuItem = new ToolStripMenuItem();
+            giớiThiệuToolStripMenuItem = new ToolStripMenuItem();
             panelMainContainer = new Panel();
-            lblWelcome = new Label();
+            label1 = new Label();
+            label2 = new Label();
             statusStrip1 = new StatusStrip();
             lblSystemInfo = new ToolStripStatusLabel();
             toolStripStatusLabel2 = new ToolStripStatusLabel();
@@ -62,7 +58,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(36, 36);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, quảnLýToolStripMenuItem, menuItemBookCopiesManagement, báoCáoToolStripMenuItem, hỗTrợToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, quảnLýToolStripMenuItem, báoCáoToolStripMenuItem, hỗTrợToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(2372, 47);
@@ -71,59 +67,40 @@
             // 
             // toolStripMenuItem1
             // 
-            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { ToolStripMenuItemChangePassword, ToolStripMenuItemLogout, ToolStripMenuItemRestart, ToolStripMenuItemExit });
+            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { đổiToolStripMenuItem, đăngXuấtToolStripMenuItem });
             toolStripMenuItem1.Image = Properties.Resources.user;
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new Size(208, 43);
             toolStripMenuItem1.Text = " Tài khoản  ";
             // 
-            // ToolStripMenuItemChangePassword
+            // đổiToolStripMenuItem
             // 
-            ToolStripMenuItemChangePassword.Image = Properties.Resources.reset_password;
-            ToolStripMenuItemChangePassword.Name = "ToolStripMenuItemChangePassword";
-            ToolStripMenuItemChangePassword.Size = new Size(326, 48);
-            ToolStripMenuItemChangePassword.Text = "Đổi mật khẩu";
-            ToolStripMenuItemChangePassword.Click += ToolStripMenuItemChangePassword_Click;
+            đổiToolStripMenuItem.Image = Properties.Resources.reset_password;
+            đổiToolStripMenuItem.Name = "đổiToolStripMenuItem";
+            đổiToolStripMenuItem.Size = new Size(326, 48);
+            đổiToolStripMenuItem.Text = "Đổi mật khẩu";
             // 
-            // ToolStripMenuItemLogout
+            // đăngXuấtToolStripMenuItem
             // 
-            ToolStripMenuItemLogout.Image = Properties.Resources.exit;
-            ToolStripMenuItemLogout.Name = "ToolStripMenuItemLogout";
-            ToolStripMenuItemLogout.Size = new Size(326, 48);
-            ToolStripMenuItemLogout.Text = "Đăng xuất";
-            ToolStripMenuItemLogout.Click += ToolStripMenuItemLogout_Click;
-            // 
-            // ToolStripMenuItemRestart
-            // 
-            ToolStripMenuItemRestart.Image = Properties.Resources.reloading;
-            ToolStripMenuItemRestart.Name = "ToolStripMenuItemRestart";
-            ToolStripMenuItemRestart.Size = new Size(326, 48);
-            ToolStripMenuItemRestart.Text = "Khởi động lại";
-            ToolStripMenuItemRestart.Click += ToolStripMenuItemRestart_Click;
-            // 
-            // ToolStripMenuItemExit
-            // 
-            ToolStripMenuItemExit.Image = Properties.Resources.exit1;
-            ToolStripMenuItemExit.Name = "ToolStripMenuItemExit";
-            ToolStripMenuItemExit.Size = new Size(326, 48);
-            ToolStripMenuItemExit.Text = "Thoát";
-            ToolStripMenuItemExit.Click += ToolStripMenuItemExit_Click_1;
+            đăngXuấtToolStripMenuItem.Image = Properties.Resources.exit;
+            đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
+            đăngXuấtToolStripMenuItem.Size = new Size(326, 48);
+            đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             // 
             // quảnLýToolStripMenuItem
             // 
-            quảnLýToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ToolStripMenuItemCategoryManagement, menuItemAuthorManagement, menuItemBookManagement, ToolStripMenuItemMemberManagement, ToolStripMenuItemLoanDashboard, ToolStripMenuItemUserManagement, ToolStripMenuItemFineManagement });
+            quảnLýToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { quảnLýThểLoạiSáchToolStripMenuItem, menuItemAuthorManagement, menuItemBookManagement, quảnLýThànhViênToolStripMenuItem, quảnLýMượnTrảToolStripMenuItem });
             quảnLýToolStripMenuItem.Image = Properties.Resources.project_manager;
             quảnLýToolStripMenuItem.Name = "quảnLýToolStripMenuItem";
             quảnLýToolStripMenuItem.Size = new Size(180, 43);
             quảnLýToolStripMenuItem.Text = "Quản lý  ";
             // 
-            // ToolStripMenuItemCategoryManagement
+            // quảnLýThểLoạiSáchToolStripMenuItem
             // 
-            ToolStripMenuItemCategoryManagement.Image = Properties.Resources.options;
-            ToolStripMenuItemCategoryManagement.Name = "ToolStripMenuItemCategoryManagement";
-            ToolStripMenuItemCategoryManagement.Size = new Size(413, 48);
-            ToolStripMenuItemCategoryManagement.Text = "Quản lý thể loại sách";
-            ToolStripMenuItemCategoryManagement.Click += ToolStripMenuItemCategoryManagement_Click;
+            quảnLýThểLoạiSáchToolStripMenuItem.Image = Properties.Resources.options;
+            quảnLýThểLoạiSáchToolStripMenuItem.Name = "quảnLýThểLoạiSáchToolStripMenuItem";
+            quảnLýThểLoạiSáchToolStripMenuItem.Size = new Size(413, 48);
+            quảnLýThểLoạiSáchToolStripMenuItem.Text = "Quản lý thể loại sách";
             // 
             // menuItemAuthorManagement
             // 
@@ -141,45 +118,19 @@
             menuItemBookManagement.Text = "Quản lý sách";
             menuItemBookManagement.Click += menuItemBookManagement_Click;
             // 
-            // ToolStripMenuItemMemberManagement
+            // quảnLýThànhViênToolStripMenuItem
             // 
-            ToolStripMenuItemMemberManagement.Image = Properties.Resources.member;
-            ToolStripMenuItemMemberManagement.Name = "ToolStripMenuItemMemberManagement";
-            ToolStripMenuItemMemberManagement.Size = new Size(413, 48);
-            ToolStripMenuItemMemberManagement.Text = "Quản lý thành viên";
-            ToolStripMenuItemMemberManagement.Click += ToolStripMenuItemMemberManagement_Click;
+            quảnLýThànhViênToolStripMenuItem.Image = Properties.Resources.member;
+            quảnLýThànhViênToolStripMenuItem.Name = "quảnLýThànhViênToolStripMenuItem";
+            quảnLýThànhViênToolStripMenuItem.Size = new Size(413, 48);
+            quảnLýThànhViênToolStripMenuItem.Text = "Quản lý thành viên";
             // 
-            // ToolStripMenuItemLoanDashboard
+            // quảnLýMượnTrảToolStripMenuItem
             // 
-            ToolStripMenuItemLoanDashboard.Image = Properties.Resources.cash_flow;
-            ToolStripMenuItemLoanDashboard.Name = "ToolStripMenuItemLoanDashboard";
-            ToolStripMenuItemLoanDashboard.Size = new Size(413, 48);
-            ToolStripMenuItemLoanDashboard.Text = "Quản lý mượn trả";
-            ToolStripMenuItemLoanDashboard.Click += ToolStripMenuItemLoanDashboard_Click;
-            // 
-            // ToolStripMenuItemUserManagement
-            // 
-            ToolStripMenuItemUserManagement.Image = Properties.Resources.librarian;
-            ToolStripMenuItemUserManagement.Name = "ToolStripMenuItemUserManagement";
-            ToolStripMenuItemUserManagement.Size = new Size(413, 48);
-            ToolStripMenuItemUserManagement.Text = "Quản lý người dùng";
-            ToolStripMenuItemUserManagement.Click += ToolStripMenuItemUserManagement_Click;
-            // 
-            // ToolStripMenuItemFineManagement
-            // 
-            ToolStripMenuItemFineManagement.Image = Properties.Resources.fine;
-            ToolStripMenuItemFineManagement.Name = "ToolStripMenuItemFineManagement";
-            ToolStripMenuItemFineManagement.Size = new Size(413, 48);
-            ToolStripMenuItemFineManagement.Text = "Quản lý khoản phạt";
-            ToolStripMenuItemFineManagement.Click += ToolStripMenuItemFineManagement_Click;
-            // 
-            // menuItemBookCopiesManagement
-            // 
-            menuItemBookCopiesManagement.Image = Properties.Resources.inventory;
-            menuItemBookCopiesManagement.Name = "menuItemBookCopiesManagement";
-            menuItemBookCopiesManagement.Size = new Size(228, 43);
-            menuItemBookCopiesManagement.Text = "Kiểm kê sách";
-            menuItemBookCopiesManagement.Click += menuItemBookCopiesManagement_Click;
+            quảnLýMượnTrảToolStripMenuItem.Image = Properties.Resources.cash_flow;
+            quảnLýMượnTrảToolStripMenuItem.Name = "quảnLýMượnTrảToolStripMenuItem";
+            quảnLýMượnTrảToolStripMenuItem.Size = new Size(413, 48);
+            quảnLýMượnTrảToolStripMenuItem.Text = "Quản lý mượn trả";
             // 
             // báoCáoToolStripMenuItem
             // 
@@ -190,27 +141,25 @@
             // 
             // hỗTrợToolStripMenuItem
             // 
-            hỗTrợToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ToolStripMenuItemSupport, ToolStripMenuItemIntroduce });
+            hỗTrợToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { trợGiúpToolStripMenuItem, giớiThiệuToolStripMenuItem });
             hỗTrợToolStripMenuItem.Image = Properties.Resources.help;
             hỗTrợToolStripMenuItem.Name = "hỗTrợToolStripMenuItem";
             hỗTrợToolStripMenuItem.Size = new Size(151, 43);
             hỗTrợToolStripMenuItem.Text = "Hỗ trợ";
             // 
-            // ToolStripMenuItemSupport
+            // trợGiúpToolStripMenuItem
             // 
-            ToolStripMenuItemSupport.Image = Properties.Resources.helping_hand;
-            ToolStripMenuItemSupport.Name = "ToolStripMenuItemSupport";
-            ToolStripMenuItemSupport.Size = new Size(283, 48);
-            ToolStripMenuItemSupport.Text = "Trợ giúp";
-            ToolStripMenuItemSupport.Click += ToolStripMenuItemSupport_Click;
+            trợGiúpToolStripMenuItem.Image = Properties.Resources.helping_hand;
+            trợGiúpToolStripMenuItem.Name = "trợGiúpToolStripMenuItem";
+            trợGiúpToolStripMenuItem.Size = new Size(283, 48);
+            trợGiúpToolStripMenuItem.Text = "Trợ giúp";
             // 
-            // ToolStripMenuItemIntroduce
+            // giớiThiệuToolStripMenuItem
             // 
-            ToolStripMenuItemIntroduce.Image = Properties.Resources.presentation;
-            ToolStripMenuItemIntroduce.Name = "ToolStripMenuItemIntroduce";
-            ToolStripMenuItemIntroduce.Size = new Size(283, 48);
-            ToolStripMenuItemIntroduce.Text = "Giới thiệu";
-            ToolStripMenuItemIntroduce.Click += ToolStripMenuItemIntroduce_Click;
+            giớiThiệuToolStripMenuItem.Image = Properties.Resources.presentation;
+            giớiThiệuToolStripMenuItem.Name = "giớiThiệuToolStripMenuItem";
+            giớiThiệuToolStripMenuItem.Size = new Size(283, 48);
+            giớiThiệuToolStripMenuItem.Text = "Giới thiệu";
             // 
             // panelMainContainer
             // 
@@ -219,15 +168,25 @@
             panelMainContainer.Size = new Size(2300, 1390);
             panelMainContainer.TabIndex = 1;
             // 
-            // lblWelcome
+            // label1
             // 
-            lblWelcome.AutoSize = true;
-            lblWelcome.Font = new Font("Segoe UI", 11F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblWelcome.Location = new Point(1639, 12);
-            lblWelcome.Name = "lblWelcome";
-            lblWelcome.Size = new Size(170, 45);
-            lblWelcome.TabIndex = 0;
-            lblWelcome.Text = "Chào bạn!";
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 11F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            label1.Location = new Point(1771, 12);
+            label1.Name = "label1";
+            label1.Size = new Size(170, 45);
+            label1.TabIndex = 0;
+            label1.Text = "Chào bạn!";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(1954, 12);
+            label2.Name = "label2";
+            label2.Size = new Size(119, 45);
+            label2.TabIndex = 0;
+            label2.Text = "Admin";
             // 
             // statusStrip1
             // 
@@ -271,8 +230,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2372, 1524);
             Controls.Add(statusStrip1);
+            Controls.Add(label2);
             Controls.Add(panelMainContainer);
-            Controls.Add(lblWelcome);
+            Controls.Add(label1);
             Controls.Add(menuStrip1);
             Name = "MainForm";
             Text = "Trang chủ";
@@ -289,28 +249,24 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem toolStripMenuItem1;
         private ToolStripMenuItem quảnLýToolStripMenuItem;
-        private ToolStripMenuItem ToolStripMenuItemCategoryManagement;
+        private ToolStripMenuItem quảnLýThểLoạiSáchToolStripMenuItem;
         private ToolStripMenuItem menuItemAuthorManagement;
         private ToolStripMenuItem menuItemBookManagement;
-        private ToolStripMenuItem ToolStripMenuItemMemberManagement;
-        private ToolStripMenuItem ToolStripMenuItemLoanDashboard;
+        private ToolStripMenuItem quảnLýThànhViênToolStripMenuItem;
+        private ToolStripMenuItem quảnLýMượnTrảToolStripMenuItem;
         private ToolStripMenuItem báoCáoToolStripMenuItem;
         private Panel panelMainContainer;
-        private Label lblWelcome;
-        private ToolStripMenuItem ToolStripMenuItemChangePassword;
-        private ToolStripMenuItem ToolStripMenuItemLogout;
+        private Label label1;
+        private Label label2;
+        private ToolStripMenuItem đổiToolStripMenuItem;
+        private ToolStripMenuItem đăngXuấtToolStripMenuItem;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel lblSystemInfo;
         private ToolStripStatusLabel toolStripStatusLabel2;
         private ToolStripStatusLabel lblClock;
         private ToolStripMenuItem hỗTrợToolStripMenuItem;
-        private ToolStripMenuItem ToolStripMenuItemSupport;
-        private ToolStripMenuItem ToolStripMenuItemIntroduce;
+        private ToolStripMenuItem trợGiúpToolStripMenuItem;
+        private ToolStripMenuItem giớiThiệuToolStripMenuItem;
         private System.Windows.Forms.Timer timer1;
-        private ToolStripMenuItem menuItemBookCopiesManagement;
-        private ToolStripMenuItem ToolStripMenuItemUserManagement;
-        private ToolStripMenuItem ToolStripMenuItemFineManagement;
-        private ToolStripMenuItem ToolStripMenuItemRestart;
-        private ToolStripMenuItem ToolStripMenuItemExit;
     }
 }

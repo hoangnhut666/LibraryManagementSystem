@@ -14,7 +14,7 @@ namespace DAL_Data
         //Get all members
         public List<Member> GetAllMembers()
         {
-            string sql = $"SELECT * FROM Members ORDER BY MemberID DESC";
+            string sql = $"SELECT * FROM Members";
             List<Member> members = Utilities.ExecuteQuery(sql, reader =>
             {
                 return new Member
@@ -34,15 +34,10 @@ namespace DAL_Data
 
         }
 
-
-        //Get member by criteria
-        public List<Member> GetMembersByCriteria(string columnName, string value)
+        // Get members by criteria
+        public List<Member> GetMembers()
         {
-            string sql = $"SELECT * FROM Members WHERE {columnName} = @Value";
-            var parameters = new SqlParameter[]
-            {
-                new SqlParameter("@Value", value)
-            };
+            string sql = $"SELECT * FROM Members";
             List<Member> members = Utilities.ExecuteQuery(sql, reader =>
             {
                 return new Member
@@ -57,50 +52,9 @@ namespace DAL_Data
                     Status = reader["Status"].ToString(),
                     Photo = reader["Photo"] as byte[]
                 };
-            }, parameters);
+            });
             return members;
         }
-
-        //Search members by search term
-        public List<Member> SearchMembers(string searchTerm)
-        {
-            string sql = @"
-            SELECT *
-            FROM Members m
-            WHERE 
-                @SearchTerm IS NULL OR
-                m.MemberID LIKE '%' + @SearchTerm + '%' OR
-                CAST(m.DateOfBirth AS NVARCHAR) LIKE '%' + @SearchTerm + '%' OR
-                m.FullName LIKE '%' + @SearchTerm + '%' OR
-                m.Email LIKE '%' + @SearchTerm + '%' OR
-                m.Phone LIKE '%' + @SearchTerm + '%' OR
-                m.Address LIKE '%' + @SearchTerm + '%'
-            ORDER BY m.MemberID DESC";
-
-            var parameters = new SqlParameter[]
-            {
-                new SqlParameter("@SearchTerm", string.IsNullOrEmpty(searchTerm) ? (object)DBNull.Value : searchTerm)
-            };
-
-            List<Member> members = Utilities.ExecuteQuery(sql, reader =>
-            {
-                return new Member
-                {
-                    MemberID = reader["MemberID"].ToString(),
-                    FullName = reader["FullName"].ToString(),
-                    Email = reader["Email"] as string,
-                    Phone = reader["Phone"] as string,
-                    Address = reader["Address"] as string,
-                    DateOfBirth = reader["DateOfBirth"] as DateTime?,
-                    JoinDate = (DateTime)reader["JoinDate"],
-                    Status = reader["Status"].ToString(),
-                    Photo = reader["Photo"] as byte[]
-                };
-            }, parameters);
-
-            return members;
-        }
-
 
 
         // Insert a new member
@@ -154,12 +108,12 @@ namespace DAL_Data
 
 
         // Delete a member
-        public int Delete(string memberId)
+        public int Delete(Member member)
         {
             string sql = $"DELETE FROM Members WHERE MemberID = @MemberID";
             var parameters = new SqlParameter[]
             {
-                new SqlParameter("@MemberID", memberId)
+                new SqlParameter("@MemberID", member.MemberID)
             };
             return Utilities.ExecuteNonQuery(sql, parameters);
         }

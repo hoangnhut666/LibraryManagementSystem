@@ -1,6 +1,5 @@
 ﻿using DBUTIL_Utilities;
 using DTO_Models;
-using DTO_Models.ViewModel;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -147,17 +146,6 @@ namespace DAL_Data
                 new SqlParameter("@BookID", bookID ?? (object)DBNull.Value)
             };
             return Utilities.ExecuteNonQuery(sql, parameters);
-        }
-
-        //Get book cover image by BookID
-        public byte[]? GetBookCoverImage(string bookID)
-        {
-            string sql = $"SELECT CoverImage FROM Books WHERE BookID = @BookID";
-            var parameters = new SqlParameter[]
-            {
-                new SqlParameter("@BookID", bookID ?? (object)DBNull.Value)
-            };
-            return Utilities.ExecuteScalar(sql, parameters) as byte[];
         }
     }
 

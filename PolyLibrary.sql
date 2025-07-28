@@ -19,14 +19,13 @@ CREATE TABLE Users
 (
     [UserID] VARCHAR(10) PRIMARY KEY,
     [Username] VARCHAR(50) UNIQUE NOT NULL,
-    [Password] VARCHAR(255) NOT NULL,
+    [Password] VARCHAR(50) NOT NULL,
     [Email] VARCHAR(100) UNIQUE NOT NULL,
     [FullName] NVARCHAR(100),
     [RoleID] VARCHAR(10) NOT NULL,
     [IsActive] BIT DEFAULT 1,
     FOREIGN KEY (RoleID) REFERENCES Roles(RoleID)
 );
-
 
 CREATE TABLE Publishers
 (
@@ -152,7 +151,7 @@ VALUES
 INSERT INTO Users
     ([UserID], [Username], [Password], [Email], [FullName], [RoleID], [IsActive])
 VALUES
-    ('USER001', 'admin', 'admin123', 'admin@polylibrary.com', N'Trần Ngọc Hà', 'ROLE001', 1),
+    ('USER001', 'admin', 'admin123', 'admin@polylibrary.com', N'Quản Trị Viên', 'ROLE001', 1),
     ('USER002', 'thuthu01', 'thuthu123', 'thuthu01@polylibrary.com', N'Nguyễn Thị Hoa', 'ROLE002', 1),
     ('USER003', 'nhanvien01', 'nhanvien123', 'nhanvien01@polylibrary.com', N'Trần Văn Long', 'ROLE002', 1),
     ('USER004', 'annguyen', 'annguyen123', 'an.nguyen@example.com', N'Nguyễn Văn An', 'ROLE003', 1),
@@ -345,23 +344,23 @@ VALUES
 
 
 INSERT INTO Loans
-    ([LoanID], [CopyID], [MemberID], [UserID],[LoanDate], [DueDate], [ReturnDate], [Status], [Notes])
+    ([LoanID], [CopyID], [MemberID], [LoanDate], [DueDate], [ReturnDate], [Status], [Notes])
 VALUES
-    ('LOAN001', 'COPY002', 'MEM001', 'USER001', '2024-06-20 10:00:00', '2024-07-04 10:00:00', NULL, N'Đang mượn', NULL),
-    ('LOAN002', 'COPY006', 'MEM003', 'USER002', '2024-06-25 11:30:00', '2024-07-09 11:30:00', NULL, N'Đang mượn', NULL),
-    ('LOAN003', 'COPY010', 'MEM005', 'USER003', '2024-06-28 14:00:00', '2024-07-12 14:00:00', NULL, N'Đang mượn', NULL),
-    ('LOAN004', 'COPY014', 'MEM007', 'USER004', '2024-07-01 09:00:00', '2024-07-15 09:00:00', NULL, N'Đang mượn', NULL),
-    ('LOAN005', 'COPY001', 'MEM002', 'USER005', '2024-05-01 10:00:00', '2024-05-15 10:00:00', '2024-05-14 16:00:00', N'Đã trả', NULL),
-    ('LOAN006', 'COPY003', 'MEM004', 'USER006', '2024-05-10 14:00:00', '2024-05-24 14:00:00', '2024-05-25 09:00:00', N'Quá hạn', N'Trả muộn 1 ngày'),
-    ('LOAN007', 'COPY004', 'MEM006', 'USER007', '2024-06-01 16:00:00', '2024-06-15 16:00:00', '2024-06-15 15:30:00', N'Đã trả', NULL),
-    ('LOAN008', 'COPY005', 'MEM008', 'USER008', '2024-06-05 09:30:00', '2024-06-19 09:30:00', '2024-06-19 09:30:00', N'Đã trả', NULL),
-    ('LOAN009', 'COPY007', 'MEM009', 'USER009', '2024-06-10 11:00:00', '2024-06-24 11:00:00', '2024-06-23 10:00:00', N'Đã trả', NULL),
-    ('LOAN010', 'COPY008', 'MEM010', 'USER010', '2024-06-15 13:00:00', '2024-06-29 13:00:00', NULL, N'Đang mượn', NULL),
-    ('LOAN011', 'COPY009', 'MEM011', 'USER011', '2024-06-18 15:00:00', '2024-07-02 15:00:00', NULL, N'Đang mượn', NULL),
-    ('LOAN012', 'COPY011', 'MEM012', 'USER012', '2024-06-22 10:30:00', '2024-07-06 10:30:00', NULL, N'Đang mượn', NULL),
-    ('LOAN013', 'COPY012', 'MEM013', 'USER013', '2024-06-27 08:00:00', '2024-07-11 08:00:00', NULL, N'Đang mượn', NULL),
-    ('LOAN014', 'COPY013', 'MEM014', 'USER014', '2024-06-30 14:30:00', '2024-07-14 14:30:00', NULL, N'Đang mượn', NULL),
-    ('LOAN015', 'COPY015', 'MEM015', 'USER015', '2024-07-03 16:00:00', '2024-07-17 16:00:00', NULL, N'Đang mượn', NULL);
+    ('LOAN001', 'COPY002', 'MEM001', '2024-06-20 10:00:00', '2024-07-04 10:00:00', NULL, N'Đang mượn', NULL),
+    ('LOAN002', 'COPY006', 'MEM003', '2024-06-25 11:30:00', '2024-07-09 11:30:00', NULL, N'Đang mượn', NULL),
+    ('LOAN003', 'COPY010', 'MEM005', '2024-06-28 14:00:00', '2024-07-12 14:00:00', NULL, N'Đang mượn', NULL),
+    ('LOAN004', 'COPY014', 'MEM007', '2024-07-01 09:00:00', '2024-07-15 09:00:00', NULL, N'Đang mượn', NULL),
+    ('LOAN005', 'COPY001', 'MEM002', '2024-05-01 10:00:00', '2024-05-15 10:00:00', '2024-05-14 16:00:00', N'Đã trả', NULL),
+    ('LOAN006', 'COPY003', 'MEM004', '2024-05-10 14:00:00', '2024-05-24 14:00:00', '2024-05-25 09:00:00', N'Quá hạn', N'Trả muộn 1 ngày'),
+    ('LOAN007', 'COPY004', 'MEM006', '2024-06-01 16:00:00', '2024-06-15 16:00:00', '2024-06-15 15:30:00', N'Đã trả', NULL),
+    ('LOAN008', 'COPY005', 'MEM008', '2024-06-05 09:30:00', '2024-06-19 09:30:00', '2024-06-19 09:30:00', N'Đã trả', NULL),
+    ('LOAN009', 'COPY007', 'MEM009', '2024-06-10 11:00:00', '2024-06-24 11:00:00', '2024-06-23 10:00:00', N'Đã trả', NULL),
+    ('LOAN010', 'COPY008', 'MEM010', '2024-06-15 13:00:00', '2024-06-29 13:00:00', NULL, N'Đang mượn', NULL),
+    ('LOAN011', 'COPY009', 'MEM011', '2024-06-18 15:00:00', '2024-07-02 15:00:00', NULL, N'Đang mượn', NULL),
+    ('LOAN012', 'COPY011', 'MEM012', '2024-06-22 10:30:00', '2024-07-06 10:30:00', NULL, N'Đang mượn', NULL),
+    ('LOAN013', 'COPY012', 'MEM013', '2024-06-27 08:00:00', '2024-07-11 08:00:00', NULL, N'Đang mượn', NULL),
+    ('LOAN014', 'COPY013', 'MEM014', '2024-06-30 14:30:00', '2024-07-14 14:30:00', NULL, N'Đang mượn', NULL),
+    ('LOAN015', 'COPY015', 'MEM015', '2024-07-03 16:00:00', '2024-07-17 16:00:00', NULL, N'Đang mượn', NULL);
 
 
 INSERT INTO Fines
@@ -479,156 +478,4 @@ SELECT a.*
 FROM Authors a
     JOIN BookAuthors ba ON a.AuthorID = ba.AuthorID
 WHERE ba.BookID = 'BOOK014'
-GO
 
-
-CREATE PROCEDURE SearchBookCopies
-    @SearchTerm NVARCHAR(100) = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT DISTINCT
-        bc.CopyID,
-        b.Title
-    FROM
-        Books b
-        LEFT JOIN Publishers p ON b.PublisherID = p.PublisherID
-        LEFT JOIN Categories c ON b.CategoryID = c.CategoryID
-        LEFT JOIN BookAuthors ba ON b.BookID = ba.BookID
-        LEFT JOIN Authors a ON ba.AuthorID = a.AuthorID
-        LEFT JOIN BookCopies bc ON bc.BookID = b.BookID
-        
-
-    WHERE 
-        @SearchTerm IS NULL OR
-        b.BookID LIKE '%' + @SearchTerm + '%' OR
-        b.Title LIKE '%' + @SearchTerm + '%' OR
-        b.ISBN LIKE '%' + @SearchTerm + '%' OR
-        a.FullName LIKE '%' + @SearchTerm + '%' OR
-        c.Name LIKE '%' + @SearchTerm + '%' OR
-        p.Name LIKE '%' + @SearchTerm + '%' OR
-        bc.CopyID LIKE '%' + @SearchTerm + '%' OR
-        bc.Barcode LIKE '%' + @SearchTerm + '%'
-
-    GROUP BY
-        bc.CopyID,
-        b.Title
-    ORDER BY 
-        b.Title;
-END;
-
-EXEC SearchBookCopies N'Dế Mèn';
-EXEC SearchBookCopies N'kim đồng';
-EXEC SearchBookCopies N'Tô Hoài';
-
-
-SELECT 
-    ba.BookAuthorID,
-    ba.BookID,
-    b.Title,
-    ba.AuthorID,
-    a.FullName
-FROM BookAuthors ba
-JOIN Authors a ON a.AuthorID = ba.AuthorID
-JOIN Books b ON b.BookID = ba.BookID
-ORDER BY ba.BookAuthorID DESC
-GO
-
-SELECT  
-    l.LoanID,
-    l.CopyID,
-    b.Title,
-    m.FullName,
-    u.FullName,
-    l.LoanDate,
-    l.DueDate,
-    l.ReturnDate,
-    l.Status
-FROM Loans l
-JOIN BookCopies bc ON bc.CopyID = l.CopyID
-JOIN Books b ON b.BookID = bc.BookID
-JOIN Members m ON m.MemberID = l.MemberID
-LEFT JOIN Users u ON u.UserID = l.UserID;
-
-
-SELECT 
-    u.UserID,
-    u.FullName,
-    r.RoleName
-FROM Users u
-JOIN Roles r ON r.RoleID = u.RoleID
-GO
-
-CREATE PROCEDURE SearchUsers
-@SearchTerm NVARCHAR(100) = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT 
-        u.UserID,
-        u.FullName,
-        r.RoleName
-    FROM Users u
-    JOIN Roles r ON r.RoleID = u.RoleID
-    WHERE 
-        @SearchTerm IS NULL OR
-        u.UserID LIKE '%' + @SearchTerm + '%' OR
-        u.FullName LIKE '%' + @SearchTerm + '%' OR
-        r.RoleName LIKE '%' + @SearchTerm + '%' OR
-        u.Email LIKE '%' + @SearchTerm + '%' OR
-        u.Username LIKE '%' + @SearchTerm + '%'
-    ORDER BY u.UserID DESC;
-END;
-
-EXEC SearchUsers N'USER001';
-EXEC SearchUsers N'Thủ thư';
-EXEC SearchUsers N'Nguyễn';
-GO
-
-
-CREATE PROCEDURE SearchMembers
-    @SearchTerm NVARCHAR(100) = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-    SELECT *
-    FROM
-        Members m
-    WHERE 
-        @SearchTerm IS NULL OR
-        m.MemberID LIKE '%' + @SearchTerm + '%' OR
-        m.DateOfBirth LIKE '%' + @SearchTerm + '%' OR
-        m.FullName LIKE '%' + @SearchTerm + '%' OR
-        m.Email LIKE '%' + @SearchTerm + '%' OR
-        m.Phone LIKE '%' + @SearchTerm + '%' OR
-        m.Address LIKE '%' + @SearchTerm + '%'
-    ORDER BY 
-        m.MemberID DESC;
-END;
-
-EXEC SearchMembers N'MEM001';
-EXEC SearchMembers N'Nguyễn';
-
-SELECT *
-FROM Members
-ORDER BY MemberID DESC;
-
-
-SELECT *
-FROM BookAuthors
-
-SELECT *
-FROM Books
-
-DELETE FROM Books
-WHERE BookID='BOOK001';
-
-UPDATE BookAuthors
-SET AuthorID = 'AUTH005'
-WHERE BookAuthorID = 1;
-
-SELECT * FROM BookAuthors WHERE BookID = 'BOOK014'
-
-UPDATE BookAuthors SET BookID = 'BOOK008', AuthorID = 'AUTH009' WHERE BookAuthorID = 2
