@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BLL_Services.Services
 {
     
@@ -15,11 +16,56 @@ namespace BLL_Services.Services
     {
         private BookRepository BookRepository { get; set; }
         private BookValidator BookValidator { get; set; }
+        private BookRepository bookRepository = new BookRepository();
+
 
         public BookService()
         {
             BookRepository = new BookRepository();
             BookValidator = new BookValidator();
+
+        }
+        //GetTopBorrowedBooks
+        public List<TopBookReport> GetTopBorrowedBooks()
+        {
+            try
+            {
+                return BookRepository.GetTopBorrowedBooks();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while retrieving top borrowed books.", ex);
+            }
+        }
+
+        //GetTopReaders
+        public List<TopReaderReport> GetTopReaders()
+        {
+            try
+            {
+                return BookRepository.GetTopReaders();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while retrieving top readers.", ex);
+            }
+        }
+        //GetBookInventoryStatus
+        public List<BookStatusReport> GetBookInventoryStatus()
+        {
+            try
+            {
+                return BookRepository.GetBookInventoryStatus();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while retrieving book inventory status.", ex);
+            }
+        }
+
+        public List<BookReport> GetBookReports(DateTime startDate, DateTime endDate)
+        {
+            return bookRepository.GetBooksByDateRange(startDate, endDate);
         }
 
         //Auto-generate AuthorID
