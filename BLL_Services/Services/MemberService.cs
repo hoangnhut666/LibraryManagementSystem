@@ -36,7 +36,7 @@ namespace BLL_Services.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while retrieving members.", ex);
+                throw new Exception("Một lỗi xảy ra khi lấy danh sách thành viên.", ex);
             }
         }
 
@@ -45,7 +45,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(columnName) || string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException("Column name and value cannot be null or empty.");
+                throw new ArgumentException("Tên cột và giá trị không được để trống.");
             }
             return MemberRepository.GetMembersByCriteria(columnName, value);
         }
@@ -55,7 +55,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
-                throw new ArgumentException("Search term cannot be null or empty.", nameof(searchTerm));
+                throw new ArgumentException("Tiêu chí tìm kiếm không được để trống.", nameof(searchTerm));
             }
             return MemberRepository.SearchMembers(searchTerm);
         }
@@ -65,7 +65,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(memberID))
             {
-                throw new ArgumentException("Member ID cannot be null or empty.", nameof(memberID));
+                throw new ArgumentException("Mã thành viên không được để trống.", nameof(memberID));
             }
             return SearchMembers("MemberID", memberID).FirstOrDefault() ?? throw new KeyNotFoundException($"Member with ID {memberID} not found.");
         }
@@ -75,7 +75,7 @@ namespace BLL_Services.Services
         {
             if (member == null)
             {
-                throw new ArgumentNullException(nameof(member), "Member cannot be null.");
+                throw new ArgumentNullException(nameof(member), "Thành viên không được để trống.");
             }
             if (!MemberValidator.IsValidMember(member))
             {
@@ -90,7 +90,7 @@ namespace BLL_Services.Services
         {
             if (member == null)
             {
-                throw new ArgumentNullException(nameof(member), "Member cannot be null.");
+                throw new ArgumentNullException(nameof(member), "Thành viên không được để trống.");
             }
 
             if (!MemberValidator.IsValidMember(member))
@@ -105,7 +105,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(memberID))
             {
-                throw new ArgumentException("Member ID cannot be null or empty.", nameof(memberID));
+                throw new ArgumentException("Mã thành viên không được để trống.", nameof(memberID));
             }
             return MemberRepository.Delete(memberID);
         }

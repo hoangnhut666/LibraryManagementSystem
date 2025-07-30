@@ -62,7 +62,7 @@ namespace GUI_UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while loading authors: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi tải danh sách tác giả: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -127,18 +127,18 @@ namespace GUI_UI
                 int result = AuthorService.AddAuthor(author);
                 if (result > 0)
                 {
-                    MessageBox.Show("Author added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Thêm tác giả thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadAuthors();
                     ClearInputFields();
                 }
                 else
                 {
-                    MessageBox.Show("Failed to add author. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Thêm tác giả thất bại. Vui lòng thử lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while adding the author: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi thêm tác giả: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -162,18 +162,18 @@ namespace GUI_UI
                 int result = AuthorService.UpdateAuthor(author);
                 if (result > 0)
                 {
-                    MessageBox.Show("Author updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Cập nhật tác giả thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadAuthors();
                     ClearInputFields();
                 }
                 else
                 {
-                    MessageBox.Show("Failed to update author. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Cập nhật tác giả thất bại. Vui lòng thử lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while updating the author: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi cập nhật tác giả: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -183,25 +183,25 @@ namespace GUI_UI
             try
             {
                 string authorId = txtAuthorID.Text.Trim();
-                DialogResult result = MessageBox.Show("Are you sure you want to delete this author?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa tác giả này không?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
                     // Delete the author from the database
                     if (AuthorService.DeleteAuthor(authorId) > 0)
                     {
-                        MessageBox.Show("Author deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Xóa tác giả thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadAuthors();
                         ClearInputFields();
                     }
                     else
                     {
-                        MessageBox.Show("Failed to delete author. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Xóa tác giả thất bại. Vui lòng thử lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("An error occurred while deleting the author. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Một lỗi xảy ra khi xóa tác giả. Vui lòng thử lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -221,7 +221,7 @@ namespace GUI_UI
             }
             catch (Exception)
             {
-                MessageBox.Show("An error occurred while searching for authors. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Một lỗi xảy ra khi tìm kiếm tác giả. Vui lòng thử lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -68,18 +68,18 @@ namespace GUI_UI
             {
                 if (MemberService.AddMember(member) > 0)
                 {
-                    MessageBox.Show("Member added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Thêm thành viên thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadMembers();
                     ClearInputFields();
                 }
                 else
                 {
-                    MessageBox.Show("Failed to add member. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Thêm thành viên thất bại. Vui lòng thử lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while adding the member: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi thêm thành viên: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -103,18 +103,18 @@ namespace GUI_UI
             {
                 if (MemberService.UpdateMember(member) > 0)
                 {
-                    MessageBox.Show("Member updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Cập nhật thành viên thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadMembers();
                     ClearInputFields();
                 }
                 else
                 {
-                    MessageBox.Show("Failed to update member. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Cập nhật thành viên thất bại. Vui lòng thử lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while updating the member: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi cập nhật thành viên: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -122,31 +122,31 @@ namespace GUI_UI
         {
             if (string.IsNullOrEmpty(txtMemberID.Text.Trim()))
             {
-                MessageBox.Show("Please select member to delete.", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn thành viên để xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             try
             {
                 string memberId = txtMemberID.Text.Trim();
-                var confirmResult = MessageBox.Show($"Are you sure delete {memberId}?", "Ok", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                var confirmResult = MessageBox.Show($"Bạn có chắc chắn muốn xóa {memberId}?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (confirmResult == DialogResult.Yes)
                 {
                     int result = MemberService.DeleteMember(memberId);
                     if (result > 0)
                     {
-                        MessageBox.Show("Complete!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Xóa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadMembers();
                         ClearInputFields();
                     }
                     else
                     {
-                        MessageBox.Show("No member found to delete or deletion failed.", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Không tìm thấy thành viên để xóa hoặc xóa thất bại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -234,13 +234,13 @@ namespace GUI_UI
                 }
                 else
                 {
-                    MessageBox.Show("No members found matching the search criteria.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadMembers(); 
+                    MessageBox.Show("Không tìm thấy thành viên nào phù hợp với tiêu chí tìm kiếm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadMembers();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while searching for members: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($"Một lỗi xảy ra khi tìm kiếm thành viên: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

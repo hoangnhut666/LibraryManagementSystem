@@ -63,7 +63,7 @@ namespace GUI_UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while loading fines", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi tải danh sách phạt: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

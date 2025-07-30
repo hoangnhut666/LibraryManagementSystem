@@ -30,7 +30,7 @@ namespace BLL_Services.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while generating a new Loan ID.", ex);
+                throw new Exception("Một lỗi xảy ra khi tạo mã khoản vay mới.", ex);
             }
         }
 
@@ -43,7 +43,7 @@ namespace BLL_Services.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while retrieving loans.", ex);
+                throw new Exception("Một lỗi xảy ra khi lấy danh sách khoản vay.", ex);
             }
         }
 
@@ -56,7 +56,7 @@ namespace BLL_Services.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while retrieving loans.", ex);
+                throw new Exception("Một lỗi xảy ra khi lấy danh sách khoản vay.", ex);
             }
         }
 
@@ -65,7 +65,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(columnName) || string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException("Column name and value cannot be null or empty.");
+                throw new ArgumentException("Tên cột và giá trị không được để trống.");
             }
             return LoanRepository.GetLoansByCriteria(columnName, value);
         }
@@ -76,7 +76,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(columnName) || string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException("Column name and value cannot be null or empty.");
+                throw new ArgumentException("Tên cột và giá trị không được để trống.");
             }
             return LoanRepository.GetLoanViewModelsByCriteria(columnName, value);
         }
@@ -86,7 +86,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
-                throw new ArgumentException("Search term cannot be null or empty.", nameof(searchTerm));
+                throw new ArgumentException("Tiêu chí tìm kiếm không được để trống.", nameof(searchTerm));
             }
             return LoanRepository.SearchLoans(searchTerm);
         }
@@ -97,7 +97,7 @@ namespace BLL_Services.Services
         {
             if (loan == null)
             {
-                throw new ArgumentNullException(nameof(loan), "Loan cannot be null.");
+                throw new ArgumentNullException(nameof(loan), "Phiếu mượn không được để trống.");
             }
             if (!LoanValidator.IsValidLoan(loan))
             {
@@ -111,7 +111,7 @@ namespace BLL_Services.Services
         {
             if (loan == null)
             {
-                throw new ArgumentNullException(nameof(loan), "Loan cannot be null.");
+                throw new ArgumentNullException(nameof(loan), "Phiếu mượn không được để trống.");
             }
             if (!LoanValidator.IsValidLoan(loan))
             {
@@ -125,7 +125,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(loanID))
             {
-                throw new ArgumentException("Loan ID cannot be null or empty.", nameof(loanID));
+                throw new ArgumentException("Mã khoản vay không được để trống.", nameof(loanID));
             }
             return LoanRepository.Delete(loanID);
         }

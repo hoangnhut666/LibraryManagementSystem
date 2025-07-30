@@ -107,7 +107,8 @@ namespace DAL_Data
                     l.LoanID AS MaMuon,
                     l.CopyID AS MaBanSao,
                     b.Title AS TenSach,
-                    m.FullName AS TenDocGia,
+                    m.MemberID AS MaThanhVien,
+                    m.FullName AS TenThanhVien,
                     u.FullName AS TenNhanVien,
                     l.LoanDate AS NgayMuon,
                     l.DueDate AS HanTra,
@@ -118,7 +119,7 @@ namespace DAL_Data
                 JOIN Books b ON b.BookID = bc.BookID
                 JOIN Members m ON m.MemberID = l.MemberID
                 LEFT JOIN Users u ON u.UserID = l.UserID
-                WHERE {columnName} = @Value
+                WHERE l.{columnName} = @Value
                 ORDER BY LoanID DESC";
 
             var parameters = new SqlParameter[]
@@ -133,7 +134,8 @@ namespace DAL_Data
                     MaMuon = reader["MaMuon"].ToString(),
                     MaBanSao = reader["MaBanSao"].ToString(),
                     TenSach = reader["TenSach"].ToString(),
-                    TenThanhVien = reader["TenDocGia"].ToString(),
+                    MaThanhVien = reader["MaThanhVien"].ToString(),
+                    TenThanhVien = reader["TenThanhVien"].ToString(),
                     TenNhanVien = reader["TenNhanVien"].ToString(),
                     NgayMuon = (DateTime)reader["NgayMuon"],
                     HanTra = (DateTime)reader["HanTra"],
@@ -204,16 +206,17 @@ namespace DAL_Data
         // Insert a new loan
         public int Insert(Loan loan)
         {
-            string sql = $"INSERT INTO Loans (LoanID, CopyID, MemberID, LoanDate, DueDate, ReturnDate, Status, Notes) " +
-                         $"VALUES (@LoanID, @CopyID, @MemberID, @LoanDate, @DueDate, @ReturnDate, @Status, @Notes)";
+            string sql = $"INSERT INTO Loans (LoanID, CopyID, MemberID, UserID, LoanDate, DueDate, ReturnDate, Status, Notes) " +
+                         $"VALUES (@LoanID, @CopyID, @MemberID, @UserID, @LoanDate, @DueDate, @ReturnDate, @Status, @Notes)";
             var parameters = new SqlParameter[]
             {
                 new SqlParameter("@LoanID", loan.LoanID ?? string.Empty),
                 new SqlParameter("@CopyID", loan.CopyID ?? string.Empty),
                 new SqlParameter("@MemberID", loan.MemberID ?? string.Empty),
+                new SqlParameter("@UserID", loan.UserID ?? string.Empty),
                 new SqlParameter("@LoanDate", loan.LoanDate),
                 new SqlParameter("@DueDate", loan.DueDate),
-                new SqlParameter("@ReturnDate", (object)loan.ReturnDate ?? DBNull.Value),
+                new SqlParameter("@ReturnDate", loan.ReturnDate != default(DateTime) ? loan.ReturnDate.Value : (object)DBNull.Value),
                 new SqlParameter("@Status", loan.Status ?? string.Empty),
                 new SqlParameter("@Notes", loan.Notes ?? (object)DBNull.Value)
             };
@@ -227,6 +230,7 @@ namespace DAL_Data
             string sql = $"UPDATE Loans SET " +
                          $"CopyID = @CopyID, " +
                          $"MemberID = @MemberID, " +
+                         $"UserID = @UserID, " +
                          $"LoanDate = @LoanDate, " +
                          $"DueDate = @DueDate, " +
                          $"ReturnDate = @ReturnDate, " +
@@ -238,9 +242,10 @@ namespace DAL_Data
                 new SqlParameter("@LoanID", loan.LoanID ?? string.Empty),
                 new SqlParameter("@CopyID", loan.CopyID ?? string.Empty),
                 new SqlParameter("@MemberID", loan.MemberID ?? string.Empty),
+                new SqlParameter("@UserID", loan.UserID ?? string.Empty),
                 new SqlParameter("@LoanDate", loan.LoanDate),
                 new SqlParameter("@DueDate", loan.DueDate),
-                new SqlParameter("@ReturnDate", (object)loan.ReturnDate ?? DBNull.Value),
+                new SqlParameter("@ReturnDate", loan.ReturnDate != default(DateTime) ? loan.ReturnDate.Value : (object)DBNull.Value),
                 new SqlParameter("@Status", loan.Status ?? string.Empty),
                 new SqlParameter("@Notes", loan.Notes ?? (object)DBNull.Value)
             };

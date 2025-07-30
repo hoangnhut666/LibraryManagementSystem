@@ -17,6 +17,16 @@ namespace BLL_Services.Validators
 
         public bool IsValidLoan(Loan loan)
         {
+            if (loan == null)
+            {
+                ErrorMessage = "Phiếu mượn không được để trống.";
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(loan.Status))
+            {
+                ErrorMessage = "Trạng thái phiếu không được để trống";
+                return false;
+            }
             // Check if CopyID is not empty
             if (string.IsNullOrWhiteSpace(loan.CopyID))
             {
@@ -35,13 +45,51 @@ namespace BLL_Services.Validators
                 ErrorMessage = "Ngày mượn không được lớn hơn ngày hiện tại.";
                 return false;
             }
-            // Check if DueDate is not before LoanDate
-            if (loan.DueDate < loan.LoanDate)
+
+            if (loan.LoanDate == default(DateTime))
+            {
+                ErrorMessage = "Ngày mượn không được để trống.";
+                return false;
+            }
+            if (loan.DueDate == default(DateTime))
+            {
+                ErrorMessage = "Ngày đến hạn không được để trống.";
+                return false;
+            }
+            if (loan.DueDate != default(DateTime) && loan.DueDate < loan.LoanDate)
             {
                 ErrorMessage = "Ngày đến hạn không được trước ngày mượn.";
+                return false;
+            }
+            if (loan.ReturnDate != default(DateTime) && loan.ReturnDate < loan.LoanDate)
+            {
+                ErrorMessage = "Ngày trả không được trước ngày mượn";
+                return false;
+            }
+            if (loan.Status == "Đã trả" && loan.ReturnDate == default(DateTime))
+            {
+                ErrorMessage = "Một phiếu mượn đã trả phải có thông tin ngày trả";
+                return false;
+            }
+            if (loan.Status == "Đang mượn" && loan.ReturnDate != default(DateTime))
+            {
+                ErrorMessage = "Một phiếu mượn đang mượn không thể có thông tin ngày trả";
+                return false;
+            }
+            if (loan.Status == "Quá hạn" && loan.ReturnDate < loan.DueDate)
+            {
+                ErrorMessage = "Một phiếu mượn quá hạn phải có ngày trả lớn hơn ngày đến hạn";
+                return false;
+            }
+            if (loan.Status == "Thất lạc" && loan.ReturnDate != default(DateTime))
+            {
+                ErrorMessage = "Một phiếu mượn thất lạc không thể có thông tin ngày trả";
                 return false;
             }
             return true;
         }
     }
 }
+
+
+

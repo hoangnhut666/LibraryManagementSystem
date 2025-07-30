@@ -36,7 +36,7 @@ namespace BLL_Services.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while retrieving fines.", ex);
+                throw new Exception("Một lỗi xảy ra khi lấy danh sách khoản phạt.", ex);
             }
         }
 
@@ -45,7 +45,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
-                throw new ArgumentException("Search term cannot be null or empty.", nameof(searchTerm));
+                throw new ArgumentException("Tiêu chí tìm kiếm không được để trống.", nameof(searchTerm));
             }
             try
             {
@@ -53,7 +53,7 @@ namespace BLL_Services.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while searching fines.", ex);
+                throw new Exception("Một lỗi xảy ra khi tìm kiếm khoản phạt.", ex);
             }
         }
 
@@ -61,7 +61,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(columnName) || string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException("Column name and value cannot be null or empty.");
+                throw new ArgumentException("Tên cột và giá trị không được để trống.");
             }
             try
             {
@@ -69,7 +69,7 @@ namespace BLL_Services.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"An error occurred while retrieving fines by {columnName}.", ex);
+                throw new Exception($"Một lỗi xảy ra khi lấy danh sách khoản phạt theo {columnName}.", ex);
             }
         }
 

@@ -747,7 +747,24 @@ END;
 EXEC SearchLoans N'LOAN001';
 EXEC SearchLoans N'Nguyễn';
 
-
+SELECT
+    l.LoanID AS MaMuon,
+    l.CopyID AS MaBanSao,
+    b.Title AS TenSach,
+    m.MemberID AS MaThanhVien,
+    m.FullName AS TenThanhVien,
+    u.FullName AS TenNhanVien,
+    l.LoanDate AS NgayMuon,
+    l.DueDate AS HanTra,
+    l.ReturnDate AS NgayTra,
+    l.Status AS TrangThai
+FROM Loans l
+JOIN BookCopies bc ON bc.CopyID = l.CopyID
+JOIN Books b ON b.BookID = bc.BookID
+JOIN Members m ON m.MemberID = l.MemberID
+LEFT JOIN Users u ON u.UserID = l.UserID
+WHERE l.UserID = 'USER020'
+ORDER BY LoanID DESC
 
         -- public string? MaMuon { get; set; }
         -- public string? MaBanSao { get; set; }
@@ -759,3 +776,13 @@ EXEC SearchLoans N'Nguyễn';
         -- public DateTime HanTra { get; set; }
         -- public DateTime? NgayTra { get; set; }
         -- public string? TrangThai { get; set; }
+
+INSERT INTO Loans
+    ([LoanID], [CopyID], [MemberID], [UserID],[LoanDate], [DueDate], [ReturnDate], [Status], [Notes])
+VALUES
+    ('LOAN030', 'COPY005', 'MEM001', 'USER020', '2024-06-20 10:00:00', '2024-07-04 10:00:00', NULL, N'Đang mượn', NULL),
+    ('LOAN031', 'COPY003', 'MEM003', 'USER020', '2024-06-25 11:30:00', '2024-07-09 11:30:00', NULL, N'Đang mượn', NULL),
+    ('LOAN032', 'COPY004', 'MEM005', 'USER020', '2024-06-28 14:00:00', '2024-07-12 14:00:00', NULL, N'Đang mượn', NULL)
+
+SELECT *
+FROM Loans

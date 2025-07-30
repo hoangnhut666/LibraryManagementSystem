@@ -51,7 +51,7 @@ namespace GUI_UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while loading categories: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi tải danh sách thể loại: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -80,7 +80,7 @@ namespace GUI_UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while adding the category: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi thêm thể loại: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -108,7 +108,7 @@ namespace GUI_UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while updating the category: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi cập nhật thể loại: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -133,7 +133,7 @@ namespace GUI_UI
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"An error occurred while deleting the category: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Một lỗi xảy ra khi xóa thể loại: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -177,7 +177,7 @@ namespace GUI_UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while searching for categories: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi tìm kiếm thể loại: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

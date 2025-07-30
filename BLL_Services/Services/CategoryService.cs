@@ -35,7 +35,7 @@ namespace BLL_Services.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while retrieving categories.", ex);
+                throw new Exception("Một lỗi xảy ra khi lấy danh sách thể loại.", ex);
             }
         }
 
@@ -44,7 +44,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
-                throw new ArgumentException("Search term cannot be null or empty.", nameof(searchTerm));
+                throw new ArgumentException("Tiêu chí tìm kiếm không được để trống.", nameof(searchTerm));
             }
             return CategoryRepository.SearchCategories(searchTerm);
         }
@@ -54,7 +54,7 @@ namespace BLL_Services.Services
         {
             if (category == null)
             {
-                throw new ArgumentNullException(nameof(category), "Category cannot be null.");
+                throw new ArgumentNullException(nameof(category), "Thể loại không được để trống.");
             }
             if (!CategoryValidator.IsValidCategory(category))
             {
@@ -68,7 +68,7 @@ namespace BLL_Services.Services
         {
             if (category == null)
             {
-                throw new ArgumentNullException(nameof(category), "Category cannot be null.");
+                throw new ArgumentNullException(nameof(category), "Thể loại không được để trống.");
             }
             if (!CategoryValidator.IsValidCategory(category))
             {
@@ -82,7 +82,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(categoryId))
             {
-                throw new ArgumentException("Category ID cannot be null or empty.", nameof(categoryId));
+                throw new ArgumentException("Mã thể loại không được để trống.", nameof(categoryId));
             }
             return CategoryRepository.Delete(categoryId);
         }

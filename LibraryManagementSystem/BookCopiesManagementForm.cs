@@ -75,7 +75,7 @@ namespace GUI_UI
             string searchTerm = txtSearch.Text.Trim();
             if (string.IsNullOrEmpty(searchTerm))
             {
-                MessageBox.Show("Please enter a search term.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập từ khóa tìm kiếm.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -88,13 +88,13 @@ namespace GUI_UI
                 }
                 else
                 {
-                    MessageBox.Show("No book copies found matching the search term.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Không tìm thấy bản sao sách nào khớp với từ khóa tìm kiếm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadBookCopies();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while searching for book copies: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi tìm kiếm bản sao sách: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -117,18 +117,18 @@ namespace GUI_UI
                 int result = BookCopyService.AddBookCopy(bookCopy);
                 if (result > 0)
                 {
-                    MessageBox.Show("Book copy added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Thêm bản sao sách thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadBookCopies();
                     ClearInputFields();
                 }
                 else
                 {
-                    MessageBox.Show("Failed to add book copy.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Thêm bản sao sách thất bại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while adding the book copy: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi thêm bản sao sách: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -150,18 +150,18 @@ namespace GUI_UI
             {
                 if (BookCopyService.UpdateBookCopy(newBookCopy) > 0)
                 {
-                    MessageBox.Show("Book copy updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Cập nhật bản sao sách thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadBookCopies();
                     ClearInputFields();
                 }
                 else
                 {
-                    MessageBox.Show("Failed to update book copy. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Cập nhật bản sao sách thất bại. Vui lòng thử lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while updating the book: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi cập nhật bản sao sách: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -174,28 +174,28 @@ namespace GUI_UI
                 string copyId = txtCopyID.Text.Trim();
                 if (string.IsNullOrEmpty(copyId))
                 {
-                    MessageBox.Show("Please select a book copy to delete.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Vui lòng chọn một bản sao sách để xóa.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                DialogResult result = MessageBox.Show("Are you sure you want to delete this book copy?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa bản sao sách này không?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
                     // Delete the book copy from the database
                     if (BookCopyService.DeleteBookCopy(copyId) > 0)
                     {
-                        MessageBox.Show("Book copy deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Xóa bản sao sách thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadBookCopies();
                         ClearInputFields();
                     }
                     else
                     {
-                        MessageBox.Show("Failed to delete book copy. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Xóa bản sao sách thất bại. Vui lòng thử lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while deleting the book copy: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi xóa bản sao sách: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

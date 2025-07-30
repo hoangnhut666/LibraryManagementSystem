@@ -69,6 +69,7 @@ namespace GUI_UI
             dtpReturnDate.CustomFormat = " ";
 
             txtSearch.PlaceholderText = "Tìm với tên bạn đọc, mã mượn, tên sách ...";
+            txtNotes.ScrollBars = ScrollBars.Vertical;
         }
 
         // Load the loan data into the DataGridView
@@ -78,7 +79,7 @@ namespace GUI_UI
             {
                 if (CurrentUser?.RoleID == "ROLE002")
                 {
-                    dgvLoans.DataSource = LoanService.GetLoanViewModelsByCriteria("Username", CurrentUser.Username);
+                    dgvLoans.DataSource = LoanService.GetLoanViewModelsByCriteria("UserID", CurrentUser.UserID);
                 }
                 else
                 {
@@ -90,7 +91,7 @@ namespace GUI_UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while loading loans: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi tải dữ liệu: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -102,9 +103,9 @@ namespace GUI_UI
                 CopyID = cboCopyId.Text,
                 MemberID = cboMemberID.SelectedValue?.ToString(),
                 UserID = CurrentUser?.UserID,
-                LoanDate = dtpLoanDate.Value,
-                DueDate = dtpDueDate.Value,
-                ReturnDate = dtpReturnDate.Value,
+                LoanDate = dtpLoanDate.CustomFormat == " " ? default(DateTime) : dtpLoanDate.Value,
+                DueDate = dtpDueDate.CustomFormat == " " ? default(DateTime) : dtpDueDate.Value,
+                ReturnDate = dtpReturnDate.CustomFormat == " " ? default(DateTime) : dtpReturnDate.Value,
                 Status = cboStatus.Text,
                 Notes = txtNotes.Text
             };
@@ -115,18 +116,19 @@ namespace GUI_UI
                 int result = LoanService.AddLoan(loan);
                 if (result > 0)
                 {
-                    MessageBox.Show("Loan added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Thêm phiếu mượn thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadLoans();
                     ClearInputFields();
                 }
                 else
                 {
-                    MessageBox.Show("Failed to add loan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Thêm phiếu mượn thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while adding the loan: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi thêm phiếu mượn: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
 
@@ -138,9 +140,9 @@ namespace GUI_UI
                 CopyID = cboCopyId.SelectedValue?.ToString(),
                 MemberID = cboMemberID.SelectedValue?.ToString(),
                 UserID = CurrentUser?.UserID,
-                LoanDate = dtpLoanDate.Value,
-                DueDate = dtpDueDate.Value,
-                ReturnDate = dtpReturnDate.Value,
+                LoanDate = dtpLoanDate.CustomFormat == " " ? default(DateTime) : dtpLoanDate.Value,
+                DueDate = dtpDueDate.CustomFormat == " " ? default(DateTime) : dtpDueDate.Value,
+                ReturnDate = dtpReturnDate.CustomFormat == " " ? default(DateTime) : dtpReturnDate.Value,
                 Status = cboStatus.Text,
                 Notes = txtNotes.Text
             };
@@ -150,18 +152,18 @@ namespace GUI_UI
                 int result = LoanService.UpdateLoan(loan);
                 if (result > 0)
                 {
-                    MessageBox.Show("Loan updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Cập nhật phiếu mượn thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadLoans();
                     ClearInputFields();
                 }
                 else
                 {
-                    MessageBox.Show("Failed to update loan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Cập nhật phiếu mượn thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while updating the loan: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi cập nhật phiếu mượn: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -173,18 +175,18 @@ namespace GUI_UI
                 int result = LoanService.DeleteLoan(loanId);
                 if (result > 0)
                 {
-                    MessageBox.Show("Loan deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Xóa phiếu mượn thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadLoans();
                     ClearInputFields();
                 }
                 else
                 {
-                    MessageBox.Show("Failed to delete loan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Xóa phiếu mượn thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while deleting the loan: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi xóa phiếu mượn: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -199,7 +201,7 @@ namespace GUI_UI
             string searchTerm = txtSearch.Text.Trim();
             if (string.IsNullOrEmpty(searchTerm))
             {
-                MessageBox.Show("Please enter a search term.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập từ khóa tìm kiếm.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             try
@@ -211,13 +213,13 @@ namespace GUI_UI
                 }
                 else
                 {
-                    MessageBox.Show("No loans found matching the search criteria.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Không tìm thấy phiếu mượn nào khớp với tiêu chí tìm kiếm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadLoans();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while searching for loans: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Một lỗi xảy ra khi tìm kiếm phiếu mượn: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -263,7 +265,7 @@ namespace GUI_UI
                 cboMemberID.Text = selectedRow.Cells["MaThanhVien"].Value?.ToString() ?? string.Empty;
                 if (selectedLoan?.LoanDate != null)
                 {
-                    dtpDueDate.CustomFormat = "dd/MM/yyyy";
+                    dtpLoanDate.CustomFormat = "dd/MM/yyyy";
                     dtpLoanDate.Value = selectedLoan.LoanDate;
                 }
                 else
