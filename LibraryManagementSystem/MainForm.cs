@@ -180,8 +180,10 @@ namespace GUI_UI
             Application.Restart();
         }
 
-
-
-
+        private void ToolStripMenuItemReport_Click(object sender, EventArgs e)
+        {
+            var reportForm = new ReportForm();
+            EmbedFormIntoPanel(reportForm);
+        }
     }
 }

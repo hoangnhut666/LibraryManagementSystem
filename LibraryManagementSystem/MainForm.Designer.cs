@@ -44,7 +44,7 @@
             ToolStripMenuItemUserManagement = new ToolStripMenuItem();
             ToolStripMenuItemFineManagement = new ToolStripMenuItem();
             menuItemBookCopiesManagement = new ToolStripMenuItem();
-            báoCáoToolStripMenuItem = new ToolStripMenuItem();
+            ToolStripMenuItemReport = new ToolStripMenuItem();
             hỗTrợToolStripMenuItem = new ToolStripMenuItem();
             ToolStripMenuItemSupport = new ToolStripMenuItem();
             ToolStripMenuItemIntroduce = new ToolStripMenuItem();
@@ -62,7 +62,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(36, 36);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, quảnLýToolStripMenuItem, menuItemBookCopiesManagement, báoCáoToolStripMenuItem, hỗTrợToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, quảnLýToolStripMenuItem, menuItemBookCopiesManagement, ToolStripMenuItemReport, hỗTrợToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(2372, 47);
@@ -181,12 +181,13 @@
             menuItemBookCopiesManagement.Text = "Kiểm kê sách";
             menuItemBookCopiesManagement.Click += menuItemBookCopiesManagement_Click;
             // 
-            // báoCáoToolStripMenuItem
+            // ToolStripMenuItemReport
             // 
-            báoCáoToolStripMenuItem.Image = Properties.Resources.increase;
-            báoCáoToolStripMenuItem.Name = "báoCáoToolStripMenuItem";
-            báoCáoToolStripMenuItem.Size = new Size(169, 43);
-            báoCáoToolStripMenuItem.Text = "Báo cáo";
+            ToolStripMenuItemReport.Image = Properties.Resources.increase;
+            ToolStripMenuItemReport.Name = "ToolStripMenuItemReport";
+            ToolStripMenuItemReport.Size = new Size(169, 43);
+            ToolStripMenuItemReport.Text = "Báo cáo";
+            ToolStripMenuItemReport.Click += ToolStripMenuItemReport_Click;
             // 
             // hỗTrợToolStripMenuItem
             // 
@@ -294,7 +295,7 @@
         private ToolStripMenuItem menuItemBookManagement;
         private ToolStripMenuItem ToolStripMenuItemMemberManagement;
         private ToolStripMenuItem ToolStripMenuItemLoanDashboard;
-        private ToolStripMenuItem báoCáoToolStripMenuItem;
+        private ToolStripMenuItem ToolStripMenuItemReport;
         private Panel panelMainContainer;
         private Label lblWelcome;
         private ToolStripMenuItem ToolStripMenuItemChangePassword;

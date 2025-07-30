@@ -759,23 +759,23 @@ SELECT
     l.ReturnDate AS NgayTra,
     l.Status AS TrangThai
 FROM Loans l
-JOIN BookCopies bc ON bc.CopyID = l.CopyID
-JOIN Books b ON b.BookID = bc.BookID
-JOIN Members m ON m.MemberID = l.MemberID
-LEFT JOIN Users u ON u.UserID = l.UserID
+    JOIN BookCopies bc ON bc.CopyID = l.CopyID
+    JOIN Books b ON b.BookID = bc.BookID
+    JOIN Members m ON m.MemberID = l.MemberID
+    LEFT JOIN Users u ON u.UserID = l.UserID
 WHERE l.UserID = 'USER020'
 ORDER BY LoanID DESC
 
-        -- public string? MaMuon { get; set; }
-        -- public string? MaBanSao { get; set; }
-        -- public string? TenSach { get; set; }
-        -- public string? MaThanhVien { get; set; }
-        -- public string? TenThanhVien { get; set; }
-        -- public string? TenNhanVien { get; set; }
-        -- public DateTime NgayMuon { get; set; }
-        -- public DateTime HanTra { get; set; }
-        -- public DateTime? NgayTra { get; set; }
-        -- public string? TrangThai { get; set; }
+-- public string? MaMuon { get; set; }
+-- public string? MaBanSao { get; set; }
+-- public string? TenSach { get; set; }
+-- public string? MaThanhVien { get; set; }
+-- public string? TenThanhVien { get; set; }
+-- public string? TenNhanVien { get; set; }
+-- public DateTime NgayMuon { get; set; }
+-- public DateTime HanTra { get; set; }
+-- public DateTime? NgayTra { get; set; }
+-- public string? TrangThai { get; set; }
 
 INSERT INTO Loans
     ([LoanID], [CopyID], [MemberID], [UserID],[LoanDate], [DueDate], [ReturnDate], [Status], [Notes])
@@ -786,3 +786,34 @@ VALUES
 
 SELECT *
 FROM Loans
+
+
+SELECT
+    bc.CopyID,
+    b.Title,
+    c.Name,
+    m.FullName,
+    l.LoanDate,
+    l.DueDate,
+    l.ReturnDate,
+    l.[Status]
+FROM Books b
+    JOIN Categories c ON c.CategoryID = b.CategoryID
+    JOIN BookCopies bc ON bc.BookID = b.BookID
+    JOIN Loans l ON l.CopyID = bc.CopyID
+    JOIN Members m ON m.MemberID = l.MemberID
+WHERE l.[Status] = N'Đang mượn'
+
+
+
+SELECT TOP 10
+    b.BookID,
+    b.Title,
+    COUNT(l.LoanID) AS TotalLoans
+FROM Books b
+    JOIN BookCopies bc ON bc.BookID = b.BookID
+    JOIN Loans l ON l.CopyID = bc.CopyID
+GROUP BY b.BookID, b.Title
+ORDER BY TotalLoans DESC;
+
+

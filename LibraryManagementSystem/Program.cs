@@ -9,7 +9,7 @@ namespace LibraryManagementSystem
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            //Application.Run(new LoanDashboardForm());
+            //Application.Run(new ReportForm());
 
             var loginForm = new LoginForm();
             if (loginForm.ShowDialog() == DialogResult.OK)
