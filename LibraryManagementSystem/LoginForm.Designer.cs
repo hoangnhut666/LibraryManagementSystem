@@ -70,7 +70,7 @@
             // 
             // btnExit
             // 
-            btnExit.BackColor = Color.FromArgb(213, 203, 239);
+            btnExit.BackColor = Color.FromArgb(186, 114, 249);
             btnExit.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             btnExit.ForeColor = Color.White;
             btnExit.Location = new Point(242, 848);
@@ -83,7 +83,7 @@
             // 
             // btnLogin
             // 
-            btnLogin.BackColor = Color.FromArgb(213, 203, 239);
+            btnLogin.BackColor = Color.FromArgb(186, 114, 249);
             btnLogin.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             btnLogin.ForeColor = Color.White;
             btnLogin.Location = new Point(242, 720);

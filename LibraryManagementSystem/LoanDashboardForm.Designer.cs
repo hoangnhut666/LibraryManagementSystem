@@ -108,7 +108,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 11F);
-            label5.Location = new Point(1678, 286);
+            label5.Location = new Point(1678, 392);
             label5.Name = "label5";
             label5.Size = new Size(0, 45);
             label5.TabIndex = 65;
@@ -234,10 +234,10 @@
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(1684, 586);
+            txtSearch.Location = new Point(1678, 149);
             txtSearch.Multiline = true;
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(570, 47);
+            txtSearch.Size = new Size(576, 47);
             txtSearch.TabIndex = 76;
             // 
             // btnRefresh
@@ -245,7 +245,7 @@
             btnRefresh.BackColor = Color.FromArgb(174, 160, 249);
             btnRefresh.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnRefresh.ForeColor = SystemColors.Control;
-            btnRefresh.Location = new Point(1020, 570);
+            btnRefresh.Location = new Point(1186, 570);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(201, 70);
             btnRefresh.TabIndex = 81;
@@ -258,7 +258,7 @@
             btnDelete.BackColor = Color.FromArgb(174, 160, 249);
             btnDelete.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnDelete.ForeColor = SystemColors.Control;
-            btnDelete.Location = new Point(703, 570);
+            btnDelete.Location = new Point(869, 570);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(201, 70);
             btnDelete.TabIndex = 80;
@@ -271,7 +271,7 @@
             btnUpdate.BackColor = Color.FromArgb(174, 160, 249);
             btnUpdate.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnUpdate.ForeColor = SystemColors.Control;
-            btnUpdate.Location = new Point(386, 570);
+            btnUpdate.Location = new Point(552, 570);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(201, 70);
             btnUpdate.TabIndex = 79;
@@ -284,7 +284,7 @@
             btnAdd.BackColor = Color.FromArgb(174, 160, 249);
             btnAdd.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnAdd.ForeColor = SystemColors.Control;
-            btnAdd.Location = new Point(69, 570);
+            btnAdd.Location = new Point(235, 570);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(201, 70);
             btnAdd.TabIndex = 78;
@@ -295,7 +295,7 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(txtNotes);
-            groupBox1.Location = new Point(1678, 318);
+            groupBox1.Location = new Point(1678, 424);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(576, 200);
             groupBox1.TabIndex = 82;
@@ -307,13 +307,13 @@
             txtNotes.Location = new Point(6, 53);
             txtNotes.Multiline = true;
             txtNotes.Name = "txtNotes";
-            txtNotes.Size = new Size(570, 146);
+            txtNotes.Size = new Size(570, 163);
             txtNotes.TabIndex = 0;
             // 
             // groupBox2
             // 
             groupBox2.Controls.Add(txtTitle);
-            groupBox2.Location = new Point(1678, 107);
+            groupBox2.Location = new Point(1678, 213);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(582, 99);
             groupBox2.TabIndex = 83;
@@ -325,7 +325,7 @@
             btnSearch.BackColor = Color.FromArgb(174, 160, 249);
             btnSearch.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnSearch.ForeColor = SystemColors.Control;
-            btnSearch.Location = new Point(1330, 570);
+            btnSearch.Location = new Point(2053, 50);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(201, 70);
             btnSearch.TabIndex = 81;
@@ -353,7 +353,7 @@
             // groupBox3
             // 
             groupBox3.Controls.Add(txtMemberName);
-            groupBox3.Location = new Point(1678, 206);
+            groupBox3.Location = new Point(1678, 312);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(582, 106);
             groupBox3.TabIndex = 82;

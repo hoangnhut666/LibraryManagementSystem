@@ -15,6 +15,18 @@ namespace GUI_UI
         public SupportForm()
         {
             InitializeComponent();
+			SetupComponent();
         }
-    }
+
+
+		private void SetupComponent()
+		{
+			//Set up Form
+			StartPosition = FormStartPosition.CenterScreen;
+
+			//Set up PictureBox
+			pictureBoxLogoImage.SizeMode = PictureBoxSizeMode.Zoom;
+		}
+
+	}
 }

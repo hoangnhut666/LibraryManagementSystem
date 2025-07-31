@@ -79,10 +79,10 @@ namespace GUI_UI
             label16 = new Label();
             label15 = new Label();
             lblAuthorId = new Label();
+            label17 = new Label();
             label14 = new Label();
             label13 = new Label();
             dgvBookAuthor = new DataGridView();
-            label17 = new Label();
             tabControl1.SuspendLayout();
             tabPageBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxCoverImage).BeginInit();
@@ -249,7 +249,7 @@ namespace GUI_UI
             btnUploadPicture.BackColor = Color.FromArgb(174, 160, 249);
             btnUploadPicture.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnUploadPicture.ForeColor = SystemColors.Control;
-            btnUploadPicture.Location = new Point(1801, 619);
+            btnUploadPicture.Location = new Point(1852, 619);
             btnUploadPicture.Name = "btnUploadPicture";
             btnUploadPicture.Size = new Size(202, 60);
             btnUploadPicture.TabIndex = 32;
@@ -262,7 +262,7 @@ namespace GUI_UI
             btnSearch.BackColor = Color.FromArgb(174, 160, 249);
             btnSearch.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnSearch.ForeColor = SystemColors.Control;
-            btnSearch.Location = new Point(2022, 115);
+            btnSearch.Location = new Point(2029, 47);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(172, 60);
             btnSearch.TabIndex = 31;
@@ -272,7 +272,7 @@ namespace GUI_UI
             // 
             // pictureBoxCoverImage
             // 
-            pictureBoxCoverImage.Location = new Point(1653, 208);
+            pictureBoxCoverImage.Location = new Point(1704, 208);
             pictureBoxCoverImage.Name = "pictureBoxCoverImage";
             pictureBoxCoverImage.Size = new Size(497, 379);
             pictureBoxCoverImage.TabIndex = 30;
@@ -462,10 +462,9 @@ namespace GUI_UI
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(1653, 23);
-            txtSearch.Multiline = true;
+            txtSearch.Location = new Point(1606, 126);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(541, 57);
+            txtSearch.Size = new Size(595, 43);
             txtSearch.TabIndex = 17;
             // 
             // txtBookId
@@ -626,6 +625,16 @@ namespace GUI_UI
             lblAuthorId.TabIndex = 3;
             lblAuthorId.Text = "Mã tác giả ";
             // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new Font("Segoe UI", 11F);
+            label17.Location = new Point(417, 364);
+            label17.Name = "label17";
+            label17.Size = new Size(288, 45);
+            label17.TabIndex = 3;
+            label17.Text = "Mã sách và tác giả";
+            // 
             // label14
             // 
             label14.AutoSize = true;
@@ -658,16 +667,6 @@ namespace GUI_UI
             dgvBookAuthor.Size = new Size(2205, 624);
             dgvBookAuthor.TabIndex = 0;
             dgvBookAuthor.CellClick += dgvBookAuthor_CellClick;
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Font = new Font("Segoe UI", 11F);
-            label17.Location = new Point(417, 364);
-            label17.Name = "label17";
-            label17.Size = new Size(288, 45);
-            label17.TabIndex = 3;
-            label17.Text = "Mã sách và tác giả";
             // 
             // BookManagementForm
             // 

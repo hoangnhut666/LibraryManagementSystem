@@ -41,6 +41,9 @@ namespace GUI_UI
 
             dtpJoinDate.Format = DateTimePickerFormat.Custom;
             dtpJoinDate.CustomFormat = " ";
+
+            txtAddress.ScrollBars = ScrollBars.Vertical;
+            chkStatus.Checked = true;
         }
 
         private void LoadMembers()
@@ -230,7 +233,7 @@ namespace GUI_UI
                 if (members.Count > 0)
                 {
                     dgvMembers.DataSource = members;
-                    dgvMembers.Columns["Photo"].Visible = false; 
+                    dgvMembers.Columns["Photo"].Visible = false;
                 }
                 else
                 {
@@ -243,5 +246,7 @@ namespace GUI_UI
                 MessageBox.Show($"Một lỗi xảy ra khi tìm kiếm thành viên: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+
     }
 }

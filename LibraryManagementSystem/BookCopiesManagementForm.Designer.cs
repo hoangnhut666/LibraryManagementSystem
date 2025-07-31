@@ -135,7 +135,7 @@
             btnSearch.BackColor = Color.FromArgb(174, 160, 249);
             btnSearch.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnSearch.ForeColor = SystemColors.Control;
-            btnSearch.Location = new Point(2060, 826);
+            btnSearch.Location = new Point(2050, 145);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(172, 60);
             btnSearch.TabIndex = 64;
@@ -145,7 +145,7 @@
             // 
             // pictureBoxCoverImage
             // 
-            pictureBoxCoverImage.Location = new Point(1728, 247);
+            pictureBoxCoverImage.Location = new Point(1725, 450);
             pictureBoxCoverImage.Name = "pictureBoxCoverImage";
             pictureBoxCoverImage.Size = new Size(497, 444);
             pictureBoxCoverImage.TabIndex = 63;
@@ -258,7 +258,7 @@
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(1732, 752);
+            txtSearch.Location = new Point(1718, 247);
             txtSearch.Multiline = true;
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(504, 47);
@@ -299,7 +299,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11F);
-            label4.Location = new Point(887, 343);
+            label4.Location = new Point(888, 343);
             label4.Name = "label4";
             label4.Size = new Size(126, 45);
             label4.TabIndex = 62;

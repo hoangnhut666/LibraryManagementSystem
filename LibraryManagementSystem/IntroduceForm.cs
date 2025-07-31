@@ -15,6 +15,15 @@ namespace GUI_UI
         public IntroduceForm()
         {
             InitializeComponent();
+            SetupComponent();
         }
-    }
+
+
+		private void SetupComponent()
+		{
+			StartPosition = FormStartPosition.CenterScreen;
+			pictureBoxLogoImage.SizeMode = PictureBoxSizeMode.Zoom;
+		}
+
+	}
 }

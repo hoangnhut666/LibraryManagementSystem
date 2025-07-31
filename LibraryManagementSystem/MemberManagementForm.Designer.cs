@@ -62,10 +62,10 @@
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(1631, 122);
+            txtSearch.Location = new Point(1645, 109);
             txtSearch.Margin = new Padding(6);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(375, 43);
+            txtSearch.Size = new Size(615, 43);
             txtSearch.TabIndex = 20;
             // 
             // dgvMembers
@@ -83,7 +83,7 @@
             // picMemberPhoto
             // 
             picMemberPhoto.BackgroundImageLayout = ImageLayout.Zoom;
-            picMemberPhoto.Location = new Point(1631, 208);
+            picMemberPhoto.Location = new Point(1765, 163);
             picMemberPhoto.Margin = new Padding(6);
             picMemberPhoto.Name = "picMemberPhoto";
             picMemberPhoto.Size = new Size(375, 368);
@@ -124,7 +124,7 @@
             // 
             // txtPhone
             // 
-            txtPhone.Location = new Point(232, 324);
+            txtPhone.Location = new Point(232, 352);
             txtPhone.Margin = new Padding(6);
             txtPhone.Name = "txtPhone";
             txtPhone.Size = new Size(452, 43);
@@ -133,7 +133,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(31, 332);
+            label8.Location = new Point(31, 360);
             label8.Margin = new Padding(6, 0, 6, 0);
             label8.Name = "label8";
             label8.Size = new Size(180, 37);
@@ -145,7 +145,7 @@
             btnDelete.BackColor = Color.FromArgb(174, 160, 249);
             btnDelete.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnDelete.ForeColor = SystemColors.Control;
-            btnDelete.Location = new Point(763, 410);
+            btnDelete.Location = new Point(783, 434);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(201, 70);
             btnDelete.TabIndex = 84;
@@ -158,7 +158,7 @@
             btnRefresh.BackColor = Color.FromArgb(174, 160, 249);
             btnRefresh.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnRefresh.ForeColor = SystemColors.Control;
-            btnRefresh.Location = new Point(1070, 410);
+            btnRefresh.Location = new Point(1090, 434);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(201, 70);
             btnRefresh.TabIndex = 86;
@@ -171,7 +171,7 @@
             btnUpdate.BackColor = Color.FromArgb(174, 160, 249);
             btnUpdate.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnUpdate.ForeColor = SystemColors.Control;
-            btnUpdate.Location = new Point(446, 410);
+            btnUpdate.Location = new Point(466, 434);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(201, 70);
             btnUpdate.TabIndex = 83;
@@ -184,7 +184,7 @@
             btnAdd.BackColor = Color.FromArgb(174, 160, 249);
             btnAdd.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnAdd.ForeColor = SystemColors.Control;
-            btnAdd.Location = new Point(129, 410);
+            btnAdd.Location = new Point(149, 434);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(201, 70);
             btnAdd.TabIndex = 82;
@@ -195,7 +195,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(764, 323);
+            label7.Location = new Point(764, 354);
             label7.Margin = new Padding(6, 0, 6, 0);
             label7.Name = "label7";
             label7.Size = new Size(141, 37);
@@ -205,7 +205,7 @@
             // chkStatus
             // 
             chkStatus.AutoSize = true;
-            chkStatus.Location = new Point(965, 323);
+            chkStatus.Location = new Point(965, 354);
             chkStatus.Margin = new Padding(6);
             chkStatus.Name = "chkStatus";
             chkStatus.Size = new Size(177, 41);
@@ -215,7 +215,7 @@
             // 
             // dtpJoinDate
             // 
-            dtpJoinDate.Location = new Point(965, 228);
+            dtpJoinDate.Location = new Point(965, 259);
             dtpJoinDate.Margin = new Padding(6);
             dtpJoinDate.Name = "dtpJoinDate";
             dtpJoinDate.Size = new Size(452, 43);
@@ -224,7 +224,7 @@
             // 
             // dtpDateOfBirth
             // 
-            dtpDateOfBirth.Location = new Point(232, 228);
+            dtpDateOfBirth.Location = new Point(232, 262);
             dtpDateOfBirth.Margin = new Padding(6);
             dtpDateOfBirth.Name = "dtpDateOfBirth";
             dtpDateOfBirth.Size = new Size(452, 43);
@@ -234,7 +234,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(764, 233);
+            label6.Location = new Point(764, 264);
             label6.Margin = new Padding(6, 0, 6, 0);
             label6.Name = "label6";
             label6.Size = new Size(187, 37);
@@ -244,7 +244,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(31, 231);
+            label5.Location = new Point(31, 265);
             label5.Margin = new Padding(6, 0, 6, 0);
             label5.Name = "label5";
             label5.Size = new Size(141, 37);
@@ -254,7 +254,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(764, 155);
+            label4.Location = new Point(767, 158);
             label4.Margin = new Padding(6, 0, 6, 0);
             label4.Name = "label4";
             label4.Size = new Size(104, 37);
@@ -263,7 +263,7 @@
             // 
             // txtAddress
             // 
-            txtAddress.Location = new Point(965, 139);
+            txtAddress.Location = new Point(965, 152);
             txtAddress.Margin = new Padding(6);
             txtAddress.Name = "txtAddress";
             txtAddress.Size = new Size(452, 43);
@@ -271,7 +271,7 @@
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(232, 129);
+            txtEmail.Location = new Point(232, 155);
             txtEmail.Margin = new Padding(6);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(452, 43);
@@ -280,7 +280,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(31, 145);
+            label3.Location = new Point(31, 158);
             label3.Margin = new Padding(6, 0, 6, 0);
             label3.Name = "label3";
             label3.Size = new Size(88, 37);
@@ -289,7 +289,7 @@
             // 
             // txtFullName
             // 
-            txtFullName.Location = new Point(965, 41);
+            txtFullName.Location = new Point(965, 57);
             txtFullName.Margin = new Padding(6);
             txtFullName.Name = "txtFullName";
             txtFullName.Size = new Size(452, 43);
@@ -298,7 +298,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(764, 67);
+            label2.Location = new Point(764, 57);
             label2.Margin = new Padding(6, 0, 6, 0);
             label2.Name = "label2";
             label2.Size = new Size(139, 37);
@@ -307,7 +307,7 @@
             // 
             // txtMemberID
             // 
-            txtMemberID.Location = new Point(232, 41);
+            txtMemberID.Location = new Point(232, 61);
             txtMemberID.Margin = new Padding(6);
             txtMemberID.Name = "txtMemberID";
             txtMemberID.ReadOnly = true;
@@ -340,7 +340,7 @@
             btnSearch.BackColor = Color.FromArgb(174, 160, 249);
             btnSearch.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnSearch.ForeColor = SystemColors.Control;
-            btnSearch.Location = new Point(2059, 106);
+            btnSearch.Location = new Point(2059, 22);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(201, 70);
             btnSearch.TabIndex = 85;
@@ -353,7 +353,7 @@
             btnSelectCoverImage.BackColor = Color.FromArgb(174, 160, 249);
             btnSelectCoverImage.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnSelectCoverImage.ForeColor = SystemColors.Control;
-            btnSelectCoverImage.Location = new Point(2059, 208);
+            btnSelectCoverImage.Location = new Point(1853, 540);
             btnSelectCoverImage.Name = "btnSelectCoverImage";
             btnSelectCoverImage.Size = new Size(201, 70);
             btnSelectCoverImage.TabIndex = 85;
@@ -361,7 +361,7 @@
             btnSelectCoverImage.UseVisualStyleBackColor = false;
             btnSelectCoverImage.Click += btnSelectCoverImage_Click;
             // 
-            // MembersManagementForm
+            // MemberManagementForm
             // 
             AutoScaleDimensions = new SizeF(15F, 37F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -374,7 +374,7 @@
             Controls.Add(dgvMembers);
             Controls.Add(picMemberPhoto);
             Controls.Add(groupBox1);
-            Name = "MembersManagementForm";
+            Name = "MemberManagementForm";
             Text = "Quản lý thành viên";
             ((System.ComponentModel.ISupportInitialize)dgvMembers).EndInit();
             ((System.ComponentModel.ISupportInitialize)picMemberPhoto).EndInit();

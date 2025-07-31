@@ -49,18 +49,24 @@
             txtSearch = new TextBox();
             txtFineID = new TextBox();
             groupBox2 = new GroupBox();
-            cboLoanID = new ComboBox();
+            groupBox3 = new GroupBox();
+            cboFineMap = new ComboBox();
             dtpIssueDate = new DateTimePicker();
+            cboLoanID = new ComboBox();
             txtMemberName = new TextBox();
+            sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
+            groupBox4 = new GroupBox();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvFineList).BeginInit();
             groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
+            groupBox4.SuspendLayout();
             SuspendLayout();
             // 
             // chkPaid
             // 
             chkPaid.AutoSize = true;
-            chkPaid.Location = new Point(1780, 1094);
+            chkPaid.Location = new Point(382, 884);
             chkPaid.Name = "chkPaid";
             chkPaid.Size = new Size(218, 41);
             chkPaid.TabIndex = 126;
@@ -147,7 +153,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 11F);
-            label10.Location = new Point(1418, 1089);
+            label10.Location = new Point(20, 879);
             label10.Name = "label10";
             label10.Size = new Size(164, 45);
             label10.TabIndex = 116;
@@ -157,11 +163,11 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 11F);
-            label9.Location = new Point(1419, 864);
+            label9.Location = new Point(23, 707);
             label9.Name = "label9";
-            label9.Size = new Size(138, 45);
+            label9.Size = new Size(225, 45);
             label9.TabIndex = 115;
-            label9.Text = "Lỗi phạt";
+            label9.Text = "Mô tả lỗi phạt";
             // 
             // label4
             // 
@@ -187,17 +193,17 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 11F);
-            label11.Location = new Point(1419, 642);
+            label11.Location = new Point(22, 508);
             label11.Name = "label11";
-            label11.Size = new Size(196, 45);
+            label11.Size = new Size(138, 45);
             label11.TabIndex = 114;
-            label11.Text = "Số tiền phạt";
+            label11.Text = "Lỗi phạt";
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 11F);
-            label6.Location = new Point(1419, 753);
+            label6.Location = new Point(24, 395);
             label6.Name = "label6";
             label6.Size = new Size(172, 45);
             label6.TabIndex = 112;
@@ -235,15 +241,15 @@
             // 
             // txtReason
             // 
-            txtReason.Location = new Point(1780, 864);
+            txtReason.Location = new Point(383, 710);
             txtReason.Multiline = true;
             txtReason.Name = "txtReason";
-            txtReason.Size = new Size(450, 206);
+            txtReason.Size = new Size(450, 157);
             txtReason.TabIndex = 107;
             // 
             // txtAmount
             // 
-            txtAmount.Location = new Point(1779, 647);
+            txtAmount.Location = new Point(6, 42);
             txtAmount.Name = "txtAmount";
             txtAmount.Size = new Size(450, 43);
             txtAmount.TabIndex = 105;
@@ -266,15 +272,50 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(cboLoanID);
+            groupBox2.Controls.Add(groupBox4);
+            groupBox2.Controls.Add(groupBox3);
+            groupBox2.Controls.Add(chkPaid);
             groupBox2.Controls.Add(dtpIssueDate);
+            groupBox2.Controls.Add(label6);
+            groupBox2.Controls.Add(cboLoanID);
             groupBox2.Controls.Add(txtMemberName);
+            groupBox2.Controls.Add(label9);
+            groupBox2.Controls.Add(label10);
+            groupBox2.Controls.Add(label11);
+            groupBox2.Controls.Add(txtReason);
             groupBox2.Location = new Point(1398, 246);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(839, 921);
+            groupBox2.Size = new Size(839, 948);
             groupBox2.TabIndex = 125;
             groupBox2.TabStop = false;
             groupBox2.Text = "Thông tin chi tiết";
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(cboFineMap);
+            groupBox3.Location = new Point(381, 492);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(450, 92);
+            groupBox3.TabIndex = 127;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Danh mục lỗi";
+            // 
+            // cboFineMap
+            // 
+            cboFineMap.FormattingEnabled = true;
+            cboFineMap.Location = new Point(0, 42);
+            cboFineMap.Name = "cboFineMap";
+            cboFineMap.Size = new Size(450, 45);
+            cboFineMap.TabIndex = 1;
+            cboFineMap.SelectedIndexChanged += cboFineMap_SelectedIndexChanged;
+            // 
+            // dtpIssueDate
+            // 
+            dtpIssueDate.Location = new Point(382, 397);
+            dtpIssueDate.Name = "dtpIssueDate";
+            dtpIssueDate.Size = new Size(450, 43);
+            dtpIssueDate.TabIndex = 0;
+            dtpIssueDate.ValueChanged += dtpIssueDate_ValueChanged;
             // 
             // cboLoanID
             // 
@@ -285,21 +326,28 @@
             cboLoanID.TabIndex = 1;
             cboLoanID.SelectedIndexChanged += cboLoanID_SelectedIndexChanged;
             // 
-            // dtpIssueDate
-            // 
-            dtpIssueDate.Location = new Point(383, 507);
-            dtpIssueDate.Name = "dtpIssueDate";
-            dtpIssueDate.Size = new Size(450, 43);
-            dtpIssueDate.TabIndex = 0;
-            dtpIssueDate.ValueChanged += dtpIssueDate_ValueChanged;
-            // 
             // txtMemberName
             // 
-            txtMemberName.Location = new Point(380, 285);
+            txtMemberName.Location = new Point(380, 288);
             txtMemberName.Name = "txtMemberName";
             txtMemberName.ReadOnly = true;
             txtMemberName.Size = new Size(450, 43);
             txtMemberName.TabIndex = 105;
+            // 
+            // sqlCommand1
+            // 
+            sqlCommand1.CommandTimeout = 30;
+            sqlCommand1.EnableOptimizedParameterBinding = false;
+            // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(txtAmount);
+            groupBox4.Location = new Point(380, 590);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(450, 89);
+            groupBox4.TabIndex = 128;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Số tiền";
             // 
             // FineManagementForm
             // 
@@ -307,23 +355,16 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(237, 235, 248);
             ClientSize = new Size(2272, 1321);
-            Controls.Add(chkPaid);
             Controls.Add(label1);
             Controls.Add(btnRefresh);
             Controls.Add(btnDelete);
             Controls.Add(btnUpdate);
             Controls.Add(btnAdd);
             Controls.Add(btnSearch);
-            Controls.Add(label10);
-            Controls.Add(label9);
             Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(label11);
-            Controls.Add(label6);
             Controls.Add(label2);
             Controls.Add(groupBox1);
-            Controls.Add(txtReason);
-            Controls.Add(txtAmount);
             Controls.Add(txtSearch);
             Controls.Add(txtFineID);
             Controls.Add(groupBox2);
@@ -333,6 +374,9 @@
             ((System.ComponentModel.ISupportInitialize)dgvFineList).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -368,5 +412,9 @@
         private DateTimePicker dtpIssueDate;
         private ComboBox cboLoanID;
         private TextBox txtMemberName;
+        private ComboBox cboFineMap;
+        private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
+        private GroupBox groupBox3;
+        private GroupBox groupBox4;
     }
 }

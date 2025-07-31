@@ -46,8 +46,10 @@
             btnRefresh = new Button();
             btnSearch = new Button();
             txtSearch = new TextBox();
+            groupBox2 = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)dgvAuthors).BeginInit();
             groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -128,7 +130,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 11F);
-            label5.Location = new Point(76, 547);
+            label5.Location = new Point(7, 50);
             label5.Name = "label5";
             label5.Size = new Size(155, 45);
             label5.TabIndex = 1;
@@ -136,7 +138,7 @@
             // 
             // dtpDateOfDeath
             // 
-            dtpDateOfDeath.Location = new Point(279, 549);
+            dtpDateOfDeath.Location = new Point(210, 52);
             dtpDateOfDeath.Name = "dtpDateOfDeath";
             dtpDateOfDeath.Size = new Size(537, 43);
             dtpDateOfDeath.TabIndex = 4;
@@ -162,7 +164,7 @@
             // 
             // btnAdd
             // 
-            btnAdd.BackColor = Color.FromArgb(192, 192, 255);
+            btnAdd.BackColor = Color.FromArgb(174, 160, 249);
             btnAdd.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnAdd.ForeColor = Color.White;
             btnAdd.Location = new Point(37, 662);
@@ -175,7 +177,7 @@
             // 
             // btnUpdate
             // 
-            btnUpdate.BackColor = Color.FromArgb(192, 192, 255);
+            btnUpdate.BackColor = Color.FromArgb(174, 160, 249);
             btnUpdate.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnUpdate.ForeColor = Color.White;
             btnUpdate.Location = new Point(279, 662);
@@ -188,7 +190,7 @@
             // 
             // btnDelete
             // 
-            btnDelete.BackColor = Color.FromArgb(192, 192, 255);
+            btnDelete.BackColor = Color.FromArgb(174, 160, 249);
             btnDelete.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnDelete.ForeColor = Color.White;
             btnDelete.Location = new Point(532, 662);
@@ -201,7 +203,7 @@
             // 
             // btnRefresh
             // 
-            btnRefresh.BackColor = Color.FromArgb(192, 192, 255);
+            btnRefresh.BackColor = Color.FromArgb(174, 160, 249);
             btnRefresh.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnRefresh.ForeColor = Color.White;
             btnRefresh.Location = new Point(774, 662);
@@ -214,7 +216,7 @@
             // 
             // btnSearch
             // 
-            btnSearch.BackColor = Color.FromArgb(192, 192, 255);
+            btnSearch.BackColor = Color.FromArgb(174, 160, 249);
             btnSearch.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnSearch.ForeColor = Color.White;
             btnSearch.Location = new Point(2058, 662);
@@ -233,12 +235,24 @@
             txtSearch.Size = new Size(900, 66);
             txtSearch.TabIndex = 7;
             // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(dtpDateOfDeath);
+            groupBox2.Controls.Add(label5);
+            groupBox2.Location = new Point(76, 498);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(747, 139);
+            groupBox2.TabIndex = 8;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Năm mất nếu có";
+            // 
             // AuthorManagementForm
             // 
             AutoScaleDimensions = new SizeF(15F, 37F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(237, 235, 248);
             ClientSize = new Size(2272, 1321);
+            Controls.Add(groupBox2);
             Controls.Add(txtSearch);
             Controls.Add(btnSearch);
             Controls.Add(btnRefresh);
@@ -246,12 +260,10 @@
             Controls.Add(btnUpdate);
             Controls.Add(btnAdd);
             Controls.Add(groupBox1);
-            Controls.Add(dtpDateOfDeath);
             Controls.Add(dtpDateOfBirth);
             Controls.Add(txtFullName);
             Controls.Add(txtAuthorID);
             Controls.Add(dgvAuthors);
-            Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -261,6 +273,8 @@
             ((System.ComponentModel.ISupportInitialize)dgvAuthors).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -285,5 +299,6 @@
         private Button btnRefresh;
         private Button btnSearch;
         private TextBox txtSearch;
+        private GroupBox groupBox2;
     }
 }

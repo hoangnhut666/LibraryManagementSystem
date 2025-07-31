@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SupportForm));
-            pictureBox2 = new PictureBox();
-            label1 = new Label();
             groupBox2 = new GroupBox();
             label8 = new Label();
             label3 = new Label();
@@ -42,33 +40,13 @@
             label4 = new Label();
             label9 = new Label();
             pictureBox1 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            label10 = new Label();
+            pictureBoxLogoImage = new PictureBox();
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxLogoImage).BeginInit();
             SuspendLayout();
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(15, 15);
-            pictureBox2.Margin = new Padding(6);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(234, 115);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 20;
-            pictureBox2.TabStop = false;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(800, 80);
-            label1.Margin = new Padding(6, 0, 6, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(839, 104);
-            label1.TabIndex = 15;
-            label1.Text = "Chăm sóc khách hàng";
             // 
             // groupBox2
             // 
@@ -200,33 +178,51 @@
             pictureBox1.TabIndex = 18;
             pictureBox1.TabStop = false;
             // 
-            // Support
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI Semibold", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label10.ForeColor = Color.MediumSlateBlue;
+            label10.Location = new Point(807, 57);
+            label10.Name = "label10";
+            label10.Size = new Size(756, 96);
+            label10.TabIndex = 21;
+            label10.Text = "Chăm sóc khách hàng";
+            // 
+            // pictureBoxLogoImage
+            // 
+            pictureBoxLogoImage.Image = Properties.Resources.FPT_Polytechnic;
+            pictureBoxLogoImage.Location = new Point(49, 41);
+            pictureBoxLogoImage.Name = "pictureBoxLogoImage";
+            pictureBoxLogoImage.Size = new Size(509, 194);
+            pictureBoxLogoImage.TabIndex = 22;
+            pictureBoxLogoImage.TabStop = false;
+            // 
+            // SupportForm
             // 
             AutoScaleDimensions = new SizeF(15F, 37F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(237, 235, 248);
             ClientSize = new Size(2272, 1321);
-            Controls.Add(pictureBox2);
-            Controls.Add(label1);
+            Controls.Add(pictureBoxLogoImage);
+            Controls.Add(label10);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(label9);
             Controls.Add(pictureBox1);
-            Name = "Support";
-            Text = "Support";
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            Name = "SupportForm";
+            Text = "Hỗ trợ";
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxLogoImage).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private PictureBox pictureBox2;
-        private Label label1;
         private GroupBox groupBox2;
         private Label label8;
         private Label label3;
@@ -238,5 +234,7 @@
         private Label label4;
         private Label label9;
         private PictureBox pictureBox1;
+        private Label label10;
+        private PictureBox pictureBoxLogoImage;
     }
 }

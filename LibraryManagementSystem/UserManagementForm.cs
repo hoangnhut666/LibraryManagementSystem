@@ -49,6 +49,7 @@ namespace GUI_UI
             cboRole.SelectedIndex = -1; 
 
             txtSearch.PlaceholderText = "Tìm kiếm theo mã người dùng, tên, email, vai trò, tên đăng nhập";
+            chkIsActive.Checked = true;
         }
 
         private void LoadUserViewModels()

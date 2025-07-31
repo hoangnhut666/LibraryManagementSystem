@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BLL_Services.Services;
+using DTO_Models;
+using DTO_Models.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,9 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BLL_Services.Services;
-using DTO_Models;
-using DTO_Models.ViewModel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace GUI_UI
 {
@@ -51,6 +52,28 @@ namespace GUI_UI
 
             txtReason.ScrollBars = ScrollBars.Vertical;
             txtSearch.PlaceholderText = "Tìm kiếm với mã phiếu mượn, tên thành viên, mã phạt";
+
+            txtReason.MaxLength = 255;
+
+            Dictionary<string, decimal> fineMap = new Dictionary<string, decimal>
+            {
+                { "Trả muộn dưới 3 ngày", 10000 },
+                { "Trả muộn từ 3 đến 7 ngày", 20000 },
+                { "Trả muộn từ 7 đến 14 ngày", 30000 },
+                { "Trả muộn trên 14 ngày", 50000 },
+                { "Mất sách", 100000 },
+                { "Hư hỏng sách", 50000 },
+                {"Làm rách bìa", 20000 },
+                {"Làm rách trang sách", 10000 },
+                {"Viết bút chì vào sách", 5000 },
+                {"Viết bút mực vào sách", 10000 },
+                {"Lỗi khác", 0}
+            };
+
+            cboFineMap.DataSource = new BindingSource(fineMap, null);
+            cboFineMap.DisplayMember = "Key";
+            cboFineMap.ValueMember = "Value";
+            cboFineMap.SelectedIndex = -1;
         }
 
 
@@ -60,6 +83,10 @@ namespace GUI_UI
             {
                 var fineViewModels = FineService.GetFineViewModels();
                 dgvFineList.DataSource = fineViewModels;
+                if (dgvFineList.Columns["SoTien"] != null)
+                {
+                    dgvFineList.Columns["SoTien"].DefaultCellStyle.Format = "N0";
+                }
             }
             catch (Exception ex)
             {
@@ -190,7 +217,7 @@ namespace GUI_UI
                 cboLoanID.Text = selectedFine?.LoanID;
                 txtFineID.Text = selectedRow.Cells["MaPhieuPhat"].Value?.ToString() ?? string.Empty;
                 txtMemberName.Text = selectedRow.Cells["TenThanhVien"].Value?.ToString() ?? string.Empty;
-                txtAmount.Text = selectedFine?.Amount?.ToString("F2");
+                txtAmount.Text = selectedFine?.Amount?.ToString("N0");
                 if (selectedFine?.IssueDate != null)
                 {
                     dtpIssueDate.CustomFormat = "dd/MM/yyyy";
@@ -220,6 +247,7 @@ namespace GUI_UI
             txtReason.Clear();
             chkPaid.Checked = false;
             txtSearch.Clear();
+            cboFineMap.SelectedIndex = -1;
         }
 
         private void cboLoanID_SelectedIndexChanged(object sender, EventArgs e)
@@ -265,6 +293,11 @@ namespace GUI_UI
             {
                 MessageBox.Show($"Một lỗi đã xảy ra khi tìm kiếm khoản phạt {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void cboFineMap_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtAmount.Text = cboFineMap.SelectedValue != null ? ((KeyValuePair<string, decimal>)cboFineMap.SelectedItem).Value.ToString() : string.Empty;
         }
     }
 }
