@@ -70,7 +70,7 @@ namespace BLL_Services.Services
         {
             if (string.IsNullOrWhiteSpace(columnName) || string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException("Tên cột và giá trị không được để trống.");
+                throw new ArgumentException("Các thuộc tính của người dùng không được để trống.");
             }
             return UserRepository.GetUsersByCriteria(columnName, value);
         }

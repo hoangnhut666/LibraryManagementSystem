@@ -50,6 +50,8 @@ namespace GUI_UI
             txtBiography.Multiline = true;
             txtBiography.ScrollBars = ScrollBars.Vertical;
             txtSearch.PlaceholderText = "Nhập id hoặc tên tác giả cần tìm";
+
+            txtBiography.MaxLength = 255; 
         }
 
 

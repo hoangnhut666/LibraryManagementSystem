@@ -28,6 +28,18 @@ namespace BLL_Services.Validators
                 return false;
             }
 
+            if (string.IsNullOrEmpty(user.Password))
+            {
+                ErrorMessage = "Mật khẩu không được để trống";
+            }
+
+            var existingUserWithTheSameEmail = UserRepository.GetUsersByCriteria("Email", user.Email);
+            if (existingUserWithTheSameEmail.Count > 0 && existingUserWithTheSameEmail[0].UserID != user.UserID)
+            {
+                ErrorMessage = "Email đã được sử dụng bởi người dùng khác.";
+                return false;
+            }
+
             if (string.IsNullOrWhiteSpace(user.FullName))
             {
                 ErrorMessage = "Họ và tên không được để trống.";

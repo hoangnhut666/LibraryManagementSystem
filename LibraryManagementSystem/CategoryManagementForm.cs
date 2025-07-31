@@ -37,6 +37,9 @@ namespace GUI_UI
             txtDescription.ScrollBars = ScrollBars.Vertical;
 
             txtSearch.PlaceholderText = "Tìm kiếm theo mã thể loại, tên thể loại...";
+
+            txtDescription.MaxLength = 255; 
+            txtDescription.ScrollBars = ScrollBars.Vertical;
         }
 
         private void LoadCategories()

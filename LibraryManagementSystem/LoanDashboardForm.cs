@@ -70,6 +70,8 @@ namespace GUI_UI
 
             txtSearch.PlaceholderText = "Tìm với tên bạn đọc, mã mượn, tên sách ...";
             txtNotes.ScrollBars = ScrollBars.Vertical;
+
+            txtNotes.MaxLength = 255;
         }
 
         // Load the loan data into the DataGridView
@@ -319,6 +321,21 @@ namespace GUI_UI
             else
             {
                 txtMemberName.Clear();
+            }
+        }
+
+        private void cboStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboStatus.SelectedItem != null)
+            {
+                if (cboStatus.Text == "Đang mượn")
+                {
+                    txtDislayReturnDate.Visible = true;
+                }
+                else
+                {
+                    txtDislayReturnDate.Visible = false;
+                }
             }
         }
     }

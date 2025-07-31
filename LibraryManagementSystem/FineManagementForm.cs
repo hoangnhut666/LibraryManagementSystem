@@ -63,11 +63,11 @@ namespace GUI_UI
                 { "Trả muộn trên 14 ngày", 50000 },
                 { "Mất sách", 100000 },
                 { "Hư hỏng sách", 50000 },
-                {"Làm rách bìa", 20000 },
-                {"Làm rách trang sách", 10000 },
-                {"Viết bút chì vào sách", 5000 },
-                {"Viết bút mực vào sách", 10000 },
-                {"Lỗi khác", 0}
+                { "Làm rách bìa", 20000 },
+                { "Làm rách trang sách", 10000 },
+                { "Viết bút chì vào sách", 5000 },
+                { "Viết bút mực vào sách", 10000 },
+                { "Lỗi khác", 0}
             };
 
             cboFineMap.DataSource = new BindingSource(fineMap, null);

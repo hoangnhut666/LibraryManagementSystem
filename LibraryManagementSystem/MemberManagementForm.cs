@@ -43,6 +43,7 @@ namespace GUI_UI
             dtpJoinDate.CustomFormat = " ";
 
             txtAddress.ScrollBars = ScrollBars.Vertical;
+            txtAddress.MaxLength = 255; 
             chkStatus.Checked = true;
         }
 

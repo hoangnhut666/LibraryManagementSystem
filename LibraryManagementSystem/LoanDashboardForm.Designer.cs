@@ -59,6 +59,7 @@
             cboCopyId = new ComboBox();
             groupBox3 = new GroupBox();
             txtMemberName = new TextBox();
+            txtDislayReturnDate = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvLoans).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -221,6 +222,7 @@
             cboStatus.Name = "cboStatus";
             cboStatus.Size = new Size(450, 45);
             cboStatus.TabIndex = 73;
+            cboStatus.SelectedIndexChanged += cboStatus_SelectedIndexChanged;
             // 
             // label12
             // 
@@ -365,8 +367,17 @@
             txtMemberName.Location = new Point(6, 53);
             txtMemberName.Multiline = true;
             txtMemberName.Name = "txtMemberName";
-            txtMemberName.Size = new Size(570, 146);
+            txtMemberName.ReadOnly = true;
+            txtMemberName.Size = new Size(570, 72);
             txtMemberName.TabIndex = 0;
+            // 
+            // txtDislayReturnDate
+            // 
+            txtDislayReturnDate.Location = new Point(1112, 475);
+            txtDislayReturnDate.Name = "txtDislayReturnDate";
+            txtDislayReturnDate.ReadOnly = true;
+            txtDislayReturnDate.Size = new Size(450, 43);
+            txtDislayReturnDate.TabIndex = 85;
             // 
             // LoanDashboardForm
             // 
@@ -374,6 +385,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(237, 235, 248);
             ClientSize = new Size(2272, 1321);
+            Controls.Add(txtDislayReturnDate);
             Controls.Add(cboCopyId);
             Controls.Add(groupBox2);
             Controls.Add(groupBox3);
@@ -448,5 +460,6 @@
         private ComboBox cboCopyId;
         private GroupBox groupBox3;
         private TextBox txtMemberName;
+        private TextBox txtDislayReturnDate;
     }
 }

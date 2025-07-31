@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -143,6 +144,12 @@ namespace GUI_UI
                 return;
             }
 
+            if (txtPassword.Text != null && !Regex.IsMatch(txtPassword.Text, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"))
+            {
+                MessageBox.Show("Mật khẩu phải có ít nhất 8 kí tự, ít nhất 1 kí tự thường, ít nhất một kí tự hoa, ít nhất một số và ít nhất một kí tự đặc biệt - e.g., !@#$%^&*", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             User user = new User()
             {
                 UserID = UserService.GenerateUserID(),
@@ -154,15 +161,22 @@ namespace GUI_UI
                 IsActive = chkIsActive.Checked
             };
 
-            var existingUserWithTheSameEmail = UserService.SearchUsers("Email", user.Email);
-            if (existingUserWithTheSameEmail.Count > 0)
-            {
-                MessageBox.Show("Email đã được sử dụng bởi người dùng khác. Vui lòng nhập email khác.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
             try
             {
+                var existingUserWithTheSameUsername = UserService.SearchUsers("Username", user.Username);
+                if (existingUserWithTheSameUsername.Count > 0)
+                {
+                    MessageBox.Show("Tên đăng nhập đã được sử dụng bởi người dùng khác. Vui lòng nhập tên đăng nhập khác.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(user.UserID) || string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrWhiteSpace(user.Password) || string.IsNullOrWhiteSpace(user.Email) || string.IsNullOrWhiteSpace(user.FullName) || string.IsNullOrWhiteSpace(user.RoleID))
+                {
+                    MessageBox.Show("Vui lòng điền đầy đủ thông tin người dùng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 if (UserService.AddUser(user) > 0)
                 {
                     MessageBox.Show("Thêm người dùng thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -190,6 +204,13 @@ namespace GUI_UI
                 return;
             }
 
+
+            if (txtPassword.Text != null && !Regex.IsMatch(txtPassword.Text, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"))
+            {
+                MessageBox.Show("Mật khẩu phải có ít nhất 8 kí tự, ít nhất 1 kí tự thường, ít nhất một kí tự hoa, ít nhất một số và ít nhất một kí tự đặc biệt - e.g., !@#$%^&*", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             User user = new User()
             {
                 UserID = txtUserId.Text.Trim(),
@@ -203,6 +224,12 @@ namespace GUI_UI
 
             try
             {
+                if (string.IsNullOrWhiteSpace(user.UserID) || string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrWhiteSpace(user.Password) || string.IsNullOrWhiteSpace(user.Email) || string.IsNullOrWhiteSpace(user.FullName) || string.IsNullOrWhiteSpace(user.RoleID))
+                {
+                    MessageBox.Show("Vui lòng điền đầy đủ thông tin người dùng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 if (UserService.UpdateUser(user) > 0)
                 {
                     MessageBox.Show("Cập nhật người dùng thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);

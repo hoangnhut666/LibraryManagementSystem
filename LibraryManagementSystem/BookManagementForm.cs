@@ -88,6 +88,8 @@ namespace GUI_UI
             txtDescription.Multiline = true;
             txtDescription.ScrollBars = ScrollBars.Vertical;
             txtSearch.PlaceholderText = "Tìm sách theo id, tên sách, tác giả, thể loại";
+
+            txtDescription.MaxLength = 255; 
         }
 
         //Load all books from the database
