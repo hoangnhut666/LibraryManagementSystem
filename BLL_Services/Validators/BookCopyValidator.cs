@@ -16,6 +16,12 @@ namespace BLL_Services.Validators
         }
         public bool IsValidBookCopy(BookCopy bookCopy)
         {
+            if (bookCopy == null)
+            {
+                ErrorMessage = "Bản sao sách không được để trống.";
+                return false;
+            }
+
             // Check if the book ID is not empty
             if (string.IsNullOrWhiteSpace(bookCopy.BookID))
             {
@@ -23,7 +29,7 @@ namespace BLL_Services.Validators
                 return false;
             }
 
-            //Check if the date is not in the future
+            // Check if the date is not in the future
             if (bookCopy.PurchaseDate.HasValue && bookCopy.PurchaseDate.Value > DateTime.Now)
             {
                 ErrorMessage = "Ngày mua không được ở tương lai.";
@@ -37,7 +43,20 @@ namespace BLL_Services.Validators
                 return false;
             }
 
+            // Check if the purchase price is a whole number
+            if (bookCopy.PurchasePrice.HasValue && bookCopy.PurchasePrice.Value % 1 != 0)
+            {
+                ErrorMessage = "Giá mua phải là một số nguyên.";
+                return false;
+            }
 
+            // Check if the purchase price is a valid decimal
+            if (!bookCopy.PurchasePrice.HasValue)
+            {
+                ErrorMessage = "Giá mua phải là một số hợp lệ.";
+                return false;
+            }
+            
             return true;
         }
     }

@@ -766,16 +766,6 @@ FROM Loans l
 WHERE l.UserID = 'USER020'
 ORDER BY LoanID DESC
 
--- public string? MaMuon { get; set; }
--- public string? MaBanSao { get; set; }
--- public string? TenSach { get; set; }
--- public string? MaThanhVien { get; set; }
--- public string? TenThanhVien { get; set; }
--- public string? TenNhanVien { get; set; }
--- public DateTime NgayMuon { get; set; }
--- public DateTime HanTra { get; set; }
--- public DateTime? NgayTra { get; set; }
--- public string? TrangThai { get; set; }
 
 INSERT INTO Loans
     ([LoanID], [CopyID], [MemberID], [UserID],[LoanDate], [DueDate], [ReturnDate], [Status], [Notes])
@@ -817,3 +807,7 @@ GROUP BY b.BookID, b.Title
 ORDER BY TotalLoans DESC;
 
 
+SELECT *
+FROM Users
+
+ 

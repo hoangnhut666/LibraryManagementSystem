@@ -172,6 +172,11 @@ namespace GUI_UI
         private void btnDelete_Click(object sender, EventArgs e)
         {
             var loanId = txtLoanId.Text;
+            var confirmResult = MessageBox.Show("Bạn có chắc chắn muốn xóa phiếu mượn này không?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirmResult != DialogResult.Yes)
+            {
+                return; 
+            }
             try
             {
                 int result = LoanService.DeleteLoan(loanId);

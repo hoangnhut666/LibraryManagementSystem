@@ -108,6 +108,8 @@ namespace GUI_UI
                 dgvBooks.Columns["Language"].Visible = false;
                 dgvBooks.Columns["Description"].Visible = false;
                 dgvBooks.Columns["CoverImage"].Visible = false;
+                dgvBooks.Columns["BookID"].HeaderText = "MaAnBan";
+                dgvBooks.Columns["Title"].HeaderText = "TieuDe";
             }
             catch (Exception ex)
             {

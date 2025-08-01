@@ -49,9 +49,10 @@ namespace GUI_UI
             // Set the TextBox properties
             txtBiography.Multiline = true;
             txtBiography.ScrollBars = ScrollBars.Vertical;
+            txtBiography.MaxLength = 1000;
             txtSearch.PlaceholderText = "Nhập id hoặc tên tác giả cần tìm";
 
-            txtBiography.MaxLength = 255; 
+            
         }
 
 
@@ -61,6 +62,11 @@ namespace GUI_UI
             {
                 var authors = AuthorService.GetAuthors();
                 dgvAuthors.DataSource = authors;
+                dgvAuthors.Columns["AuthorID"].HeaderText = "Mã tác giả";
+                dgvAuthors.Columns["FullName"].HeaderText = "Tên tác giả";
+                dgvAuthors.Columns["Biography"].HeaderText = "Tiểu sử";
+                dgvAuthors.Columns["DateOfBirth"].HeaderText = "Ngày sinh";
+                dgvAuthors.Columns["DateOfDeath"].HeaderText = "Ngày mất";
             }
             catch (Exception ex)
             {
@@ -109,6 +115,7 @@ namespace GUI_UI
             dtpDateOfBirth.CustomFormat = " ";
             dtpDateOfDeath.CustomFormat = " ";
             txtBiography.Clear();
+            txtAuthorID.Clear();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

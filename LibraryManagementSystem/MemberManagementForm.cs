@@ -51,6 +51,14 @@ namespace GUI_UI
         {
             dgvMembers.DataSource = MemberService.GetMembers();
             dgvMembers.Columns["Photo"].Visible = false;
+            dgvMembers.Columns["MemberId"].HeaderText = "MaThanhVien";
+            dgvMembers.Columns["FullName"].HeaderText = "HoTen";
+            dgvMembers.Columns["Email"].HeaderText = "Email";
+            dgvMembers.Columns["Phone"].HeaderText = "SoDienThoai";
+            dgvMembers.Columns["Address"].HeaderText = "DiaChi";
+            dgvMembers.Columns["DateOfBirth"].HeaderText = "NgaySinh";
+            dgvMembers.Columns["JoinDate"].HeaderText = "NgayDangKy";
+            dgvMembers.Columns["Status"].HeaderText = "TrangThai";
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -173,6 +181,7 @@ namespace GUI_UI
             picMemberPhoto.Image = null;
             dtpJoinDate.CustomFormat = " ";
             dtpDateOfBirth.CustomFormat = " ";
+            txtSearch.Clear();
         }
 
         private byte[] ImageToByteArray(Image image)

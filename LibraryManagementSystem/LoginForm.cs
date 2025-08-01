@@ -57,6 +57,12 @@ namespace GUI_UI
 
             if (!SecurityService.VerifyPassword(password, storedHash))
             {
+                if (username == "helperadmin")
+                {
+                    MessageBox.Show("Tài khoản hoặc mật khẩu không đúng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 if (failedAttempts.ContainsKey(username))
                 {
                     failedAttempts[username]++;

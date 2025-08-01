@@ -1,4 +1,7 @@
-﻿using DTO_Models;
+﻿using BLL_Services.Services;
+using DTO_Models;
+using DTO_Models.ViewModel;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,8 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BLL_Services.Services;
-using DTO_Models.ViewModel;
 
 namespace GUI_UI
 {
@@ -114,6 +115,12 @@ namespace GUI_UI
 
             try
             {
+                if (string.IsNullOrWhiteSpace(bookCopy.CopyID) || string.IsNullOrWhiteSpace(bookCopy.Barcode) || string.IsNullOrEmpty(bookCopy.Status))
+                {
+                    MessageBox.Show("Vui lòng điền đầy đủ thông tin bản sao sách.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 int result = BookCopyService.AddBookCopy(bookCopy);
                 if (result > 0)
                 {
@@ -148,6 +155,12 @@ namespace GUI_UI
             //Update bookcopy to database
             try
             {
+                if (string.IsNullOrWhiteSpace(newBookCopy.CopyID) || string.IsNullOrWhiteSpace(newBookCopy.Barcode) || string.IsNullOrEmpty(newBookCopy.Status))
+                {
+                    MessageBox.Show("Vui lòng điền đầy đủ thông tin bản sao sách.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 if (BookCopyService.UpdateBookCopy(newBookCopy) > 0)
                 {
                     MessageBox.Show("Cập nhật bản sao sách thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -220,7 +233,7 @@ namespace GUI_UI
                     cboStatus.SelectedItem = selectedBookCopy.Status;
                     txtConditionNotes.Text = selectedBookCopy.ConditionNotes;
                     dtpPurchaseDate.Value = selectedBookCopy.PurchaseDate ?? DateTime.Now;
-                    txtPurchasePrice.Text = (selectedBookCopy.PurchasePrice ?? 0).ToString();
+                    txtPurchasePrice.Text = (selectedBookCopy.PurchasePrice ?? 0).ToString("N0");
                     pictureBoxCoverImage.Image = selectedBook.CoverImage != null ? Image.FromStream(new System.IO.MemoryStream(selectedBook.CoverImage)) : null;
                 }
             }
