@@ -1,12 +1,13 @@
-﻿using System;
+﻿using BLL_Services.Services;
+using BLL_Services.Validators;
+using DAL_Data;
+using DTO_Models;
+using DTO_Models.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL_Data;
-using DTO_Models;
-using DTO_Models.ViewModel;
-using BLL_Services.Validators;
 
 namespace BLL_Services.Services
 {
@@ -26,7 +27,7 @@ namespace BLL_Services.Services
         {
             try
             {
-                return EntityRepository.GenerateId("Loans", "LoanID","LOAN");
+                return EntityRepository.GenerateId("Loans", "LoanID", "LOAN");
             }
             catch (Exception ex)
             {
@@ -129,6 +130,50 @@ namespace BLL_Services.Services
             }
             return LoanRepository.Delete(loanID);
         }
+
+
+        //Auto update loan status if the loan have overdue
+        public void AutoUpdateLoanStatus(Loan loan)
+        {
+            if (loan == null)
+            {
+                throw new ArgumentNullException(nameof(loan), "Phiếu mượn không được để trống.");
+            }
+            int overdueDays = CalculateDaysOverdue(loan);
+            if (overdueDays > 0)
+            {
+                loan.Status = "Quá hạn";
+            }
+            else if (loan.ReturnDate != default(DateTime) && loan.ReturnDate.Value <= loan.DueDate)
+            {
+                loan.Status = "Đã trả";
+            }
+            else
+            {
+                loan.Status = "Đang mượn";
+            }
+            UpdateLoan(loan);
+        }
+
+
+        // Calculate the number of days overdue for a loan
+        public int CalculateDaysOverdue(Loan loan)
+        {
+            if (loan == null)
+            {
+                throw new ArgumentNullException(nameof(loan), "Phiếu mượn không được để trống.");
+            }
+            if (loan.ReturnDate == null)
+            {
+                throw new ArgumentException("Ngày trả không được để trống.");
+            }
+            DateTime returnDate = loan.ReturnDate.Value;
+            DateTime dueDate = loan.DueDate;
+            if (returnDate <= dueDate)
+            {
+                return 0;
+            }
+            return (returnDate - dueDate).Days;
+        }
     }
 }
-

@@ -57,10 +57,6 @@ namespace GUI_UI
 
             Dictionary<string, decimal> fineMap = new Dictionary<string, decimal>
             {
-                { "Trả muộn dưới 3 ngày", 10000 },
-                { "Trả muộn từ 3 đến 7 ngày", 20000 },
-                { "Trả muộn từ 7 đến 14 ngày", 30000 },
-                { "Trả muộn trên 14 ngày", 50000 },
                 { "Mất sách", 100000 },
                 { "Hư hỏng sách", 50000 },
                 { "Làm rách bìa", 20000 },
@@ -298,6 +294,13 @@ namespace GUI_UI
         private void cboFineMap_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtAmount.Text = cboFineMap.SelectedValue != null ? ((KeyValuePair<string, decimal>)cboFineMap.SelectedItem).Value.ToString() : string.Empty;
+            txtReason.Text = cboFineMap.Text;
+        }
+
+        private void btnUpdateOverDueFines_Click(object sender, EventArgs e)
+        {
+            FineService.AutoUpdateFines();
+            LoadFineViewModels();
         }
     }
 }

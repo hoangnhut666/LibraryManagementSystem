@@ -15,10 +15,12 @@ namespace BLL_Services.Services
     {
         private FineRepository FineRepository { get; set; }
         private FineValidator FineValidator { get; set; }
+        private LoanService LoanService { get; set; }
         public FineService()
         {
             FineRepository = new FineRepository();
             FineValidator = new FineValidator();
+            LoanService = new LoanService();
         }
 
         //Auto-generate FineID
@@ -133,5 +135,62 @@ namespace BLL_Services.Services
             }
             return FineRepository.Delete(fineId);
         }
+
+
+        //Automaticly update fine for overdue loans
+        public void AutoUpdateFines()
+        {
+            var overdueLoans = LoanService.GetLoansByCriteria("Status", "Quá hạn");
+            var overdueFines = FineRepository.GetFinesByCriteria("Reason", "Quá hạn");
+
+            foreach (var overdueLoan in overdueLoans)
+            {
+                int overdueDays = LoanService.CalculateDaysOverdue(overdueLoan);
+                if (overdueFines.Any(f => f.LoanID == overdueLoan.LoanID))
+                {
+                    var existingFine = overdueFines.First(f => f.LoanID == overdueLoan.LoanID);
+
+                    if (existingFine.Paid == true)
+                    {
+                        continue;
+                    }
+
+                    if (overdueDays > 0)
+                    {
+                        decimal fineAmount = overdueDays * 5000;
+                        existingFine.Amount = fineAmount;
+                        existingFine.IssueDate = DateTime.Now;
+                        existingFine.Paid = false;
+                        existingFine.Reason = $"Quá hạn";
+                        if (UpdateFine(existingFine) <= 0)
+                        {
+                            throw new Exception("Không thể cập nhật khoản phạt tự động.");
+                        }
+                    }
+                }
+                else 
+                {
+                    if (overdueDays > 0)
+                    {
+                        decimal fineAmount = overdueDays * 5000;
+                        Fine fine = new Fine
+                        {
+                            FineID = GenerateFineID(),
+                            LoanID = overdueLoan.LoanID,
+                            Amount = fineAmount,
+                            IssueDate = DateTime.Now,
+                            Paid = false,
+                            Reason = $"Quá hạn"
+                        };
+                        if (AddFine(fine) <= 0)
+                        {
+                            throw new Exception("Không thể thêm khoản phạt tự động.");
+                        }
+                    }
+                }
+            }
+        }
+
+
     }
 }

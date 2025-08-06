@@ -9,7 +9,7 @@ namespace LibraryManagementSystem
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            //Application.Run(new BookCopiesManagementForm());
+            //Application.Run(new UserManagementForm());
 
             var loginForm = new LoginForm();
             if (loginForm.ShowDialog() == DialogResult.OK)

@@ -44,7 +44,6 @@
             label8 = new Label();
             dtpReturnDate = new DateTimePicker();
             label11 = new Label();
-            cboStatus = new ComboBox();
             label12 = new Label();
             txtSearch = new TextBox();
             btnRefresh = new Button();
@@ -59,7 +58,8 @@
             cboCopyId = new ComboBox();
             groupBox3 = new GroupBox();
             txtMemberName = new TextBox();
-            txtDislayReturnDate = new TextBox();
+            txtLoanDate = new TextBox();
+            txtStatus = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvLoans).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -69,10 +69,10 @@
             // dgvLoans
             // 
             dgvLoans.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvLoans.Location = new Point(12, 698);
+            dgvLoans.Location = new Point(11, 679);
             dgvLoans.Name = "dgvLoans";
             dgvLoans.RowHeadersWidth = 92;
-            dgvLoans.Size = new Size(2248, 611);
+            dgvLoans.Size = new Size(2098, 594);
             dgvLoans.TabIndex = 0;
             dgvLoans.CellClick += dgvLoans_CellClick;
             // 
@@ -81,9 +81,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.MediumSlateBlue;
-            label1.Location = new Point(881, 22);
+            label1.Location = new Point(822, 21);
             label1.Name = "label1";
-            label1.Size = new Size(618, 96);
+            label1.Size = new Size(549, 86);
             label1.TabIndex = 54;
             label1.Text = "Quản lý mượn trả";
             // 
@@ -91,44 +91,44 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11F);
-            label2.Location = new Point(12, 151);
+            label2.Location = new Point(11, 147);
             label2.Name = "label2";
-            label2.Size = new Size(162, 45);
+            label2.Size = new Size(147, 41);
             label2.TabIndex = 55;
             label2.Text = "Mã mượn";
             // 
             // txtLoanId
             // 
-            txtLoanId.Location = new Point(247, 154);
+            txtLoanId.Location = new Point(231, 150);
             txtLoanId.Name = "txtLoanId";
             txtLoanId.ReadOnly = true;
-            txtLoanId.Size = new Size(450, 43);
+            txtLoanId.Size = new Size(420, 42);
             txtLoanId.TabIndex = 53;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 11F);
-            label5.Location = new Point(1678, 392);
+            label5.Location = new Point(1566, 381);
             label5.Name = "label5";
-            label5.Size = new Size(0, 45);
+            label5.Size = new Size(0, 41);
             label5.TabIndex = 65;
             // 
             // txtTitle
             // 
-            txtTitle.Location = new Point(6, 42);
+            txtTitle.Location = new Point(6, 41);
             txtTitle.Name = "txtTitle";
             txtTitle.ReadOnly = true;
-            txtTitle.Size = new Size(576, 43);
+            txtTitle.Size = new Size(538, 42);
             txtTitle.TabIndex = 62;
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 11F);
-            label6.Location = new Point(820, 152);
+            label6.Location = new Point(765, 148);
             label6.Name = "label6";
-            label6.Size = new Size(222, 45);
+            label6.Size = new Size(200, 41);
             label6.TabIndex = 72;
             label6.Text = "Tên nhân viên";
             // 
@@ -136,26 +136,26 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11F);
-            label4.Location = new Point(820, 267);
+            label4.Location = new Point(765, 260);
             label4.Name = "label4";
-            label4.Size = new Size(230, 45);
+            label4.Size = new Size(206, 41);
             label4.TabIndex = 72;
             label4.Text = "Mã thành viên";
             // 
             // cboMemberID
             // 
             cboMemberID.FormattingEnabled = true;
-            cboMemberID.Location = new Point(1112, 262);
+            cboMemberID.Location = new Point(1038, 255);
             cboMemberID.Name = "cboMemberID";
-            cboMemberID.Size = new Size(450, 45);
+            cboMemberID.Size = new Size(420, 44);
             cboMemberID.TabIndex = 73;
             cboMemberID.SelectedIndexChanged += cboMemberID_SelectedIndexChanged;
             // 
             // dtpLoanDate
             // 
-            dtpLoanDate.Location = new Point(248, 470);
+            dtpLoanDate.Location = new Point(231, 457);
             dtpLoanDate.Name = "dtpLoanDate";
-            dtpLoanDate.Size = new Size(450, 43);
+            dtpLoanDate.Size = new Size(420, 42);
             dtpLoanDate.TabIndex = 75;
             dtpLoanDate.ValueChanged += dtpLoanDate_ValueChanged;
             // 
@@ -163,9 +163,9 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 11F);
-            label9.Location = new Point(12, 466);
+            label9.Location = new Point(11, 453);
             label9.Name = "label9";
-            label9.Size = new Size(192, 45);
+            label9.Size = new Size(175, 41);
             label9.TabIndex = 74;
             label9.Text = "Ngày mượn";
             // 
@@ -173,17 +173,17 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 11F);
-            label7.Location = new Point(820, 364);
+            label7.Location = new Point(765, 354);
             label7.Name = "label7";
-            label7.Size = new Size(127, 45);
+            label7.Size = new Size(114, 41);
             label7.TabIndex = 74;
             label7.Text = "Hạn trả";
             // 
             // dtpDueDate
             // 
-            dtpDueDate.Location = new Point(1112, 365);
+            dtpDueDate.Location = new Point(1038, 355);
             dtpDueDate.Name = "dtpDueDate";
-            dtpDueDate.Size = new Size(450, 43);
+            dtpDueDate.Size = new Size(420, 42);
             dtpDueDate.TabIndex = 75;
             dtpDueDate.ValueChanged += dtpDueDate_ValueChanged;
             // 
@@ -191,17 +191,17 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 11F);
-            label8.Location = new Point(820, 468);
+            label8.Location = new Point(765, 455);
             label8.Name = "label8";
-            label8.Size = new Size(145, 45);
+            label8.Size = new Size(131, 41);
             label8.TabIndex = 74;
             label8.Text = "Ngày trả";
             // 
             // dtpReturnDate
             // 
-            dtpReturnDate.Location = new Point(1112, 475);
+            dtpReturnDate.Location = new Point(1038, 462);
             dtpReturnDate.Name = "dtpReturnDate";
-            dtpReturnDate.Size = new Size(450, 43);
+            dtpReturnDate.Size = new Size(420, 42);
             dtpReturnDate.TabIndex = 75;
             dtpReturnDate.ValueChanged += dtpReturnDate_ValueChanged;
             // 
@@ -209,37 +209,28 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 11F);
-            label11.Location = new Point(12, 361);
+            label11.Location = new Point(11, 351);
             label11.Name = "label11";
-            label11.Size = new Size(164, 45);
+            label11.Size = new Size(148, 41);
             label11.TabIndex = 72;
             label11.Text = "Trạng thái";
-            // 
-            // cboStatus
-            // 
-            cboStatus.FormattingEnabled = true;
-            cboStatus.Location = new Point(248, 363);
-            cboStatus.Name = "cboStatus";
-            cboStatus.Size = new Size(450, 45);
-            cboStatus.TabIndex = 73;
-            cboStatus.SelectedIndexChanged += cboStatus_SelectedIndexChanged;
             // 
             // label12
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 11F);
-            label12.Location = new Point(12, 256);
+            label12.Location = new Point(11, 249);
             label12.Name = "label12";
-            label12.Size = new Size(190, 45);
+            label12.Size = new Size(172, 41);
             label12.TabIndex = 55;
             label12.Text = "Mã bản sao";
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(1678, 149);
+            txtSearch.Location = new Point(1566, 145);
             txtSearch.Multiline = true;
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(576, 47);
+            txtSearch.Size = new Size(538, 46);
             txtSearch.TabIndex = 76;
             // 
             // btnRefresh
@@ -247,9 +238,9 @@
             btnRefresh.BackColor = Color.FromArgb(174, 160, 249);
             btnRefresh.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnRefresh.ForeColor = SystemColors.Control;
-            btnRefresh.Location = new Point(1186, 570);
+            btnRefresh.Location = new Point(1107, 555);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(201, 70);
+            btnRefresh.Size = new Size(188, 68);
             btnRefresh.TabIndex = 81;
             btnRefresh.Text = "Làm mới";
             btnRefresh.UseVisualStyleBackColor = false;
@@ -260,9 +251,9 @@
             btnDelete.BackColor = Color.FromArgb(174, 160, 249);
             btnDelete.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnDelete.ForeColor = SystemColors.Control;
-            btnDelete.Location = new Point(869, 570);
+            btnDelete.Location = new Point(811, 555);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(201, 70);
+            btnDelete.Size = new Size(188, 68);
             btnDelete.TabIndex = 80;
             btnDelete.Text = "Xóa";
             btnDelete.UseVisualStyleBackColor = false;
@@ -273,9 +264,9 @@
             btnUpdate.BackColor = Color.FromArgb(174, 160, 249);
             btnUpdate.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnUpdate.ForeColor = SystemColors.Control;
-            btnUpdate.Location = new Point(552, 570);
+            btnUpdate.Location = new Point(515, 555);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(201, 70);
+            btnUpdate.Size = new Size(188, 68);
             btnUpdate.TabIndex = 79;
             btnUpdate.Text = "Sửa";
             btnUpdate.UseVisualStyleBackColor = false;
@@ -286,9 +277,9 @@
             btnAdd.BackColor = Color.FromArgb(174, 160, 249);
             btnAdd.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnAdd.ForeColor = SystemColors.Control;
-            btnAdd.Location = new Point(235, 570);
+            btnAdd.Location = new Point(219, 555);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(201, 70);
+            btnAdd.Size = new Size(188, 68);
             btnAdd.TabIndex = 78;
             btnAdd.Text = "Thêm";
             btnAdd.UseVisualStyleBackColor = false;
@@ -297,27 +288,27 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(txtNotes);
-            groupBox1.Location = new Point(1678, 424);
+            groupBox1.Location = new Point(1566, 413);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(576, 200);
+            groupBox1.Size = new Size(538, 210);
             groupBox1.TabIndex = 82;
             groupBox1.TabStop = false;
             groupBox1.Text = "Ghi chú";
             // 
             // txtNotes
             // 
-            txtNotes.Location = new Point(6, 53);
+            txtNotes.Location = new Point(6, 52);
             txtNotes.Multiline = true;
             txtNotes.Name = "txtNotes";
-            txtNotes.Size = new Size(570, 163);
+            txtNotes.Size = new Size(532, 152);
             txtNotes.TabIndex = 0;
             // 
             // groupBox2
             // 
             groupBox2.Controls.Add(txtTitle);
-            groupBox2.Location = new Point(1678, 213);
+            groupBox2.Location = new Point(1566, 207);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(582, 99);
+            groupBox2.Size = new Size(543, 96);
             groupBox2.TabIndex = 83;
             groupBox2.TabStop = false;
             groupBox2.Text = "Tên sách";
@@ -327,9 +318,9 @@
             btnSearch.BackColor = Color.FromArgb(174, 160, 249);
             btnSearch.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnSearch.ForeColor = SystemColors.Control;
-            btnSearch.Location = new Point(2053, 50);
+            btnSearch.Location = new Point(1916, 49);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(201, 70);
+            btnSearch.Size = new Size(188, 68);
             btnSearch.TabIndex = 81;
             btnSearch.Text = "Tìm kiếm";
             btnSearch.UseVisualStyleBackColor = false;
@@ -337,55 +328,64 @@
             // 
             // txtUserFullName
             // 
-            txtUserFullName.Location = new Point(1112, 154);
+            txtUserFullName.Location = new Point(1038, 150);
             txtUserFullName.Name = "txtUserFullName";
             txtUserFullName.ReadOnly = true;
-            txtUserFullName.Size = new Size(450, 43);
+            txtUserFullName.Size = new Size(420, 42);
             txtUserFullName.TabIndex = 53;
             // 
             // cboCopyId
             // 
             cboCopyId.FormattingEnabled = true;
-            cboCopyId.Location = new Point(247, 261);
+            cboCopyId.Location = new Point(231, 254);
             cboCopyId.Name = "cboCopyId";
-            cboCopyId.Size = new Size(451, 45);
+            cboCopyId.Size = new Size(421, 44);
             cboCopyId.TabIndex = 84;
             cboCopyId.SelectedIndexChanged += cboCopyId_SelectedIndexChanged;
             // 
             // groupBox3
             // 
             groupBox3.Controls.Add(txtMemberName);
-            groupBox3.Location = new Point(1678, 312);
+            groupBox3.Location = new Point(1566, 304);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(582, 106);
+            groupBox3.Size = new Size(543, 103);
             groupBox3.TabIndex = 82;
             groupBox3.TabStop = false;
             groupBox3.Text = "Tên thành viên";
             // 
             // txtMemberName
             // 
-            txtMemberName.Location = new Point(6, 53);
+            txtMemberName.Location = new Point(6, 52);
             txtMemberName.Multiline = true;
             txtMemberName.Name = "txtMemberName";
             txtMemberName.ReadOnly = true;
-            txtMemberName.Size = new Size(570, 72);
+            txtMemberName.Size = new Size(532, 70);
             txtMemberName.TabIndex = 0;
             // 
-            // txtDislayReturnDate
+            // txtLoanDate
             // 
-            txtDislayReturnDate.Location = new Point(1112, 475);
-            txtDislayReturnDate.Name = "txtDislayReturnDate";
-            txtDislayReturnDate.ReadOnly = true;
-            txtDislayReturnDate.Size = new Size(450, 43);
-            txtDislayReturnDate.TabIndex = 85;
+            txtLoanDate.Location = new Point(231, 455);
+            txtLoanDate.Name = "txtLoanDate";
+            txtLoanDate.ReadOnly = true;
+            txtLoanDate.Size = new Size(420, 42);
+            txtLoanDate.TabIndex = 86;
+            // 
+            // txtStatus
+            // 
+            txtStatus.Location = new Point(231, 351);
+            txtStatus.Name = "txtStatus";
+            txtStatus.ReadOnly = true;
+            txtStatus.Size = new Size(421, 42);
+            txtStatus.TabIndex = 87;
             // 
             // LoanDashboardForm
             // 
-            AutoScaleDimensions = new SizeF(15F, 37F);
+            AutoScaleDimensions = new SizeF(14F, 36F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(237, 235, 248);
-            ClientSize = new Size(2272, 1321);
-            Controls.Add(txtDislayReturnDate);
+            ClientSize = new Size(2121, 1285);
+            Controls.Add(txtStatus);
+            Controls.Add(txtLoanDate);
             Controls.Add(cboCopyId);
             Controls.Add(groupBox2);
             Controls.Add(groupBox3);
@@ -402,7 +402,6 @@
             Controls.Add(label7);
             Controls.Add(dtpLoanDate);
             Controls.Add(label9);
-            Controls.Add(cboStatus);
             Controls.Add(cboMemberID);
             Controls.Add(label11);
             Controls.Add(label4);
@@ -445,7 +444,6 @@
         private Label label8;
         private DateTimePicker dtpReturnDate;
         private Label label11;
-        private ComboBox cboStatus;
         private Label label12;
         private TextBox txtSearch;
         private Button btnRefresh;
@@ -460,6 +458,7 @@
         private ComboBox cboCopyId;
         private GroupBox groupBox3;
         private TextBox txtMemberName;
-        private TextBox txtDislayReturnDate;
+        private TextBox txtLoanDate;
+        private TextBox txtStatus;
     }
 }

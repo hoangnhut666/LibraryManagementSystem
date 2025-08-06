@@ -810,4 +810,6 @@ ORDER BY TotalLoans DESC;
 SELECT *
 FROM Users
 
- 
+
+DELETE FROM Fines
+WHERE Reason LIKE N'%Quá hạn%';

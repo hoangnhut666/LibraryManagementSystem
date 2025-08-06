@@ -32,6 +32,13 @@ namespace BLL_Services.Validators
                 return false;
             }
 
+            //Check if the age of the author is not less than 8
+            if (author.DateOfBirth.HasValue && (DateTime.Now.Year - author.DateOfBirth.Value.Year) < 8)
+            {
+                ErrorMessage = "Tác giả phải ít nhất 8 tuổi.";
+                return false;
+            }
+
             //Check if date of birth is not in the future
             if (author.DateOfBirth.HasValue && author.DateOfBirth > DateTime.Now)
             {

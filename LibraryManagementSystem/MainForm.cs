@@ -27,7 +27,7 @@ namespace GUI_UI
         {
             // Set the main form properties
             StartPosition = FormStartPosition.CenterScreen;
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            //FormBorderStyle = FormBorderStyle.FixedSingle;
             this.Size = new Size(2400, 1600);
         }
 

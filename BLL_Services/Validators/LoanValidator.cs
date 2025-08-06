@@ -22,11 +22,7 @@ namespace BLL_Services.Validators
                 ErrorMessage = "Phiếu mượn không được để trống.";
                 return false;
             }
-            if (string.IsNullOrWhiteSpace(loan.Status))
-            {
-                ErrorMessage = "Trạng thái phiếu không được để trống";
-                return false;
-            }
+
             // Check if CopyID is not empty
             if (string.IsNullOrWhiteSpace(loan.CopyID))
             {
@@ -71,11 +67,7 @@ namespace BLL_Services.Validators
                 ErrorMessage = "Một phiếu mượn đã trả phải có thông tin ngày trả";
                 return false;
             }
-            if (loan.Status == "Đang mượn" && loan.ReturnDate != default(DateTime))
-            {
-                ErrorMessage = "Một phiếu mượn đang mượn không thể có thông tin ngày trả";
-                return false;
-            }
+
             if (loan.Status == "Quá hạn" && loan.ReturnDate < loan.DueDate)
             {
                 ErrorMessage = "Một phiếu mượn quá hạn phải có ngày trả lớn hơn ngày đến hạn";
@@ -86,6 +78,7 @@ namespace BLL_Services.Validators
                 ErrorMessage = "Một phiếu mượn thất lạc không thể có thông tin ngày trả";
                 return false;
             }
+
             return true;
         }
     }

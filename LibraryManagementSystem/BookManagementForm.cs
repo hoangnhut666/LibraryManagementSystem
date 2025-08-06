@@ -89,7 +89,7 @@ namespace GUI_UI
             txtDescription.ScrollBars = ScrollBars.Vertical;
             txtSearch.PlaceholderText = "Tìm sách theo id, tên sách, tác giả, thể loại";
 
-            txtDescription.MaxLength = 255; 
+            txtDescription.MaxLength = 500; 
         }
 
         //Load all books from the database
@@ -300,9 +300,9 @@ namespace GUI_UI
                 txtBookId.Text = selectedBook.BookID;
                 txtISBN.Text = selectedBook.ISBN;
                 txtTitle.Text = selectedBook.Title;
-                cboPublisherName.SelectedValue = selectedBook.PublisherID;
+                cboPublisherName.SelectedValue = selectedBook.PublisherID ?? string.Empty;
                 txtPublicationYear.Text = selectedBook.PublicationYear.HasValue ? selectedBook.PublicationYear.Value.ToString() : string.Empty;
-                cboCategory.SelectedValue = selectedBook.CategoryID;
+                cboCategory.SelectedValue = selectedBook.CategoryID ?? string.Empty;
                 cboShelfLocation.Text = selectedBook.ShelfLocation;
                 txtNumberOfPages.Text = selectedBook.NumberOfPages.HasValue ? selectedBook.NumberOfPages.Value.ToString() : string.Empty;
                 txtLanguage.Text = selectedBook.Language;
@@ -351,6 +351,8 @@ namespace GUI_UI
             txtLanguage.Clear();
             txtDescription.Clear();
             pictureBoxCoverImage.Image = null;
+            txtAuthor.Clear();
+            txtSearch.Clear();
         }
 
         private void btnAddBookAuthor_Click(object sender, EventArgs e)

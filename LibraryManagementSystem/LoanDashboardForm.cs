@@ -46,10 +46,6 @@ namespace GUI_UI
             //Set up Form
             StartPosition = FormStartPosition.CenterScreen;
 
-            //Set up status combo box
-            cboStatus.DataSource = new List<string> { "Đang mượn", "Đã trả", "Quá hạn", "Thất lạc" };
-            cboStatus.SelectedIndex = -1;
-
             //Set up member combo box
             cboMemberID.DataSource = MemberService.GetMembers();
             cboMemberID.DisplayMember = "MemberID";
@@ -105,10 +101,10 @@ namespace GUI_UI
                 CopyID = cboCopyId.Text,
                 MemberID = cboMemberID.SelectedValue?.ToString(),
                 UserID = CurrentUser?.UserID,
-                LoanDate = dtpLoanDate.CustomFormat == " " ? default(DateTime) : dtpLoanDate.Value,
-                DueDate = dtpDueDate.CustomFormat == " " ? default(DateTime) : dtpDueDate.Value,
-                ReturnDate = dtpReturnDate.CustomFormat == " " ? default(DateTime) : dtpReturnDate.Value,
-                Status = cboStatus.Text,
+                Status = "Đang mượn",
+                LoanDate = DateTime.Now,
+                DueDate = dtpDueDate.CustomFormat == " " ? default(DateTime) : dtpDueDate.Value.Date,
+                ReturnDate = dtpReturnDate.CustomFormat == " " ? default(DateTime) : dtpReturnDate.Value.Date,
                 Notes = txtNotes.Text
             };
 
@@ -118,6 +114,7 @@ namespace GUI_UI
                 int result = LoanService.AddLoan(loan);
                 if (result > 0)
                 {
+                    LoanService.AutoUpdateLoanStatus(loan);
                     MessageBox.Show("Thêm phiếu mượn thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadLoans();
                     ClearInputFields();
@@ -130,30 +127,36 @@ namespace GUI_UI
             catch (Exception ex)
             {
                 MessageBox.Show($"Một lỗi xảy ra khi thêm phiếu mượn: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            var originalLoan = LoanService.GetLoansByCriteria("LoanID", txtLoanId.Text).FirstOrDefault();
             Loan loan = new Loan()
             {
                 LoanID = txtLoanId.Text,
                 CopyID = cboCopyId.SelectedValue?.ToString(),
                 MemberID = cboMemberID.SelectedValue?.ToString(),
+                Status = "Đang mượn",
                 UserID = CurrentUser?.UserID,
-                LoanDate = dtpLoanDate.CustomFormat == " " ? default(DateTime) : dtpLoanDate.Value,
-                DueDate = dtpDueDate.CustomFormat == " " ? default(DateTime) : dtpDueDate.Value,
-                ReturnDate = dtpReturnDate.CustomFormat == " " ? default(DateTime) : dtpReturnDate.Value,
-                Status = cboStatus.Text,
+                LoanDate = originalLoan.LoanDate,
+                DueDate = dtpDueDate.CustomFormat == " " ? default(DateTime) : dtpDueDate.Value.Date,
+                ReturnDate = dtpReturnDate.CustomFormat == " " ? default(DateTime) : dtpReturnDate.Value.Date,
                 Notes = txtNotes.Text
             };
 
             try
             {
+                if (loan.Status == "Đã trả" || loan.Status == "Quá hạn")
+                {
+                    MessageBox.Show("Bạn không thể cập nhật một phiếu mượn đã trả hoặc quá hạn", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 int result = LoanService.UpdateLoan(loan);
                 if (result > 0)
                 {
+                    LoanService.AutoUpdateLoanStatus(loan);
                     MessageBox.Show("Cập nhật phiếu mượn thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadLoans();
                     ClearInputFields();
@@ -172,10 +175,17 @@ namespace GUI_UI
         private void btnDelete_Click(object sender, EventArgs e)
         {
             var loanId = txtLoanId.Text;
+            var loan = LoanService.GetLoansByCriteria("LoanID", loanId).FirstOrDefault();
+            if (loan.Status == "Đã trả" || loan.Status == "Quá hạn")
+            {
+                MessageBox.Show("Bạn không thể xóa một phiếu mượn đã trả hoặc quá hạn", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             var confirmResult = MessageBox.Show("Bạn có chắc chắn muốn xóa phiếu mượn này không?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirmResult != DialogResult.Yes)
             {
-                return; 
+                return;
             }
             try
             {
@@ -251,13 +261,18 @@ namespace GUI_UI
             cboCopyId.SelectedIndex = -1;
             cboMemberID.SelectedIndex = -1;
             dtpLoanDate.CustomFormat = " ";
+            txtLoanDate.Clear();
             dtpDueDate.CustomFormat = " ";
             dtpReturnDate.CustomFormat = " ";
-            cboStatus.SelectedIndex = -1;
+            txtStatus.Clear();
             txtNotes.Clear();
             txtTitle.Clear();
             txtUserFullName.Clear();
             txtSearch.Clear();
+
+            btnUpdate.Enabled = true;
+            btnDelete.Enabled = true;
+            btnAdd.Enabled = true;
         }
 
         private void dgvLoans_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -274,6 +289,7 @@ namespace GUI_UI
                 {
                     dtpLoanDate.CustomFormat = "dd/MM/yyyy";
                     dtpLoanDate.Value = selectedLoan.LoanDate;
+                    txtLoanDate.Text = selectedLoan.LoanDate.ToString("dd/MM/yyyy");
                 }
                 else
                 {
@@ -299,8 +315,21 @@ namespace GUI_UI
                 }
                 txtTitle.Text = selectedRow.Cells["TenSach"].Value?.ToString() ?? string.Empty;
                 txtUserFullName.Text = selectedRow.Cells["TenNhanVien"].Value?.ToString() ?? string.Empty;
-                cboStatus.Text = selectedRow.Cells["TrangThai"].Value?.ToString() ?? string.Empty;
+                txtStatus.Text = selectedRow.Cells["TrangThai"].Value?.ToString() ?? string.Empty;
                 txtNotes.Text = selectedLoan?.Notes ?? string.Empty;
+
+                if (selectedLoan != null && (selectedLoan.Status == "Đã trả" || selectedLoan.Status == "Quá hạn"))
+                {
+                    btnUpdate.Enabled = false;
+                    btnDelete.Enabled = false;
+                    btnAdd.Enabled = false;
+                }
+                else
+                {
+                    btnUpdate.Enabled = true;
+                    btnDelete.Enabled = true;
+                    btnAdd.Enabled = true;
+                }
             }
         }
 
@@ -329,19 +358,5 @@ namespace GUI_UI
             }
         }
 
-        private void cboStatus_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cboStatus.SelectedItem != null)
-            {
-                if (cboStatus.Text == "Đang mượn")
-                {
-                    txtDislayReturnDate.Visible = true;
-                }
-                else
-                {
-                    txtDislayReturnDate.Visible = false;
-                }
-            }
-        }
     }
 }
